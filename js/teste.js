@@ -2,17 +2,18 @@
 let panelBody = document.querySelector('.panel-body');
 const jsonfile = require('jsonfile-promised');
 const fs = require('fs');
+var heroes;
 
+getJSON('http://gdurl.com/KM4u'); //heroes
+//var cards = fetch('http://gdurl.com/dAE9'); //cards
 
-var heroes = fetch('http://gdurl.com/KM4u');
-//var cards = fetch('http://gdurl.com/dAE9');
-
-heroes.then(function(response) {
-  response.text().then(function(text) {
-    console.log(JSON.parse(text));
+function getJSON(url){
+  fetch(url).then(function(response) {
+    response.text().then(function(text) {
+      heroes = JSON.parse(text);
+    });
   });
-});
-
+};
 
 panelBody.innerHTML = '<div class="col-lg-12">'+
 
