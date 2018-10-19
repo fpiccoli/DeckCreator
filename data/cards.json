@@ -1,0 +1,601 @@
+{
+    "Decks": [
+        {
+            "Class": "Alchemist",
+            "FaceURL": "http://gdurl.com/L7_k",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": [
+        {
+            "Number": "405",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Miasma"
+        },
+        {
+            "Number": "404",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Healing Elixir"
+        },
+        {
+            "Number": "332",
+            "Name": "Card",
+            "Type": "EVD",
+            "Nickname": "Brimstone Cloud"
+        },
+        {
+            "Number": "331",
+            "Name": "Card",
+            "Type": "GRD",
+            "Nickname": "Chemical Protection"
+        },
+        {
+            "Number": "330",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Philosopher's Stone"
+        },
+        {
+            "Number": "329",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Tonic of Sufferance"
+        },
+        {
+            "Number": "328",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Quicksilver Solution"
+        },
+        {
+            "Number": "327",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Prepare Potion"
+        },
+        {
+            "Number": "326",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Transmutation"
+        },
+        {
+            "Number": "325",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Combustion"
+        },
+        {
+            "Number": "324",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Poison Gas"
+        },
+        {
+            "Number": "323",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Summon Homunculus"
+        },
+        {
+            "Number": "322",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Wandering Wisp"
+        },
+        {
+            "Number": "321",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Salt Acids"
+        }
+    ]
+        },
+        {
+            "Class": "Amazon",
+            "FaceURL": "http://gdurl.com/9Bi0",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": [
+        {
+            "Number": "373",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Pegasus Mount",
+            "imgURL": "http://gdurl.com/Osif"
+        },
+        {
+            "Number": "372",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Chain Lightning",
+            "imgURL": "http://gdurl.com/hIzs"
+        },
+        {
+            "Number": "096",
+            "Name": "Card",
+            "Type": "EVD",
+            "Nickname": "Uncanny Dodge",
+            "imgURL": "http://gdurl.com/5EBZ"
+        },
+        {
+            "Number": "095",
+            "Name": "Card",
+            "Type": "BLK",
+            "Nickname": "Aegis",
+            "imgURL": "http://gdurl.com/RtqC"
+        },
+        {
+            "Number": "094",
+            "Name": "Card",
+            "Type": "BLK",
+            "Nickname": "Sisterhood",
+            "imgURL": "http://gdurl.com/lUeN"
+        },
+        {
+            "Number": "093",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Deity Bless",
+            "imgURL": "http://gdurl.com/Blzx"
+        },
+        {
+            "Number": "092",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Lightning Strike",
+            "imgURL": "http://gdurl.com/BG6I"
+        },
+        {
+            "Number": "091",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Guided Arrow",
+            "imgURL": "http://gdurl.com/DS6e"
+        },
+        {
+            "Number": "090",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Javelin",
+            "imgURL": "http://gdurl.com/gBNo"
+        },
+        {
+            "Number": "089",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Impale",
+            "imgURL": "http://gdurl.com/ONCg"
+        },
+        {
+            "Number": "088",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Critical Charge",
+            "imgURL": "http://gdurl.com/0Bi2"
+        },
+        {
+            "Number": "087",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Gorgoneion",
+            "imgURL": "http://gdurl.com/bvmc"
+        },
+        {
+            "Number": "086",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Critical Hit",
+            "imgURL": "http://gdurl.com/mqNM"
+        },
+        {
+            "Number": "085",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Chakram",
+            "imgURL": "http://gdurl.com/FgOP"
+        }
+    ]
+        },
+        {
+            "Class": "Barbarian",
+            "FaceURL": "http://gdurl.com/9Bi0",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": [
+        {
+            "Number": "363",
+            "Name": "Card",
+            "Type": "SKL",
+            "Nickname": "Support Throw",
+            "CardID": "101",
+            "imgURL": "http://gdurl.com/Osif"
+        },
+        {
+            "Number": "362",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Ruthless",
+            "CardID": "102",
+            "imgURL": "http://gdurl.com/hIzs"
+        },
+        {
+            "Number": "036",
+            "Name": "Card",
+            "Type": "GRD",
+            "Nickname": "Safeguard",
+            "CardID": "103",
+            "imgURL": "http://gdurl.com/5EBZ"
+        },
+        {
+            "Number": "035",
+            "Name": "Card",
+            "Type": "GRD",
+            "Nickname": "Ignore Pain",
+            "CardID": "104",
+            "imgURL": "http://gdurl.com/RtqC"
+        },
+        {
+            "Number": "034",
+            "Name": "Card",
+            "Type": "SPE",
+            "Nickname": "Rage",
+            "CardID": "105",
+            "imgURL": "http://gdurl.com/lUeN"
+        },
+        {
+            "Number": "033",
+            "Name": "Card",
+            "Type": "TEC",
+            "Nickname": "Avanlanche",
+            "CardID": "106",
+            "imgURL": "http://gdurl.com/Blzx"
+        },
+        {
+            "Number": "032",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Whirlwind",
+            "CardID": "107",
+            "imgURL": "http://gdurl.com/BG6I"
+        },
+        {
+            "Number": "031",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Furious Charge",
+            "CardID": "108",
+            "imgURL": "http://gdurl.com/DS6e"
+        },
+        {
+            "Number": "030",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Seismic Slam",
+            "CardID": "109",
+            "imgURL": "http://gdurl.com/gBNo"
+        },
+        {
+            "Number": "029",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Power Slam",
+            "CardID": "110",
+            "imgURL": "http://gdurl.com/ONCg"
+        },
+        {
+            "Number": "028",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Piledriver",
+            "CardID": "111",
+            "imgURL": "http://gdurl.com/0Bi2"
+        },
+        {
+            "Number": "027",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Drop Kick",
+            "CardID": "112",
+            "imgURL": "http://gdurl.com/bvmc"
+        },
+        {
+            "Number": "026",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Bash",
+            "CardID": "113",
+            "imgURL": "http://gdurl.com/mqNM"
+        },
+        {
+            "Number": "025",
+            "Name": "Card",
+            "Type": "ATK",
+            "Nickname": "Knockdown",
+            "CardID": "114",
+            "imgURL": "http://gdurl.com/FgOP"
+        }
+    ]
+        },
+        {
+            "Class": "Bard",
+            "FaceURL": "http://gdurl.com/Dy26",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Beast",
+            "FaceURL": "http://gdurl.com/hRd5",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Berserker",
+            "FaceURL": "http://gdurl.com/z0FD",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Cleric",
+            "FaceURL": "http://gdurl.com/iONoY",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Demon",
+            "FaceURL": "http://gdurl.com/9W47n",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Druid",
+            "FaceURL": "http://gdurl.com/8UCG",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Fighter",
+            "FaceURL": "http://gdurl.com/CnUo",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Goblin",
+            "FaceURL": "http://gdurl.com/PBNq",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Gremlim",
+            "FaceURL": "http://gdurl.com/Vk9Y",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Guardian",
+            "FaceURL": "http://gdurl.com/QfBg",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Jester",
+            "FaceURL": "http://gdurl.com/M6_E",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Knight",
+            "FaceURL": "http://gdurl.com/FUTZ",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Monk",
+            "FaceURL": "http://gdurl.com/vyG2",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Necromancer",
+            "FaceURL": "http://gdurl.com/j80H",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Paladin",
+            "FaceURL": "http://gdurl.com/5VMD",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Ranger",
+            "FaceURL": "http://gdurl.com/EDXH",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Sorcerer",
+            "FaceURL": "http://gdurl.com/Xj7E",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Thief",
+            "FaceURL": "http://gdurl.com/yfDb",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Vampire",
+            "FaceURL": "http://gdurl.com/bsAs",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Warlock",
+            "FaceURL": "http://gdurl.com/10oC",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Warrior",
+            "FaceURL": "http://gdurl.com/gKWn",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Wizard",
+            "FaceURL": "http://gdurl.com/LSzv",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Talent1",
+            "FaceURL": "http://gdurl.com/0nex",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Talent2",
+            "FaceURL": "http://gdurl.com/gLg8",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Spell-Dom1",
+            "FaceURL": "http://gdurl.com/Rr68",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Spell-Dom2",
+            "FaceURL": "http://gdurl.com/FtRm",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        },
+        {
+            "Class": "Spell-SKL1",
+            "FaceURL": "http://gdurl.com/gsiX",
+            "BackURL": "http://gdurl.com/FXdw",
+            "NumWidth": "5",
+            "NumHeight": "4",
+            "BackIsHidden": "FALSE",
+            "UniqueBack": "FALSE",
+            "Cards": "[]"
+        }
+    ]
+}
