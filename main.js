@@ -1,4 +1,4 @@
-const { app, BrowserWindow }  = require('electron');
+const { app, BrowserWindow, ipcMain }  = require('electron');
 
 app.on('ready', () => {
 
@@ -8,7 +8,12 @@ app.on('ready', () => {
     });
     mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
     mainWindow.maximize();
+
 });
+
+ipcMain.on('get-cards', (event) => {
+  event.returnValue = cards;
+})
 
 app.on('window-all-closed', () => {
       app.quit();
