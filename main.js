@@ -11,10 +11,26 @@ app.on('ready', () => {
 
 });
 
-ipcMain.on('get-cards', (event) => {
-  event.returnValue = cards;
-})
-
 app.on('window-all-closed', () => {
       app.quit();
+});
+
+let heroisWindow = null;
+ipcMain.on('seleciona-heroi', (event, param) => {
+    if(heroisWindow == null){
+        heroisWindow = new BrowserWindow({
+            width: 600,
+            height: 768,
+            alwaysOnTop: true,
+            frame: false
+        });
+        heroisWindow.on('closed', () => {
+          heroisWindow = null;
+        })
+    }
+    heroisWindow.loadURL(`file://${__dirname}/pages/herois.html`);
+});
+
+ipcMain.on('fechar-janela-herois', () => {
+    heroisWindow.close();
 });
