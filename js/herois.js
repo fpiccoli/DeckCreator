@@ -1,42 +1,33 @@
 const { ipcRenderer } = require('electron');
-const data = require('./data.js');
+const panel = require('./panel-heroes.js');
 
 let linkFechar = document.querySelector("#link-fechar");
-let amazon = document.querySelector("#pure-amazon");
+let classesPuras = ['alchemist','amazon','barbarian','bard','beast','berserker','cleric','demon','druid',
+'fighter','goblin','gremlim','guardian','jester','knight','monk','necromancer','paladin','ranger','sorcerer',
+'thief','vampire','warlock','warrior','wizard'];
+let classesHibridas = ['acolyte','arcanist','assassin','beastmaster','bloodmancer','bloodrager','brawler',
+'celt','champion','efreet','eldritchknight','ghoul','gipsy','heretic','hobgoblin','hun','hunter','illusionist',
+'imp','infernalist','lich','necrolic','nymph','occultist','oni','preacher','revenant','rogue','runesoldier',
+'scavenger','shaman','shieldmaiden','skald','slayer','spellblade','squire','succubus','troll','valkyrie','witch'];
 
+renderizar(classesPuras, '#pure-');
+renderizar(classesHibridas, '#hybrid-');
 
-//document.getElementById("MyElement").classList.add('MyClass');
-//document.getElementById("MyElement").classList.remove('MyClass');
-
+function renderizar(classes, tipo){
+  for(let i in classes){
+    console.log(tipo+classes[i]);
+    let obj = document.querySelector(tipo+classes[i]);
+    if(obj){
+      obj.addEventListener('click', function () {
+        panel.render(obj);
+      })
+    }
+  }
+}
 
 window.onload = function(){
 }
 
 linkFechar.addEventListener('click', function () {
-    ipcRenderer.send('fechar-janela-herois');
-})
-
-amazon.addEventListener('click', function () {
-    let item = document.querySelector('#'+amazon.id+'-item');
-    if(item.classList.contains('in')){
-      item.innerHTML = '<div class="panel-body"></div>'
-      return;
-    }
-    let herois = data.getHerois(amazon.innerHTML);
-    console.log(herois);
-    let stringHTML = '<div class="panel-body"><div class="col-sm-12"><div class="row">';
-
-    for(let i in herois){
-
-      console.log(herois[i]);
-
-      stringHTML += '<div class="col-sm-4"><img src="' + herois[i].imgURL + '" height="25%" width="25%"></div>';
-    }
-
-    stringHTML += '</div></div></div>';
-
-    item.innerHTML = stringHTML;
-    console.log(item.innerHTML);
-
-    //console.log(data.listaHerois());
+  ipcRenderer.send('fechar-janela-herois');
 })
