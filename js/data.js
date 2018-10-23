@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron')
 
 let herois;
-let cards;
+let cartas;
 
 fetch('http://gdurl.com/KM4u').then(function(response) {
     response.text().then(function(text) {
@@ -17,10 +17,18 @@ fetch('http://gdurl.com/dAE9').then(function(response) {
 
 
 module.exports = {
-  getCards(){
-    return cards;
+  getHerois(classe){
+    return herois.Heroes.filter(
+       function(heroi){ return heroi.Class == classe }
+     );
   },
-  getCards(){
-    return cards;
+  listaHerois(){
+    return herois;
+  },
+  getCartas(classe){
+    return cartas;
+  },
+  listaCartas(){
+    return cartas;
   }
 }

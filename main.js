@@ -19,7 +19,7 @@ let heroisWindow = null;
 ipcMain.on('seleciona-heroi', (event, param) => {
     if(heroisWindow == null){
         heroisWindow = new BrowserWindow({
-            width: 600,
+            width: 1366,
             height: 768,
             alwaysOnTop: true,
             frame: false

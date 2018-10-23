@@ -8,7 +8,7 @@ let h3 = document.querySelector('.selecionar-heroi-3');
 
 /*
 menu.addEventListener('click', function () {
-    panel.render(data.getCards(), 2);
+    panel.render(data.getCartas(), 2);
 });
 */
 
