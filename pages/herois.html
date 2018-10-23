@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sobre o Alura Timer</title>
+  <title>Seleção de Herói</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,16 +19,15 @@
   <!-- Custom Fonts -->
   <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-  <link rel="stylesheet" href="css/sobre.css">
 </head>
 <body>
 
   <div class="panel-body">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#panel-puros" data-toggle="tab">Puros</a>
+      <li class="active"><a href="#accordion-pure" data-toggle="tab">Puros</a>
       </li>
-      <li><a href="#panel-hibridos" data-toggle="tab">Hibridos</a>
+      <li><a href="#accordion-hybrid" data-toggle="tab">Híbridos</a>
       </li>
       <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown panel-red">
@@ -38,57 +37,18 @@
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-      <div class="tab-pane fade in active" id="panel-puros">
+      <div class="tab-pane fade in active" id="accordion-pure">
         <div class="row">
           <div class="col-lg-12">
             <div class="panel panel-default">
-              <div class="panel-body">
-                <div class="panel-group" id="accordion">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a id="pure-amazon" data-toggle="collapse" data-parent="#accordion" href="#pure-amazon-item">Amazon</a>
-                      </h4>
-                    </div>
-                    <div id="pure-amazon-item" class="panel-collapse collapse">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a id="pure-barbarian" data-toggle="collapse" data-parent="#accordion" href="#pure-barbarian-item">Barbarian</a>
-                      </h4>
-                    </div>
-                    <div id="pure-barbarian-item" class="panel-collapse collapse">
-                      <div class="panel-body">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#pure-goblin">Goblin</a>
-                      </h4>
-                    </div>
-                    <div id="pure-goblin" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="panel-body" id="accordion-pure-panel">
               </div>
-              <!-- .panel-body -->
             </div>
-            <!-- /.panel -->
           </div>
-          <!-- /.col-lg-12 -->
-
         </div>
       </div>
-      <div class="tab-pane fade" id="panel-hibridos">
+
+      <div class="tab-pane fade" id="accordion-hybrid">
         <div class="row">
           <div class="col-lg-12">
             <div class="panel panel-default">
@@ -97,52 +57,10 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#hybrid-amazon">Amazon</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">Collapsible Group Item #1</a>
                       </h4>
                     </div>
-                    <div id="hybrid-amazon" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-pills">
-                          <li class="active"><a href="#succubus" data-toggle="tab">Succubus</a>
-                          </li>
-                          <li><a href="#valkyrie" data-toggle="tab">Valkyrie</a>
-                          </li>
-                          <li><a href="#hunter" data-toggle="tab">Hunter</a>
-                          </li>
-                          <li><a href="#shieldmaiden" data-toggle="tab">Shieldmaiden</a>
-                          </li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                          <div class="tab-pane fade in active" id="succubus">
-                            <h4>Home Tab</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          </div>
-                          <div class="tab-pane fade" id="valkyrie">
-                            <h4>Profile Tab</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          </div>
-                          <div class="tab-pane fade" id="hunter">
-                            <h4>Messages Tab</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          </div>
-                          <div class="tab-pane fade" id="shieldmaiden">
-                            <h4>Settings Tab</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#hybrid-barbarian">Barbarian</a>
-                      </h4>
-                    </div>
-                    <div id="hybrid-barbarian" class="panel-collapse collapse">
+                    <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
                       <div class="panel-body">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                       </div>
@@ -151,10 +69,22 @@
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#hybrid-goblin">Goblin</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">Collapsible Group Item #2</a>
                       </h4>
                     </div>
-                    <div id="hybrid-goblin" class="panel-collapse collapse">
+                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                      <div class="panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">Collapsible Group Item #3</a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
                       <div class="panel-body">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                       </div>
@@ -162,11 +92,8 @@
                   </div>
                 </div>
               </div>
-              <!-- .panel-body -->
             </div>
-            <!-- /.panel -->
           </div>
-          <!-- /.col-lg-12 -->
         </div>
       </div>
     </div>
