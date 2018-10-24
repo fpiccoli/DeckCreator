@@ -1,5 +1,5 @@
 const data = require('./data.js');
-//const html = require('./html-builder.js');
+const html = require('./html-builder.js');
 var builder = require('html2json').json2html;
 
 module.exports = {
@@ -32,28 +32,29 @@ module.exports = {
 
     let obj = {node:'element',tag:'img', attr: {src:'https://gdurl.com/OzHW', height:'100%', width:'100%'}};
     let col = {node:'element',tag:'div', attr: {class:'col-lg-12'}, child:[obj]};
-    let row = {node:'element',tag:'div', attr: {class:'row'}, child:[col]};
-    let panelHeading = {node:'element',tag:'div', attr: {class:'panel-heading'}, child:[row]};
-    let panel = {node:'element',tag:'div', attr: {class:'panel'}, child:[panelHeading]};
+    //let row = {node:'element',tag:'div', attr: {class:'row'}, child:[col]};
+    //let panelHeading = {node:'element',tag:'div', attr: {class:'panel-heading'}, child:[row]};
+    //let panel = {node:'element',tag:'div', attr: {class:'panel'}, child:[panelHeading]};
 
-    let root = {node:'root',child:[panel]};
+    let root = {node:'root',child:[col]};
 
     let teste = builder(root);
 
-    console.log(teste);
+
+    let root2 = html.create();
+    root2 = html.addElement(root2, 'div', {class:'col-lg-12'});
+    root2.addChild('teste', 2);
+    console.log(root2);
+
+    //root2.child[0] = html.addElement(root2.child[0], 'img', {src:'https://gdurl.com/OzHW', height:'100%', width:'100%'});
+
+    let teste2 = builder(root2);
+
+        console.log(teste);
+        console.log(teste2);
     //https://www.npmjs.com/package/html2json
     //  <div class="col-lg-4">
 
-    let teste2 = `
-       <div class="panel">
-          <div class="panel-heading">
-             <div class="row">
-                <div class="col-lg-12">
-                       <img src="https://gdurl.com/OzHW" height="100%" width="100%">
-                   </div>
-             </div>
-          </div>
-       </div>`
 
     //    <a href="#" class="selecionar-heroi-1">
     //       <div class="panel-footer">
@@ -63,8 +64,7 @@ module.exports = {
     //    </a>
     // </div>
 
-        console.log(teste2);
-    accordion.innerHTML = teste2;
+    //accordion.innerHTML = teste;
   },
   renderHibrido(lista){
     let accordion = document.querySelector('#accordion-hybrid-panel');
