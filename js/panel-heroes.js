@@ -28,44 +28,70 @@ module.exports = {
     accordion.innerHTML = stringHTML;
   },
   renderPuro(lista){
+    /*
     let accordion = document.querySelector('#accordion-pure-panel');
 
-    let obj = {node:'element',tag:'img', attr: {src:'https://gdurl.com/OzHW', height:'100%', width:'100%'}};
-    let col = {node:'element',tag:'div', attr: {class:'col-lg-12'}, child:[obj]};
-    //let row = {node:'element',tag:'div', attr: {class:'row'}, child:[col]};
-    //let panelHeading = {node:'element',tag:'div', attr: {class:'panel-heading'}, child:[row]};
-    //let panel = {node:'element',tag:'div', attr: {class:'panel'}, child:[panelHeading]};
+    let obj1 = {node:'element',tag:'img', attr: {src:'https://gdurl.com/OzHW', height:'100%', width:'100%'}};
+    let col1 = {node:'element',tag:'div', attr: {class:'col-lg-12'}, child:[obj]};
+    let row1 = {node:'element',tag:'div', attr: {class:'row'}, child:[col]};
+    let panelHeading1 = {node:'element',tag:'div', attr: {class:'panel-heading'}, child:[row]};
+    let panel1 = {node:'element',tag:'div', attr: {class:'panel'}, child:[panelHeading]};
 
-    let root = {node:'root',child:[col]};
+    let root1 = {node:'root',child:[panel]};
 
-    let teste = builder(root);
+    let teste1 = builder(root);
+*/
 
+    //let heroi = html.heroi();
 
-    let root2 = html.create();
-    root2 = html.addElement(root2, 'div', {class:'col-lg-12'});
-    root2.addChild('teste', 2);
-    console.log(root2);
+    //let classe = html.classe(heroi);
 
-    //root2.child[0] = html.addElement(root2.child[0], 'img', {src:'https://gdurl.com/OzHW', height:'100%', width:'100%'});
+    //let root = html.root(classe);
 
-    let teste2 = builder(root2);
+    let retornoJSON = html.classe('Ophelia');
 
-        console.log(teste);
-        console.log(teste2);
-    //https://www.npmjs.com/package/html2json
-    //  <div class="col-lg-4">
+    console.log(retornoJSON);
 
+    let retornoHTML = builder({node:'root', child:retornoJSON});
 
-    //    <a href="#" class="selecionar-heroi-1">
-    //       <div class="panel-footer">
-    //          <span class="pull-left">Ophelia</span><span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-    //          <div class="clearfix"></div>
-    //       </div>
-    //    </a>
-    // </div>
+    console.log(retornoHTML);
 
-    //accordion.innerHTML = teste;
   },
+
+
+
+  //  CLASSE HIBRIDA
+  //               <ul class="nav nav-pills">
+  //                   <li class="active"><a href="#home-pills" data-toggle="tab">Home</a>
+  //                   </li>
+  //                   <li><a href="#profile-pills" data-toggle="tab">Profile</a>
+  //                   </li>
+  //                   <li><a href="#messages-pills" data-toggle="tab">Messages</a>
+  //                   </li>
+  //                   <li><a href="#settings-pills" data-toggle="tab">Settings</a>
+  //                   </li>
+  //               </ul>
+  //
+  //               <!-- Tab panes -->
+  //               <div class="tab-content">
+  //                   <div class="tab-pane fade in active" id="home-pills">
+  //                       //HEROIS
+  //                   </div>
+  //                   <div class="tab-pane fade" id="profile-pills">
+  //                       //HEROIS
+  //                   </div>
+  //                   <div class="tab-pane fade" id="messages-pills">
+  //                       //HEROIS
+  //                   </div>
+  //                   <div class="tab-pane fade" id="settings-pills">
+  //                       //HEROIS
+  //                   </div>
+  //               </div>
+
+
+
+
+
   renderHibrido(lista){
     let accordion = document.querySelector('#accordion-hybrid-panel');
 
@@ -103,7 +129,6 @@ module.exports = {
 
     stringHTML += '</div></div>';
 
-    console.log(stringHTML);
     accordion.innerHTML = stringHTML;
   }
 }
@@ -146,13 +171,4 @@ function renderTab(lista){
   retorno += '</ul><div class="tab-content">';
 
   return retorno;
-
-  //   let retorno = '<li class="active"><a href="#hun" data-toggle="tab">Hun</a></li>';
-  //       retorno = '<li><a href="#oni" data-toggle="tab">Oni</a></li>';
-  //       retorno = '<li><a href="#bloodrager" data-toggle="tab">Bloodrager</a></li></li>';
-  //       retorno = '<li><a href="#champion" data-toggle="tab">Champion</a></li>';
-  //       retorno = '<li><a href="#squire" data-toggle="tab">Squire</a></li>';
-  //       retorno = '</ul><div class="tab-content">';
-  //
-  // return retorno;
 }

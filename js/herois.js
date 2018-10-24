@@ -13,7 +13,7 @@ let classesHibridas = ['acolyte','arcanist','assassin','beastmaster','bloodmance
 'scavenger','shaman','shieldmaiden','skald','slayer','spellblade','squire','succubus','troll','valkyrie','witch'];
 
 setTimeout(function(){
-  panel.renderPuro(classesPuras);
+  panel.renderPuroOld(classesPuras);
   //panel.renderHibrido(classesPuras);
 }, 1000);
 
