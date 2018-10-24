@@ -15,14 +15,23 @@ fetch('http://gdurl.com/dAE9').then(function(response) {
   });
 });
 
-
 module.exports = {
   getHerois(classe){
     if(!herois){return;}
     return herois.Heroes.filter(
-      function(heroi){ return heroi.Class == classe }
+      function(heroi){
+        return heroi.Class == classe
+      }
     );
   },
+    getHeroisHibridos(classe){
+      if(!herois){return;}
+      return herois.Heroes.filter(
+        function(heroi){
+          return heroi.Type == "Hybrid" && (heroi.Main == classe || heroi.Sub == classe)
+        }
+      );
+    },
   listaHerois(){
     return herois;
   },
