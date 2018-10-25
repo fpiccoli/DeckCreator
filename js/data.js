@@ -18,17 +18,17 @@ fetch('http://gdurl.com/dAE9').then(function(response) {
 module.exports = {
   getHerois(classe){
     if(!herois){return;}
-    return herois.Heroes.filter(
+    return herois.heroes.filter(
       function(heroi){
-        return heroi.Class == classe
+        return heroi.class == classe
       }
     );
   },
     getHeroisHibridos(classe){
       if(!herois){return;}
-      return herois.Heroes.filter(
+      return herois.heroes.filter(
         function(heroi){
-          return heroi.Type == "Hybrid" && (heroi.Main == classe || heroi.Sub == classe)
+          return heroi.type == "Hybrid" && (heroi.main == classe || heroi.sub == classe)
         }
       );
     },

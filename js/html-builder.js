@@ -15,12 +15,12 @@ module.exports = {
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
                                         child: [{node: 'element', tag: 'div', attr: { class: 'row' },
                                                     child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-12' },
-                                                                child: [{node: 'element', tag: 'img', attr: { src: herois[i].imgURL, height: '100%', width: '100%' }, child: [] }]
+                                                                child: [{node: 'element', tag: 'img', attr: { src: herois[i].imgurl, height: '100%', width: '100%' }, child: [] }]
                                                             }]
                                                 }]
                                     }]
                         },
-                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi-'+herois[i].CardId },
+                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi-'+herois[i].id },
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
                                         child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
                                                     child:[{ node: 'text', text: nomeDaClasse }]},
@@ -34,37 +34,35 @@ module.exports = {
       }
 
   return jsonHerois;
-  },
-  classe(classes, jsonHerois, type){
+},
+  classe(classe, jsonHerois, type){
 
-    let jsonClasses = [];
-
-    for (let i in classes){
-
-      let json = {
+      return {
         node: 'element', tag: 'div', attr: { class: 'row' },
             child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-6' },
                         child: [{node: 'element', tag: 'div', attr: { class: 'panel panel-default' },
                                     child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
-                                                child: [{node: 'element', tag: 'a', attr: { dataToggle: 'collapse', dataParent:'#accordion-pure-panel', href:'#'+type+'-'+classes[i].Class },
-                                                            child:[{node: 'element', tag: 'i', attr: { class: "fa fa-arrow-circle-right" },
-                                                                        child: [{ node: 'text', text: classes[i].Name }]
-                                                                   }]
+                                                child: [{node: 'element', tag: 'div', attr: { class: 'panel-title' },
+                                                            child:[{node: 'element', tag: 'a', attr: { dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel', href:'#'+type+'-'+classe.toLowerCase() },
+                                                                        child: [{ node: 'text', text: classe }]
+                                                                    }]
                                                         }]
                                             },
-                                            {
-
-                                            }
-                                          ]
+                                            {node: 'element', tag: 'div', attr: { id: type+'-'+classe.toLowerCase(), class: 'panel-collapse collapse' },
+                                                        child: [{node: 'element', tag: 'div', attr: { class: 'panel-body' },
+                                                                    child: [{node: 'element', tag: 'div', attr: { class: 'row' },
+                                                                                child: [{node: 'element', tag: 'div', attr: { class: 'col-sm-12' }, child: [jsonHerois] }]
+                                                                            }]
+                                                                }]
+                                            }]
                                 }]
-                    },
+                    }]
       };
 
-    return;
   }
 }
 
-// A CADA CLASSE
+// A CADA JSON
 // <div class="panel-group">
 
 // A CADA 2 CLASSE
@@ -86,26 +84,6 @@ module.exports = {
 //                <div class="row">
 //                   <div class="col-sm-12">
 // HEROIS
-//                         <div class="panel">
-//                            <div class="panel-heading">
-//                               <div class="row">
-//                                  <div class="col-lg-12"><img src="https://gdurl.com/Zzi1" height="100%" width="100%"></div>
-//                               </div>
-//                            </div>
-//                         </div>
-
-
-//                         <a href="#" class="selecionar-heroi-3">
-//                            <div class="panel-footer">
-//                               <span class="pull-left">
-//                                    Morgan
-//                               </span>
-//                               <span class="pull-right">
-//                                    <i class="fa fa-arrow-circle-right"></i>
-//                               </span>
-//                               <div class="clearfix"></div>
-//                            </div>
-//                         </a>
 
 
 //                      </div>

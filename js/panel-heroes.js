@@ -28,34 +28,19 @@ module.exports = {
     accordion.innerHTML = stringHTML;
   },
   renderPuro(lista){
-    /*
-    let accordion = document.querySelector('#accordion-pure-panel');
 
-    let obj1 = {node:'element',tag:'img', attr: {src:'https://gdurl.com/OzHW', height:'100%', width:'100%'}};
-    let col1 = {node:'element',tag:'div', attr: {class:'col-lg-12'}, child:[obj]};
-    let row1 = {node:'element',tag:'div', attr: {class:'row'}, child:[col]};
-    let panelHeading1 = {node:'element',tag:'div', attr: {class:'panel-heading'}, child:[row]};
-    let panel1 = {node:'element',tag:'div', attr: {class:'panel'}, child:[panelHeading]};
+    let jsonHerois = html.heroi('Amazon');
 
-    let root1 = {node:'root',child:[panel]};
+    console.log(jsonHerois)
+    console.log(builder({node:'root', child:jsonHerois}))
 
-    let teste1 = builder(root);
-*/
+    let jsonClasse = html.classe('Amazon', jsonHerois, 'pure');
 
-    //let heroi = html.heroi();
+    console.log(jsonClasse);
 
-    //let classe = html.classe(heroi);
-
-    //let root = html.root(classe);
-
-    let retornoJSON = html.classe('Ophelia');
-
-    console.log(retornoJSON);
-
-    let retornoHTML = builder({node:'root', child:retornoJSON});
+    let retornoHTML = builder({node:'root', child:jsonClasse});
 
     console.log(retornoHTML);
-
   },
 
 
