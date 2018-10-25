@@ -1,13 +1,12 @@
 const data = require('./data.js');
+const json2html = require('html2json').json2html;
 
 module.exports = {
-    heroi(nomeDaClasse){
-
-      let herois = data.getHerois(nomeDaClasse);
+    heroi(classe){
 
       let jsonHerois = [];
 
-      for (let i in herois)
+      for (let i in classe.heroes)
       {
           let json = {
             node: 'element', tag: 'div', attr: { class: 'col-lg-4' },
@@ -15,15 +14,15 @@ module.exports = {
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
                                         child: [{node: 'element', tag: 'div', attr: { class: 'row' },
                                                     child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-12' },
-                                                                child: [{node: 'element', tag: 'img', attr: { src: herois[i].imgurl, height: '100%', width: '100%' }, child: [] }]
+                                                                child: [{node: 'element', tag: 'img', attr: { src: classe.heroes[i].imgurl, height: '100%', width: '100%' }, child: [] }]
                                                             }]
                                                 }]
                                     }]
                         },
-                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi-'+herois[i].id },
+                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi-'+classe.heroes[i].id },
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
                                         child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
-                                                    child:[{ node: 'text', text: nomeDaClasse }]},
+                                                    child:[{ node: 'text', text: classe.class }]},
                                                 {node: 'element', tag: 'span', attr: { class: 'pull-right' },
                                                     child:[{node: 'element', tag: 'i', attr: { class: "fa fa-arrow-circle-right" }, child: []} ]},
                                                 {node: 'element', tag: 'div', attr: { class: 'clearfix' }, child:[] }]
@@ -37,28 +36,31 @@ module.exports = {
 },
   classe(classe, jsonHerois, type){
 
-      return {
+      return [{
         node: 'element', tag: 'div', attr: { class: 'row' },
             child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-6' },
                         child: [{node: 'element', tag: 'div', attr: { class: 'panel panel-default' },
                                     child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
                                                 child: [{node: 'element', tag: 'div', attr: { class: 'panel-title' },
                                                             child:[{node: 'element', tag: 'a', attr: { dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel', href:'#'+type+'-'+classe.toLowerCase() },
-                                                                        child: [{ node: 'text', text: classe }]
+                                                                        child: [{ node: 'text', text: classe.name }]
                                                                     }]
                                                         }]
                                             },
                                             {node: 'element', tag: 'div', attr: { id: type+'-'+classe.toLowerCase(), class: 'panel-collapse collapse' },
                                                         child: [{node: 'element', tag: 'div', attr: { class: 'panel-body' },
                                                                     child: [{node: 'element', tag: 'div', attr: { class: 'row' },
-                                                                                child: [{node: 'element', tag: 'div', attr: { class: 'col-sm-12' }, child: [jsonHerois] }]
+                                                                                child: [{node: 'element', tag: 'div', attr: { class: 'col-sm-12' }, child: jsonHerois }]
                                                                             }]
                                                                 }]
                                             }]
                                 }]
                     }]
-      };
+      }];
 
+  },
+  builder(json){
+    return json2html({node:'root', child:json});
   }
 }
 
