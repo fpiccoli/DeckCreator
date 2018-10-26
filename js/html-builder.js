@@ -69,65 +69,26 @@ module.exports = {
       return [{node: 'element', tag: 'ul', attr: { class: 'nav nav-pills' }, child: jsonNav},
               {node: 'element', tag: 'div', attr: { class: 'tab-content' }, child: jsonContent}];
   },
-    classe(classes, type){
+    classe(type, colunas){
+      let classes = data.listByType('Pure');
       let json = [];
 
-      for(let i in classes){
-
-        json.push({node: 'element', tag: 'div', attr: { class: 'col-lg-6' },
-                    child: [{node: 'element', tag: 'div', attr: { class: 'panel panel-default' },
-                                child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
-                                            child: [{node: 'element', tag: 'div', attr: { class: 'panel-title' },
-                                                        child:[{node: 'element', tag: 'a', attr: { dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel',  ariaExpanded:'false', class:'collapsed', href:'#'+type+'-'+classes[i].name.toLowerCase() },
-                                                                    child: [{ node: 'text', text: classes[i].name }]
-                                                                }]
-                                                    }]
-                                        },
-                                        {node: 'element', tag: 'div', attr: { id: type+'-'+classes[i].name.toLowerCase(), class: 'panel-collapse collapse',  ariaExpanded:'false' },
-                                                    child: [{node: 'element', tag: 'div', attr: { class: 'panel-body' },
-                                                                child: [{node: 'element', tag: 'div', attr: { class: 'row' },
-                                                                            child: [{node: 'element', tag: 'div', attr: { class: 'col-sm-12' }, child: this.heroi(classes[i]) }]
-                                                                        }]
-                                                            }]
-                                        }]
-                            }]
-
-        });
-
-      }
-      let retorno = [];
-      let i = 0;
-      do {
-        let child = [];
-        if(json[i]){
-          child.push(json[i]);
-        }
-        if(json[i+1]){
-          child.push(json[i+1]);
-        }
-      retorno.push({node: 'element', tag: 'div', attr: { class: 'row' },
-                  child: child
-                    });
-        i++;i++;
-      }
-      while (i < json.length);
-
-      return retorno;
-    },
-    classeHibrido(classes, type){
-      let json = [];
-
-      for(let i in classes){
+      for (let i in classes){
         let hibridos = data.getHybrid(classes[i].name);
         let child = [];
         let cor = 'panel panel-danger';
 
-        if (hibridos.length > 0){
+
+        if (type == 'pure'){
+          child = this.heroi(classes[i]);
+          cor = 'panel panel-default'
+        }
+        else if (hibridos.length > 0){
           child = this.hibrido(hibridos, classes[i].name);
           cor = 'panel panel-default'
         }
 
-        json.push({node: 'element', tag: 'div', attr: { class: 'col-lg-6' },
+        json.push({node: 'element', tag: 'div', attr: { class: 'col-lg-'+(12/colunas) },
                     child: [{node: 'element', tag: 'div', attr: { class: cor },
                                 child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
                                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-title' },
@@ -148,27 +109,59 @@ module.exports = {
         });
 
       }
-      let retorno = [];
-      let i = 0;
-      do {
-        let child = [];
+
+      return this.coluna(json, colunas);
+    },
+  build(type, colunas){
+    let html = json2html({node:'root', child: this.classe(type, colunas)});
+
+    html = replaceAll(html,"dataToggle", "data-toggle");
+    html = replaceAll(html,"dataParent", "data-parent");
+    html = replaceAll(html,"ariaExpanded", "aria-expanded");
+
+    if (html == '<div class="row"></div>'){
+      html = this.botaoRecarregar();
+    }
+
+    return html;
+  },
+  coluna(json, colunas){
+    let retorno = [];
+    let i = 0;
+    do {
+      let child = [];
+      let c = 0;
+
+      do{
         if(json[i]){
           child.push(json[i]);
         }
-        if(json[i+1]){
-          child.push(json[i+1]);
-        }
-      retorno.push({node: 'element', tag: 'div', attr: { class: 'row' },
-                  child: child
-                    });
-        i++;i++;
+        i++;c++;
       }
-      while (i < json.length);
+      while (c < colunas)
 
-      return retorno;
-    },
+    retorno.push({node: 'element', tag: 'div', attr: { class: 'row' },
+                child: child
+                  });
+    }
+    while (i < json.length);
 
-  build(json){
-    return json2html({node:'root', child:json});
+    return retorno;
+  },
+  botaoRecarregar(){
+    let json = [{node: 'element', tag: 'button', attr: { type: 'button', class: 'btn btn-primary btn-lg btn-block', id:'recarregar-herois' },
+                    child: [{node: 'element', tag: 'i', attr: { class: 'fa fa-refresh' }, child: []}, {node: 'text', text: ' Carregar heróis'}]
+                }];
+
+    return json2html({node:'root', child: json});
   }
+}
+
+function replaceAll(str, de, para){
+  var pos = str.indexOf(de);
+  while (pos > -1){
+    str = str.replace(de, para);
+    pos = str.indexOf(de);
+  }
+  return (str);
 }
