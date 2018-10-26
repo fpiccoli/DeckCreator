@@ -6,7 +6,7 @@ let linkFechar = document.querySelector("#link-fechar");
 
 setTimeout(function(){
   panel.renderPuro();
-  //panel.renderHibrido(classesPuras);
+  //panel.renderHibrido();
 }, 2000);
 
 window.onload = function(){

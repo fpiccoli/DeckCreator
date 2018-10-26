@@ -9,14 +9,44 @@ module.exports = {
     let classes = data.listByType('Pure');
     let jsonHerois;
     let jsonClasse;
+    // let stringHTML = '<div class="panel-group"><div class="row">';
+    //
+    // for(let i in classes){
+    //   if(i%2 == 0 && i != 0){
+    //     stringHTML += '</div><div class="row">';
+    //   }
+    //   jsonHerois = html.heroi(classes[i]);
+    //   jsonClasse = html.classe(classes[i], jsonHerois, 'pure');
+    //   stringHTML += html.builder(jsonClasse);
+    // }
+    //
+    // stringHTML += '</div></div>';
+
+    console.log(html.classe(classes, 'pure'));
+
+    stringHTML = html.build(html.classe(classes, 'pure'));
+
+    stringHTML = replaceAll(stringHTML,"dataToggle", "data-toggle");
+    stringHTML = replaceAll(stringHTML,"dataParent", "data-parent");
+
+    console.log(stringHTML);
+
+    panelPuro.innerHTML = stringHTML;
+  },
+  renderHibrido(){
+    let panelHibrido = document.querySelector("#accordion-hybrid-panel");
+
+    let classes = data.listByType('Hybrid');
+    let jsonHerois;
+    let jsonClasse;
     let stringHTML = '<div class="panel-group"><div class="row">';
 
     for(let i in classes){
       if(i%2 == 0 && i != 0){
         stringHTML += '</div><div class="row">';
       }
-      jsonHerois = html.heroi(classes[i]);
-      jsonClasse = html.classe(classes[i], jsonHerois, 'pure');
+      jsonHerois = html.heroiHibrido(classes);
+      jsonClasse = html.classe(classes[i], jsonHerois, 'hybrid');
       stringHTML += html.builder(jsonClasse);
     }
 
@@ -25,55 +55,10 @@ module.exports = {
     stringHTML = replaceAll(stringHTML,"dataToggle", "data-toggle");
     stringHTML = replaceAll(stringHTML,"dataParent", "data-parent");
 
-    panelPuro.innerHTML = stringHTML;
+    console.log(stringHTML);
 
-    // for (let i in herois){
-    //
-    //   let jsonHerois = html.heroi(herois[i].class);
-    //
-    // }
-
-    // let jsonHerois = html.heroi('Amazon');
-    //
-    // console.log(html.builder(jsonHerois));
-    //
-    // let jsonClasse = html.classe('Amazon', jsonHerois, 'pure');
-    //
-    // let retornoHTML = html.builder(jsonClasse);
-    //
-    // console.log(retornoHTML);
+    panelHibrido.innerHTML = stringHTML;
   }
-
-
-
-  //  CLASSE HIBRIDA
-  //               <ul class="nav nav-pills">
-  //                   <li class="active"><a href="#home-pills" data-toggle="tab">Home</a>
-  //                   </li>
-  //                   <li><a href="#profile-pills" data-toggle="tab">Profile</a>
-  //                   </li>
-  //                   <li><a href="#messages-pills" data-toggle="tab">Messages</a>
-  //                   </li>
-  //                   <li><a href="#settings-pills" data-toggle="tab">Settings</a>
-  //                   </li>
-  //               </ul>
-  //
-  //               <!-- Tab panes -->
-  //               <div class="tab-content">
-  //                   <div class="tab-pane fade in active" id="home-pills">
-  //                       //HEROIS
-  //                   </div>
-  //                   <div class="tab-pane fade" id="profile-pills">
-  //                       //HEROIS
-  //                   </div>
-  //                   <div class="tab-pane fade" id="messages-pills">
-  //                       //HEROIS
-  //                   </div>
-  //                   <div class="tab-pane fade" id="settings-pills">
-  //                       //HEROIS
-  //                   </div>
-  //               </div>
-
 }
 
 function replaceAll(str, de, para){
