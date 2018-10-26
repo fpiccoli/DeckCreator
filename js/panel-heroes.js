@@ -2,13 +2,30 @@ const data = require('./data.js');
 const html = require('./html-builder.js');
 
 module.exports = {
+
   renderPuro(){
+    let panelPuro = document.querySelector("#accordion-pure-panel");
 
     let classes = data.listByType('Pure');
+    let jsonHerois;
+    let jsonClasse;
+    let stringHTML = '<div class="panel-group"><div class="row">';
 
     for(let i in classes){
-      console.log(classes[i]);
+      if(i%2 == 0 && i != 0){
+        stringHTML += '</div><div class="row">';
+      }
+      jsonHerois = html.heroi(classes[i]);
+      jsonClasse = html.classe(classes[i], jsonHerois, 'pure');
+      stringHTML += html.builder(jsonClasse);
     }
+
+    stringHTML += '</div></div>';
+
+    stringHTML = replaceAll(stringHTML,"dataToggle", "data-toggle");
+    stringHTML = replaceAll(stringHTML,"dataParent", "data-parent");
+
+    panelPuro.innerHTML = stringHTML;
 
     // for (let i in herois){
     //
@@ -57,4 +74,13 @@ module.exports = {
   //                   </div>
   //               </div>
 
+}
+
+function replaceAll(str, de, para){
+  var pos = str.indexOf(de);
+  while (pos > -1){
+    str = str.replace(de, para);
+    pos = str.indexOf(de);
+  }
+  return (str);
 }

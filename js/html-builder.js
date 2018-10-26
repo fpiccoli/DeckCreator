@@ -19,10 +19,10 @@ module.exports = {
                                                 }]
                                     }]
                         },
-                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi-'+classe.heroes[i].id },
+                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi' },
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
                                         child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
-                                                    child:[{ node: 'text', text: classe.class }]},
+                                                    child:[{ node: 'text', text: classe.heroes[i].name }]},
                                                 {node: 'element', tag: 'span', attr: { class: 'pull-right' },
                                                     child:[{node: 'element', tag: 'i', attr: { class: "fa fa-arrow-circle-right" }, child: []} ]},
                                                 {node: 'element', tag: 'div', attr: { class: 'clearfix' }, child:[] }]
@@ -36,26 +36,24 @@ module.exports = {
 },
   classe(classe, jsonHerois, type){
 
-      return [{
-        node: 'element', tag: 'div', attr: { class: 'row' },
-            child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-6' },
-                        child: [{node: 'element', tag: 'div', attr: { class: 'panel panel-default' },
-                                    child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
-                                                child: [{node: 'element', tag: 'div', attr: { class: 'panel-title' },
-                                                            child:[{node: 'element', tag: 'a', attr: { dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel', href:'#'+type+'-'+classe.toLowerCase() },
-                                                                        child: [{ node: 'text', text: classe.name }]
-                                                                    }]
-                                                        }]
-                                            },
-                                            {node: 'element', tag: 'div', attr: { id: type+'-'+classe.toLowerCase(), class: 'panel-collapse collapse' },
-                                                        child: [{node: 'element', tag: 'div', attr: { class: 'panel-body' },
-                                                                    child: [{node: 'element', tag: 'div', attr: { class: 'row' },
-                                                                                child: [{node: 'element', tag: 'div', attr: { class: 'col-sm-12' }, child: jsonHerois }]
-                                                                            }]
-                                                                }]
-                                            }]
-                                }]
-                    }]
+      return [{node: 'element', tag: 'div', attr: { class: 'col-lg-6' },
+                  child: [{node: 'element', tag: 'div', attr: { class: 'panel panel-default' },
+                              child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
+                                          child: [{node: 'element', tag: 'div', attr: { class: 'panel-title' },
+                                                      child:[{node: 'element', tag: 'a', attr: { dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel', href:'#'+type+'-'+classe.name.toLowerCase() },
+                                                                  child: [{ node: 'text', text: classe.name }]
+                                                              }]
+                                                  }]
+                                      },
+                                      {node: 'element', tag: 'div', attr: { id: type+'-'+classe.name.toLowerCase(), class: 'panel-collapse collapse' },
+                                                  child: [{node: 'element', tag: 'div', attr: { class: 'panel-body' },
+                                                              child: [{node: 'element', tag: 'div', attr: { class: 'row' },
+                                                                          child: [{node: 'element', tag: 'div', attr: { class: 'col-sm-12' }, child: jsonHerois }]
+                                                                      }]
+                                                          }]
+                                      }]
+                          }]
+
       }];
 
   },
