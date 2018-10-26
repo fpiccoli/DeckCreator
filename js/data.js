@@ -51,5 +51,12 @@ module.exports = {
         return classe.type == tipo
       }
     );
+  },
+  getHybrid(nomeDaClasse){
+    return classes.filter(
+      function(classe){
+        return (classe.main == nomeDaClasse || classe.sub == nomeDaClasse) && classe.type == 'Hybrid'
+      }
+    );
   }
 }
