@@ -48,18 +48,20 @@ module.exports = {
           }
 
           let sub = '';
+          let sub2 = hibridos[i].sub;
           if(hibridos[i].sub == classe){
             sub = ' pull-right';
+            sub2 = hibridos[i].main;
           }
 
           jsonNav.push({
-            node: 'element', tag: 'li', attr: { class: ativo+sub },
-                child: [{node: 'element', tag: 'a', attr: { href: '#'+classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase()+'-nav', dataToggle: 'tab' },
-                            child: [{ node: 'text', text: hibridos[i].name }]
+            node: 'element', tag: 'li', attr: { class: 'text-center '+ativo+sub },
+                child: [{node: 'element', tag: 'a', attr: { href: '#'+classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav', dataToggle: 'tab' },
+                            child: [{ node: 'text', text: hibridos[i].name + '<br />(' + sub2 +')' }]
                         }]
           });
           jsonContent.push ({
-            node: 'element', tag: 'div', attr: { class: ativo2, id: classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase()+'-nav' },
+            node: 'element', tag: 'div', attr: { class: ativo2, id: classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav' },
                 child: this.heroi(hibridos[i])
           });
       }
