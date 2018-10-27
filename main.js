@@ -1,5 +1,6 @@
-const { app, BrowserWindow, ipcMain }  = require('electron');
+const { app, BrowserWindow, ipcMain, session }  = require('electron');
 let mainWindow;
+let mainSession;
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
@@ -9,7 +10,7 @@ app.on('ready', () => {
   });
   mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
   mainWindow.maximize();
-
+  mainSession = mainWindow.webContents.session;
 });
 
 app.on('window-all-closed', () => {
@@ -29,7 +30,13 @@ ipcMain.on('seleciona-heroi', (event, param) => {
       heroisWindow = null;
     })
   }
-  heroisWindow.loadURL(`file://${__dirname}/pages/herois.html`);
+  heroisWindow.loadURL(`file://${__dirname}/pages/herois.html?posicao=${param}`);
+});
+
+ipcMain.on('get-cookies', (event) => {
+  mainSession.cookies.get({}, (error, cookies) => {
+    event.sender.send('send-cookies', cookies);
+  });
 });
 
 ipcMain.on('fechar-janela-herois', () => {
@@ -38,4 +45,12 @@ ipcMain.on('fechar-janela-herois', () => {
 
 ipcMain.on('fechar-janela-principal', () => {
   mainWindow.close();
+});
+
+ipcMain.on('heroi-selecionado', (event, heroi, posicao) => {
+  let newCookie = {url:'https://deckcreator.com', name: 'heroi'+posicao, value: JSON.stringify(heroi)};
+
+  mainSession.cookies.set(newCookie, (error) => {
+    mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
+  });
 });

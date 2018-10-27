@@ -2,7 +2,7 @@ const data = require('./data.js');
 const json2html = require('html2json').json2html;
 
 module.exports = {
-    heroi(classe){
+    heroi(classe, selecionarHeroi){
       let jsonHerois = [];
 
       for (let i in classe.heroes)
@@ -18,7 +18,7 @@ module.exports = {
                                                 }]
                                     }]
                         },
-                        {node: 'element', tag: 'a', attr: { href: '#', class: 'selecionar-heroi' },
+                        {node: 'element', tag: 'a', attr: { href: '#', class: selecionarHeroi+'-'+classe.heroes[i].number.toLowerCase() },
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
                                         child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
                                                     child:[{ node: 'text', text: classe.heroes[i].name }]},
@@ -62,7 +62,7 @@ module.exports = {
           });
           jsonContent.push ({
             node: 'element', tag: 'div', attr: { class: ativo2, id: classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav' },
-                child: this.heroi(hibridos[i])
+                child: this.heroi(hibridos[i], 'selecionar-'+classe.toLowerCase()+'-'+sub2.toLowerCase())
           });
       }
 
@@ -80,7 +80,7 @@ module.exports = {
 
 
         if (type == 'pure'){
-          child = this.heroi(classes[i]);
+          child = this.heroi(classes[i], 'selecionar-'+classes[i].name.toLowerCase());
           cor = 'panel panel-default'
         }
         else if (hibridos.length > 0){
@@ -122,7 +122,7 @@ module.exports = {
     if (html == '<div class="row"></div>'){
       html = this.botaoRecarregar();
     }
-
+    console.log(html);
     return html;
   },
   coluna(json, colunas){
