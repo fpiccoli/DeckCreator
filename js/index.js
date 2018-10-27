@@ -1,6 +1,7 @@
 const { ipcRenderer }  = require('electron');
 const data = require('./data.js');
 const panel = require('./panel-cards.js');
+const html = require('./html-builder.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let h1 = document.querySelector('.selecionar-heroi-1');
@@ -17,7 +18,10 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     json.panel = cookiesHeroi[i].name.replace('heroi','');
     herois.push(json);
   }
-  renderPanel(herois);
+  for(let i in herois){
+    renderPanel(herois[i]);
+    renderSidebar(herois[i]);
+  }
 });
 
 linkFechar.addEventListener('click', function () {
@@ -45,12 +49,16 @@ function filtraCookies(cookies, nome){
   );
 }
 
-function renderPanel(herois){
-  for(let i in herois){
-    document.querySelector('#panel'+herois[i].panel).innerHTML = document.querySelector('#panel'+herois[i].panel).innerHTML.replace('panel-red','panel-green');
-    document.querySelector('#nome-heroi-'+herois[i].panel).textContent = herois[i].name;
-    document.querySelector('#classe-heroi-'+herois[i].panel).textContent = herois[i].class;
-    document.querySelector('#txt-heroi-'+herois[i].panel).textContent = 'Alterar';
-    document.querySelector('#img-heroi-'+herois[i].panel).innerHTML = '<img src="'+herois[i].imgurl+'" height="240%" width="240%"/>';
-  }
+function renderPanel(heroi){
+  document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-red','panel-green');
+  document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
+  document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class;
+  document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
+  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="'+heroi.imgurl+'" height="240%" width="240%"/>';
 }
+
+
+// function renderSidebar(heroi){
+  // let innerHTML = document.querySelector('#side-menu').innerHTML;
+  // console.log(html.returnJSON(innerHTML));
+// }

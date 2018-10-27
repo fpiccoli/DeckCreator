@@ -1,5 +1,6 @@
 const data = require('./data.js');
 const json2html = require('html2json').json2html;
+const html2json = require('html2json').html2json;
 
 module.exports = {
     heroi(classe, selecionarHeroi){
@@ -147,6 +148,13 @@ module.exports = {
     while (i < json.length);
 
     return retorno;
+  },
+  returnJSON(html){
+    html = replaceAll(html, '\n', '');
+    html = replaceAll(html, '> ', '>');
+    html = replaceAll(html, ' <', '<');
+    console.log(html);
+    return html2json(html);
   },
   botaoRecarregar(){
     let json = [{node: 'element', tag: 'button', attr: { type: 'button', class: 'btn btn-primary btn-lg btn-block', id:'recarregar-herois' },
