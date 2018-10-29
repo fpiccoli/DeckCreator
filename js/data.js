@@ -62,7 +62,7 @@ module.exports = {
   getCardsByClass(nomeDaClasse){
     return cartas.filter(
       function(carta){
-        return carta.class == nomeDaClasse
+        return carta.class.includes(nomeDaClasse)
       }
     );
   }

@@ -176,8 +176,6 @@ module.exports = {
     let lista = data.getCardsByClass(classe);
     let cards = [];
 
-    // { node: 'element', tag: 'div', attr:{ class: 'col-lg-1' },child:[] }
-
     lista.sort(function (a, b) {
       if (a.number > b.number) {
         return 1;
@@ -189,9 +187,10 @@ module.exports = {
     });
 
     for(let i in lista){
-      console.log(lista[i].number);
-      cards.push({ node: 'element', tag: 'div', attr:{ class: 'col-lg-2' },
-                      child:[{ node: 'element', tag: 'img', attr: { src:lista[i].imgurl, height: '100%', width: '100%' } }]
+      cards.push({ node: 'element', tag: 'div', attr:{ class: 'col-lg-3 qtde-cards' },
+                      child:[{ node: 'element', tag: 'img', attr: { src:lista[i].imgurl, height: '100%', width: '100%' } },
+                             { node: 'element', tag: 'h4', attr: { class:'text-center' },
+                                  child:[{ node: 'text', text: 'Quantidade: 0'}] } ]
                   });
     }
 
