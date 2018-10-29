@@ -18,10 +18,16 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     json.panel = cookiesHeroi[i].name.replace('heroi','');
     herois.push(json);
   }
+  let buttons = [];
+  console.log(herois);
   for(let i in herois){
     renderPanel(herois[i]);
-    renderSidebar(herois[i]);
+    buttons = addButtons(herois[i].class);
   }
+
+  buttons.push('Spell');
+  buttons.push('Talent');
+  renderSidebar(buttons);
 });
 
 linkFechar.addEventListener('click', function () {
@@ -40,6 +46,13 @@ h3.addEventListener('click' , function(){
   ipcRenderer.send('seleciona-heroi', 3);
 });
 
+function addButtons(classe){
+  let buttons = [];
+  if (!buttons.includes(classe)){
+    buttons.push(classe);
+  }
+  return buttons;
+}
 
 function filtraCookies(cookies, nome){
   return cookies.filter(
@@ -47,6 +60,10 @@ function filtraCookies(cookies, nome){
       return cookie.domain == 'deckcreator.com' && cookie.name.includes(nome)
     }
   );
+}
+
+function procuraLista(age){
+  return age >= 18;
 }
 
 function renderPanel(heroi){
@@ -58,7 +75,12 @@ function renderPanel(heroi){
 }
 
 
-// function renderSidebar(heroi){
-  // let innerHTML = document.querySelector('#side-menu').innerHTML;
-  // console.log(html.returnJSON(innerHTML));
-// }
+function renderSidebar(buttons){
+  let innerHTML = document.querySelector('#side-menu').innerHTML;
+  let retorno = html.returnJSON(innerHTML);
+  retorno.child = [];
+
+  let resultado = html.menuItem(retorno, buttons);
+
+  document.querySelector('#side-menu').innerHTML = html.returnHTML(resultado);
+}

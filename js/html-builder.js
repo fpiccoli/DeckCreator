@@ -123,7 +123,6 @@ module.exports = {
     if (html == '<div class="row"></div>'){
       html = this.botaoRecarregar();
     }
-    console.log(html);
     return html;
   },
   coluna(json, colunas){
@@ -149,12 +148,36 @@ module.exports = {
 
     return retorno;
   },
+  menuItem(sidemenu, classes){
+    let json = [];
+    sidemenu.child.push({node: 'element', tag:'li', attr:{ class:'sidebar-search' },
+        child:[{ node:'element', tag:'div', attr:{ class:'input-group custom-search-form' },
+                    child:[{ node:'element', tag:'input', attr:{type:'text', class:'form-control', placeholder:'Nome do Time' } },
+                           { node:'element', tag:'span', attr:{ class:'input-group-btn' },
+                                  child: [{node:'element', tag:'button', attr:{ class:'btn btn-default', type:'button' },
+                                              child:[{ node:'element', tag:'i', attr:{ class: 'fa fa-edit' } }]
+                                          }]
+                            }]
+               }]
+    });
+    for (let i in classes){
+      sidemenu.child.push({ node: 'element', tag: 'li',
+                  child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+classes[i].toLowerCase() },
+                              child:[{ node: 'element', tag: 'img', 'attr':{ src: '../icons/'+classes[i].toLowerCase()+'.svg', height: '50%', width: '25%' }},
+                              {node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: classes[i]}]} ]
+                     }]
+        });
+      }
+      return sidemenu;
+  },
   returnJSON(html){
     html = replaceAll(html, '\n', '');
     html = replaceAll(html, '> ', '>');
     html = replaceAll(html, ' <', '<');
-    console.log(html);
     return html2json(html);
+  },
+  returnHTML(json){
+    return json2html(json);
   },
   botaoRecarregar(){
     let json = [{node: 'element', tag: 'button', attr: { type: 'button', class: 'btn btn-primary btn-lg btn-block', id:'recarregar-herois' },

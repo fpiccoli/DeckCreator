@@ -50,6 +50,8 @@ ipcMain.on('fechar-janela-principal', () => {
 ipcMain.on('heroi-selecionado', (event, heroi, posicao) => {
   let newCookie = {url:'https://deckcreator.com', name: 'heroi'+posicao, value: JSON.stringify(heroi)};
 
+  console.log(heroi);
+
   mainSession.cookies.set(newCookie, (error) => {
     mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
   });

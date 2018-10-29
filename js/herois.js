@@ -33,22 +33,29 @@ function buttonBuilder(){
 
   for(let i in puros){
     for(let h in puros[i].heroes){
-      buttonSelecionar(puros[i].name.toLowerCase(), puros[i].heroes[h]);
+      let heroi = puros[i].heroes[h];
+      heroi.main = puros[i].main;
+      heroi.sub = puros[i].sub;
+      buttonSelecionar(puros[i].name.toLowerCase(), heroi);
     }
   }
   for(let i in hibridos){
     for(let h in hibridos[i].heroes){
-      buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), hibridos[i].heroes[h]);
-      buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), hibridos[i].heroes[h]);
+      let heroi = hibridos[i].heroes[h];
+      heroi.main = hibridos[i].main;
+      heroi.sub = hibridos[i].sub;
+      console.log(heroi);
+      buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), heroi);
+      buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), heroi);
     }
   }
 }
 
 function buttonSelecionar(param, heroi){
   myURL = new URL(document.URL);
-  console.log(param);
   document.querySelector('.selecionar-'+param+'-'+heroi.number.toLowerCase()).addEventListener('click', function () {
+    console.log(heroi);
     ipcRenderer.send('heroi-selecionado', heroi, myURL.searchParams.get('posicao'));
-    ipcRenderer.send('fechar-janela-herois');
+    //ipcRenderer.send('fechar-janela-herois');
   });
 }
