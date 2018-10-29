@@ -171,6 +171,39 @@ module.exports = {
       }
       return sidemenu;
   },
+  cartas(classe){
+    let colunas = 5;
+    let lista = data.getCardsByClass(classe);
+    let cards = [];
+
+    // { node: 'element', tag: 'div', attr:{ class: 'col-lg-1' },child:[] }
+
+    lista.sort(function (a, b) {
+      if (a.number > b.number) {
+        return 1;
+      }
+      if (a.number < b.number) {
+        return -1;
+      }
+      return 0;
+    });
+
+    for(let i in lista){
+      console.log(lista[i].number);
+      cards.push({ node: 'element', tag: 'div', attr:{ class: 'col-lg-2' },
+                      child:[{ node: 'element', tag: 'img', attr: { src:lista[i].imgurl, height: '100%', width: '100%' } }]
+                  });
+    }
+
+    let rows = [];
+    rows.push({ node: 'element', tag:'div', attr:{ class: 'row' }, child:cards });
+
+    let json = {node: 'root',
+                    child:[{ node: 'element', tag: 'div', attr:{ class: 'col-lg-12' }, child: rows }]
+    }
+
+return json2html(json);
+  },
   returnJSON(html){
     html = replaceAll(html, '\n', '');
     html = replaceAll(html, '> ', '>');

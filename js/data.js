@@ -58,5 +58,12 @@ module.exports = {
         return (classe.main == nomeDaClasse || classe.sub == nomeDaClasse) && classe.type == 'Hybrid'
       }
     );
+  },
+  getCardsByClass(nomeDaClasse){
+    return cartas.filter(
+      function(carta){
+        return carta.class == nomeDaClasse
+      }
+    );
   }
 }

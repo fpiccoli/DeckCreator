@@ -80,12 +80,12 @@ function renderSidebar(buttons){
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].toLowerCase()).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].toLowerCase();
-      console.log(txt);
-      renderCards(txt);
+      renderCards(buttons[i]);
     });
   }
 }
 
-function renderCards(txt){
-  console.log('criou o botao: '+txt);
+function renderCards(classe){
+  let retorno = html.cartas(classe);
+  document.querySelector('#skill-cards').innerHTML = retorno;
 }
