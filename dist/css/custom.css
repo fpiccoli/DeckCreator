@@ -1,0 +1,404 @@
+.panel-bard {
+  border-color: #eee906;
+}
+.panel-bard > .panel-heading {
+  border-color: #eee906;
+  color: white;
+  background-color: #eee906;
+}
+.panel-bard > a {
+  color: #eee906;
+}
+.panel-bard > a:hover {
+  color: #eee906;
+}
+
+.panel-alchemist {
+  border-color: #c5838a;
+}
+.panel-alchemist > .panel-heading {
+  border-color: #c5838a;
+  color: white;
+  background-color: #c5838a;
+}
+.panel-alchemist > a {
+  color: #c5838a;
+}
+.panel-alchemist > a:hover {
+  color: #c5838a;
+}
+
+.panel-amazon {
+  border-color: #ff04f1;
+}
+.panel-amazon > .panel-heading {
+  border-color: #ff04f1;
+  color: white;
+  background-color: #ff04f1;
+}
+.panel-amazon > a {
+  color: #ff04f1;
+}
+.panel-amazon > a:hover {
+  color: #ff04f1;
+}
+
+.panel-barbarian {
+  border-color: #ff7b03;
+}
+.panel-barbarian > .panel-heading {
+  border-color: #ff7b03;
+  color: white;
+  background-color: #ff7b03;
+}
+.panel-barbarian > a {
+  color: #ff7b03;
+}
+.panel-barbarian > a:hover {
+  color: #ff7b03;
+}
+
+.panel-beast {
+  border-color: #9d6118;
+}
+.panel-beast > .panel-heading {
+  border-color: #9d6118;
+  color: white;
+  background-color: #9d6118;
+}
+.panel-beast > a {
+  color: #9d6118;
+}
+.panel-beast > a:hover {
+  color: #9d6118;
+}
+
+.panel-berserker {
+  border-color: #670106;
+}
+.panel-berserker > .panel-heading {
+  border-color: #670106;
+  color: white;
+  background-color: #670106;
+}
+.panel-berserker > a {
+  color: #670106;
+}
+.panel-berserker > a:hover {
+  color: #670106;
+}
+
+.panel-cleric {
+  border-color: #03a681;
+}
+.panel-cleric > .panel-heading {
+  border-color: #03a681;
+  color: white;
+  background-color: #03a681;
+}
+.panel-cleric > a {
+  color: #03a681;
+}
+.panel-cleric > a:hover {
+  color: #03a681;
+}
+
+.panel-demon {
+  border-color: #a1555d;
+}
+.panel-demon > .panel-heading {
+  border-color: #a1555d;
+  color: white;
+  background-color: #a1555d;
+}
+.panel-demon > a {
+  color: #a1555d;
+}
+.panel-demon > a:hover {
+  color: #a1555d;
+}
+
+.panel-druid {
+  border-color: #016704;
+}
+.panel-druid > .panel-heading {
+  border-color: #016704;
+  color: white;
+  background-color: #016704;
+}
+.panel-druid > a {
+  color: #016704;
+}
+.panel-druid > a:hover {
+  color: #016704;
+}
+
+.panel-fighter {
+  border-color: #d88d5c;
+}
+.panel-fighter > .panel-heading {
+  border-color: #d88d5c;
+  color: white;
+  background-color: #d88d5c;
+}
+.panel-fighter > a {
+  color: #d88d5c;
+}
+.panel-fighter > a:hover {
+  color: #d88d5c;
+}
+
+.panel-goblin {
+  border-color: #87ff03;
+}
+.panel-goblin > .panel-heading {
+  border-color: #87ff03;
+  color: white;
+  background-color: #87ff03;
+}
+.panel-goblin > a {
+  color: #87ff03;
+}
+.panel-goblin > a:hover {
+  color: #87ff03;
+}
+
+.panel-gremlin {
+  border-color: #04ff94;
+}
+.panel-gremlin > .panel-heading {
+  border-color: #04ff94;
+  color: white;
+  background-color: #04ff94;
+}
+.panel-gremlin > a {
+  color: #04ff94;
+}
+.panel-gremlin > a:hover {
+  color: #04ff94;
+}
+
+.panel-guardian {
+  border-color: #5c5300;
+}
+.panel-guardian > .panel-heading {
+  border-color: #5c5300;
+  color: white;
+  background-color: #5c5300;
+}
+.panel-guardian > a {
+  color: #5c5300;
+}
+.panel-guardian > a:hover {
+  color: #5c5300;
+}
+
+.panel-jester {
+  border-color: #437170;
+}
+.panel-jester > .panel-heading {
+  border-color: #437170;
+  color: white;
+  background-color: #437170;
+}
+.panel-jester > a {
+  color: #437170;
+}
+.panel-jester > a:hover {
+  color: #437170;
+}
+
+.panel-knight {
+  border-color: #828282;
+}
+.panel-knight > .panel-heading {
+  border-color: #828282;
+  color: white;
+  background-color: #828282;
+}
+.panel-knight > a {
+  color: #828282;
+}
+.panel-knight > a:hover {
+  color: #828282;
+}
+
+.panel-monk {
+  border-color: #c0a743;
+}
+.panel-monk > .panel-heading {
+  border-color: #c0a743;
+  color: white;
+  background-color: #c0a743;
+}
+.panel-monk > a {
+  color: #c0a743;
+}
+.panel-monk > a:hover {
+  color: #c0a743;
+}
+
+.panel-necromancer {
+  border-color: #0d0d0d;
+}
+.panel-necromancer > .panel-heading {
+  border-color: #0d0d0d;
+  color: white;
+  background-color: #0d0d0d;
+}
+.panel-necromancer > a {
+  color: #0d0d0d;
+}
+.panel-necromancer > a:hover {
+  color: #0d0d0d;
+}
+
+.panel-paladin {
+  border-color: #a6a386;
+}
+.panel-paladin > .panel-heading {
+  border-color: #a6a386;
+  color: white;
+  background-color: #a6a386;
+}
+.panel-paladin > a {
+  color: #a6a386;
+}
+.panel-paladin > a:hover {
+  color: #a6a386;
+}
+
+.panel-ranger {
+  border-color: #0435b3;
+}
+.panel-ranger > .panel-heading {
+  border-color: #0435b3;
+  color: white;
+  background-color: #0435b3;
+}
+.panel-ranger > a {
+  color: #0435b3;
+}
+.panel-ranger > a:hover {
+  color: #0435b3;
+}
+
+.panel-sorcerer {
+  border-color: #ff0471;
+}
+.panel-sorcerer > .panel-heading {
+  border-color: #ff0471;
+  color: white;
+  background-color: #ff0471;
+}
+.panel-sorcerer > a {
+  color: #ff0471;
+}
+.panel-sorcerer > a:hover {
+  color: #ff0471;
+}
+
+.panel-spell {
+  border-color: #61506d;
+}
+.panel-spell > .panel-heading {
+  border-color: #61506d;
+  color: white;
+  background-color: #61506d;
+}
+.panel-spell > a {
+  color: #61506d;
+}
+.panel-spell > a:hover {
+  color: #61506d;
+}
+
+.panel-talent {
+  border-color: #d4d5ff;
+}
+.panel-talent > .panel-heading {
+  border-color: #d4d5ff;
+  color: white;
+  background-color: #d4d5ff;
+}
+.panel-talent > a {
+  color: #d4d5ff;
+}
+.panel-talent > a:hover {
+  color: #d4d5ff;
+}
+
+.panel-thief {
+  border-color: #303048;
+}
+.panel-thief > .panel-heading {
+  border-color: #303048;
+  color: white;
+  background-color: #303048;
+}
+.panel-thief > a {
+  color: #303048;
+}
+.panel-thief > a:hover {
+  color: #303048;
+}
+
+.panel-vampire {
+  border-color: #7503ff;
+}
+.panel-vampire > .panel-heading {
+  border-color: #7503ff;
+  color: white;
+  background-color: #7503ff;
+}
+.panel-vampire > a {
+  color: #7503ff;
+}
+.panel-vampire > a:hover {
+  color: #7503ff;
+}
+
+.panel-warlock {
+  border-color: #271f15;
+}
+.panel-warlock > .panel-heading {
+  border-color: #271f15;
+  color: white;
+  background-color: #271f15;
+}
+.panel-warlock > a {
+  color: #271f15;
+}
+.panel-warlock > a:hover {
+  color: #271f15;
+}
+
+.panel-warrior {
+  border-color: #ff2703;
+}
+.panel-warrior > .panel-heading {
+  border-color: #ff2703;
+  color: white;
+  background-color: #ff2703;
+}
+.panel-warrior > a {
+  color: #ff2703;
+}
+.panel-warrior > a:hover {
+  color: #ff2703;
+}
+
+.panel-wizard {
+  border-color: #06e4ff;
+}
+.panel-wizard > .panel-heading {
+  border-color: #06e4ff;
+  color: white;
+  background-color: #06e4ff;
+}
+.panel-wizard > a {
+  color: #06e4ff;
+}
+.panel-wizard > a:hover {
+  color: #06e4ff;
+}

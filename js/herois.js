@@ -54,8 +54,7 @@ function buttonBuilder(){
 function buttonSelecionar(param, heroi){
   myURL = new URL(document.URL);
   document.querySelector('.selecionar-'+param+'-'+heroi.number.toLowerCase()).addEventListener('click', function () {
-    console.log(heroi);
     ipcRenderer.send('heroi-selecionado', heroi, myURL.searchParams.get('posicao'));
-    //ipcRenderer.send('fechar-janela-herois');
+    ipcRenderer.send('fechar-janela-herois');
   });
 }

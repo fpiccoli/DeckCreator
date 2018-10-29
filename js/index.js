@@ -19,10 +19,11 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     herois.push(json);
   }
   let buttons = [];
-  console.log(herois);
+
   for(let i in herois){
     renderPanel(herois[i]);
-    buttons = addButtons(herois[i].class);
+    buttons = addButtons(buttons, herois[i].main);
+    buttons = addButtons(buttons, herois[i].sub);
   }
 
   buttons.push('Spell');
@@ -46,8 +47,7 @@ h3.addEventListener('click' , function(){
   ipcRenderer.send('seleciona-heroi', 3);
 });
 
-function addButtons(classe){
-  let buttons = [];
+function addButtons(buttons, classe){
   if (!buttons.includes(classe)){
     buttons.push(classe);
   }
@@ -62,25 +62,30 @@ function filtraCookies(cookies, nome){
   );
 }
 
-function procuraLista(age){
-  return age >= 18;
-}
-
 function renderPanel(heroi){
-  document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-red','panel-green');
+  document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class;
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
-  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="'+heroi.imgurl+'" height="240%" width="240%"/>';
+  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="../icons-transparent/'+heroi.main.toLowerCase()+'.svg" height="750%" width="750%"/>';
 }
-
 
 function renderSidebar(buttons){
   let innerHTML = document.querySelector('#side-menu').innerHTML;
   let retorno = html.returnJSON(innerHTML);
   retorno.child = [];
-
   let resultado = html.menuItem(retorno, buttons);
 
   document.querySelector('#side-menu').innerHTML = html.returnHTML(resultado);
+  for(let i in buttons){
+    document.querySelector('#cards-'+buttons[i].toLowerCase()).addEventListener('click', function () {
+      let txt = '#cards-'+buttons[i].toLowerCase();
+      console.log(txt);
+      renderCards(txt);
+    });
+  }
+}
+
+function renderCards(txt){
+  console.log('criou o botao: '+txt);
 }

@@ -161,9 +161,10 @@ module.exports = {
                }]
     });
     for (let i in classes){
+      classes[i];
       sidemenu.child.push({ node: 'element', tag: 'li',
                   child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+classes[i].toLowerCase() },
-                              child:[{ node: 'element', tag: 'img', 'attr':{ src: '../icons/'+classes[i].toLowerCase()+'.svg', height: '50%', width: '25%' }},
+                              child:[{ node: 'element', tag: 'img', attr:{ src: '../icons/'+classes[i].toLowerCase()+'.svg', height: '50%', width: '25%' }},
                               {node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: classes[i]}]} ]
                      }]
         });
