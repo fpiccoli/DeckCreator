@@ -67,7 +67,7 @@ function renderPanel(heroi){
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class;
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
-  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="../icons-transparent/'+heroi.main.toLowerCase()+'.svg" height="750%" width="750%"/>';
+  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="../icons-transparent/'+heroi.main.toLowerCase()+'.svg" height="300%" width="300%"/>';
 }
 
 function renderSidebar(buttons){
