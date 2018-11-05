@@ -14,7 +14,7 @@ module.exports = {
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
                                         child: [{node: 'element', tag: 'div', attr: { class: 'row' },
                                                     child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-12' },
-                                                                child: [{node: 'element', tag: 'img', attr: { src: classe.heroes[i].imgurl, height: '100%', width: '100%' }, child: [] }]
+                                                                child: [{node: 'element', tag: 'img', attr: { src: 'https://gdurl.com/'+classe.heroes[i].imgurl, height: '100%', width: '100%' }, child: [] }]
                                                             }]
                                                 }]
                                     }]
@@ -188,7 +188,7 @@ module.exports = {
 
     for(let i in lista){
       cards.push({ node: 'element', tag: 'div', attr:{ class: 'col-lg-2 qtde-cards' },
-                      child:[{ node: 'element', tag: 'img', attr: { src:lista[i].imgurl, height: '100%', width: '100%' } },
+                      child:[{ node: 'element', tag: 'img', attr: { src:'https://gdurl.com/'+lista[i].imgurl, height: '100%', width: '100%' } },
                              { node: 'element', tag: 'h4', attr: { class:'text-center' },
                                   child:[{ node: 'text', text: 'Quantidade: 0'}] } ]
                   });
