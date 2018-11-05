@@ -171,9 +171,9 @@ module.exports = {
       }
       return sidemenu;
   },
-  cartas(classe){
+  cartas(lista){
     let colunas = 5;
-    let lista = data.getCardsByClass(classe);
+    // let lista = data.getCardsByClass(classe);
     let cards = [];
 
     lista.sort(function (a, b) {
@@ -187,10 +187,10 @@ module.exports = {
     });
 
     for(let i in lista){
-      cards.push({ node: 'element', tag: 'div', attr:{ class: 'col-lg-2 qtde-cards' },
+      cards.push({ node: 'element', tag: 'div', attr:{ id:'card-'+lista[i].number, class: 'col-lg-2' },
                       child:[{ node: 'element', tag: 'img', attr: { src:'https://gdurl.com/'+lista[i].imgurl, height: '100%', width: '100%' } },
-                             { node: 'element', tag: 'h4', attr: { class:'text-center' },
-                                  child:[{ node: 'text', text: 'Quantidade: 0'}] } ]
+                             { node: 'element', tag: 'h4', attr: { id:'card-text-'+lista[i].number, class:'qtde-cards' },
+                                  child:[{ node: 'text', text: '0'}] } ]
                   });
     }
 

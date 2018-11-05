@@ -4,9 +4,11 @@ const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
 
 let linkFechar = document.querySelector("#link-fechar");
-let h1 = document.querySelector('.selecionar-heroi-1');
+// let h1 = document.querySelector('.selecionar-heroi-1');
 let h2 = document.querySelector('.selecionar-heroi-2');
 let h3 = document.querySelector('.selecionar-heroi-3');
+
+let listaDeCartas = []
 
 ipcRenderer.send('get-cookies');
 
@@ -29,22 +31,32 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   buttons.push('Spell');
   buttons.push('Talent');
   renderSidebar(buttons);
+
+  cookiesCards = filtraCookies(cookies, 'cards');
+  listaDeCartas = JSON.parse(cookiesCards[0].value);
+
 });
 
 linkFechar.addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-principal');
 });
 
-h1.addEventListener('click' , function(){
+document.querySelector('.selecionar-heroi-1').addEventListener('click' , function(){
+  console.log('entrou1')
   ipcRenderer.send('seleciona-heroi', 1);
+  ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
 
 h2.addEventListener('click' , function(){
+  console.log('entrou2')
   ipcRenderer.send('seleciona-heroi', 2);
+  ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
 
 h3.addEventListener('click' , function(){
+  console.log('entrou3')
   ipcRenderer.send('seleciona-heroi', 3);
+  ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
 
 function addButtons(buttons, classe){
@@ -86,6 +98,75 @@ function renderSidebar(buttons){
 }
 
 function renderCards(classe){
-  let retorno = html.cartas(classe);
+  let cartas = data.getCardsByClass(classe)
+  let retorno = html.cartas(cartas);
   document.querySelector('#skill-cards').innerHTML = retorno;
+
+  for(let i in cartas){
+    document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {
+      if(contaObj(listaDeCartas, cartas[i]) < 3){
+        if(listaDeCartas.length < 50){
+          listaDeCartas.push(cartas[i]);
+        }
+        else{
+          window.alert('O Deck já possui o número máximo de cartas (50)');
+        }
+      }
+      else{
+        removeObj(listaDeCartas, cartas[i]);
+        removeObj(listaDeCartas, cartas[i]);
+        removeObj(listaDeCartas, cartas[i]);
+      };
+      updatePanels(cartas[i]);
+    });
+    document.querySelector('#card-'+cartas[i].number).addEventListener('contextmenu', function () {
+      removeObj(listaDeCartas, cartas[i]);
+      updatePanels(cartas[i]);
+    });
+
+    updatePanels(cartas[i], classe);
+  }
+}
+
+function updatePanels(carta, classe){
+  // document.querySelector('#-cards').textContent = contaClass(listaDeCartas, );
+  updatePanels(carta)
+}
+
+function updatePanels(carta){
+  document.querySelector('#card-text-'+carta.number).textContent = contaObj(listaDeCartas, carta);
+  document.querySelector('#all-cards').textContent = listaDeCartas.length;
+  document.querySelector('#spell-cards').textContent = contaClass(listaDeCartas, 'Spell');
+  document.querySelector('#talent-cards').textContent = contaClass(listaDeCartas, 'Talent');
+}
+
+function contaObj(lista, obj){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].number == obj.number){
+      count++;
+    }
+  }
+  return count;
+}
+
+function contaClass(lista, tipo){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].class.includes(tipo)){
+      count++;
+    }
+  }
+  return count;
+}
+
+function removeObj(lista, obj){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].number == obj.number){
+      lista.splice(i, 1);
+      break;
+    }
+  }
+  return count;
 }
