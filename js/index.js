@@ -4,16 +4,16 @@ const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
 
 let linkFechar = document.querySelector("#link-fechar");
-// let h1 = document.querySelector('.selecionar-heroi-1');
+let h1 = document.querySelector('.selecionar-heroi-1');
 let h2 = document.querySelector('.selecionar-heroi-2');
 let h3 = document.querySelector('.selecionar-heroi-3');
 
-let listaDeCartas = []
+let listaDeCartas = [];
+let herois = [];
 
 ipcRenderer.send('get-cookies');
 
 ipcRenderer.on('send-cookies', (event, cookies) => {
-  let herois = [];
   cookiesHeroi = filtraCookies(cookies, 'heroi');
   for (let i in cookiesHeroi){
     let json = JSON.parse(cookiesHeroi[i].value);
@@ -33,15 +33,16 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   renderSidebar(buttons);
 
   cookiesCards = filtraCookies(cookies, 'cards');
-  listaDeCartas = JSON.parse(cookiesCards[0].value);
-
+  if(cookiesCards[0]){
+    listaDeCartas = JSON.parse(cookiesCards[0].value);
+  }
 });
 
 linkFechar.addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-principal');
 });
 
-document.querySelector('.selecionar-heroi-1').addEventListener('click' , function(){
+h1.addEventListener('click' , function(){
   console.log('entrou1')
   ipcRenderer.send('seleciona-heroi', 1);
   ipcRenderer.send('set-card-cookie', listaDeCartas);
@@ -98,7 +99,10 @@ function renderSidebar(buttons){
 }
 
 function renderCards(classe){
-  let cartas = data.getCardsByClass(classe)
+  let cartas = [];
+  cartas.push(data.getMainCardsByClass(classe));
+  cartas.push(data.getSubCardsByClass(classe));
+
   let retorno = html.cartas(cartas);
   document.querySelector('#skill-cards').innerHTML = retorno;
 
@@ -117,24 +121,37 @@ function renderCards(classe){
         removeObj(listaDeCartas, cartas[i]);
         removeObj(listaDeCartas, cartas[i]);
       };
-      updatePanels(cartas[i]);
+      updateCardPanels(cartas[i]);
+      updateOtherPanels();
+      updateHeroPanels();
     });
     document.querySelector('#card-'+cartas[i].number).addEventListener('contextmenu', function () {
       removeObj(listaDeCartas, cartas[i]);
-      updatePanels(cartas[i]);
+      updateCardPanels(cartas[i]);
+      updateOtherPanels();
+      updateHeroPanels();
     });
+    updateCardPanels(cartas[i]);
+  }
+  updateHeroPanels();
+  updateOtherPanels();
+}
 
-    updatePanels(cartas[i], classe);
+function updateHeroPanels(){
+  for(let i in herois){
+    let valor = contaClass(listaDeCartas, herois[i].main);
+    if(herois[i].main != herois[i].sub){
+      valor += contaClass(listaDeCartas, herois[i].sub);
+    }
+    document.querySelector('#qtde-heroi-'+herois[i].panel).textContent = valor;
   }
 }
 
-function updatePanels(carta, classe){
-  // document.querySelector('#-cards').textContent = contaClass(listaDeCartas, );
-  updatePanels(carta)
+function updateCardPanels(carta){
+  document.querySelector('#card-text-'+carta.number).textContent = contaObj(listaDeCartas, carta);
 }
 
-function updatePanels(carta){
-  document.querySelector('#card-text-'+carta.number).textContent = contaObj(listaDeCartas, carta);
+function updateOtherPanels(){
   document.querySelector('#all-cards').textContent = listaDeCartas.length;
   document.querySelector('#spell-cards').textContent = contaClass(listaDeCartas, 'Spell');
   document.querySelector('#talent-cards').textContent = contaClass(listaDeCartas, 'Talent');

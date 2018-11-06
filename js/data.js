@@ -59,10 +59,18 @@ module.exports = {
       }
     );
   },
-  getCardsByClass(nomeDaClasse){
+  getMainCardsByClass(nomeDaClasse){
     return cartas.filter(
       function(carta){
-        return carta.class.includes(nomeDaClasse)
+        console.log(carta.class.includes(nomeDaClasse) && (carta.type == 'ATK' || carta.type == 'TEC' || carta.type == 'SKL'));
+        return carta.class.includes(nomeDaClasse) && (carta.type == 'ATK' || carta.type == 'TEC' || carta.type == 'SKL')
+      }
+    );
+  },
+  getSubCardsByClass(nomeDaClasse){
+    return cartas.filter(
+      function(carta){
+        return carta.class.includes(nomeDaClasse) && (carta.type == 'GRD' || carta.type == 'EVD')
       }
     );
   }

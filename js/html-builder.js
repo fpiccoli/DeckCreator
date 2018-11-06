@@ -173,7 +173,6 @@ module.exports = {
   },
   cartas(lista){
     let colunas = 5;
-    // let lista = data.getCardsByClass(classe);
     let cards = [];
 
     lista.sort(function (a, b) {

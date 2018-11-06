@@ -53,6 +53,7 @@ function buttonBuilder(){
 
 function buttonSelecionar(param, heroi){
   myURL = new URL(document.URL);
+  // console.log('.selecionar-'+param+'-'+heroi.number.toLowerCase());
   document.querySelector('.selecionar-'+param+'-'+heroi.number.toLowerCase()).addEventListener('click', function () {
     ipcRenderer.send('heroi-selecionado', heroi, myURL.searchParams.get('posicao'));
     ipcRenderer.send('fechar-janela-herois');
