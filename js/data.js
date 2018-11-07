@@ -62,8 +62,7 @@ module.exports = {
   getMainCardsByClass(nomeDaClasse){
     return cartas.filter(
       function(carta){
-        console.log(carta.class.includes(nomeDaClasse) && (carta.type == 'ATK' || carta.type == 'TEC' || carta.type == 'SKL'));
-        return carta.class.includes(nomeDaClasse) && (carta.type == 'ATK' || carta.type == 'TEC' || carta.type == 'SKL')
+        return carta.class.includes(nomeDaClasse) && (carta.type == 'ATK' || carta.type == 'TEC' || carta.type == 'SKL' || carta.type == 'DOM')
       }
     );
   },

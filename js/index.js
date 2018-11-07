@@ -2,6 +2,7 @@ const { ipcRenderer }  = require('electron');
 const data = require('./data.js');
 const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
+const deck = require('./deck-builder.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let h1 = document.querySelector('.selecionar-heroi-1');
@@ -10,6 +11,7 @@ let h3 = document.querySelector('.selecionar-heroi-3');
 
 let listaDeCartas = [];
 let herois = [];
+let buttons = [];
 
 ipcRenderer.send('get-cookies');
 
@@ -20,7 +22,6 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     json.panel = cookiesHeroi[i].name.replace('heroi','');
     herois.push(json);
   }
-  let buttons = [];
 
   for(let i in herois){
     renderPanel(herois[i]);
@@ -36,6 +37,9 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   if(cookiesCards[0]){
     listaDeCartas = JSON.parse(cookiesCards[0].value);
   }
+
+  updateHeroPanels();
+  updateOtherPanels();
 });
 
 linkFechar.addEventListener('click', function () {
@@ -43,19 +47,16 @@ linkFechar.addEventListener('click', function () {
 });
 
 h1.addEventListener('click' , function(){
-  console.log('entrou1')
   ipcRenderer.send('seleciona-heroi', 1);
   ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
 
 h2.addEventListener('click' , function(){
-  console.log('entrou2')
   ipcRenderer.send('seleciona-heroi', 2);
   ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
 
 h3.addEventListener('click' , function(){
-  console.log('entrou3')
   ipcRenderer.send('seleciona-heroi', 3);
   ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
@@ -84,6 +85,7 @@ function renderPanel(heroi){
 }
 
 function renderSidebar(buttons){
+
   let innerHTML = document.querySelector('#side-menu').innerHTML;
   let retorno = html.returnJSON(innerHTML);
   retorno.child = [];
@@ -94,14 +96,16 @@ function renderSidebar(buttons){
     document.querySelector('#cards-'+buttons[i].toLowerCase()).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].toLowerCase();
       renderCards(buttons[i]);
+      ipcRenderer.send('set-card-cookie', listaDeCartas);
     });
   }
 }
 
 function renderCards(classe){
   let cartas = [];
-  cartas.push(data.getMainCardsByClass(classe));
-  cartas.push(data.getSubCardsByClass(classe));
+
+  Array.prototype.push.apply(cartas, data.getMainCardsByClass(classe));
+  Array.prototype.push.apply(cartas, data.getSubCardsByClass(classe));
 
   let retorno = html.cartas(cartas);
   document.querySelector('#skill-cards').innerHTML = retorno;
@@ -139,10 +143,7 @@ function renderCards(classe){
 
 function updateHeroPanels(){
   for(let i in herois){
-    let valor = contaClass(listaDeCartas, herois[i].main);
-    if(herois[i].main != herois[i].sub){
-      valor += contaClass(listaDeCartas, herois[i].sub);
-    }
+    let valor = contaMainClass(listaDeCartas, herois[i]) + contaSubClass(listaDeCartas, herois[i]);
     document.querySelector('#qtde-heroi-'+herois[i].panel).textContent = valor;
   }
 }
@@ -161,6 +162,26 @@ function contaObj(lista, obj){
   let count = 0;
   for(let i in lista){
     if(lista[i].number == obj.number){
+      count++;
+    }
+  }
+  return count;
+}
+
+function contaMainClass(lista, heroi){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].class == heroi.main && (lista[i].type == 'ATK' || lista[i].type == 'TEC' || lista[i].type == 'SKL')){
+      count++;
+    }
+  }
+  return count;
+}
+
+function contaSubClass(lista, heroi){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].class == heroi.sub && (lista[i].type == 'GRD' || lista[i].type == 'EVD')){
       count++;
     }
   }
