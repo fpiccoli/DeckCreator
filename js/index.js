@@ -5,6 +5,7 @@ const html = require('./html-builder.js');
 const deck = require('./deck-builder.js');
 
 let linkFechar = document.querySelector("#link-fechar");
+let deckSalvar = document.querySelector("#salvar-deck");
 let h1 = document.querySelector('.selecionar-heroi-1');
 let h2 = document.querySelector('.selecionar-heroi-2');
 let h3 = document.querySelector('.selecionar-heroi-3');
@@ -61,6 +62,17 @@ h3.addEventListener('click' , function(){
   ipcRenderer.send('set-card-cookie', listaDeCartas);
 });
 
+deckSalvar.addEventListener('click' , function(){
+  let object = {
+    name: 'Teste',
+    cards: listaDeCartas
+  }
+
+  let deckRetorno = deck.build(object);
+
+  console.log(JSON.stringify(deckRetorno));
+});
+
 function addButtons(buttons, classe){
   if (!buttons.includes(classe)){
     buttons.push(classe);
@@ -114,6 +126,8 @@ function renderCards(classe){
     document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {
       if(contaObj(listaDeCartas, cartas[i]) < 3){
         if(listaDeCartas.length < 50){
+          cartas[i].deck = data.getClasseByCard(cartas[i]);
+          cartas[i].deck.cards = [];
           listaDeCartas.push(cartas[i]);
         }
         else{

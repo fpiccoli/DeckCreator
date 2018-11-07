@@ -72,5 +72,12 @@ module.exports = {
         return carta.class.includes(nomeDaClasse) && (carta.type == 'GRD' || carta.type == 'EVD')
       }
     );
+  },
+  getClasseByCard(card){
+    return classes.find(
+      function(classe){
+        return classe.name == card.class
+      }
+    );
   }
 }

@@ -1,7 +1,7 @@
 
 module.exports = {
 
-  deck(object){
+  build(object){
     let json = {
       SaveName: '',
       GameMode: '',
@@ -22,19 +22,20 @@ module.exports = {
 
     let listaDeIds = [];
     for(let i in object.cards){
-      listaDeIds.push(object.cards[i].id);
+      let valor = object.cards[i].deck.id + object.cards[i].id;
+      listaDeIds.push(parseInt(valor));
     }
 
     let json = [];
     json.push({
       Name: 'Deck',
       Transform: {
-        posX: 0.24660559,
-        posY: 1.2083478,
-        posZ: -0.013766719,
-        rotX: 1.6045432E-07,
-        rotY: 180.0004,
-        rotZ: -2.52562074E-07,
+        // posX: 0.24660559,
+        // posY: 1.2083478,
+        // posZ: -0.013766719,
+        // rotX: 1.6045432E-07,
+        // rotY: 180.0004,
+        // rotZ: -2.52562074E-07,
         scaleX: 1.5,
         scaleY: 1.0,
         scaleZ: 1.5
@@ -56,7 +57,7 @@ module.exports = {
       Hands: false,
       SidewaysCard: false,
       DeckIDs: listaDeIds,
-      CustomDeck: this.decks(object.decks),
+      CustomDeck: this.decks(object.cards),
       XmlUI: '',
       LuaScript: '',
       LuaScriptState: '',
@@ -66,16 +67,22 @@ module.exports = {
     });
     return json;
   },
-  decks(decks){
+  decks(cards){
+    let decks = [];
+    for(let i in cards){
+      if(!verificaSeExiste(decks, cards[i].deck.id)){
+        decks.push(cards[i].deck);
+      }
+    }
+
     let json = '{';
     for(let i in decks){
       if(i > 0){
         json += ','
       }
-      json += '"' + decks[i].id + '":{"FaceURL": "' + decks[i].face + '","BackURL": "http://gdurl.com/FXdw","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}'
+      json += '"' + decks[i].id + '":{"FaceURL": "http://gdurl.com/' + decks[i].face + '","BackURL": "http://gdurl.com/FXdw","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}'
     }
     json += '}';
-    console.log(json);
     return JSON.parse(json);
   },
   cards(cards){
@@ -114,11 +121,19 @@ module.exports = {
         CustomDeck: {},
         XmlUI: '',
         LuaScript: '',
-        LuaScriptState: '',
-        GUID: cards[i].guid
+        LuaScriptState: ''//,
+        // GUID: cards[i].guid
       });
     }
     return json;
   }
+}
 
+function verificaSeExiste(decks, id){
+  for(let i in decks){
+    if (decks[i].id == id) {
+      return true;
+    }
+  }
+  return false;
 }
