@@ -20,22 +20,12 @@ module.exports = {
   },
   objectStates(object){
 
-    let listaDeIds = [];
-    for(let i in object.cards){
-      let valor = object.cards[i].deck.id + object.cards[i].id;
-      listaDeIds.push(parseInt(valor));
-    }
+    let content = buildCards(object);
 
     let json = [];
     json.push({
       Name: 'Deck',
       Transform: {
-        // posX: 0.24660559,
-        // posY: 1.2083478,
-        // posZ: -0.013766719,
-        // rotX: 1.6045432E-07,
-        // rotY: 180.0004,
-        // rotZ: -2.52562074E-07,
         scaleX: 1.5,
         scaleY: 1.0,
         scaleZ: 1.5
@@ -56,77 +46,97 @@ module.exports = {
       GridProjection: false,
       Hands: false,
       SidewaysCard: false,
-      DeckIDs: listaDeIds,
-      CustomDeck: this.decks(object.cards),
+      DeckIDs: content.listaDeIds,
+      CustomDeck: content.decks,
       XmlUI: '',
       LuaScript: '',
       LuaScriptState: '',
-      ContainedObjects: this.cards(object.cards)
-      // ,
-      // GUID: '92eb27'
+      ContainedObjects: content.cards
     });
     return json;
-  },
-  decks(cards){
-    let decks = [];
-    for(let i in cards){
-      if(!verificaSeExiste(decks, cards[i].deck.id)){
-        decks.push(cards[i].deck);
+  }
+}
+
+function buildCards(object){
+  let json;
+  let retorno = '{';
+  let decks = [];
+
+  let content = {cards: [], listaDeIds: []};
+
+  for(let i in object.cards){
+    json = deckJSON(object.cards[i].deck);
+    object.cards[i].deckJSON = JSON.parse("{"+json+"}");
+    if(!verificaSeExiste(decks, object.cards[i].deck.id)){
+      if(decks.length > 0){
+        retorno += ',';
       }
+      decks.push(object.cards[i].deck);
+      retorno += json;
     }
 
-    let json = '{';
-    for(let i in decks){
-      if(i > 0){
-        json += ','
-      }
-      json += '"' + decks[i].id + '":{"FaceURL": "http://gdurl.com/' + decks[i].face + '","BackURL": "http://gdurl.com/FXdw","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}'
-    }
-    json += '}';
-    return JSON.parse(json);
-  },
-  cards(cards){
-    let json = [];
-    for(let i in cards){
-      json.push({
-        Name: 'Card',
-        Transform: {
-          posX: -73.01444,
-          posY: 1.08727837,
-          posZ: 25.63611,
-          rotX: 359.992157,
-          rotY: 179.903046,
-          rotZ: 359.9631,
-          scaleX: 1.5,
-          scaleY: 1.0,
-          scaleZ: 1.5
-        },
-        Nickname: cards[i].name,
-        Description: '',
-        ColorDiffuse: {
-          r: 0.713235259,
-          g: 0.713235259,
-          b: 0.713235259
-        },
-        Locked: false,
-        Grid: true,
-        Snap: true,
-        Autoraise: true,
-        Sticky: true,
-        Tooltip: true,
-        GridProjection: false,
-        Hands: true,
-        CardID: cards[i].id,
-        SidewaysCard: false,
-        CustomDeck: {},
-        XmlUI: '',
-        LuaScript: '',
-        LuaScriptState: ''//,
-        // GUID: cards[i].guid
-      });
-    }
-    return json;
+    let valor = object.cards[i].deck.id + object.cards[i].id;
+    content.listaDeIds.push(parseInt(valor));
+
+    content.cards.push(cardJSON(object.cards[i]));
   }
+
+  for(let i in object.heroes){
+    json = deckJSON(object.heroes[i].deck);
+    object.heroes[i].deckJSON = JSON.parse("{"+json+"}");
+    if(!verificaSeExiste(decks, object.heroes[i].deck.id)){
+      if(decks.length > 0){
+        retorno += ',';
+      }
+      decks.push(object.heroes[i].deck);
+      retorno += json;
+    }
+
+    let valor = object.heroes[i].deck.id + object.heroes[i].id;
+    content.listaDeIds.push(parseInt(valor));
+
+    content.cards.push(cardJSON(object.heroes[i]));
+  }
+
+  retorno += '}';
+  content.decks = JSON.parse(retorno)
+  return content;
+}
+
+function cardJSON(card){
+  return {
+    Name: 'Card',
+    Transform: {
+      scaleX: 1.5,
+      scaleY: 1.0,
+      scaleZ: 1.5
+    },
+    Nickname: card.name,
+    Description: '',
+    ColorDiffuse: {
+      r: 0.713235259,
+      g: 0.713235259,
+      b: 0.713235259
+    },
+    Locked: false,
+    Grid: true,
+    Snap: true,
+    Autoraise: true,
+    Sticky: true,
+    Tooltip: true,
+    GridProjection: false,
+    Hands: true,
+    CardID: parseInt(card.deck.id + card.id),
+    SidewaysCard: false,
+    CustomDeck: card.deckJSON,
+    XmlUI: '',
+    LuaScript: '',
+    LuaScriptState: ''
+  }
+}
+
+function deckJSON(deck){
+  return '"' + deck.id + '":{"FaceURL": "http://gdurl.com/' + deck.face + '","BackURL": "http://gdurl.com/FXdw","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 
 function verificaSeExiste(decks, id){

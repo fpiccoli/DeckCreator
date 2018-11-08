@@ -63,9 +63,15 @@ h3.addEventListener('click' , function(){
 });
 
 deckSalvar.addEventListener('click' , function(){
+  for(let i in herois){
+    herois[i].deck = data.getClasseByCard(herois[i]);
+    herois[i].deck.cards = [];
+  }
+
   let object = {
     name: 'Teste',
-    cards: listaDeCartas
+    cards: listaDeCartas,
+    heroes: herois
   }
 
   let deckRetorno = deck.build(object);
