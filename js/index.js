@@ -3,6 +3,7 @@ const data = require('./data.js');
 const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
 const deck = require('./deck-builder.js');
+const file = require('./file-manager.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let deckSalvar = document.querySelector("#salvar-deck");
@@ -49,6 +50,14 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   addEventSelecionar(1);
   addEventSelecionar(2);
   addEventSelecionar(3);
+
+  function filtraCookies(cookies, nome){
+    return cookies.filter(
+      function(cookie){
+        return cookie.domain == 'deckcreator.com' && cookie.name.includes(nome)
+      }
+    );
+  }
 });
 
 linkFechar.addEventListener('click', function () {
@@ -76,16 +85,14 @@ deckSalvar.addEventListener('click' , function(){
 
   let deckRetorno = deck.build(object);
 
-  console.log(JSON.stringify(deckRetorno));
-});
+  ipcRenderer.send('get-path', 'documents');
+  ipcRenderer.on('return-path', (event, path) => {
 
-function filtraCookies(cookies, nome){
-  return cookies.filter(
-    function(cookie){
-      return cookie.domain == 'deckcreator.com' && cookie.name.includes(nome)
-    }
-  );
-}
+      file.save(path, nomeDoTime, deckRetorno);
+  });
+
+  // console.log(JSON.stringify(deckRetorno));
+});
 
 function renderPanel(heroi){
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());

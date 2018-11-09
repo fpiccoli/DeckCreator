@@ -39,6 +39,10 @@ ipcMain.on('get-cookies', (event) => {
   });
 });
 
+ipcMain.on('get-path', (event, location) => {
+  event.sender.send('return-path', app.getPath(location));
+});
+
 ipcMain.on('fechar-janela-herois', () => {
   heroisWindow.close();
 });
