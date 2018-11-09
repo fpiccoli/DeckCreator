@@ -24,12 +24,12 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
 
   for(let i in herois){
     renderPanel(herois[i]);
-    buttons = addButtons(buttons, herois[i].main);
-    buttons = addButtons(buttons, herois[i].sub);
+    buttons.push(herois[i]);
   }
 
-  buttons.push('Spell');
-  buttons.push('Talent');
+  buttons.push({class: 'Spell-SKL', type: 'Spell-SKL', main: 'Spell-SKL', sub: 'Spell-SKL'});
+  buttons.push({class: 'Spell-DOM', type: 'Spell-DOM', main: 'Spell-DOM', sub: 'Spell-DOM'});
+  buttons.push({class: 'Talent', type: 'Talent', main: 'Talent', sub: 'Talent'});
   renderSidebar(buttons);
 
   cookiesCards = filtraCookies(cookies, 'cards');
@@ -79,13 +79,6 @@ deckSalvar.addEventListener('click' , function(){
   console.log(JSON.stringify(deckRetorno));
 });
 
-function addButtons(buttons, classe){
-  if (!buttons.includes(classe)){
-    buttons.push(classe);
-  }
-  return buttons;
-}
-
 function filtraCookies(cookies, nome){
   return cookies.filter(
     function(cookie){
@@ -110,8 +103,8 @@ function renderSidebar(buttons){
 
   document.querySelector('#side-menu').innerHTML = html.returnHTML(resultado);
   for(let i in buttons){
-    document.querySelector('#cards-'+buttons[i].toLowerCase()).addEventListener('click', function () {
-      let txt = '#cards-'+buttons[i].toLowerCase();
+    document.querySelector('#cards-'+buttons[i].class.toLowerCase()).addEventListener('click', function () {
+      let txt = '#cards-'+buttons[i].class.toLowerCase();
       renderCards(buttons[i]);
       ipcRenderer.send('set-card-cookie', listaDeCartas);
     });
@@ -136,10 +129,13 @@ function renderSidebar(buttons){
 }
 
 function renderCards(classe){
-  let cartas = [];
+  let main = data.getMainCardsByClass(classe.main);
+  let sub = data.getSubCardsByClass(classe.sub);
 
-  Array.prototype.push.apply(cartas, data.getMainCardsByClass(classe));
-  Array.prototype.push.apply(cartas, data.getSubCardsByClass(classe));
+  main.sort(dynamicSort('number'));
+  sub.sort(dynamicSort('number'));
+
+  let cartas = main.concat(sub);
 
   let retorno = html.cartas(cartas);
   document.querySelector('#skill-cards').innerHTML = retorno;
@@ -148,25 +144,26 @@ function renderCards(classe){
     document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {
       if(contaObj(listaDeCartas, cartas[i]) < 3){
         if(listaDeCartas.length < 50){
-          cartas[i].deck = data.getClasseByCard(cartas[i]);
-          cartas[i].deck.cards = [];
-          listaDeCartas.push(cartas[i]);
-        }
-        else{
-          window.alert('O Deck já possui o número máximo de cartas (50)');
+          addObj(cartas[i]);
         }
       }
       else{
         removeObj(listaDeCartas, cartas[i]);
         removeObj(listaDeCartas, cartas[i]);
         removeObj(listaDeCartas, cartas[i]);
-      };
+      }
       updateCardPanels(cartas[i]);
       updateOtherPanels();
       updateHeroPanels();
     });
     document.querySelector('#card-'+cartas[i].number).addEventListener('contextmenu', function () {
-      removeObj(listaDeCartas, cartas[i]);
+      if(contaObj(listaDeCartas, cartas[i]) == 0){
+        addObj(cartas[i]);
+        addObj(cartas[i]);
+        addObj(cartas[i]);
+      } else{
+        removeObj(listaDeCartas, cartas[i]);
+      }
       updateCardPanels(cartas[i]);
       updateOtherPanels();
       updateHeroPanels();
@@ -175,6 +172,31 @@ function renderCards(classe){
   }
   updateHeroPanels();
   updateOtherPanels();
+
+  function deckFull(){
+    if(listaDeCartas.length >= 50){
+      return true;
+    }
+    return false;
+  }
+  function addObj(carta){
+    if(deckFull()){
+      return;
+    }
+    carta.deck = data.getClasseByCard(carta);
+    carta.deck.cards = [];
+    listaDeCartas.push(carta);
+  }
+  function removeObj(lista, obj){
+    let count = 0;
+    for(let i in lista){
+      if(lista[i].number == obj.number){
+        lista.splice(i, 1);
+        break;
+      }
+    }
+    return count;
+  }
 }
 
 function updateHeroPanels(){
@@ -234,13 +256,14 @@ function contaClass(lista, tipo){
   return count;
 }
 
-function removeObj(lista, obj){
-  let count = 0;
-  for(let i in lista){
-    if(lista[i].number == obj.number){
-      lista.splice(i, 1);
-      break;
-    }
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+    sortOrder = -1;
+    property = property.substr(1);
   }
-  return count;
+  return function (a,b) {
+    var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+    return result * sortOrder;
+  }
 }

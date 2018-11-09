@@ -148,7 +148,8 @@ module.exports = {
 
     return retorno;
   },
-  menuItem(sidemenu, classes){
+  menuItem(sidemenu, buttons){
+
     let json = [];
     sidemenu.child.push({node: 'element', tag:'li', attr:{ class:'sidebar-search' },
         child:[{ node:'element', tag:'div', attr:{ class:'input-group custom-search-form' },
@@ -160,13 +161,20 @@ module.exports = {
                             }]
                }]
     });
-    for (let i in classes){
-      classes[i];
+    for (let i in buttons){
+      let child = [];
+
+      if (buttons[i].type == 'Hybrid'){
+        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons/'+buttons[i].main.toLowerCase()+'.svg', height: '50%', width: '25%' }});
+        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons/'+buttons[i].sub.toLowerCase()+'.svg', height: '50%', width: '25%' }});
+      }else{
+        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons/'+buttons[i].class.toLowerCase()+'.svg', height: '50%', width: '25%' }});
+      }
+      child.push({node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: buttons[i].class}]});
+
       sidemenu.child.push({ node: 'element', tag: 'li',
-                  child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+classes[i].toLowerCase() },
-                              child:[{ node: 'element', tag: 'img', attr:{ src: '../icons/'+classes[i].toLowerCase()+'.svg', height: '50%', width: '25%' }},
-                              {node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: classes[i]}]} ]
-                     }]
+                  child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+buttons[i].class.toLowerCase() },
+                              child: child }]
         });
       }
       return sidemenu;
@@ -175,20 +183,16 @@ module.exports = {
     let colunas = 5;
     let cards = [];
 
-    lista.sort(function (a, b) {
-      if (a.number > b.number) {
-        return 1;
-      }
-      if (a.number < b.number) {
-        return -1;
-      }
-      return 0;
-    });
+    // main.sort(dynamicSort('number'));
+    // sub.sort(dynamicSort('number'));
 
-    for(let i in lista){
-      cards.push({ node: 'element', tag: 'div', attr:{ id:'card-'+lista[i].number, class: 'col-lg-2' },
-                      child:[{ node: 'element', tag: 'img', attr: { src:'https://gdurl.com/'+lista[i].imgurl, height: '100%', width: '100%' } },
-                             { node: 'element', tag: 'h4', attr: { id:'card-text-'+lista[i].number, class:'qtde-cards' },
+    lista.forEach(addCard);
+    // sub.forEach(addCard);
+
+    function addCard(card, index, array){
+      cards.push({ node: 'element', tag: 'div', attr:{ id:'card-'+card.number, class: 'col-lg-2' },
+                      child:[{ node: 'element', tag: 'img', attr: { src:'https://gdurl.com/'+card.imgurl, height: '100%', width: '100%' } },
+                             { node: 'element', tag: 'h4', attr: { id:'card-text-'+card.number, class:'qtde-cards' },
                                   child:[{ node: 'text', text: '0'}] } ]
                   });
     }
@@ -200,7 +204,7 @@ module.exports = {
                     child:[{ node: 'element', tag: 'div', attr:{ class: 'col-lg-12' }, child: rows }]
     }
 
-return json2html(json);
+    return json2html(json);
   },
   returnJSON(html){
     html = replaceAll(html, '\n', '');
