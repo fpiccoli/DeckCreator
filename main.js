@@ -62,3 +62,11 @@ ipcMain.on('set-card-cookie', (event, lista) => {
     console.log('cookie cards atualizado');
   });
 });
+
+ipcMain.on('set-nome-cookie', (event, stringNome) => {
+  let newCookie = {url:'https://deckcreator.com', name: 'nome', value: stringNome};
+
+  mainSession.cookies.set(newCookie, (error) => {
+    console.log('cookie nome do deck atualizado');
+  });
+});

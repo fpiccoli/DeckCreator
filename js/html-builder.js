@@ -152,9 +152,9 @@ module.exports = {
     let json = [];
     sidemenu.child.push({node: 'element', tag:'li', attr:{ class:'sidebar-search' },
         child:[{ node:'element', tag:'div', attr:{ class:'input-group custom-search-form' },
-                    child:[{ node:'element', tag:'input', attr:{type:'text', class:'form-control', placeholder:'Nome do Time' } },
+                    child:[{ node:'element', tag:'input', attr:{ id:'campo-nome', type:'text', class:'form-control', placeholder:'Nome do Deck' } },
                            { node:'element', tag:'span', attr:{ class:'input-group-btn' },
-                                  child: [{node:'element', tag:'button', attr:{ class:'btn btn-default', type:'button' },
+                                  child: [{node:'element', tag:'button', attr:{ id:'update-nome', class:'btn btn-default', type:'button' },
                                               child:[{ node:'element', tag:'i', attr:{ class: 'fa fa-edit' } }]
                                           }]
                             }]

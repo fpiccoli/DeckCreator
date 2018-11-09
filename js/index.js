@@ -6,13 +6,11 @@ const deck = require('./deck-builder.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let deckSalvar = document.querySelector("#salvar-deck");
-let h1 = document.querySelector('.selecionar-heroi-1');
-let h2 = document.querySelector('.selecionar-heroi-2');
-let h3 = document.querySelector('.selecionar-heroi-3');
 
 let listaDeCartas = [];
 let herois = [];
 let buttons = [];
+let nomeDoTime = 'NovoDeck';
 
 ipcRenderer.send('get-cookies');
 
@@ -39,28 +37,30 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     listaDeCartas = JSON.parse(cookiesCards[0].value);
   }
 
+  cookiesNome = filtraCookies(cookies, 'nome');
+  if(cookiesNome[0]){
+    nomeDoTime = cookiesNome[0].value;
+    document.querySelector("#nome-time").textContent = nomeDoTime;
+  }
+
   updateHeroPanels();
   updateOtherPanels();
+
+  addEventSelecionar(1);
+  addEventSelecionar(2);
+  addEventSelecionar(3);
 });
 
 linkFechar.addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-principal');
 });
 
-h1.addEventListener('click' , function(){
-  ipcRenderer.send('seleciona-heroi', 1);
-  ipcRenderer.send('set-card-cookie', listaDeCartas);
-});
-
-h2.addEventListener('click' , function(){
-  ipcRenderer.send('seleciona-heroi', 2);
-  ipcRenderer.send('set-card-cookie', listaDeCartas);
-});
-
-h3.addEventListener('click' , function(){
-  ipcRenderer.send('seleciona-heroi', 3);
-  ipcRenderer.send('set-card-cookie', listaDeCartas);
-});
+function addEventSelecionar(number){
+  document.querySelector('.selecionar-heroi-'+number).addEventListener('click' , function(){
+    ipcRenderer.send('seleciona-heroi', number);
+    ipcRenderer.send('set-card-cookie', listaDeCartas);
+  });
+}
 
 deckSalvar.addEventListener('click' , function(){
   for(let i in herois){
@@ -69,7 +69,7 @@ deckSalvar.addEventListener('click' , function(){
   }
 
   let object = {
-    name: 'Teste',
+    name: nomeDoTime,
     cards: listaDeCartas,
     heroes: herois
   }
@@ -103,7 +103,6 @@ function renderPanel(heroi){
 }
 
 function renderSidebar(buttons){
-
   let innerHTML = document.querySelector('#side-menu').innerHTML;
   let retorno = html.returnJSON(innerHTML);
   retorno.child = [];
@@ -116,6 +115,23 @@ function renderSidebar(buttons){
       renderCards(buttons[i]);
       ipcRenderer.send('set-card-cookie', listaDeCartas);
     });
+  }
+  document.querySelector("#update-nome").addEventListener('click', function(){
+    eventUpdateNome();
+  });
+  document.querySelector('#campo-nome').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      eventUpdateNome();
+    }
+  });
+  function eventUpdateNome(){
+    let campo = document.querySelector("#campo-nome");
+
+    nomeDoTime = campo.value;
+    campo.value = '';
+    document.querySelector("#nome-time").textContent = nomeDoTime;
+
+    ipcRenderer.send('set-nome-cookie', nomeDoTime);
   }
 }
 
