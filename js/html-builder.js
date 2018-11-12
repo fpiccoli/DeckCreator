@@ -173,7 +173,7 @@ module.exports = {
       child.push({node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: buttons[i].class}]});
 
       sidemenu.child.push({ node: 'element', tag: 'li',
-                  child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+buttons[i].class.toLowerCase() },
+                  child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','') },
                               child: child }]
         });
       }

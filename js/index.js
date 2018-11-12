@@ -110,8 +110,8 @@ function renderSidebar(buttons){
 
   document.querySelector('#side-menu').innerHTML = html.returnHTML(resultado);
   for(let i in buttons){
-    document.querySelector('#cards-'+buttons[i].class.toLowerCase()).addEventListener('click', function () {
-      let txt = '#cards-'+buttons[i].class.toLowerCase();
+    document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
+      let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');
       renderCards(buttons[i]);
       ipcRenderer.send('set-card-cookie', listaDeCartas);
     });
