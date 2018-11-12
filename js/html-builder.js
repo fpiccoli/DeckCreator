@@ -165,10 +165,10 @@ module.exports = {
       let child = [];
 
       if (buttons[i].type == 'Hybrid'){
-        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons/'+buttons[i].main.toLowerCase()+'.svg', height: '50%', width: '25%' }});
-        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons/'+buttons[i].sub.toLowerCase()+'.svg', height: '50%', width: '25%' }});
+        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons-full/'+buttons[i].main.toLowerCase()+'.svg', height: '50%', width: '25%' }});
+        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons-full/'+buttons[i].sub.toLowerCase()+'.svg', height: '50%', width: '25%' }});
       }else{
-        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons/'+buttons[i].class.toLowerCase()+'.svg', height: '50%', width: '25%' }});
+        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons-full/'+buttons[i].class.toLowerCase()+'.svg', height: '50%', width: '25%' }});
       }
       child.push({node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: buttons[i].class}]});
 
