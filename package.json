@@ -16,7 +16,7 @@
     "html2json": "^1.0.2",
     "jquery": "^3.3.1",
     "json-beautify": "^1.0.1",
-    "jsonfile-promised": "0.0.1",
+    "jsonfile": "^5.0.0",
     "popper.js": "^1.14.5"
   },
   "devDependencies": {

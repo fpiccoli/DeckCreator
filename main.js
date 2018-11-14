@@ -55,7 +55,7 @@ ipcMain.on('heroi-selecionado', (event, heroi, posicao) => {
   let newCookie = {url:'https://deckcreator.com', name: 'heroi'+posicao, value: JSON.stringify(heroi)};
 
   mainSession.cookies.set(newCookie, (error) => {
-    mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/pages/editor.html`);
   });
 });
 
@@ -73,4 +73,8 @@ ipcMain.on('set-nome-cookie', (event, stringNome) => {
   mainSession.cookies.set(newCookie, (error) => {
     console.log('cookie nome do deck atualizado');
   });
+});
+
+ipcMain.on('pagina-editor', () => {
+  mainWindow.loadURL(`file://${__dirname}/pages/editor.html`);
 });

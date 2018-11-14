@@ -79,5 +79,19 @@ module.exports = {
         return classe.name == card.class
       }
     );
+  },
+  getCardByName(name){
+    return cartas.find(
+      function(card){
+        return card.name == name
+      }
+    );
+  },
+  getHeroByName(name){
+    return herois.find(
+      function(heroi){
+        return heroi.name == name
+      }
+    );
   }
 }

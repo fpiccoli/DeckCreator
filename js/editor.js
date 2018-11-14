@@ -3,10 +3,8 @@ const data = require('./data.js');
 const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
 const deck = require('./deck-builder.js');
+const conta = require('./conta.js');
 const file = require('./file-manager.js');
-
-let linkFechar = document.querySelector("#link-fechar");
-let deckSalvar = document.querySelector("#salvar-deck");
 
 let listaDeCartas = [];
 let herois = [];
@@ -28,8 +26,8 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  buttons.push({class: 'Spell-SKL', type: 'Spell-SKL', main: 'Spell-SKL', sub: 'Spell-SKL'});
-  buttons.push({class: 'Spell-DOM', type: 'Spell-DOM', main: 'Spell-DOM', sub: 'Spell-DOM'});
+  buttons.push({class: 'Spell', type: 'Spell', main: 'Spell', sub: 'Spell'});
+  buttons.push({class: 'Enchantment', type: 'Enchantment', main: 'Enchantment', sub: 'Enchantment'});
   buttons.push({class: 'Talent', type: 'Talent', main: 'Talent', sub: 'Talent'});
   renderSidebar(buttons);
 
@@ -60,7 +58,7 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   }
 });
 
-linkFechar.addEventListener('click', function () {
+document.querySelector("#link-fechar").addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-principal');
 });
 
@@ -71,11 +69,14 @@ function addEventSelecionar(number){
   });
 }
 
-deckSalvar.addEventListener('click' , function(){
+document.querySelector("#salvar-deck").addEventListener('click' , function(){
   for(let i in herois){
     herois[i].deck = data.getClasseByCard(herois[i]);
     herois[i].deck.cards = [];
   }
+
+  console.log(JSON.stringify(listaDeCartas));
+  console.log(JSON.stringify(herois));
 
   let object = {
     name: nomeDoTime,
@@ -87,11 +88,8 @@ deckSalvar.addEventListener('click' , function(){
 
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
-
       file.save(path, nomeDoTime, deckRetorno);
   });
-
-  // console.log(JSON.stringify(deckRetorno));
 });
 
 function renderPanel(heroi){
@@ -149,7 +147,7 @@ function renderCards(classe){
 
   for(let i in cartas){
     document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {
-      if(contaObj(listaDeCartas, cartas[i]) < 3){
+      if(conta.obj(listaDeCartas, cartas[i]) < 3){
         if(listaDeCartas.length < 50){
           addObj(cartas[i]);
         }
@@ -164,7 +162,7 @@ function renderCards(classe){
       updateHeroPanels();
     });
     document.querySelector('#card-'+cartas[i].number).addEventListener('contextmenu', function () {
-      if(contaObj(listaDeCartas, cartas[i]) == 0){
+      if(conta.obj(listaDeCartas, cartas[i]) == 0){
         addObj(cartas[i]);
         addObj(cartas[i]);
         addObj(cartas[i]);
@@ -208,59 +206,19 @@ function renderCards(classe){
 
 function updateHeroPanels(){
   for(let i in herois){
-    let valor = contaMainClass(listaDeCartas, herois[i]) + contaSubClass(listaDeCartas, herois[i]);
+    let valor = conta.mainClass(listaDeCartas, herois[i]) + conta.subClass(listaDeCartas, herois[i]);
     document.querySelector('#qtde-heroi-'+herois[i].panel).textContent = valor;
   }
 }
 
 function updateCardPanels(carta){
-  document.querySelector('#card-text-'+carta.number).textContent = contaObj(listaDeCartas, carta);
+  document.querySelector('#card-text-'+carta.number).textContent = conta.obj(listaDeCartas, carta);
 }
 
 function updateOtherPanels(){
   document.querySelector('#all-cards').textContent = listaDeCartas.length;
-  document.querySelector('#spell-cards').textContent = contaClass(listaDeCartas, 'Spell');
-  document.querySelector('#talent-cards').textContent = contaClass(listaDeCartas, 'Talent');
-}
-
-function contaObj(lista, obj){
-  let count = 0;
-  for(let i in lista){
-    if(lista[i].number == obj.number){
-      count++;
-    }
-  }
-  return count;
-}
-
-function contaMainClass(lista, heroi){
-  let count = 0;
-  for(let i in lista){
-    if(lista[i].class == heroi.main && (lista[i].type == 'ATK' || lista[i].type == 'TEC' || lista[i].type == 'SKL')){
-      count++;
-    }
-  }
-  return count;
-}
-
-function contaSubClass(lista, heroi){
-  let count = 0;
-  for(let i in lista){
-    if(lista[i].class == heroi.sub && (lista[i].type == 'GRD' || lista[i].type == 'EVD')){
-      count++;
-    }
-  }
-  return count;
-}
-
-function contaClass(lista, tipo){
-  let count = 0;
-  for(let i in lista){
-    if(lista[i].class.includes(tipo)){
-      count++;
-    }
-  }
-  return count;
+  document.querySelector('#spell-cards').textContent = conta.class(listaDeCartas, 'Spell');
+  document.querySelector('#talent-cards').textContent = conta.class(listaDeCartas, 'Talent');
 }
 
 function dynamicSort(property) {

@@ -1,4 +1,5 @@
 const data = require('./data.js');
+const conta = require('./conta.js');
 const json2html = require('html2json').json2html;
 const html2json = require('html2json').html2json;
 
@@ -205,6 +206,108 @@ module.exports = {
     }
 
     return json2html(json);
+  },
+  menuDecks(decks){
+    let json = [];
+    let panels = [];
+
+    decks.forEach(build);
+
+    function build(deck, index, array) {
+    let herois = [];
+    let cartas = [];
+
+    let rowTitle = { node: 'element', tag:'div', attr:{ class: 'row' },
+                        child: [{ node: 'element', tag: 'div', attr:{ class:'col-lg-12' },
+                                      child: [{ node: 'element', tag: 'div', attr:{ class:'huge text-center' }, child: [{ node: 'text', text: deck.Nickname }]
+                                                }]
+                                }]
+    };
+
+    deck.ContainedObjects.forEach(function (card, index, array){
+        let cartaObj = data.getCardByName(card.Nickname);
+        if(cartaObj){
+          cartaObj.deck = data.getClasseByCard(cartaObj);
+          cartaObj.deck.cards = [];
+          cartaObj.deck.heroes = [];
+          cartas.push(cartaObj);
+        }
+        else{
+          let heroiObj = data.getHeroByName(card.Nickname);
+          if(heroiObj){
+            heroiObj.deck = data.getClasseByCard(heroiObj);
+            heroiObj.deck.cards = [];
+            heroiObj.deck.heroes = [];
+            herois.push(heroiObj);
+          }
+        }
+    });
+
+    herois.push({class:'Spell', deck:{ main:'Spell' }});
+    herois.push({class:'Enchantment', deck:{ main:'Enchantment' }});
+    herois.push({class:'Talent', deck:{ main:'Talent' }});
+
+    let elements = [];
+
+    herois.forEach(function (heroi, index, array){
+    let main = heroi.deck.main.toLowerCase();
+    let atk = conta.mainClass(cartas, heroi.deck);
+    let def = conta.subClass(cartas, heroi.deck);
+
+    elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
+                        child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
+                               { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
+                               { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
+                   });
+
+    childDeck = { node: 'element', tag: 'div', attr:{ class:'col-xs-9 text-right' }, child: elements };
+    });
+
+    let childs = [];
+    let botoes = [];
+
+    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
+                    child:[{ node: 'element', tag: 'button', attr:{ class:'btn btn-info btn-circle btn-xl', title: 'Alterar Nome' },
+                                child:[{ node: 'element', tag: 'span', attr:{ class:'glyphicon glyphicon-tags' }, child: [] }]
+                           }]
+                 });
+    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
+                    child:[{ node: 'element', tag: 'button', attr:{ class:'btn btn-primary btn-circle btn-xl', title: 'Alterar Deck' },
+                                child:[{ node: 'element', tag: 'i', attr:{ class:'fa fa-edit' }, child: [] }]
+                           }]
+                });
+    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
+                    child:[{ node: 'element', tag: 'button', attr:{ class:'btn btn-danger btn-circle btn-xl', title: 'Excluir Deck' },
+                                child:[{ node: 'element', tag: 'i', attr:{ class:'fa fa-trash' }, child: [] }]
+                           }]
+                 });
+
+     childBotoes = { node: 'element', tag: 'div', attr:{ class:'col-xs-3 text-right' }, child: botoes };
+
+     childs.push(rowTitle);
+     childs.push(childDeck);
+     childs.push(childBotoes);
+
+     let rowContent = { node: 'element', tag:'div', attr:{ class: 'row' }, child: childs };
+
+     json.push(rowContent);
+    }
+
+    json.forEach(function (obj, index, array){
+      let child = [];
+      child.push(obj);
+         panels.push({ node: 'element', tag:'div', attr:{ class: 'col-lg-12' },
+                           child: [{ node: 'element', tag:'div', attr:{ class: 'col-lg-12' },
+                                       child: [{ node: 'element', tag:'div', attr:{ class: 'panel panel-default' },
+                                                     child: [{ node: 'element', tag:'div', attr:{ class: 'panel-heading' },
+                                                                   child: child
+                                                             }]
+                                               }]
+                                  }]
+                     });
+    });
+
+    return json2html({node:'root', child: panels});
   },
   returnJSON(html){
     html = replaceAll(html, '\n', '');
