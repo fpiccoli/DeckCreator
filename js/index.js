@@ -31,6 +31,11 @@ document.querySelector('#load-decks').addEventListener('click' , function(){
 });
 
 document.querySelector('#novo-deck').addEventListener('click' , function(){
+  ipcRenderer.send('clear-cookies');
+  ipcRenderer.send('pagina-editor');
+});
+
+document.querySelector('#editor-deck').addEventListener('click' , function(){
   ipcRenderer.send('pagina-editor');
 });
 

@@ -1,4 +1,5 @@
-const { ipcRenderer }  = require('electron');
+const { ipcRenderer, remote }  = require('electron');
+const dialog = remote.dialog;
 const data = require('./data.js');
 const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
@@ -16,7 +17,6 @@ ipcRenderer.send('get-cookies');
 ipcRenderer.on('send-cookies', (event, cookies) => {
   cookiesHeroi = filtraCookies(cookies, 'heroi');
   for (let i in cookiesHeroi){
-    console.log(cookiesHeroi);
     let json = JSON.parse(cookiesHeroi[i].value);
     json.panel = cookiesHeroi[i].name.replace('heroi','');
     herois.push(json);
@@ -71,13 +71,16 @@ function addEventSelecionar(number){
 }
 
 document.querySelector("#salvar-deck").addEventListener('click' , function(){
+  if(listaDeCartas.length != 50){
+    dialog.showMessageBox({message: 'Você precisa ter 50 cartas em seu deck para poder salvá-lo', title: 'Deck Incompleto'}, () => {
+    });
+    return;
+  }
+
   for(let i in herois){
     herois[i].deck = data.getClasseByCard(herois[i]);
     herois[i].deck.cards = [];
   }
-
-  console.log(JSON.stringify(listaDeCartas));
-  console.log(JSON.stringify(herois));
 
   let object = {
     name: nomeDoTime,
@@ -89,7 +92,8 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
 
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
-      file.save(path, nomeDoTime, deckRetorno);
+    file.save(path, nomeDoTime, deckRetorno);
+    ipcRenderer.send('pagina-index');
   });
 });
 

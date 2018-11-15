@@ -5,8 +5,8 @@ let mainSession;
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 1366,
-    height: 768,
-    frame: false
+    height: 768//,
+    // frame: false
   });
   mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
   mainWindow.maximize();
@@ -20,11 +20,17 @@ app.on('window-all-closed', () => {
 let heroisWindow = null;
 ipcMain.on('seleciona-heroi', (event, param) => {
   if(heroisWindow == null){
+    let pos = mainWindow.getPosition();
+    let size = mainWindow.getSize();
     heroisWindow = new BrowserWindow({
       width: 1366,
       height: 768,
       alwaysOnTop: true,
-      frame: false
+      frame: false,
+      x: pos[0]+10,
+      y: pos[1]+10,
+      width: size[0],
+      height: size[1]
     });
     heroisWindow.on('closed', () => {
       heroisWindow = null;
@@ -88,4 +94,17 @@ ipcMain.on('set-herois-cookie', (event, herois) => {
 
 ipcMain.on('pagina-editor', () => {
   mainWindow.loadURL(`file://${__dirname}/pages/editor.html`);
+});
+
+ipcMain.on('pagina-index', () => {
+  mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
+});
+
+ipcMain.on('clear-cookies', () => {
+  let cookies = ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome'];
+  cookies.forEach(function (cookie, index, array){
+    mainSession.cookies.remove('https://deckcreator.com', cookie, (error) => {
+      console.log('cookie '+cookie+' removido');
+    });
+  });
 });
