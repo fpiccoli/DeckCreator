@@ -16,6 +16,7 @@ ipcRenderer.send('get-cookies');
 ipcRenderer.on('send-cookies', (event, cookies) => {
   cookiesHeroi = filtraCookies(cookies, 'heroi');
   for (let i in cookiesHeroi){
+    console.log(cookiesHeroi);
     let json = JSON.parse(cookiesHeroi[i].value);
     json.panel = cookiesHeroi[i].name.replace('heroi','');
     herois.push(json);

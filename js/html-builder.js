@@ -1,5 +1,6 @@
 const data = require('./data.js');
 const conta = require('./conta.js');
+const load = require('./loadJSON.js');
 const json2html = require('html2json').json2html;
 const html2json = require('html2json').html2json;
 
@@ -107,11 +108,8 @@ module.exports = {
                                                             }]
                                         }]
                             }]
-
         });
-
       }
-
       return this.coluna(json, colunas);
     },
   build(type, colunas){
@@ -224,43 +222,30 @@ module.exports = {
                                 }]
     };
 
-    deck.ContainedObjects.forEach(function (card, index, array){
-        let cartaObj = data.getCardByName(card.Nickname);
-        if(cartaObj){
-          cartaObj.deck = data.getClasseByCard(cartaObj);
-          cartaObj.deck.cards = [];
-          cartaObj.deck.heroes = [];
-          cartas.push(cartaObj);
-        }
-        else{
-          let heroiObj = data.getHeroByName(card.Nickname);
-          if(heroiObj){
-            heroiObj.deck = data.getClasseByCard(heroiObj);
-            heroiObj.deck.cards = [];
-            heroiObj.deck.heroes = [];
-            herois.push(heroiObj);
-          }
-        }
-    });
+    let retornoLoad = load.montaObj(deck);
+    if (retornoLoad){
+      herois = retornoLoad.herois;
+      cartas = retornoLoad.cartas;
+    }
 
-    herois.push({class:'Spell', deck:{ main:'Spell' }});
-    herois.push({class:'Enchantment', deck:{ main:'Enchantment' }});
-    herois.push({class:'Talent', deck:{ main:'Talent' }});
+    herois.push({class:'Spell', main:'Spell' });
+    herois.push({class:'Enchantment', main:'Enchantment' });
+    herois.push({class:'Talent', main:'Talent' });
 
     let elements = [];
 
     herois.forEach(function (heroi, index, array){
-    let main = heroi.deck.main.toLowerCase();
-    let atk = conta.mainClass(cartas, heroi.deck);
-    let def = conta.subClass(cartas, heroi.deck);
+      let main = heroi.main.toLowerCase();
+      let atk = conta.mainClass(cartas, heroi);
+      let def = conta.subClass(cartas, heroi);
 
-    elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
-                        child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
-                               { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
-                               { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
-                   });
+      elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
+                          child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
+                                 { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
+                                 { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
+                     });
 
-    childDeck = { node: 'element', tag: 'div', attr:{ class:'col-xs-9 text-right' }, child: elements };
+      childDeck = { node: 'element', tag: 'div', attr:{ class:'col-xs-9 text-right' }, child: elements };
     });
 
     let childs = [];
@@ -272,7 +257,7 @@ module.exports = {
                            }]
                  });
     botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
-                    child:[{ node: 'element', tag: 'button', attr:{ class:'btn btn-primary btn-circle btn-xl', title: 'Alterar Deck' },
+                    child:[{ node: 'element', tag: 'button', attr:{ id:'botao-editar-'+index, class:'btn btn-primary btn-circle btn-xl', title: 'Editar Deck' },
                                 child:[{ node: 'element', tag: 'i', attr:{ class:'fa fa-edit' }, child: [] }]
                            }]
                 });
