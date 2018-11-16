@@ -18,6 +18,7 @@ module.exports = {
           heroiObj.deck = data.getClasseByCard(heroiObj);
           heroiObj.main = heroiObj.deck.main;
           heroiObj.sub = heroiObj.deck.sub;
+          heroiObj.type = heroiObj.deck.type;
           heroiObj.deck.cards = [];
           heroiObj.deck.heroes = [];
           herois.push(heroiObj);

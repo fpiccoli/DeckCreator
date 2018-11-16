@@ -98,9 +98,10 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
 });
 
 function renderPanel(heroi){
+  console.log(heroi);
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
-  document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class;
+  document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.deck.alligment+')';
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
   document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="../icons-transparent/'+heroi.main.toLowerCase()+'.svg" height="300%" width="300%"/>';
 }
@@ -222,7 +223,7 @@ function updateCardPanels(carta){
 
 function updateOtherPanels(){
   document.querySelector('#all-cards').textContent = listaDeCartas.length;
-  document.querySelector('#spell-cards').textContent = conta.class(listaDeCartas, 'Spell');
+  document.querySelector('#spell-cards').textContent = conta.class(listaDeCartas, 'Spell') + conta.class(listaDeCartas, 'Enchantment');
   document.querySelector('#talent-cards').textContent = conta.class(listaDeCartas, 'Talent');
 }
 

@@ -24,7 +24,7 @@ module.exports = {
                         {node: 'element', tag: 'a', attr: { href: '#', class: selecionarHeroi+'-'+classe.heroes[i].number.toLowerCase() },
                             child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
                                         child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
-                                                    child:[{ node: 'text', text: classe.heroes[i].name }]},
+                                                    child:[{ node: 'text', text: classe.heroes[i].name + ' ('+classe.alligment+')' }]},
                                                 {node: 'element', tag: 'span', attr: { class: 'pull-right' },
                                                     child:[{node: 'element', tag: 'i', attr: { class: "fa fa-arrow-circle-right" }, child: []} ]},
                                                 {node: 'element', tag: 'div', attr: { class: 'clearfix' }, child:[] }]
@@ -239,11 +239,27 @@ module.exports = {
       let atk = conta.mainClass(cartas, heroi);
       let def = conta.subClass(cartas, heroi);
 
-      elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
-                          child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
-                                 { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
-                                 { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
-                     });
+      if(heroi.type == 'Hybrid'){
+        let sub = heroi.sub.toLowerCase();
+        elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
+                            child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
+                                   { node: 'element', tag: 'img', attr:{ src:'../icons-full/'+sub+'.svg', height:'40%', width:'40%' }, child: [] },
+                                   { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
+                                   { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
+                       });
+      }else{
+        elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
+                            child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
+                                   { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
+                                   { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
+                       });
+      }
+
+      // elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
+      //                     child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
+      //                            { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
+      //                            { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
+      //                });
 
       childDeck = { node: 'element', tag: 'div', attr:{ class:'col-xs-9 text-right' }, child: elements };
     });
