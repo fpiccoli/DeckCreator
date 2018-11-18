@@ -5,6 +5,23 @@ const file = require('./file-manager.js');
 const html = require('./html-builder.js');
 
 document.querySelector('#load-decks').addEventListener('click' , function(){
+  renderDecks();
+});
+
+document.querySelector('#novo-deck').addEventListener('click' , function(){
+  ipcRenderer.send('clear-cookies');
+  ipcRenderer.send('pagina-editor');
+});
+
+document.querySelector('#editor-deck').addEventListener('click' , function(){
+  ipcRenderer.send('pagina-editor');
+});
+
+document.querySelector("#link-fechar").addEventListener('click', function () {
+  ipcRenderer.send('fechar-janela-principal');
+});
+
+function renderDecks(){
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
     let json = file.readDir(path);
@@ -26,19 +43,15 @@ document.querySelector('#load-decks').addEventListener('click' , function(){
         ipcRenderer.send('set-herois-cookie', herois);
         ipcRenderer.send('pagina-editor');
       });
+      document.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
+        file.delete(path, array[index].Nickname);
+        renderDecks();
+      });
+      document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
+        console.log('Altera Nome');
+        // file.save(path, array[index].Nickname, json);
+        renderDecks();
+      });
     }
   });
-});
-
-document.querySelector('#novo-deck').addEventListener('click' , function(){
-  ipcRenderer.send('clear-cookies');
-  ipcRenderer.send('pagina-editor');
-});
-
-document.querySelector('#editor-deck').addEventListener('click' , function(){
-  ipcRenderer.send('pagina-editor');
-});
-
-document.querySelector("#link-fechar").addEventListener('click', function () {
-  ipcRenderer.send('fechar-janela-principal');
-});
+}

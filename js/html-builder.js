@@ -268,7 +268,7 @@ module.exports = {
     let botoes = [];
 
     botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
-                    child:[{ node: 'element', tag: 'button', attr:{ class:'btn btn-info btn-circle btn-xl', title: 'Alterar Nome' },
+                    child:[{ node: 'element', tag: 'button', attr:{ id:'botao-alterar-nome-'+index, class:'btn btn-info btn-circle btn-xl', title: 'Alterar Nome' },
                                 child:[{ node: 'element', tag: 'span', attr:{ class:'glyphicon glyphicon-tags' }, child: [] }]
                            }]
                  });
@@ -278,7 +278,7 @@ module.exports = {
                            }]
                 });
     botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
-                    child:[{ node: 'element', tag: 'button', attr:{ class:'btn btn-danger btn-circle btn-xl', title: 'Excluir Deck' },
+                    child:[{ node: 'element', tag: 'button', attr:{ id:'botao-excluir-'+index, class:'btn btn-danger btn-circle btn-xl', title: 'Excluir Deck' },
                                 child:[{ node: 'element', tag: 'i', attr:{ class:'fa fa-trash' }, child: [] }]
                            }]
                  });

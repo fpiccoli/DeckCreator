@@ -92,13 +92,17 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
 
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
-    file.save(path, nomeDoTime, deckRetorno);
-    ipcRenderer.send('pagina-index');
+    if (file.save(path, nomeDoTime, deckRetorno)){
+      ipcRenderer.send('pagina-index');
+    }
+    else {
+      ipcRenderer.send('set-card-cookie', listaDeCartas);
+      ipcRenderer.send('pagina-editor');
+    };
   });
 });
 
 function renderPanel(heroi){
-  console.log(heroi);
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.deck.alligment+')';
