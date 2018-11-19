@@ -3,6 +3,7 @@ const fs = require('fs');
 const load = require('./loadJSON.js');
 const file = require('./file-manager.js');
 const html = require('./html-builder.js');
+const menu = require('./menubar.js');
 
 document.querySelector('#load-decks').addEventListener('click' , function(){
   renderDecks();
@@ -19,6 +20,10 @@ document.querySelector('#editor-deck').addEventListener('click' , function(){
 
 document.querySelector("#link-fechar").addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-principal');
+});
+
+document.querySelector("#clear-cache").addEventListener('click', function () {
+  menu.clearCache(document);
 });
 
 function renderDecks(){

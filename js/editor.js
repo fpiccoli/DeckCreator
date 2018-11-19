@@ -6,6 +6,8 @@ const html = require('./html-builder.js');
 const deck = require('./deck-builder.js');
 const conta = require('./conta.js');
 const file = require('./file-manager.js');
+const menu = require('./menubar.js');
+const alert = require('./alert-message.js');
 
 let listaDeCartas = [];
 let herois = [];
@@ -13,7 +15,6 @@ let buttons = [];
 let nomeDoTime = 'NovoDeck';
 
 ipcRenderer.send('get-cookies');
-
 ipcRenderer.on('send-cookies', (event, cookies) => {
   cookiesHeroi = filtraCookies(cookies, 'heroi');
   for (let i in cookiesHeroi){
@@ -59,6 +60,10 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   }
 });
 
+document.querySelector("#clear-cache").addEventListener('click', function () {
+  menu.clearCache(document);
+});
+
 document.querySelector("#link-fechar").addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-principal');
 });
@@ -72,15 +77,9 @@ function addEventSelecionar(number){
 
 document.querySelector("#salvar-deck").addEventListener('click' , function(){
   if(listaDeCartas.length != 50){
-    dialog.showMessageBox({message: 'Você precisa ter 50 cartas em seu deck para poder salvá-lo', title: 'Deck Incompleto'}, () => {
-    });
+    alert.message(document.querySelector('#alert-message'), 'Você precisa ter <b>50 cartas</b> em seu deck para poder salvá-lo!', 'warning')
     return;
   }
-
-  // for(let i in herois){
-  //   herois[i].deck = data.getClasseByCard(herois[i]);
-  //   herois[i].deck.cards = [];
-  // }
 
   let object = {
     name: nomeDoTime,

@@ -1,3 +1,8 @@
+.alert {
+  margin-bottom: 0px;
+  padding: 13px;
+}
+
 .qtde-cards {
   position: absolute;
   top: 50%;

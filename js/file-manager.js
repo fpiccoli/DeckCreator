@@ -43,6 +43,19 @@ module.exports = {
       json.push(jsonfile.readFileSync(caminho + file).ObjectStates[0]);
     })
     return json;
+  },
+  clearCache(path){
+    let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Mods','/Images/']);
+    let files = [];
+
+    fs.readdirSync(caminho).forEach(file => {
+      files.push(file);
+    })
+
+    files.forEach(excluir);
+    function excluir(file, index, array){
+      fs.unlinkSync(caminho + file);
+    }
   }
 }
 
