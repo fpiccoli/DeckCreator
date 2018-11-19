@@ -47,11 +47,11 @@ function renderDecks(){
         file.delete(path, array[index].Nickname);
         renderDecks();
       });
-      document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
-        console.log('Altera Nome');
-        // file.save(path, array[index].Nickname, json);
-        renderDecks();
-      });
+      // document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
+      //   console.log('Altera Nome');
+      //   // file.save(path, array[index].Nickname, json);
+      //   renderDecks();
+      // });
     }
   });
 }

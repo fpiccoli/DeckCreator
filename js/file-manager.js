@@ -5,10 +5,10 @@ const fs = require('fs');
 
 module.exports = {
   save(path, nome, json){
-    if(!confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
-      console.log('Salvamento Cancelado');
-      return 0;
-    }
+    // if(!confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
+    //   console.log('Salvamento Cancelado');
+    //   return 0;
+    // }
 
     let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Saves','/Saved Objects','/DeckCreator/']);
 

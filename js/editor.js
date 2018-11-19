@@ -77,10 +77,10 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
     return;
   }
 
-  for(let i in herois){
-    herois[i].deck = data.getClasseByCard(herois[i]);
-    herois[i].deck.cards = [];
-  }
+  // for(let i in herois){
+  //   herois[i].deck = data.getClasseByCard(herois[i]);
+  //   herois[i].deck.cards = [];
+  // }
 
   let object = {
     name: nomeDoTime,
@@ -105,6 +105,7 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
 function renderPanel(heroi){
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
+  console.log(heroi);
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.deck.alligment+')';
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
   document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="../icons-transparent/'+heroi.main.toLowerCase()+'.svg" height="300%" width="300%"/>';
@@ -153,6 +154,7 @@ function renderCards(classe){
   let cartas = main.concat(sub);
 
   let retorno = html.cartas(cartas);
+  console.log(retorno);
   document.querySelector('#skill-cards').innerHTML = retorno;
 
   for(let i in cartas){

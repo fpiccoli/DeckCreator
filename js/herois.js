@@ -36,6 +36,8 @@ function buttonBuilder(){
       let heroi = puros[i].heroes[h];
       heroi.main = puros[i].main;
       heroi.sub = puros[i].sub;
+      heroi.deck = data.getClasseByCard(heroi);
+      heroi.deck.cards = [];
       buttonSelecionar(puros[i].name.toLowerCase(), heroi);
     }
   }
@@ -44,7 +46,8 @@ function buttonBuilder(){
       let heroi = hibridos[i].heroes[h];
       heroi.main = hibridos[i].main;
       heroi.sub = hibridos[i].sub;
-      console.log(heroi);
+      heroi.deck = data.getClasseByCard(heroi);
+      heroi.deck.cards = [];
       buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), heroi);
       buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), heroi);
     }
