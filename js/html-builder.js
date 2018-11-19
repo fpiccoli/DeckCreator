@@ -255,29 +255,23 @@ module.exports = {
                        });
       }
 
-      // elements.push({node: 'element', tag: 'div', attr:{ class:'col-xs-2 text-center' },
-      //                     child:[{ node: 'element', tag: 'img', attr:{ src:'../icons-full/'+main+'.svg', height:'40%', width:'40%' }, child: [] },
-      //                            { node: 'element', tag: 'div', child: [{ node: 'text', text: heroi.class }] },
-      //                            { node: 'element', tag: 'div', child: [{ node: 'text', text: atk+'/'+def+' ('+(atk+def)+')' }] }]
-      //                });
-
       childDeck = { node: 'element', tag: 'div', attr:{ class:'col-xs-9 text-right' }, child: elements };
     });
 
     let childs = [];
     let botoes = [];
 
-    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
-                    child:[{ node: 'element', tag: 'button', attr:{ id:'botao-alterar-nome-'+index, class:'btn btn-info btn-circle btn-xl', title: 'Alterar Nome' },
-                                child:[{ node: 'element', tag: 'span', attr:{ class:'glyphicon glyphicon-tags' }, child: [] }]
-                           }]
-                 });
-    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
+    // botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
+    //                 child:[{ node: 'element', tag: 'button', attr:{ id:'botao-alterar-nome-'+index, class:'btn btn-info btn-circle btn-xl', title: 'Alterar Nome' },
+    //                             child:[{ node: 'element', tag: 'span', attr:{ class:'glyphicon glyphicon-tags' }, child: [] }]
+    //                        }]
+    //              });
+    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-6 text-center' },
                     child:[{ node: 'element', tag: 'button', attr:{ id:'botao-editar-'+index, class:'btn btn-primary btn-circle btn-xl', title: 'Editar Deck' },
                                 child:[{ node: 'element', tag: 'i', attr:{ class:'fa fa-edit' }, child: [] }]
                            }]
                 });
-    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-4 text-center' },
+    botoes.push({node: 'element', tag: 'div', attr:{ class:'col-xs-6 text-center' },
                     child:[{ node: 'element', tag: 'button', attr:{ id:'botao-excluir-'+index, class:'btn btn-danger btn-circle btn-xl', title: 'Excluir Deck' },
                                 child:[{ node: 'element', tag: 'i', attr:{ class:'fa fa-trash' }, child: [] }]
                            }]
