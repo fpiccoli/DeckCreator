@@ -5,10 +5,18 @@ const fs = require('fs');
 
 module.exports = {
   save(path, nome, json){
-    // if(!confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
-    //   console.log('Salvamento Cancelado');
-    //   return 0;
-    // }
+    if(verificaSeExiste(this.readDir(path), nome)){
+      if(!confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
+        console.log('Salvamento Cancelado');
+        return 0;
+      }
+    }
+    else{
+      if(!confirmDialog('Salvar Deck', 'Sim', 'Vou alterar o nome', 'Deseja criar um novo deck chamado "'+nome+'"?')){
+        console.log('Salvamento Cancelado');
+        return 0;
+      }
+    }
 
     let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Saves','/Saved Objects','/DeckCreator/']);
 
@@ -61,4 +69,12 @@ function confirmDialog(title, confirm, cancel, message) {
       }
     }
     return caminho;
+  }
+
+  function verificaSeExiste(json, nome) {
+    return json.find(
+      function(deck){
+        return deck.Nickname == nome
+      }
+    );
   }
