@@ -14,6 +14,8 @@ let herois = [];
 let buttons = [];
 let nomeDoTime = 'NovoDeck';
 
+menu.navbar(document);
+
 ipcRenderer.send('get-cookies');
 ipcRenderer.on('send-cookies', (event, cookies) => {
   cookiesHeroi = filtraCookies(cookies, 'heroi');
@@ -58,18 +60,6 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
       }
     );
   }
-});
-
-document.querySelector("#lista-efeitos").addEventListener('click', function () {
-  ipcRenderer.send('abrir-janela-efeitos');
-});
-
-document.querySelector("#clear-cache").addEventListener('click', function () {
-  menu.clearCache(document);
-});
-
-document.querySelector("#link-fechar").addEventListener('click', function () {
-  ipcRenderer.send('fechar-janela-principal');
 });
 
 function addEventSelecionar(number){

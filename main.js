@@ -127,6 +127,10 @@ ipcMain.on('pagina-index', () => {
   mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
 });
 
+ipcMain.on('pagina-regras', () => {
+  mainWindow.loadURL(`file://${__dirname}/pages/regras.html`);
+});
+
 ipcMain.on('clear-cookies', () => {
   let cookies = ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome'];
   cookies.forEach(function (cookie, index, array){
