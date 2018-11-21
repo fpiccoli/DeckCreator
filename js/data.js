@@ -3,6 +3,14 @@ const { ipcRenderer } = require('electron')
 let classes = [];
 let herois = [];
 let cartas = [];
+let efeitos = [];
+
+fetch('http://gdurl.com/LJ2W').then(function(response) {
+  response.text().then(function(text) {
+    efeitos = JSON.parse(text).effects;
+    console.log('Carregou Efeitos');
+  });
+});
 
 fetch('http://gdurl.com/KM4u').then(function(response) {
   response.text().then(function(text) {
@@ -93,5 +101,8 @@ module.exports = {
         return heroi.name == name
       }
     );
+  },
+  listEffect(){
+    return efeitos;
   }
 }

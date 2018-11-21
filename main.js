@@ -8,6 +8,7 @@ app.on('ready', () => {
     height: 768//,
     // frame: false
   });
+  // mainWindow.setMenu(null);
   mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
   mainWindow.maximize();
   mainSession = mainWindow.webContents.session;
@@ -39,6 +40,28 @@ ipcMain.on('seleciona-heroi', (event, param) => {
   heroisWindow.loadURL(`file://${__dirname}/pages/herois.html?posicao=${param}`);
 });
 
+let efeitosWindow = null;
+ipcMain.on('abrir-janela-efeitos', (event) => {
+  if(efeitosWindow == null){
+    let pos = mainWindow.getPosition();
+    let size = mainWindow.getSize();
+    efeitosWindow = new BrowserWindow({
+      width: 1366,
+      height: 768,
+      alwaysOnTop: true,
+      x: pos[0]+10,
+      y: pos[1]+10,
+      width: size[0]/4,
+      height: size[1]
+    });
+    efeitosWindow.on('closed', () => {
+      efeitosWindow = null;
+    })
+  }
+  // efeitosWindow.setMenu(null);
+  efeitosWindow.loadURL(`file://${__dirname}/pages/efeitos.html`);
+});
+
 ipcMain.on('get-cookies', (event) => {
   mainSession.cookies.get({}, (error, cookies) => {
     event.sender.send('send-cookies', cookies);
@@ -55,6 +78,10 @@ ipcMain.on('fechar-janela-herois', () => {
 
 ipcMain.on('fechar-janela-principal', () => {
   mainWindow.close();
+});
+
+ipcMain.on('fechar-janela-efeitos', () => {
+  efeitosWindow.close();
 });
 
 ipcMain.on('heroi-selecionado', (event, heroi, posicao) => {

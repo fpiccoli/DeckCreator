@@ -26,6 +26,10 @@ document.querySelector("#clear-cache").addEventListener('click', function () {
   menu.clearCache(document);
 });
 
+document.querySelector("#lista-efeitos").addEventListener('click', function () {
+  ipcRenderer.send('abrir-janela-efeitos');
+});
+
 function renderDecks(){
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {

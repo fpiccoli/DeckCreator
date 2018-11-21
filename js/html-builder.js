@@ -147,6 +147,42 @@ module.exports = {
 
     return retorno;
   },
+  efeitos(){
+  console.log('efeitos');
+    let efeitos = data.listEffect();
+    let json = [];
+
+    efeitos.forEach(build);
+    function build(efeito, index, array){
+      let childs = [];
+      console.log(efeito.nameEN);
+      console.log(efeito.descriptionBR);
+
+      childs.push({ node: 'element', tag: 'div', attr:{ class: 'panel-heading' },
+                        child: [{ node: 'element', tag: 'h4', attr:{ class: 'panel-title' },
+                                      child: [{ node: 'element', tag: 'a', attr:{ dataToggle:'collapse', dataParent:'#efeitos', href:'#efeito'+index, ariaExpanded:'false', class:'collapsed' },
+                                                    child: [{ node: 'text', text: efeito.nameEN }]
+                                              }]
+                                 }]
+                   });
+
+       childs.push({ node: 'element', tag: 'div', attr:{ id: 'efeito'+index, class:'panel-collapse collapse', ariaExpanded:'false' },
+                         child: [{ node: 'element', tag: 'div', attr:{ class: 'panel-body' },
+                                       child: [{ node: 'text', text: efeito.descriptionBR }]
+                                  }]
+                    });
+
+      json.push({ node: 'element', tag: 'div', attr:{ class: 'panel panel-default' }, child: childs });
+    }
+
+    let html = json2html({node: 'root', child: json });
+
+    html = replaceAll(html,"dataToggle", "data-toggle");
+    html = replaceAll(html,"dataParent", "data-parent");
+    html = replaceAll(html,"ariaExpanded", "aria-expanded");
+
+    return html;
+  },
   menuItem(sidemenu, buttons){
 
     let json = [];
@@ -207,9 +243,7 @@ module.exports = {
     let rows = [];
     rows.push({ node: 'element', tag:'div', attr:{ class: 'row' }, child:cards });
 
-    let json = {node: 'root',
-                    child:[{ node: 'element', tag: 'div', attr:{ class: 'col-lg-12' }, child: rows }]
-    }
+    let json = {node: 'root', child:[{ node: 'element', tag: 'div', attr:{ class: 'col-lg-12' }, child: rows }] }
 
     return json2html(json);
   },
@@ -218,7 +252,6 @@ module.exports = {
     let panels = [];
 
     decks.forEach(build);
-
     function build(deck, index, array) {
     let herois = [];
     let cartas = [];

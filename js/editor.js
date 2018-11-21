@@ -60,6 +60,10 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   }
 });
 
+document.querySelector("#lista-efeitos").addEventListener('click', function () {
+  ipcRenderer.send('abrir-janela-efeitos');
+});
+
 document.querySelector("#clear-cache").addEventListener('click', function () {
   menu.clearCache(document);
 });
