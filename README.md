@@ -9,6 +9,11 @@
 
 Releases:
 
+  1.3.0 (21/11/2018)
+      - Novas Funcionalidades:
+          - Lista de efeitos das cartas.
+          - Página com as regras do jogo.
+
   1.2.0 (19/11/2018)
       - Novas Funcionalidades:
           - Excluir Deck.
