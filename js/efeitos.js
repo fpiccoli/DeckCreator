@@ -1,4 +1,4 @@
-const html = require('./html-builder.js');
+const html = require('./html/efeitos.js');
 
 setTimeout(function(){
   document.querySelector('#efeitos').innerHTML = html.efeitos();

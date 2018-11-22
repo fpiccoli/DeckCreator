@@ -5,74 +5,74 @@ const json2html = require('html2json').json2html;
 const html2json = require('html2json').html2json;
 
 module.exports = {
-    heroi(classe, selecionarHeroi){
-      let jsonHerois = [];
+  heroi(classe, selecionarHeroi){
+    let jsonHerois = [];
 
-      for (let i in classe.heroes)
-      {
-          let json = {
-            node: 'element', tag: 'div', attr: { class: 'col-lg-4' },
-                child: [{node: 'element', tag: 'div', attr: { class: 'panel' },
-                            child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
-                                        child: [{node: 'element', tag: 'div', attr: { class: 'row' },
-                                                    child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-12' },
-                                                                child: [{node: 'element', tag: 'img', attr: { src: 'https://gdurl.com/'+classe.heroes[i].imgurl, height: '100%', width: '100%' }, child: [] }]
-                                                            }]
-                                                }]
-                                    }]
-                        },
-                        {node: 'element', tag: 'a', attr: { href: '#', class: selecionarHeroi+'-'+classe.heroes[i].number.toLowerCase() },
-                            child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
-                                        child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
-                                                    child:[{ node: 'text', text: classe.heroes[i].name + ' ('+classe.alligment+')' }]},
-                                                {node: 'element', tag: 'span', attr: { class: 'pull-right' },
-                                                    child:[{node: 'element', tag: 'i', attr: { class: "fa fa-arrow-circle-right" }, child: []} ]},
-                                                {node: 'element', tag: 'div', attr: { class: 'clearfix' }, child:[] }]
+    for (let i in classe.heroes)
+    {
+        let json = {
+          node: 'element', tag: 'div', attr: { class: 'col-lg-4' },
+              child: [{node: 'element', tag: 'div', attr: { class: 'panel' },
+                          child: [{node: 'element', tag: 'div', attr: { class: 'panel-heading' },
+                                      child: [{node: 'element', tag: 'div', attr: { class: 'row' },
+                                                  child: [{node: 'element', tag: 'div', attr: { class: 'col-lg-12' },
+                                                              child: [{node: 'element', tag: 'img', attr: { src: 'https://gdurl.com/'+classe.heroes[i].imgurl, height: '100%', width: '100%' }, child: [] }]
+                                                          }]
+                                              }]
                                   }]
-                        }]
-          };
-          jsonHerois.push(json);
-      }
+                      },
+                      {node: 'element', tag: 'a', attr: { href: '#', class: selecionarHeroi+'-'+classe.heroes[i].number.toLowerCase() },
+                          child: [{node: 'element', tag: 'div', attr: { class: 'panel-footer' },
+                                      child: [{node: 'element', tag: 'span', attr: { class: 'pull-left' },
+                                                  child:[{ node: 'text', text: classe.heroes[i].name + ' ('+classe.alligment+')' }]},
+                                              {node: 'element', tag: 'span', attr: { class: 'pull-right' },
+                                                  child:[{node: 'element', tag: 'i', attr: { class: "fa fa-arrow-circle-right" }, child: []} ]},
+                                              {node: 'element', tag: 'div', attr: { class: 'clearfix' }, child:[] }]
+                                }]
+                      }]
+        };
+        jsonHerois.push(json);
+    }
 
-  return jsonHerois;
+return jsonHerois;
 
 },
-    hibrido(hibridos, classe){
-      let jsonNav = [];
-      let jsonContent = [];
+  hibrido(hibridos, classe){
+    let jsonNav = [];
+    let jsonContent = [];
 
-      for (let i in hibridos){
-          let ativo = '';
-          let ativo2 = 'tab-pane fade';
+    for (let i in hibridos){
+        let ativo = '';
+        let ativo2 = 'tab-pane fade';
 
-          if(i == 0){
-            ativo = 'active';
-            ativo2 = 'tab-pane fade in active';
-          }
+        if(i == 0){
+          ativo = 'active';
+          ativo2 = 'tab-pane fade in active';
+        }
 
-          let sub = '';
-          let sub2 = hibridos[i].sub;
-          if(hibridos[i].sub == classe){
-            sub = ' pull-right';
-            sub2 = hibridos[i].main;
-          }
+        let sub = '';
+        let sub2 = hibridos[i].sub;
+        if(hibridos[i].sub == classe){
+          sub = ' pull-right';
+          sub2 = hibridos[i].main;
+        }
 
-          jsonNav.push({
-            node: 'element', tag: 'li', attr: { class: 'text-center '+ativo+sub },
-                child: [{node: 'element', tag: 'a', attr: { href: '#'+classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav', dataToggle: 'tab' },
-                            child: [{ node: 'text', text: hibridos[i].name + '<br />(' + sub2 +')' }]
-                        }]
-          });
-          jsonContent.push ({
-            node: 'element', tag: 'div', attr: { class: ativo2, id: classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav' },
-                child: this.heroi(hibridos[i], 'selecionar-'+classe.toLowerCase()+'-'+sub2.toLowerCase())
-          });
-      }
+        jsonNav.push({
+          node: 'element', tag: 'li', attr: { class: 'text-center '+ativo+sub },
+              child: [{node: 'element', tag: 'a', attr: { href: '#'+classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav', dataToggle: 'tab' },
+                          child: [{ node: 'text', text: hibridos[i].name + '<br />(' + sub2 +')' }]
+                      }]
+        });
+        jsonContent.push ({
+          node: 'element', tag: 'div', attr: { class: ativo2, id: classe.toLowerCase()+'-'+hibridos[i].name.toLowerCase().replace(' ','')+'-nav' },
+              child: this.heroi(hibridos[i], 'selecionar-'+classe.toLowerCase()+'-'+sub2.toLowerCase())
+        });
+    }
 
-      return [{node: 'element', tag: 'ul', attr: { class: 'nav nav-pills' }, child: jsonNav},
-              {node: 'element', tag: 'div', attr: { class: 'tab-content' }, child: jsonContent}];
-  },
-    classe(type, colunas){
+    return [{node: 'element', tag: 'ul', attr: { class: 'nav nav-pills' }, child: jsonNav},
+            {node: 'element', tag: 'div', attr: { class: 'tab-content' }, child: jsonContent}];
+},
+  classe(type, colunas){
       let classes = data.listByType('Pure');
       let json = [];
 
@@ -146,42 +146,6 @@ module.exports = {
     while (i < json.length);
 
     return retorno;
-  },
-  efeitos(){
-  console.log('efeitos');
-    let efeitos = data.listEffect();
-    let json = [];
-
-    efeitos.forEach(build);
-    function build(efeito, index, array){
-      let childs = [];
-      console.log(efeito.nameEN);
-      console.log(efeito.descriptionBR);
-
-      childs.push({ node: 'element', tag: 'div', attr:{ class: 'panel-heading' },
-                        child: [{ node: 'element', tag: 'h4', attr:{ class: 'panel-title' },
-                                      child: [{ node: 'element', tag: 'a', attr:{ dataToggle:'collapse', dataParent:'#efeitos', href:'#efeito'+index, ariaExpanded:'false', class:'collapsed' },
-                                                    child: [{ node: 'text', text: efeito.nameEN }]
-                                              }]
-                                 }]
-                   });
-
-       childs.push({ node: 'element', tag: 'div', attr:{ id: 'efeito'+index, class:'panel-collapse collapse', ariaExpanded:'false' },
-                         child: [{ node: 'element', tag: 'div', attr:{ class: 'panel-body' },
-                                       child: [{ node: 'text', text: efeito.descriptionBR }]
-                                  }]
-                    });
-
-      json.push({ node: 'element', tag: 'div', attr:{ class: 'panel panel-default' }, child: childs });
-    }
-
-    let html = json2html({node: 'root', child: json });
-
-    html = replaceAll(html,"dataToggle", "data-toggle");
-    html = replaceAll(html,"dataParent", "data-parent");
-    html = replaceAll(html,"ariaExpanded", "aria-expanded");
-
-    return html;
   },
   menuItem(sidemenu, buttons){
 
