@@ -4,6 +4,7 @@ const data = require('./data.js');
 const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
 const htmlMenu = require('./html/menu-cards.js');
+const htmlCartas = require('./html/cartas.js');
 const deck = require('./deck-builder.js');
 const conta = require('./conta.js');
 const file = require('./file-manager.js');
@@ -105,7 +106,7 @@ function renderPanel(heroi){
 }
 
 function renderSidebar(buttons){
-  document.querySelector('#side-menu').innerHTML = htmlMenu.menuItem(buttons);
+  document.querySelector('#side-menu').innerHTML = htmlMenu.items(buttons);
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');
@@ -141,9 +142,7 @@ function renderCards(classe){
 
   let cartas = main.concat(sub);
 
-  let retorno = html.cartas(cartas);
-  console.log(retorno);
-  document.querySelector('#skill-cards').innerHTML = retorno;
+  document.querySelector('#skill-cards').innerHTML = htmlCartas.cartas(cartas);
 
   for(let i in cartas){
     document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {

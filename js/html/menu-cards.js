@@ -1,7 +1,7 @@
 const builder = require('./builder.js');
 
 module.exports = {
-  menuItem(buttons){
+  items(buttons){
     let json = [];
 
     json.push(search());
