@@ -7,13 +7,15 @@ module.exports = {
   menu(decks){
     let json = [];
     let panels = [];
+    panels.push(builder.element('h1', {class:'page-header'}, [builder.text(decks.length +' decks encontrados: ')]));
 
     decks.forEach(build);
     function build(deck, index, array) {
       let herois = [];
       let cartas = [];
+      let deckName = deck.Nickname;
 
-      let rowTitle = title(deck.Nickname);
+      let rowTitle = title(deckName, index);
 
       let retornoLoad = load.montaObj(deck);
       if (retornoLoad){
@@ -50,30 +52,22 @@ module.exports = {
       let botaoExcluir = botao('trash', 'danger', 'excluir-'+index, 'Excluir Deck');
       childBotoes = builder.element('div', {class:'col-xs-3 text-right'}, [botaoEditar, botaoExcluir]);
 
-      let rowContent = builder.element('div', {class: 'row'}, [rowTitle, childDeck, childBotoes]);
+      let panelBody = builder.element('div', {class: 'panel-body'}, [childDeck, childBotoes]);
+      let rowContent = builder.element('div', {id:'deck'+index, class:'panel-collapse collapse', ariaExpanded:'false', style:'height: 0px;'}, [panelBody]);
 
-      json.push(rowContent);
+      let panelDefault = builder.element('div', {class: 'panel panel-default'}, [rowTitle, rowContent]);
+      panels.push(builder.element('div', {class: 'panel-group', id:'accordion'}, [panelDefault]));
     }
 
-    json.forEach(function (obj, index, array){
-      let child = [];
-      child.push(obj);
-
-      let panelHeading = builder.element('div', {class: 'panel-heading'}, child);
-      let panelDefault = builder.element('div', {class: 'panel panel-default'}, [panelHeading]);
-      let col12 = builder.element('div', {class: 'col-lg-12'}, [panelDefault]);
-      panels.push(builder.element('div', {class: 'col-lg-12'}, [col12]));
-    });
-
-    return builder.build(panels);
+    return builder.replaceCamelCase(builder.build(panels));
   }
 }
 
-function title(name){
+function title(name, index){
   let deckName = builder.text(name);
-  let hugeText = builder.element('div', {class:'huge text-center'}, [deckName]);
-  let col12 = builder.element('div', {class: 'col-lg-12'}, [hugeText]);
-  return builder.element('div', {class: 'row'}, [col12]);
+  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [deckName]);
+  let title = builder.element('h4', {class: 'panel-title'}, [collapse]);
+  return builder.element('div', {class: 'panel-heading'}, [title]);
 }
 
 function botao(type, color, index, title){

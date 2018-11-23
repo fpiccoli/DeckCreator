@@ -18,5 +18,11 @@ module.exports = {
       pos = str.indexOf(de);
     }
     return (str);
+  },
+  replaceCamelCase(html){
+    html = this.replaceAll(html,"dataToggle", "data-toggle");
+    html = this.replaceAll(html,"dataParent", "data-parent");
+    html = this.replaceAll(html,"ariaExpanded", "aria-expanded");
+    return html;
   }
 }

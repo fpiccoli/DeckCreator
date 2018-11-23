@@ -25,6 +25,7 @@ module.exports = {
       ipcRenderer.send('get-path', 'documents');
       ipcRenderer.on('return-path', (event, path) => {
         let json = file.readDir(path);
+        console.log(html.menu(json));
         documento.querySelector('#menu-content').innerHTML = html.menu(json);
 
         json.forEach(build);
