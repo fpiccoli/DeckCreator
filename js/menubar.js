@@ -2,7 +2,7 @@ const { ipcRenderer }  = require('electron');
 const file = require('./file-manager.js');
 const alert = require('./alert-message.js');
 const load = require('./loadJSON.js');
-const html = require('./html-builder.js');
+const html = require('./html/menu-decks.js');
 
 module.exports = {
   navbar(documento){
@@ -25,7 +25,9 @@ module.exports = {
       ipcRenderer.send('get-path', 'documents');
       ipcRenderer.on('return-path', (event, path) => {
         let json = file.readDir(path);
-        documento.querySelector('#menu-content').innerHTML = html.menuDecks(json);
+        let r = html.menu(json);
+        console.log(r);
+        documento.querySelector('#menu-content').innerHTML = r;
 
         json.forEach(build);
         function build(deck, index, array) {
