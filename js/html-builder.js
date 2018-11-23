@@ -147,37 +147,6 @@ return jsonHerois;
 
     return retorno;
   },
-  menuItem(sidemenu, buttons){
-
-    let json = [];
-    sidemenu.child.push({node: 'element', tag:'li', attr:{ class:'sidebar-search' },
-        child:[{ node:'element', tag:'div', attr:{ class:'input-group custom-search-form' },
-                    child:[{ node:'element', tag:'input', attr:{ id:'campo-nome', type:'text', class:'form-control', placeholder:'Nome do Deck' } },
-                           { node:'element', tag:'span', attr:{ class:'input-group-btn' },
-                                  child: [{node:'element', tag:'button', attr:{ id:'update-nome', class:'btn btn-default', type:'button' },
-                                              child:[{ node:'element', tag:'i', attr:{ class: 'fa fa-edit' } }]
-                                          }]
-                            }]
-               }]
-    });
-    for (let i in buttons){
-      let child = [];
-
-      if (buttons[i].type == 'Hybrid'){
-        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons-full/'+buttons[i].main.toLowerCase()+'.svg', height: '50%', width: '25%' }});
-        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons-full/'+buttons[i].sub.toLowerCase()+'.svg', height: '50%', width: '25%' }});
-      }else{
-        child.push({ node: 'element', tag: 'img', attr:{ src: '../icons-full/'+buttons[i].class.toLowerCase()+'.svg', height: '50%', width: '25%' }});
-      }
-      child.push({node: 'element', tag: 'div', attr: { class: 'text-center' }, child:[{ node: 'text', text: buttons[i].class}]});
-
-      sidemenu.child.push({ node: 'element', tag: 'li',
-                  child:[{node: 'element', tag: 'a', 'attr':{ href:'#', class: 'text-center', id:'cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','') },
-                              child: child }]
-        });
-      }
-      return sidemenu;
-  },
   cartas(lista){
     let colunas = 5;
     let cards = [];

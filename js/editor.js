@@ -3,6 +3,7 @@ const dialog = remote.dialog;
 const data = require('./data.js');
 const panel = require('./panel-cards.js');
 const html = require('./html-builder.js');
+const htmlMenu = require('./html/menu-cards.js');
 const deck = require('./deck-builder.js');
 const conta = require('./conta.js');
 const file = require('./file-manager.js');
@@ -104,12 +105,7 @@ function renderPanel(heroi){
 }
 
 function renderSidebar(buttons){
-  let innerHTML = document.querySelector('#side-menu').innerHTML;
-  let retorno = html.returnJSON(innerHTML);
-  retorno.child = [];
-  let resultado = html.menuItem(retorno, buttons);
-
-  document.querySelector('#side-menu').innerHTML = html.returnHTML(resultado);
+  document.querySelector('#side-menu').innerHTML = htmlMenu.menuItem(buttons);
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');

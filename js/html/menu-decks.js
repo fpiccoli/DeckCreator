@@ -64,8 +64,7 @@ module.exports = {
 }
 
 function title(name, index){
-  let deckName = builder.text(name);
-  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [deckName]);
+  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [builder.text(name)]);
   let title = builder.element('h4', {class: 'panel-title'}, [collapse]);
   return builder.element('div', {class: 'panel-heading'}, [title]);
 }
