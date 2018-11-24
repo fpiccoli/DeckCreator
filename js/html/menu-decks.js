@@ -60,6 +60,9 @@ module.exports = {
     }
 
     return builder.replaceCamelCase(builder.build(panels));
+  },
+  loading(){
+    return builder.loading();
   }
 }
 

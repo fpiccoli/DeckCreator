@@ -25,35 +25,12 @@ module.exports = {
       ipcRenderer.send('get-path', 'documents');
       ipcRenderer.on('return-path', (event, path) => {
         let json = file.readDir(path);
-        console.log(html.menu(json));
-        documento.querySelector('#menu-content').innerHTML = html.menu(json);
+        console.log(json);
 
-        json.forEach(build);
-        function build(deck, index, array) {
-          let herois = [];
-          let cartas = [];
-
-          let retornoLoad = load.montaObj(deck);
-          if (retornoLoad){
-            herois = retornoLoad.herois;
-            cartas = retornoLoad.cartas;
-          }
-          documento.querySelector('#botao-editar-'+index).addEventListener('click' , function(){
-            ipcRenderer.send('set-nome-cookie', array[index].Nickname);
-            ipcRenderer.send('set-card-cookie', cartas);
-            ipcRenderer.send('set-herois-cookie', herois);
-            ipcRenderer.send('pagina-editor');
-          });
-          documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
-            file.delete(path, array[index].Nickname);
-            renderDecks();
-          });
-          // document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
-          //   console.log('Altera Nome');
-          //   // file.save(path, array[index].Nickname, json);
-          //   renderDecks();
-          // });
-        }
+        documento.querySelector('#menu-content').innerHTML = html.loading();
+        setTimeout(function(){
+          render(documento, path, json);
+        }, 3000);
       });
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
@@ -242,5 +219,35 @@ module.exports = {
                 </div>`;
         documento.querySelector('#menu-content').innerHTML = htmlText;
     });
+  }
+}
+
+function render(documento, path, json){
+  documento.querySelector('#menu-content').innerHTML = html.menu(json);
+  json.forEach(build);
+  function build(deck, index, array) {
+    let herois = [];
+    let cartas = [];
+
+    let retornoLoad = load.montaObj(deck);
+    if (retornoLoad){
+      herois = retornoLoad.herois;
+      cartas = retornoLoad.cartas;
+    }
+    documento.querySelector('#botao-editar-'+index).addEventListener('click' , function(){
+      ipcRenderer.send('set-nome-cookie', array[index].Nickname);
+      ipcRenderer.send('set-card-cookie', cartas);
+      ipcRenderer.send('set-herois-cookie', herois);
+      ipcRenderer.send('pagina-editor');
+    });
+    documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
+      file.delete(path, array[index].Nickname);
+      renderDecks();
+    });
+    // document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
+    //   console.log('Altera Nome');
+    //   // file.save(path, array[index].Nickname, json);
+    //   renderDecks();
+    // });
   }
 }

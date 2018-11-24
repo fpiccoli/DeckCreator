@@ -1,9 +1,12 @@
 const { ipcRenderer } = require('electron');
-const html = require('./html-builder.js');
+const html = require('./html/herois.js');
 const data = require('./data.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let recarregar;
+
+document.querySelector('#accordion-pure-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
+document.querySelector('#accordion-hybrid-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
 
 setTimeout(function(){
   render('pure', 2);
@@ -17,6 +20,7 @@ linkFechar.addEventListener('click', function () {
 
 function render(type, colunas){
   let retorno = html.build(type, colunas);
+  console.log(retorno);
   document.querySelector('#accordion-'+type+'-panel').innerHTML = retorno;
   if (retorno.search("recarregar-herois") > 0){
     recarregar = document.querySelector("#recarregar-herois");

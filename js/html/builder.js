@@ -24,5 +24,8 @@ module.exports = {
     html = this.replaceAll(html,"dataParent", "data-parent");
     html = this.replaceAll(html,"ariaExpanded", "aria-expanded");
     return html;
+  },
+  loading(){
+    return '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
   }
 }

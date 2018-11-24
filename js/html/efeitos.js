@@ -26,9 +26,7 @@ module.exports = {
     }
     let html = builder.build(json);
 
-    html = builder.replaceAll(html,"dataToggle", "data-toggle");
-    html = builder.replaceAll(html,"dataParent", "data-parent");
-    html = builder.replaceAll(html,"ariaExpanded", "aria-expanded");
+    html = builder.replaceCamelCase(html);
 
     return html;
   }
