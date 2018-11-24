@@ -9,6 +9,10 @@
 
 Releases:
 
+  1.3.1 (21/11/2018)
+      - Correções de bugs:
+          - Refatoração de código.
+
   1.3.0 (21/11/2018)
       - Novas Funcionalidades:
           - Lista de efeitos das cartas.
