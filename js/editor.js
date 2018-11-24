@@ -214,7 +214,10 @@ function updateCardPanels(carta){
 }
 
 function updateOtherPanels(){
+  let percentual = listaDeCartas.length*100/50;
   document.querySelector('#all-cards').textContent = listaDeCartas.length;
+  document.querySelector('#status-value').textContent = percentual+'%';
+  document.querySelector('#status-bar').innerHTML = htmlCartas.statusbar(percentual);
   document.querySelector('#spell-cards').textContent = conta.class(listaDeCartas, 'Spell') + conta.class(listaDeCartas, 'Enchantment');
   document.querySelector('#talent-cards').textContent = conta.class(listaDeCartas, 'Talent');
 }

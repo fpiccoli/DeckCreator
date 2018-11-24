@@ -29,5 +29,14 @@ module.exports = {
     rows.push(builder.element('div', {class: 'row'}, cards));
 
     return builder.build([{ node: 'element', tag: 'div', attr:{class: 'col-lg-12'}, child: rows }]);
+  },
+  statusbar(percentual){
+    let color = 'info';
+    if (percentual == 100) {
+      color = 'success'
+    }
+    let json = builder.element('div', {class:'progress-bar progress-bar-'+color, role:'progressbar', ariaValuenow: percentual, ariaValuemin:'0', ariaValuemax:'100', style:'width: '+percentual+'%'}, []);
+    let html = builder.build([json]);
+    return builder.replaceCamelCase(html);
   }
 }

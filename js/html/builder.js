@@ -23,6 +23,9 @@ module.exports = {
     html = this.replaceAll(html,"dataToggle", "data-toggle");
     html = this.replaceAll(html,"dataParent", "data-parent");
     html = this.replaceAll(html,"ariaExpanded", "aria-expanded");
+    html = this.replaceAll(html,"ariaValuenow", "aria-valuenow");
+    html = this.replaceAll(html,"ariaValuemin", "aria-valuemin");
+    html = this.replaceAll(html,"ariaValuemax", "aria-valuemax");
     return html;
   },
   loading(){
