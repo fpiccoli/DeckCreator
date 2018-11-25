@@ -11,7 +11,7 @@ module.exports = {
   mainClass(lista, heroi){
     let count = 0;
     for(let i in lista){
-      if(lista[i].class.includes(heroi.main) && (lista[i].type == 'ATK' || lista[i].type == 'TEC' || lista[i].type == 'SKL')){
+      if(lista[i].class.includes(heroi.main) && (lista[i].type == 'ATK' || lista[i].type == 'TEC' || lista[i].type == 'SKL' || lista[i].type == 'DOM')){
         count++;
       }
     }

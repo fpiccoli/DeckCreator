@@ -33,6 +33,8 @@ module.exports = {
         let main = heroi.main.toLowerCase();
         let atk = conta.mainClass(cartas, heroi);
         let def = conta.subClass(cartas, heroi);
+        console.log(main + ' atk: '+atk+' -  def: '+def);
+        console.log(cartas);
 
         let subElements = [];
 

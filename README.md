@@ -9,6 +9,12 @@
 
 Releases:
 
+  1.4.0 (xx/xx/2018)
+      - Novas Funcionalidades:
+          - Alterar nome do deck.
+      - Correções de bugs:
+          - Agora a contagem de Enchantments do Deck aparece correta na listagem.
+
   1.3.1 (21/11/2018)
       - Correções de bugs:
           - Refatoração de código.
