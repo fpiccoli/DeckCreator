@@ -9,7 +9,7 @@
 
 Releases:
 
-  1.4.0 (xx/xx/2018)
+  1.4.0 (25/11/2018)
       - Novas Funcionalidades:
           - Alterar nome do deck.
       - Correções de bugs:
@@ -19,7 +19,7 @@ Releases:
           - Paralyze (Spell): Função alterada (Afeta todos).
           - Cleansing (Spell): Função alterada (Afeta todos).
           - Replicate (Spell): Nova carta.
-          - Clumsiness (Enchantment): Nome alterado para Strangle.
+          - Clumsiness (Enchantment): Diminuição do custo.
           - Hyperthmesia (Enchantment): Diminuição do efeito.
           - Adrenaline Rush (Berserker): Diminuição do custo.
           - Detect Magic (Warlock): Diminuição do custo.
