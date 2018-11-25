@@ -48,9 +48,10 @@ module.exports = {
         childDeck = builder.element('div', {class:'col-xs-9 text-right'}, elements);
       });
 
+      let botaoAlterarNome = botao('tag', 'info', 'alterar-nome-'+index, 'Alterar Nome');
       let botaoEditar = botao('edit', 'primary', 'editar-'+index, 'Editar Deck');
       let botaoExcluir = botao('trash', 'danger', 'excluir-'+index, 'Excluir Deck');
-      childBotoes = builder.element('div', {class:'col-xs-3 text-right'}, [botaoEditar, botaoExcluir]);
+      childBotoes = builder.element('div', {class:'col-xs-3 text-right'}, [botaoAlterarNome, botaoEditar, botaoExcluir, builder.element('div', {id:'input-novo-nome-'+index}, [])]);
 
       let panelBody = builder.element('div', {class: 'panel-body'}, [childDeck, childBotoes]);
       let rowContent = builder.element('div', {id:'deck'+index, class:'panel-collapse collapse', ariaExpanded:'false', style:'height: 0px;'}, [panelBody]);
@@ -75,5 +76,5 @@ function title(name, index){
 function botao(type, color, index, title){
   let icon = builder.element('i', {class:'fa fa-'+type}, []);
   let btn = builder.element('button', {id:'botao-'+index, class:'btn btn-'+color+' btn-circle btn-xl', title: title}, [icon]);
-  return builder.element('div', {class: 'col-xs-6 text-center'}, [btn]);
+  return builder.element('div', {class: 'col-xs-4 text-center', id:'birbo-'+index}, [btn]);
 }

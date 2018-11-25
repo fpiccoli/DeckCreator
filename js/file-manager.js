@@ -28,6 +28,33 @@ module.exports = {
       console.log(err);
     })
   },
+  update(path, nome, antigo, json){
+    if(verificaSeExiste(this.readDir(path), nome)){
+      if(!confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
+        console.log('Salvamento Cancelado');
+        return 0;
+      }
+    }
+    else{
+      if(!confirmDialog('Salvar Deck', 'Sim', 'Não', 'Deseja alterar o nome de "'+antigo+'" para  "'+nome+'"?')){
+        console.log('Salvamento Cancelado');
+        return 0;
+      }
+    }
+    let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Saves','/Saved Objects','/DeckCreator/']);
+    let newFile = caminho + nome + '.json';
+    let oldFile = caminho + antigo + '.json';
+    fs.unlinkSync(oldFile);
+
+    json = {SaveName: '',GameMode: '',Gravity: 0.5,Date: '',Table: '',Sky: '',Note: '',Rules: '',XmlUI: '',LuaScript: '',ObjectStates: [json],LuaScriptState: ''};
+
+    return jsonfile.writeFile(newFile, json, {spaces: 2})
+    .then(() => {
+      console.log('Arquivo Salvo');
+    }).catch((err) => {
+      console.log(err);
+    })
+  },
   delete(path, name){
     if(!confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ name +'"?')){
       return;

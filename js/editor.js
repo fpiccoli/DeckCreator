@@ -1,7 +1,5 @@
-const { ipcRenderer, remote }  = require('electron');
-const dialog = remote.dialog;
+const { ipcRenderer }  = require('electron');
 const data = require('./data.js');
-const panel = require('./panel-cards.js');
 const htmlMenu = require('./html/menu-cards.js');
 const htmlCartas = require('./html/cartas.js');
 const deck = require('./deck-builder.js');
