@@ -14,6 +14,15 @@ Releases:
           - Alterar nome do deck.
       - Correções de bugs:
           - Agora a contagem de Enchantments do Deck aparece correta na listagem.
+      - Cartas alteradas:
+          - Wisdom (Spell): Função alterada novamente (Novo efeito Search).
+          - Paralyze (Spell): Função alterada (Afeta todos).
+          - Cleansing (Spell): Função alterada (Afeta todos).
+          - Replicate (Spell): Nova carta.
+          - Clumsiness (Enchantment): Nome alterado para Strangle.
+          - Hyperthmesia (Enchantment): Diminuição do efeito.
+          - Adrenaline Rush (Berserker): Diminuição do custo.
+          - Detect Magic (Warlock): Diminuição do custo.
 
   1.3.1 (21/11/2018)
       - Correções de bugs:
@@ -33,9 +42,9 @@ Releases:
           - Novos selos em cartas novas ou que foram alteradas recentemente.
           - Agora aparece o tipo da classe ao lado do nome do herói (M/S/U).
       - Cartas alteradas:
-          - Knowledge: Texto corrigido.
-          - Wisdom: Função alterada (Ainda em avaliação).
-          - Squeeze: Nome alterado para Strangle.
+          - Knowledge (Talent): Texto corrigido.
+          - Wisdom (Spell): Função alterada (Ainda em avaliação).
+          - Squeeze (Beast): Nome alterado para Strangle.
       - Correções de bugs:
           - Imagens de híbridos agora aparecem corretamente ao carregar deck.
           - Imagens de híbridos agora aparecem corretamente no menu de decks.
