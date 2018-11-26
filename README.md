@@ -12,6 +12,8 @@ Releases:
   1.5.0 (xx/11/2018)
       - Novas Funcionalidades:
           - Homepage com FAQ e helpdesk.
+      - Melhorias visuais:
+          - Novos ícones no menu principal.
 
   1.4.0 (25/11/2018)
       - Novas Funcionalidades:
