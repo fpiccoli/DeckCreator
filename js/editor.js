@@ -5,6 +5,7 @@ const htmlCartas = require('./html/cartas.js');
 const deck = require('./deck-builder.js');
 const conta = require('./conta.js');
 const file = require('./file-manager.js');
+const cookie = require('./cookie-manager.js');
 const menu = require('./menubar.js');
 const alert = require('./alert-message.js');
 
@@ -17,7 +18,7 @@ menu.navbar(document);
 
 ipcRenderer.send('get-cookies');
 ipcRenderer.on('send-cookies', (event, cookies) => {
-  cookiesHeroi = filtraCookies(cookies, 'heroi');
+  cookiesHeroi = cookie.filtraCookies(cookies, 'heroi');
   for (let i in cookiesHeroi){
     let json = JSON.parse(cookiesHeroi[i].value);
     json.panel = cookiesHeroi[i].name.replace('heroi','');
@@ -34,12 +35,12 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   buttons.push({class: 'Talent', type: 'Talent', main: 'Talent', sub: 'Talent'});
   renderSidebar(buttons);
 
-  cookiesCards = filtraCookies(cookies, 'cards');
+  cookiesCards = cookie.filtraCookies(cookies, 'cards');
   if(cookiesCards[0]){
     listaDeCartas = JSON.parse(cookiesCards[0].value);
   }
 
-  cookiesNome = filtraCookies(cookies, 'nome');
+  cookiesNome = cookie.filtraCookies(cookies, 'nome');
   if(cookiesNome[0]){
     nomeDoTime = cookiesNome[0].value;
     document.querySelector("#nome-time").textContent = nomeDoTime;
@@ -51,14 +52,6 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   addEventSelecionar(1);
   addEventSelecionar(2);
   addEventSelecionar(3);
-
-  function filtraCookies(cookies, nome){
-    return cookies.filter(
-      function(cookie){
-        return cookie.domain == 'deckcreator.com' && cookie.name.includes(nome)
-      }
-    );
-  }
 });
 
 function addEventSelecionar(number){

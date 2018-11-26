@@ -9,11 +9,12 @@
 
 Releases:
 
-  1.5.0 (xx/11/2018)
+  1.5.0 (26/11/2018)
       - Novas Funcionalidades:
           - Homepage com FAQ e helpdesk.
       - Melhorias visuais:
           - Novos ícones no menu principal.
+          - Melhoria na descrição dos efeitos para os iniciantes com exemplos mais descritivos.
 
   1.4.0 (25/11/2018)
       - Novas Funcionalidades:
