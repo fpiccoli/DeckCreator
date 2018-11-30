@@ -7,7 +7,6 @@ let efeitos = [];
 
 fetch('http://gdurl.com/LJ2W').then(function(response) {
   response.text().then(function(text) {
-    console.log(JSON.parse(text));
     efeitos = JSON.parse(text).effects;
     console.log('Carregou Efeitos');
   });

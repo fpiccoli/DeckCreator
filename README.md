@@ -9,6 +9,12 @@
 
 Releases:
 
+  1.6.0 (xx/11/2018)
+      - Novas Funcionalidades:
+          - Página Sobre.
+      - Correções de bugs:
+          - Refatoração de código.
+
   1.5.0 (26/11/2018)
       - Novas Funcionalidades:
           - Homepage com FAQ e helpdesk.
