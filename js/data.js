@@ -88,6 +88,13 @@ module.exports = {
       }
     );
   },
+  getClasseByName(name){
+    return classes.find(
+      function(classe){
+        return classe.name.includes(name)
+      }
+    );
+  },
   getCardByName(name){
     return cartas.find(
       function(card){

@@ -30,9 +30,9 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  buttons.push({class: 'Spell', type: 'Spell', main: 'Spell', sub: 'Spell'});
-  buttons.push({class: 'Enchantment', type: 'Enchantment', main: 'Enchantment', sub: 'Enchantment'});
-  buttons.push({class: 'Talent', type: 'Talent', main: 'Talent', sub: 'Talent'});
+  buttons.push({class:'Spell', main:'Spell', icon:'xMlN', bg:'aiJl'})
+  buttons.push({class:'Enchantment', main:'Enchantment', icon:'ZbmkU', bg:'7klK'})
+  buttons.push({class:'Talent', main:'Talent', icon:'oAoH', bg:'tPiS'})
   renderSidebar(buttons);
 
   cookiesCards = cookie.filtraCookies(cookies, 'cards');
@@ -92,7 +92,7 @@ function renderPanel(heroi){
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.deck.alligment+')';
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
-  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="../icons-transparent/'+heroi.main.toLowerCase()+'.svg" height="300%" width="300%"/>';
+  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://gdurl.com/'+heroi.icon+'" height="300%" width="300%"/>';
 }
 
 function renderSidebar(buttons){

@@ -19,6 +19,38 @@
   1px 1px 0 #000;
 }
 
+.center-icon {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size:5vw;
+
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
+.center-icon-menu {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size:5vw;
+
+  color: white;
+  text-shadow:
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
 .selo-novidade {
   position: absolute;
   top: 22%;
@@ -438,4 +470,34 @@
 }
 .panel-wizard > a:hover {
   color: #06e4ff;
+}
+
+.panel-ninja {
+  border-color: #84c4d7;
+}
+.panel-ninja > .panel-heading {
+  border-color: #84c4d7;
+  color: white;
+  background-color: #84c4d7;
+}
+.panel-ninja > a {
+  color: #84c4d7;
+}
+.panel-ninja > a:hover {
+  color: #84c4d7;
+}
+
+.panel-blacksmith {
+  border-color: #dcb500;
+}
+.panel-blacksmith > .panel-heading {
+  border-color: #dcb500;
+  color: white;
+  background-color: #dcb500;
+}
+.panel-blacksmith > a {
+  color: #dcb500;
+}
+.panel-blacksmith > a:hover {
+  color: #dcb500;
 }

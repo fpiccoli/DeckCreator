@@ -22,27 +22,21 @@ module.exports = {
         herois = retornoLoad.herois;
         cartas = retornoLoad.cartas;
       }
-
-      herois.push({class:'Spell', main:'Spell'});
-      herois.push({class:'Enchantment', main:'Enchantment'});
-      herois.push({class:'Talent', main:'Talent'});
+      herois.push({class:'Spell', main:'Spell', icon:'xMlN', bg:'aiJl'})
+      herois.push({class:'Enchantment', main:'Enchantment', icon:'ZbmkU', bg:'7klK'})
+      herois.push({class:'Talent', main:'Talent', icon:'oAoH', bg:'tPiS'})
 
       let elements = [];
 
       herois.forEach(function (heroi, index, array){
-        let main = heroi.main.toLowerCase();
         let atk = conta.mainClass(cartas, heroi);
         let def = conta.subClass(cartas, heroi);
-        console.log(main + ' atk: '+atk+' -  def: '+def);
-        console.log(cartas);
 
         let subElements = [];
 
-        subElements.push(builder.element('img', {src:'../icons-full/'+main+'.svg', height:'40%', width:'40%'}, []));
-        if(heroi.type == 'Hybrid'){
-          let sub = heroi.sub.toLowerCase();
-          subElements.push(builder.element('img', {src:'../icons-full/'+sub+'.svg', height:'40%', width:'40%'}, []));
-        }
+        subElements.push(builder.element('img', {src:'https://gdurl.com/'+heroi.icon, height:'55%', width:'55%', class:'center-icon'}, []));
+        subElements.push(builder.element('img', {src:'https://gdurl.com/'+heroi.bg, height:'40%', width:'40%'}, []));
+
         subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
         subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));
         elements.push(builder.element('div', {class: 'col-xs-2 text-center'}, subElements));

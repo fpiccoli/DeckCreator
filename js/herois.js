@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const html = require('./html/herois.js');
 const data = require('./data.js');
+const monta = require('./monta-heroi.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let recarregar;
@@ -20,7 +21,6 @@ linkFechar.addEventListener('click', function () {
 
 function render(type, colunas){
   let retorno = html.build(type, colunas);
-  console.log(retorno);
   document.querySelector('#accordion-'+type+'-panel').innerHTML = retorno;
   if (retorno.search("recarregar-herois") > 0){
     recarregar = document.querySelector("#recarregar-herois");
@@ -38,20 +38,16 @@ function buttonBuilder(){
   for(let i in puros){
     for(let h in puros[i].heroes){
       let heroi = puros[i].heroes[h];
-      heroi.main = puros[i].main;
-      heroi.sub = puros[i].sub;
-      heroi.deck = data.getClasseByCard(heroi);
-      heroi.deck.cards = [];
+
+      heroi = monta.heroi(heroi, data.getClasseByCard(heroi), puros[i].main, puros[i].sub, null, null, null);
       buttonSelecionar(puros[i].name.toLowerCase(), heroi);
     }
   }
   for(let i in hibridos){
     for(let h in hibridos[i].heroes){
       let heroi = hibridos[i].heroes[h];
-      heroi.main = hibridos[i].main;
-      heroi.sub = hibridos[i].sub;
-      heroi.deck = data.getClasseByCard(heroi);
-      heroi.deck.cards = [];
+
+      heroi = monta.heroi(heroi, data.getClasseByCard(heroi), hibridos[i].main, hibridos[i].sub, null, null, null);
       buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), heroi);
       buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), heroi);
     }

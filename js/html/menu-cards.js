@@ -11,12 +11,9 @@ module.exports = {
       let childs = [];
       let elements = [];
 
-      if (button.type == 'Hybrid'){
-        childs.push(builder.element('img', {src: '../icons-full/'+button.main.toLowerCase()+'.svg', height: '50%', width: '25%'}, []));
-        childs.push(builder.element('img', {src: '../icons-full/'+button.sub.toLowerCase()+'.svg', height: '50%', width: '25%'}, []));
-      }else{
-        childs.push(builder.element('img', {src: '../icons-full/'+button.sub.toLowerCase()+'.svg', height: '50%', width: '25%'}, []));
-      }
+      childs.push(builder.element('img', {src:'https://gdurl.com/'+button.icon, height:'50%', width:'25%', class:'center-icon-menu'}, []));
+      childs.push(builder.element('img', {src:'https://gdurl.com/'+button.bg, height:'50%', width:'25%'}, []));
+
       childs.push(builder.element('div', {class: 'text-center'}, [builder.text(button.class)]));
       elements.push(builder.element('a', {href:'#', class: 'text-center', id:'cards-'+button.class.toLowerCase().toLowerCase().replace(' ','')}, childs));
 

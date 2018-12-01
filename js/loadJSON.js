@@ -1,4 +1,5 @@
 const data = require('./data.js');
+const monta = require('./monta-heroi.js');
 
 module.exports = {
   montaObj(deck){
@@ -7,21 +8,14 @@ module.exports = {
     deck.ContainedObjects.forEach(function (card, index, array){
       let cartaObj = data.getCardByName(card.Nickname);
       if(cartaObj){
-        cartaObj.deck = data.getClasseByCard(cartaObj);
-        cartaObj.deck.cards = [];
-        cartaObj.deck.heroes = [];
-        cartas.push(cartaObj);
+        let retorno = monta.carta(cartaObj, data);
+        cartas.push(retorno);
       }
       else{
         let heroiObj = data.getHeroByName(card.Nickname);
         if(heroiObj){
-          heroiObj.deck = data.getClasseByCard(heroiObj);
-          heroiObj.main = heroiObj.deck.main;
-          heroiObj.sub = heroiObj.deck.sub;
-          heroiObj.type = heroiObj.deck.type;
-          heroiObj.deck.cards = [];
-          heroiObj.deck.heroes = [];
-          herois.push(heroiObj);
+          let retorno = monta.heroi(heroiObj, data);
+          herois.push(retorno);
         }
       }
     });

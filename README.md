@@ -12,6 +12,9 @@ Releases:
   1.6.0 (xx/11/2018)
       - Novas Funcionalidades:
           - Página Sobre.
+      - Novas Classes:
+          - Blacksmith (Beta), com 14 cartas experimentais.
+          - Ninja (Beta), com 14 cartas experimentais.
       - Correções de bugs:
           - Refatoração de código.
 
