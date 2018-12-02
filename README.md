@@ -12,6 +12,7 @@ Releases:
   1.6.0 (xx/11/2018)
       - Novas Funcionalidades:
           - Ver todas as cartas inseridas no deck (independente da classe escolhida) e removê-las.
+          - Salvar Deck Experimental com mais ou menos do que 50 cartas.
           - Página Sobre.
       - Novas Classes:
           - Blacksmith (Beta), com 14 cartas experimentais.
