@@ -55,6 +55,9 @@ module.exports = {
     if (percentual == 100) {
       color = 'success'
     }
+    else if (percentual > 100) {
+      color = 'danger'
+    }
     let json = builder.element('div', {class:'progress-bar progress-bar-'+color, role:'progressbar', ariaValuenow: percentual, ariaValuemin:'0', ariaValuemax:'100', style:'width: '+percentual+'%'}, []);
     let html = builder.build([json]);
     return builder.replaceCamelCase(html);

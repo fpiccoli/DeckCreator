@@ -87,7 +87,7 @@ module.exports = {
       }])
     );
 
-    let json = builder.element('div', null, text)
+    let json = builder.element('div', {class:'col-lg-12'}, text)
 
     return builder.build([json]);
   }

@@ -62,11 +62,18 @@ function addEventSelecionar(number){
 }
 
 document.querySelector("#salvar-deck").addEventListener('click' , function(){
-  if(listaDeCartas.length != 50){
-    alert.message(document.querySelector('#alert-message'), 'Você precisa ter <b>50 cartas</b> em seu deck para poder salvá-lo!', 'warning')
+  if(!deckDefault()){
+    alert.message(document.querySelector('#alert-message'), 'Você precisa ter exatamente <b>50 cartas</b> para salvar um deck padrão!', 'warning')
     return;
   }
+  saveDeck();
+});
 
+document.querySelector("#salvar-deck-experimental").addEventListener('click' , function(){
+  saveDeck();
+});
+
+function saveDeck(){
   let object = {
     name: nomeDoTime,
     cards: listaDeCartas,
@@ -85,7 +92,7 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
       ipcRenderer.send('pagina-editor');
     };
   });
-});
+}
 
 function renderPanel(heroi){
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
@@ -143,9 +150,7 @@ function renderCards(classe){
   for(let i in cartas){
     document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {
       if(conta.obj(listaDeCartas, cartas[i]) < 3){
-        if(listaDeCartas.length < 50){
-          addObj(cartas[i]);
-        }
+        addObj(cartas[i]);
       }
       else{
         removeObj(listaDeCartas, cartas[i]);
@@ -176,7 +181,6 @@ function renderCards(classe){
 
 function renderLista(cartas){
   document.querySelector('#skill-cards').innerHTML = htmlCartas.lista(cartas);
-  console.log(cartas)
 
   cartas.forEach(function (carta, index, array){
     document.querySelector('#card-'+index).addEventListener('click', function () {
@@ -208,23 +212,19 @@ function updateOtherPanels(){
   document.querySelector('#talent-cards').textContent = conta.class(listaDeCartas, 'Talent');
 }
 
-function deckFull(){
-  if(listaDeCartas.length >= 50){
+function deckDefault(){
+  if(listaDeCartas.length == 50){
     return true;
   }
   return false;
 }
 
 function addObj(carta){
-  if(deckFull()){
-    return;
-  }
   carta.deck = data.getClasseByCard(carta);
   carta.deck.cards = [];
   listaDeCartas.push(carta);
   listaDeCartas.sort(dynamicSort('number'));
   listaDeCartas.sort(dynamicSort('class'));
-  console.log(listaDeCartas);
 }
 
 function removeObj(lista, obj){

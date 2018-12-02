@@ -21,12 +21,13 @@ module.exports = {
     let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Saves','/Saved Objects','/DeckCreator/']);
 
     let file = caminho + nome + '.json';
-    return jsonfile.writeFile(file, json, {spaces: 2})
-    .then(() => {
-      console.log('Arquivo Salvo');
-    }).catch((err) => {
-      console.log(err);
+
+    jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
+      if (err) console.error(err)
     })
+
+    return 1;
+
   },
   update(path, nome, antigo, json){
     if(verificaSeExiste(this.readDir(path), nome)){
@@ -41,6 +42,7 @@ module.exports = {
         return 0;
       }
     }
+    json.Nickname = nome;
     let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Saves','/Saved Objects','/DeckCreator/']);
     let newFile = caminho + nome + '.json';
     let oldFile = caminho + antigo + '.json';
@@ -48,12 +50,11 @@ module.exports = {
 
     json = {SaveName: '',GameMode: '',Gravity: 0.5,Date: '',Table: '',Sky: '',Note: '',Rules: '',XmlUI: '',LuaScript: '',ObjectStates: [json],LuaScriptState: ''};
 
-    return jsonfile.writeFile(newFile, json, {spaces: 2})
-    .then(() => {
-      console.log('Arquivo Salvo');
-    }).catch((err) => {
-      console.log(err);
+    jsonfile.writeFile(newFile, json, {spaces: 2}, function (err) {
+      if (err) console.error(err)
     })
+
+    return 1;
   },
   delete(path, name){
     if(!confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ name +'"?')){

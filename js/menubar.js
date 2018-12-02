@@ -45,7 +45,6 @@ module.exports = {
       documento.querySelector('#menu-content').innerHTML = regras.html();
     });
     documento.querySelector("#sobre-semver").addEventListener('click', function () {
-      console.log(sobre.html())
       documento.querySelector('#menu-content').innerHTML = sobre.html();
     });
   }
@@ -90,8 +89,10 @@ function render(documento, path, json){
 function eventUpdateNome(documento, path, deck, index, json){
   let novoNome = documento.querySelector('#campo-nome-'+index).value;
   let antigo = deck.Nickname;
-  deck.Nickname = novoNome;
   if (file.update(path, novoNome, antigo, deck)){
     render(documento, path, json);
-  };
+  } else{
+    deck.Nickname = antigo;
+    render(documento, path, json);
+  }
 }
