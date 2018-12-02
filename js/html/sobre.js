@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.6.1 (02/12/2018)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Corrigido problema de não aparecerem Spell/Talents defensivos.']
+      }])
+    );
+
     text.push(h4('1.6.0 (02/12/2018)'));
     text.push(patch([
       {

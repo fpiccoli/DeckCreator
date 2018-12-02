@@ -30,9 +30,9 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  buttons.push({class:'Spell', main:'Spell', icon:'xMlN', bg:'aiJl'})
-  buttons.push({class:'Enchantment', main:'Enchantment', icon:'ZbmkU', bg:'7klK'})
-  buttons.push({class:'Talent', main:'Talent', icon:'oAoH', bg:'tPiS'})
+  buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'xMlN', bg:'aiJl'})
+  buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'ZbmkU', bg:'7klK'})
+  buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'oAoH', bg:'tPiS'})
   renderSidebar(buttons);
 
   cookiesCards = cookie.filtraCookies(cookies, 'cards');

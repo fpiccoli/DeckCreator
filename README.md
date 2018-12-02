@@ -9,7 +9,11 @@
 
 Releases:
 
-  1.6.0 (02/12/2018)
+    1.6.1 (02/12/2018)
+      - Correções de bugs:
+          - Corrigido problema de não aparecerem Spell/Talents defensivos.
+
+    1.6.0 (02/12/2018)
       - Novas Funcionalidades:
           - Ver todas as cartas inseridas no deck (independente da classe escolhida) e removê-las.
           - Salvar Deck Experimental com mais ou menos do que 50 cartas.
