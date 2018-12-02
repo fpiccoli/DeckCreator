@@ -100,6 +100,7 @@ function renderSidebar(buttons){
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');
+
       renderCards(buttons[i]);
       ipcRenderer.send('set-card-cookie', listaDeCartas);
     });
@@ -122,6 +123,11 @@ function renderSidebar(buttons){
     ipcRenderer.send('set-nome-cookie', nomeDoTime);
   }
 }
+
+document.querySelector('.cartas-deck').addEventListener('click', function () {
+  renderLista(listaDeCartas);
+});
+
 
 function renderCards(classe){
   let main = data.getMainCardsByClass(classe.main);
@@ -166,31 +172,20 @@ function renderCards(classe){
   }
   updateHeroPanels();
   updateOtherPanels();
+}
 
-  function deckFull(){
-    if(listaDeCartas.length >= 50){
-      return true;
-    }
-    return false;
-  }
-  function addObj(carta){
-    if(deckFull()){
-      return;
-    }
-    carta.deck = data.getClasseByCard(carta);
-    carta.deck.cards = [];
-    listaDeCartas.push(carta);
-  }
-  function removeObj(lista, obj){
-    let count = 0;
-    for(let i in lista){
-      if(lista[i].number == obj.number){
-        lista.splice(i, 1);
-        break;
-      }
-    }
-    return count;
-  }
+function renderLista(cartas){
+  document.querySelector('#skill-cards').innerHTML = htmlCartas.lista(cartas);
+  console.log(cartas)
+
+  cartas.forEach(function (carta, index, array){
+    document.querySelector('#card-'+index).addEventListener('click', function () {
+      removeObj(cartas, carta);
+      renderLista(cartas);
+      updateOtherPanels();
+      updateHeroPanels();
+    });
+  });
 }
 
 function updateHeroPanels(){
@@ -211,6 +206,36 @@ function updateOtherPanels(){
   document.querySelector('#status-bar').innerHTML = htmlCartas.statusbar(percentual);
   document.querySelector('#spell-cards').textContent = conta.class(listaDeCartas, 'Spell') + conta.class(listaDeCartas, 'Enchantment');
   document.querySelector('#talent-cards').textContent = conta.class(listaDeCartas, 'Talent');
+}
+
+function deckFull(){
+  if(listaDeCartas.length >= 50){
+    return true;
+  }
+  return false;
+}
+
+function addObj(carta){
+  if(deckFull()){
+    return;
+  }
+  carta.deck = data.getClasseByCard(carta);
+  carta.deck.cards = [];
+  listaDeCartas.push(carta);
+  listaDeCartas.sort(dynamicSort('number'));
+  listaDeCartas.sort(dynamicSort('class'));
+  console.log(listaDeCartas);
+}
+
+function removeObj(lista, obj){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].number == obj.number){
+      lista.splice(i, 1);
+      break;
+    }
+  }
+  return lista;
 }
 
 function dynamicSort(property) {
