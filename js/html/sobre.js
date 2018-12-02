@@ -7,11 +7,11 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
-    text.push(h4('1.6.0 (xx/11/2018)'));
+    text.push(h4('1.6.0 (02/12/2018)'));
     text.push(patch([
       {
         titulo: 'Novas Funcionalidades:',
-        itens: ['Página Sobre.']
+        itens: ['Ver todas as cartas inseridas no deck (independente da classe escolhida) e removê-las.', 'Salvar Deck Experimental com mais ou menos do que 50 cartas.','Página Sobre.']
       },
       {
         titulo: 'Novas Classes:',
@@ -71,7 +71,7 @@ module.exports = {
     text.push(patch([
       {
         titulo: 'Novas Funcionalidades:',
-        itens: ['Lista de efeitos das cartas.', 'Página com as regras do jogo.']
+        itens: ['Excluir Deck.', 'Limpar Cache do Tabletop Simulator.']
       },
       {
         titulo: 'Melhorias visuais:',
