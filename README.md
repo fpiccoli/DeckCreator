@@ -16,6 +16,8 @@ Releases:
           - Blacksmith (Beta), com 14 cartas experimentais.
           - Ninja (Beta), com 14 cartas experimentais.
       - Correções de bugs:
+          - Agora ao salvar um deck ele permanece corretamente no editor para fazer alterações.
+          - Ao excluir um deck, a lista de decks será recarregada corretamente.
           - Refatoração de código.
 
   1.5.0 (26/11/2018)

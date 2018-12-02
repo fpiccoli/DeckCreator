@@ -4,6 +4,7 @@ const alert = require('./alert-message.js');
 const load = require('./loadJSON.js');
 const html = require('./html/menu-decks.js');
 const regras = require('./html/regras.js');
+const sobre = require('./html/sobre.js');
 
 module.exports = {
   navbar(documento){
@@ -43,6 +44,10 @@ module.exports = {
     documento.querySelector("#regras-panel").addEventListener('click', function () {
       documento.querySelector('#menu-content').innerHTML = regras.html();
     });
+    documento.querySelector("#sobre-semver").addEventListener('click', function () {
+      console.log(sobre.html())
+      documento.querySelector('#menu-content').innerHTML = sobre.html();
+    });
   }
 }
 
@@ -66,7 +71,7 @@ function render(documento, path, json){
     });
     documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
       file.delete(path, array[index].Nickname);
-      renderDecks();
+      render(documento, path, file.readDir(path));
     });
     document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
       document.querySelector('#input-novo-nome-'+index).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+index+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+index+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';

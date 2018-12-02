@@ -77,11 +77,11 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
 
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
+    ipcRenderer.send('set-card-cookie', listaDeCartas);
     if (file.save(path, nomeDoTime, deckRetorno)){
       ipcRenderer.send('pagina-index');
     }
     else {
-      ipcRenderer.send('set-card-cookie', listaDeCartas);
       ipcRenderer.send('pagina-editor');
     };
   });

@@ -38,8 +38,7 @@ function buttonBuilder(){
   for(let i in puros){
     for(let h in puros[i].heroes){
       let heroi = puros[i].heroes[h];
-
-      heroi = monta.heroi(heroi, data.getClasseByCard(heroi), puros[i].main, puros[i].sub, null, null, null);
+      heroi = monta.heroiMenu(heroi, data, puros[i].main, puros[i].sub);
       buttonSelecionar(puros[i].name.toLowerCase(), heroi);
     }
   }
@@ -47,7 +46,7 @@ function buttonBuilder(){
     for(let h in hibridos[i].heroes){
       let heroi = hibridos[i].heroes[h];
 
-      heroi = monta.heroi(heroi, data.getClasseByCard(heroi), hibridos[i].main, hibridos[i].sub, null, null, null);
+      heroi = monta.heroiMenu(heroi, data, hibridos[i].main, hibridos[i].sub);
       buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), heroi);
       buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), heroi);
     }
