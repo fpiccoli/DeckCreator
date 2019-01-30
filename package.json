@@ -1,13 +1,14 @@
 {
   "name": "deckcreator",
+  "productName": "Deck Creator",
   "version": "1.6.1",
-  "description": "",
+  "description": "Criador de decks para Tabletop Simulator",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-packager . app --platform win32 --arch x64 --out dist/",
-    "setup": "electron-installer-windows --src dist/app-win32-x64/ --dest dist/installers/"
+    "build-win": "electron-packager D:/projetos/deckcreator/ DeckCreator --platform=win32 --arch=x64 --icon=build/icon.ico --out=release-builds/ --prune=true --asar=true --overwrite=true --quiet=true",
+    "setup-win": "node installers/windows/createinstaller.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "electron": "^3.0.4",
-    "electron-packager": "^12.2.0"
+    "electron-packager": "^12.2.0",
+    "electron-winstaller": "^2.7.0"
   }
 }
