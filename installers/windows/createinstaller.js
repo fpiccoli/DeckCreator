@@ -21,6 +21,7 @@ function getInstallerConfig () {
     exe: 'DeckCreator.exe',
     setupExe: 'DeckCreatorSetup.exe',
     setupIcon:  path.join(rootPath, 'build', 'icon.ico'),
+    loadingGif:  path.join(rootPath, 'build', 'installer.gif'),
     name: 'DeckCreator'
   })
 }
