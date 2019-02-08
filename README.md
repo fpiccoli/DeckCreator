@@ -26,14 +26,14 @@ Releases:
           - Ao excluir um deck, a lista de decks será recarregada corretamente.
           - Refatoração de código.
 
-  1.5.0 (26/11/2018)
+    1.5.0 (26/11/2018)
       - Novas Funcionalidades:
           - Homepage com FAQ e helpdesk.
       - Melhorias visuais:
           - Novos ícones no menu principal.
           - Melhoria na descrição dos efeitos para os iniciantes com exemplos mais descritivos.
 
-  1.4.0 (25/11/2018)
+    1.4.0 (25/11/2018)
       - Novas Funcionalidades:
           - Alterar nome do deck.
       - Correções de bugs:
@@ -48,16 +48,16 @@ Releases:
           - Adrenaline Rush (Berserker): Diminuição do custo.
           - Detect Magic (Warlock): Diminuição do custo.
 
-  1.3.1 (21/11/2018)
+    1.3.1 (21/11/2018)
       - Correções de bugs:
           - Refatoração de código.
 
-  1.3.0 (21/11/2018)
+    1.3.0 (21/11/2018)
       - Novas Funcionalidades:
           - Lista de efeitos das cartas.
           - Página com as regras do jogo.
 
-  1.2.0 (19/11/2018)
+    1.2.0 (19/11/2018)
       - Novas Funcionalidades:
           - Excluir Deck.
           - Limpar Cache do Tabletop Simulator.
