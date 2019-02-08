@@ -1,5 +1,3 @@
-const { ipcRenderer } = require('electron')
-
 let classes = [];
 let herois = [];
 let cartas = [];
