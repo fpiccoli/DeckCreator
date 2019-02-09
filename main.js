@@ -150,3 +150,7 @@ ipcMain.on('clear-cookies', () => {
     });
   });
 });
+
+ipcMain.on('console-log-main', (event, mensagem) => {
+  console.log(mensagem);
+});
