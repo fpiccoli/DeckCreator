@@ -12,16 +12,16 @@ module.exports = {
 
     return heroi;
   },
-  heroiMenu(heroi, data, main, sub){
-    let deck = data.getClasseByCard(heroi);
+  heroiMenu(heroi, data, lista, main, sub){
+    let deck = data.getClasseByCard(heroi, lista);
     let retorno = heroi;
     retorno.deck = deck;
     retorno.main = main;
     retorno.sub = sub;
-    retorno.type = deck.type;
+    retorno.subtype = deck.subtype;
     retorno.deck.cards = [];
-    retorno.icon = data.getClasseByName(deck.main).icon;
-    retorno.bg = data.getClasseByName(deck.sub).bg;
+    retorno.icon = data.getClasseByName(deck.main, lista).icon;
+    retorno.bg = data.getClasseByName(deck.sub, lista).bg;
 
     return retorno;
   },
