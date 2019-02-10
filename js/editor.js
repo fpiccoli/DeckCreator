@@ -1,5 +1,5 @@
 const { ipcRenderer }  = require('electron');
-const data = require('./data.js');
+const data = require('./data-mongo.js');
 const htmlMenu = require('./html/menu-cards.js');
 const htmlCartas = require('./html/cartas.js');
 const deck = require('./deck-builder.js');
@@ -135,20 +135,30 @@ document.querySelector('.cartas-deck').addEventListener('click', function () {
   renderLista(listaDeCartas);
 });
 
+async function renderCards(classe){
+  let main = await data.getClassCards(classe.main);
+  let sub = await data.getClassCards(classe.sub);
 
-function renderCards(classe){
-  let main = data.getMainCardsByClass(classe.main);
-  let sub = data.getSubCardsByClass(classe.sub);
+  main = main.filter(
+    function(carta){
+      return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
+    }
+  );
+  sub = sub.filter(
+    function(carta){
+      return (carta.subtype == 'GRD' || carta.subtype == 'EVD')
+    }
+  );
 
-  main.sort(dynamicSort('number'));
-  sub.sort(dynamicSort('number'));
+  main.sort(dynamicSort('cardnumber'));
+  sub.sort(dynamicSort('cardnumber'));
 
   let cartas = main.concat(sub);
 
   document.querySelector('#skill-cards').innerHTML = htmlCartas.cartas(cartas);
 
   for(let i in cartas){
-    document.querySelector('#card-'+cartas[i].number).addEventListener('click', function () {
+    document.querySelector('#card-'+cartas[i].cardnumber).addEventListener('click', function () {
       if(conta.obj(listaDeCartas, cartas[i]) < 3){
         addObj(cartas[i]);
       }
@@ -161,7 +171,7 @@ function renderCards(classe){
       updateOtherPanels();
       updateHeroPanels();
     });
-    document.querySelector('#card-'+cartas[i].number).addEventListener('contextmenu', function () {
+    document.querySelector('#card-'+cartas[i].cardnumber).addEventListener('contextmenu', function () {
       if(conta.obj(listaDeCartas, cartas[i]) == 0){
         addObj(cartas[i]);
         addObj(cartas[i]);
@@ -200,7 +210,7 @@ function updateHeroPanels(){
 }
 
 function updateCardPanels(carta){
-  document.querySelector('#card-text-'+carta.number).textContent = conta.obj(listaDeCartas, carta);
+  document.querySelector('#card-text-'+carta.cardnumber).textContent = conta.obj(listaDeCartas, carta);
 }
 
 function updateOtherPanels(){
@@ -219,8 +229,8 @@ function deckDefault(){
   return false;
 }
 
-function addObj(carta){
-  carta.deck = data.getClasseByCard(carta);
+async function addObj(carta){
+  carta.deck = await data.getClasseByCard(carta);
   carta.deck.cards = [];
   listaDeCartas.push(carta);
   listaDeCartas.sort(dynamicSort('number'));
@@ -230,7 +240,7 @@ function addObj(carta){
 function removeObj(lista, obj){
   let count = 0;
   for(let i in lista){
-    if(lista[i].number == obj.number){
+    if(lista[i].cardnumber == obj.cardnumber){
       lista.splice(i, 1);
       break;
     }

@@ -15,9 +15,9 @@ module.exports = {
       if(card.stamp){
         childs.push(builder.element('img', {class:'selo-novidade', src:'https://gdurl.com/'+card.stamp, height: '25%', width: '30%'}, []));
       }
-      childs.push(builder.element('h4', {id:'card-text-'+card.number, class:'qtde-cards'}, [builder.text('0')]));
+      childs.push(builder.element('h4', {id:'card-text-'+card.cardnumber, class:'qtde-cards'}, [builder.text('0')]));
 
-      cards.push(builder.element('div', {id:'card-'+card.number, class: 'col-lg-2'}, childs));
+      cards.push(builder.element('div', {id:'card-'+card.cardnumber, class: 'col-lg-2'}, childs));
     }
 
     let rows = [];
