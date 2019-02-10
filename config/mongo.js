@@ -16,11 +16,4 @@ module.exports = function(db){
   mongoose.connection.on('disconnected', function(){
     ipcRenderer.send('console-log-main', 'Desconectado do MongoDB.');
   });
-
-  process.on('disconnect', function(){
-    mongoose.connection.close(function(){
-      ipcRenderer.send('console-log-main', 'Conexão fechada pelo término da aplicação.');
-      process.exit(0);
-    });
-  });
 }

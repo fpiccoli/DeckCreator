@@ -1,10 +1,9 @@
-const data = require('../data.js');
 const builder = require('./builder.js');
 const json2html = require('html2json').json2html;
 
 module.exports = {
-  efeitos(){
-    let efeitos = data.listEffect();
+  efeitos(lista){
+    let efeitos = lista;
     let json = [];
 
     efeitos.forEach(build);
