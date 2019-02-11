@@ -1,5 +1,4 @@
 const builder = require('./builder.js');
-const data = require('../data.js');
 const load = require('../loadJSON.js');
 const conta = require('../conta.js');
 

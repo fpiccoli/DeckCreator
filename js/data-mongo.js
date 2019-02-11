@@ -31,5 +31,11 @@ module.exports = {
     },function(error){
       console.log(error);
     })
+  },
+  getCardByName(nome){
+    return null;
+  },
+  getHeroByName(nome){
+    return null;
   }
 }

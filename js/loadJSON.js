@@ -1,4 +1,4 @@
-const data = require('./data.js');
+const data = require('./data-mongo.js');
 const monta = require('./monta-heroi.js');
 
 module.exports = {

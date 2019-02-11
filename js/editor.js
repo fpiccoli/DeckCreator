@@ -229,9 +229,7 @@ function deckDefault(){
   return false;
 }
 
-async function addObj(carta){
-  carta.deck = await data.getClasseByCard(carta);
-  carta.deck.cards = [];
+function addObj(carta){
   listaDeCartas.push(carta);
   listaDeCartas.sort(dynamicSort('number'));
   listaDeCartas.sort(dynamicSort('class'));
