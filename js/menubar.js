@@ -23,17 +23,17 @@ module.exports = {
     });
   },
   sidebar(documento){
-    documento.querySelector('#load-decks').addEventListener('click' , function(){
-      ipcRenderer.send('get-path', 'documents');
-      ipcRenderer.on('return-path', (event, path) => {
-        let json = file.readDir(path);
-
-        documento.querySelector('#menu-content').innerHTML = html.loading();
-        setTimeout(function(){
-          render(documento, path, json);
-        }, 3000);
-      });
-    });
+    // documento.querySelector('#load-decks').addEventListener('click' , function(){
+    //   ipcRenderer.send('get-path', 'documents');
+    //   ipcRenderer.on('return-path', (event, path) => {
+    //     let json = file.readDir(path);
+    //
+    //     documento.querySelector('#menu-content').innerHTML = html.loading();
+    //     setTimeout(function(){
+    //       render(documento, path, json);
+    //     }, 3000);
+    //   });
+    // });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
       ipcRenderer.send('clear-cookies');
       ipcRenderer.send('pagina-editor');
@@ -50,6 +50,7 @@ module.exports = {
   }
 }
 
+//DEPRECATED
 function render(documento, path, json){
   documento.querySelector('#menu-content').innerHTML = html.menu(json);
   json.forEach(build);
