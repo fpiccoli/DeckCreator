@@ -81,23 +81,25 @@ function saveDeck(){
     extra: [],
     user: "mqt"
   }
-  data.save(object);
-  // exportDeck(object);
+  data.saveDeck(object);
+  exportDeck(object);
 }
 
-function exportDeck(deck){
-  let deckRetorno = deck.build(deck);
+function exportDeck(object){
+  let deckRetorno = deck.build(object);
 
-  ipcRenderer.send('get-path', 'documents');
-  ipcRenderer.on('return-path', (event, path) => {
-    ipcRenderer.send('set-card-cookie', listaDeCartas);
-    if (file.export(path, object.name, deckRetorno)){
-      ipcRenderer.send('pagina-index');
-    }
-    else {
-      ipcRenderer.send('pagina-editor');
-    };
-  });
+  // ipcRenderer.send('get-path', 'documents');
+  // ipcRenderer.on('return-path', (event, path) => {
+  //   ipcRenderer.send('set-card-cookie', listaDeCartas);
+  //   if (file.export(path, object.name, deckRetorno)){
+  //     console.log("if");
+  //     // ipcRenderer.send('pagina-index');
+  //   }
+  //   else {
+  //     console.log("else");
+  //     // ipcRenderer.send('pagina-editor');
+  //   };
+  // });
 }
 
 function renderPanel(heroi){

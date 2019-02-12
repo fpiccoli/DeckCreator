@@ -1,6 +1,6 @@
+const data = require('./data-mongo.js');
 
 module.exports = {
-
   build(object){
     let json = {
       SaveName: '',
@@ -21,6 +21,7 @@ module.exports = {
   objectStates(object){
 
     let content = buildCards(object);
+    console.log(content);
 
     let json = [];
     json.push({
@@ -57,7 +58,7 @@ module.exports = {
   }
 }
 
-function buildCards(object){
+async function buildCards(object){
   let json;
   let retorno = '{';
   let decks = [];
@@ -65,17 +66,18 @@ function buildCards(object){
   let content = {cards: [], listaDeIds: []};
 
   for(let i in object.cards){
-    json = deckJSON(object.cards[i].deck);
+    let deckBuscado = await data.getClasseByCard(object.cards[i]);
+    json = deckJSON(deckBuscado);
     object.cards[i].deckJSON = JSON.parse("{"+json+"}");
-    if(!verificaSeExiste(decks, object.cards[i].deck.id)){
+    if(!verificaSeExiste(decks, object.deckBuscado.id)){
       if(decks.length > 0){
         retorno += ',';
       }
-      decks.push(object.cards[i].deck);
+      decks.push(object.deckBuscado);
       retorno += json;
     }
 
-    let valor = object.cards[i].deck.id + object.cards[i].id;
+    let valor = object.deckBuscado.id + object.cards[i].id;
     content.listaDeIds.push(parseInt(valor));
 
     content.cards.push(cardJSON(object.cards[i]));
