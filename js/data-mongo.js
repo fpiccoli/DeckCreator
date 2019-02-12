@@ -1,6 +1,7 @@
 require('../config/mongo.js')('deckcreator');
 var mongoose = require('mongoose');
 const Classe = require('../models/classe.js');
+const Deck = require('../models/deck.js');
 
 var model = mongoose.model('Classe');
 
@@ -31,6 +32,15 @@ module.exports = {
     },function(error){
       console.log(error);
     })
+  },
+  save(deck){
+    var object = new Deck(deck);
+    console.log(deck);
+    console.log(object);
+    object.save(function (err) {
+        if (err) return handleError(err);
+        console.log('Salvo com sucesso!');
+    });
   },
   getCardByName(nome){
     return null;

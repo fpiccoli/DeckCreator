@@ -77,15 +77,21 @@ function saveDeck(){
   let object = {
     name: nomeDoTime,
     cards: listaDeCartas,
-    heroes: herois
+    heroes: herois,
+    extra: [],
+    user: "mqt"
   }
+  data.save(object);
+  // exportDeck(object);
+}
 
-  let deckRetorno = deck.build(object);
+function exportDeck(deck){
+  let deckRetorno = deck.build(deck);
 
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
     ipcRenderer.send('set-card-cookie', listaDeCartas);
-    if (file.save(path, nomeDoTime, deckRetorno)){
+    if (file.export(path, object.name, deckRetorno)){
       ipcRenderer.send('pagina-index');
     }
     else {
