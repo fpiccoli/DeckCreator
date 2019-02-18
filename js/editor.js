@@ -14,6 +14,8 @@ let herois = [];
 let buttons = [];
 let nomeDoTime = 'NovoDeck';
 
+// https://drive.google.com/uc?export=download&id=<ID_ARQUIVO>
+
 menu.navbar(document);
 
 ipcRenderer.send('get-cookies');
