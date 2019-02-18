@@ -32,9 +32,12 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'xMlN', bg:'aiJl'})
-  buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'ZbmkU', bg:'7klK'})
-  buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'oAoH', bg:'tPiS'})
+  buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'spell.svg', bg:'spell.svg'})
+  buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'enchantment.svg', bg:'enchantment.svg'})
+  buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'talent.svg', bg:'talent.svg'}) 
+  // buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'1be1iq7sJOLYeo07ZrNrKgSCx30ln_8_R'})
+  // buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'1QOaiH7ABjkmcLrij5Cz-Ir2Qh7FRc-zd'})
+  // buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'1tDpQbbRL7rMfj2GBR2SXKFo8hSd3i1ef'})
   renderSidebar(buttons);
 
   cookiesCards = cookie.filtraCookies(cookies, 'cards');
