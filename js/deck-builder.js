@@ -19,9 +19,7 @@ module.exports = {
     return json;
   },
   objectStates(object){
-
     let content = buildCards(object);
-    console.log(content);
 
     let json = [];
     json.push({
@@ -58,7 +56,7 @@ module.exports = {
   }
 }
 
-async function buildCards(object){
+function buildCards(object){
   let json;
   let retorno = '{';
   let decks = [];
@@ -66,18 +64,17 @@ async function buildCards(object){
   let content = {cards: [], listaDeIds: []};
 
   for(let i in object.cards){
-    let deckBuscado = await data.getClasseByCard(object.cards[i]);
-    json = deckJSON(deckBuscado);
+    json = deckJSON(object.cards[i].deck);
     object.cards[i].deckJSON = JSON.parse("{"+json+"}");
-    if(!verificaSeExiste(decks, object.deckBuscado.id)){
+    if(!verificaSeExiste(decks, object.cards[i].deck.id)){
       if(decks.length > 0){
         retorno += ',';
       }
-      decks.push(object.deckBuscado);
+      decks.push(object.cards[i].deck);
       retorno += json;
     }
 
-    let valor = object.deckBuscado.id + object.cards[i].id;
+    let valor = object.cards[i].deck.id + object.cards[i].id;
     content.listaDeIds.push(parseInt(valor));
 
     content.cards.push(cardJSON(object.cards[i]));
@@ -138,7 +135,7 @@ function cardJSON(card){
 }
 
 function deckJSON(deck){
-  return '"' + deck.id + '":{"FaceURL": "http://gdurl.com/' + deck.face + '","BackURL": "http://gdurl.com/FXdw","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
+  return '"' + deck.id + '":{"FaceURL": "https://drive.google.com/uc?export=download&id=' + deck.face + '","BackURL": "https://drive.google.com/uc?export=download&id=15d1rszwKVEFO9sALb2Mu00iXCD3ojxus","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 
 function verificaSeExiste(decks, id){

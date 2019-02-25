@@ -83,7 +83,7 @@ function content(classe, selecionarHeroi){
 
   for (let i in classe.heroes)
   {
-    let img = builder.element('img', {src: 'https://gdurl.com/'+classe.heroes[i].imgurl, height: '100%', width: '100%'}, []);
+    let img = builder.element('img', {src: 'https://drive.google.com/uc?export=download&id='+classe.heroes[i].imgurl, height: '100%', width: '100%'}, []);
     let col = builder.element('div', {class: 'col-lg-12'}, [img]);
     let row = builder.element('div', {class: 'row'}, [col]);
     let heading = builder.element('div', {class: 'panel-heading'}, [row]);

@@ -14,8 +14,6 @@ let herois = [];
 let buttons = [];
 let nomeDoTime = 'NovoDeck';
 
-// https://drive.google.com/uc?export=download&id=<ID_ARQUIVO>
-
 menu.navbar(document);
 
 ipcRenderer.send('get-cookies');
@@ -32,9 +30,6 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  // buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'spell.svg', bg:'spell.svg'})
-  // buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'enchantment.svg', bg:'enchantment.svg'})
-  // buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'talent.svg', bg:'talent.svg'})
   buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'1be1iq7sJOLYeo07ZrNrKgSCx30ln_8_R'})
   buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'1QOaiH7ABjkmcLrij5Cz-Ir2Qh7FRc-zd'})
   buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'1tDpQbbRL7rMfj2GBR2SXKFo8hSd3i1ef'})
@@ -86,6 +81,7 @@ function saveDeck(){
     extra: [],
     user: "mqt"
   }
+  listaDeCartas.sort(dynamicSort('cardnumber'));
   data.saveDeck(object);
   exportDeck(object);
 }
@@ -93,18 +89,11 @@ function saveDeck(){
 function exportDeck(object){
   let deckRetorno = deck.build(object);
 
-  // ipcRenderer.send('get-path', 'documents');
-  // ipcRenderer.on('return-path', (event, path) => {
-  //   ipcRenderer.send('set-card-cookie', listaDeCartas);
-  //   if (file.export(path, object.name, deckRetorno)){
-  //     console.log("if");
-  //     // ipcRenderer.send('pagina-index');
-  //   }
-  //   else {
-  //     console.log("else");
-  //     // ipcRenderer.send('pagina-editor');
-  //   };
-  // });
+  ipcRenderer.send('get-path', 'documents');
+  ipcRenderer.on('return-path', (event, path) => {
+    ipcRenderer.send('set-card-cookie', listaDeCartas);
+    file.export(path, object.name, deckRetorno)
+  });
 }
 
 function renderPanel(heroi){
@@ -112,7 +101,7 @@ function renderPanel(heroi){
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.deck.alligment+')';
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
-  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://gdurl.com/'+heroi.icon+'" height="300%" width="300%"/>';
+  document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://drive.google.com/uc?export=download&id='+heroi.icon+'" height="300%" width="300%"/>';
 }
 
 function renderSidebar(buttons){
@@ -151,22 +140,31 @@ document.querySelector('.cartas-deck').addEventListener('click', function () {
 async function renderCards(classe){
   let main = await data.getClassCards(classe.main);
   let sub = await data.getClassCards(classe.sub);
+  let mainCards = main.cards;
+  let subCards = sub.cards;
 
-  main = main.filter(
+  mainCards = mainCards.filter(
     function(carta){
       return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
     }
   );
-  sub = sub.filter(
+  subCards = subCards.filter(
     function(carta){
       return (carta.subtype == 'GRD' || carta.subtype == 'EVD')
     }
   );
 
-  main.sort(dynamicSort('cardnumber'));
-  sub.sort(dynamicSort('cardnumber'));
+  mainCards.forEach(function (carta, index, array){
+    carta.deck = {id: main.id, face: main.face};
+  });
+  subCards.forEach(function (carta, index, array){
+    carta.deck = {id: sub.id, face: sub.face};
+  });
 
-  let cartas = main.concat(sub);
+  mainCards.sort(dynamicSort('cardnumber'));
+  subCards.sort(dynamicSort('cardnumber'));
+
+  let cartas = mainCards.concat(subCards);
 
   document.querySelector('#skill-cards').innerHTML = htmlCartas.cartas(cartas);
 
@@ -244,8 +242,7 @@ function deckDefault(){
 
 function addObj(carta){
   listaDeCartas.push(carta);
-  listaDeCartas.sort(dynamicSort('number'));
-  listaDeCartas.sort(dynamicSort('class'));
+  listaDeCartas.sort(dynamicSort('cardnumber'));
 }
 
 function removeObj(lista, obj){

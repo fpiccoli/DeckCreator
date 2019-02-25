@@ -10,11 +10,9 @@ module.exports = {
     function addCard(card, index, array){
       let childs = [];
 
-      // childs.push(builder.element('img', {src:'../img/cards/'+card.class.toLowerCase()+'/'+card.id+'-'+card.name.toLowerCase()+'-min.png', height: '100%', width: '100%'}, []));
       childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+card.imgurl, height: '100%', width: '100%'}, []));
 
       if(card.stamp){
-        // childs.push(builder.element('img', {class:'selo-novidade', src:'../img/stamp/'+card.stamp+'.png', height: '25%', width: '30%'}, []));
         childs.push(builder.element('img', {class:'selo-novidade', src:'https://drive.google.com/uc?export=download&id='+card.stamp, height: '25%', width: '30%'}, []));
       }
       childs.push(builder.element('h4', {id:'card-text-'+card.cardnumber, class:'qtde-cards'}, [builder.text('0')]));
@@ -36,11 +34,9 @@ module.exports = {
     function addCard(card, index, array){
       let childs = [];
 
-      // childs.push(builder.element('img', {src:'../img/cards/'+card.class.toLowerCase()+'/'+card.id+'-'+card.name.toLowerCase()+'-min.png', height: '100%', width: '100%'}, []));
-      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id=+card.imgurl', height: '100%', width: '100%'}, []));
+      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+card.imgurl, height: '100%', width: '100%'}, []));
 
       if(card.stamp){
-        // childs.push(builder.element('img', {class:'selo-novidade', src:'../img/stamp/'+card.stamp+'.png', height: '25%', width: '30%'}, []));
         childs.push(builder.element('img', {class:'selo-novidade', src:'https://drive.google.com/uc?export=download&id='+card.stamp, height: '25%', width: '30%'}, []));
       }
       let removeButton = builder.element('i', {class:'fa fa-times fa-fw'}, );

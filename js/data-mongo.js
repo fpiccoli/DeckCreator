@@ -16,13 +16,7 @@ module.exports = {
   },
   getClassCards(classe){
     return classeModel.find({name: {'$regex': classe}}).lean().then(function(retorno){
-      let lista = [];
-      retorno.forEach(function (classe, index, array){
-        if(classe.cards){
-          lista = lista.concat(classe.cards);
-        }
-      });
-      return lista;
+      return retorno[0];
     },function(error){
       console.log(error);
     })
@@ -35,13 +29,9 @@ module.exports = {
     })
   },
   saveDeck(deck){
-    // var object = new Deck(deck);
-    // object.save(function (err) {
-    //   if (err) return handleError(err);
-    // });
     var query = {'name':deck.name};
     Deck.findOneAndUpdate(query, deck, {upsert:true, useFindAndModify: false}, function(err, doc){
-      if (err) console.log(err);
+      if (err) console.log(err) 
     });
   },
   getDecks(user){

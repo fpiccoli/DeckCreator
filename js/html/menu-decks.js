@@ -33,8 +33,8 @@ module.exports = {
 
         let subElements = [];
 
-        subElements.push(builder.element('img', {src:'https://gdurl.com/'+heroi.icon, height:'55%', width:'55%', class:'center-icon'}, []));
-        subElements.push(builder.element('img', {src:'https://gdurl.com/'+heroi.bg, height:'40%', width:'40%'}, []));
+        subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', class:'center-icon'}, []));
+        subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.bg, height:'40%', width:'40%'}, []));
 
         subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
         subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));
