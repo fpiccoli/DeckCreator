@@ -17,9 +17,13 @@ var schema = mongoose.Schema({
     {
       cardnumber: String,
       class: String,
+      main: String,
+      sub: String,
       name: String,
       id: String,
-      imgurl: String
+      imgurl: String,
+      icon: String,
+      bg: String
     }
   ],
   extra: [

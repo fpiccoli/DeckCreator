@@ -1,10 +1,10 @@
 const { ipcRenderer }  = require('electron');
 const file = require('./file-manager.js');
 const alert = require('./alert-message.js');
-const load = require('./loadJSON.js');
 const html = require('./html/menu-decks.js');
 const regras = require('./html/regras.js');
 const sobre = require('./html/sobre.js');
+const data = require('./data-mongo.js');
 
 module.exports = {
   navbar(documento){
@@ -23,17 +23,17 @@ module.exports = {
     });
   },
   sidebar(documento){
-    // documento.querySelector('#load-decks').addEventListener('click' , function(){
-    //   ipcRenderer.send('get-path', 'documents');
-    //   ipcRenderer.on('return-path', (event, path) => {
-    //     let json = file.readDir(path);
-    //
-    //     documento.querySelector('#menu-content').innerHTML = html.loading();
-    //     setTimeout(function(){
-    //       render(documento, path, json);
-    //     }, 3000);
-    //   });
-    // });
+    documento.querySelector('#load-decks').addEventListener('click' , function(){
+      ipcRenderer.send('get-path', 'documents');
+      ipcRenderer.on('return-path', (event, path) => {
+        let decks = data.getDecks('mqt');
+
+        decks.then((retorno) => {
+          documento.querySelector('#menu-content').innerHTML = html.loading();
+          render(documento, path, retorno);
+        }).catch(err => console.log(err));
+      });
+    });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
       ipcRenderer.send('clear-cookies');
       ipcRenderer.send('pagina-editor');
@@ -52,17 +52,12 @@ module.exports = {
 
 //DEPRECATED
 function render(documento, path, json){
-  documento.querySelector('#menu-content').innerHTML = html.menu(json);
-  json.forEach(build);
-  function build(deck, index, array) {
-    let herois = [];
-    let cartas = [];
 
-    let retornoLoad = load.montaObj(deck);
-    if (retornoLoad){
-      herois = retornoLoad.herois;
-      cartas = retornoLoad.cartas;
-    }
+  documento.querySelector('#menu-content').innerHTML = html.menu(json);
+  json.forEach(function (deck, index, array) {
+    let herois = deck.heroes;
+    let cartas = deck.cards;
+
     documento.querySelector('#botao-editar-'+index).addEventListener('click' , function(){
       ipcRenderer.send('set-nome-cookie', array[index].Nickname);
       ipcRenderer.send('set-card-cookie', cartas);
@@ -84,7 +79,7 @@ function render(documento, path, json){
         }
       });
     });
-  }
+  });
 }
 
 function eventUpdateNome(documento, path, deck, index, json){
