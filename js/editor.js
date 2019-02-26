@@ -24,8 +24,8 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     json.panel = cookiesHeroi[i].name.replace('heroi','');
     herois.push(json);
   }
-
   for(let i in herois){
+    console.log(herois.length);
     renderPanel(herois[i]);
     buttons.push(herois[i]);
   }
@@ -97,9 +97,10 @@ function exportDeck(object){
 }
 
 function renderPanel(heroi){
+  console.log(heroi)
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
-  document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.deck.alligment+')';
+  document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.alligment+')';
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
   document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://drive.google.com/uc?export=download&id='+heroi.icon+'" height="300%" width="300%"/>';
 }

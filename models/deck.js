@@ -21,6 +21,7 @@ var schema = mongoose.Schema({
       sub: String,
       name: String,
       id: String,
+      alligment: String,
       imgurl: String,
       icon: String,
       bg: String

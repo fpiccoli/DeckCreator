@@ -59,7 +59,7 @@ function render(documento, path, json){
     let cartas = deck.cards;
 
     documento.querySelector('#botao-editar-'+index).addEventListener('click' , function(){
-      ipcRenderer.send('set-nome-cookie', array[index].Nickname);
+      ipcRenderer.send('set-nome-cookie', array[index].name);
       ipcRenderer.send('set-card-cookie', cartas);
       ipcRenderer.send('set-herois-cookie', herois);
       ipcRenderer.send('pagina-editor');
