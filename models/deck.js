@@ -4,17 +4,23 @@ var schema = mongoose.Schema({
   name: String,
   cards: [
     {
+      _id: false,
       class: String,
       cardnumber: String,
       subtype: String,
       name: String,
       id: String,
       imgurl: String,
-      stamp: String
+      stamp: String,
+      deck:{
+        id: String,
+        face: String
+      }
     }
   ],
   heroes: [
     {
+      _id: false,
       cardnumber: String,
       class: String,
       main: String,
@@ -24,7 +30,11 @@ var schema = mongoose.Schema({
       alligment: String,
       imgurl: String,
       icon: String,
-      bg: String
+      bg: String,
+      deck:{
+        id: String,
+        face: String
+      }
     }
   ],
   extra: [
@@ -37,6 +47,6 @@ var schema = mongoose.Schema({
     }
   ],
   user: String
-}, {collection: 'decks'});
+}, { _id: false, collection: 'decks'});
 
 module.exports = mongoose.model('Deck', schema);

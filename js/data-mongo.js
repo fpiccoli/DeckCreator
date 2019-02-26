@@ -28,10 +28,10 @@ module.exports = {
       console.log(error);
     })
   },
-  saveDeck(deck){
+  save(deck){
     var query = {'name':deck.name};
     Deck.findOneAndUpdate(query, deck, {upsert:true, useFindAndModify: false}, function(err, doc){
-      if (err) console.log(err) 
+      if (err) console.log(err)
     });
   },
   getDecks(user){

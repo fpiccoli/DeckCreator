@@ -7,9 +7,10 @@ module.exports = {
     retorno.sub = sub;
     retorno.subtype = deck.subtype;
     retorno.alligment = deck.alligment;
-    retorno.deck.cards = [];
     retorno.icon = data.getClasseByName(deck.main, lista).icon;
     retorno.bg = data.getClasseByName(deck.sub, lista).bg;
+
+    delete retorno.deck.cards;
 
     return retorno;
   }

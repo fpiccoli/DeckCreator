@@ -29,6 +29,10 @@ module.exports = {
         let decks = data.getDecks('mqt');
 
         decks.then((retorno) => {
+          retorno.forEach(function (deck, index, array) {
+            deck.cards.forEach(function(card){ delete card._id });
+            deck.heroes.forEach(function(hero){ delete hero._id });
+          });
           documento.querySelector('#menu-content').innerHTML = html.loading();
           render(documento, path, retorno);
         }).catch(err => console.log(err));
@@ -50,9 +54,7 @@ module.exports = {
   }
 }
 
-//DEPRECATED
 function render(documento, path, json){
-
   documento.querySelector('#menu-content').innerHTML = html.menu(json);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;

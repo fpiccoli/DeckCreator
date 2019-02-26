@@ -25,7 +25,6 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     herois.push(json);
   }
   for(let i in herois){
-    console.log(herois.length);
     renderPanel(herois[i]);
     buttons.push(herois[i]);
   }
@@ -82,7 +81,7 @@ function saveDeck(){
     user: "mqt"
   }
   listaDeCartas.sort(dynamicSort('cardnumber'));
-  data.saveDeck(object);
+  data.save(object);
   exportDeck(object);
 }
 
@@ -92,12 +91,12 @@ function exportDeck(object){
   ipcRenderer.send('get-path', 'documents');
   ipcRenderer.on('return-path', (event, path) => {
     ipcRenderer.send('set-card-cookie', listaDeCartas);
-    file.export(path, object.name, deckRetorno)
+    file.export(path, object.name, deckRetorno);
+    ipcRenderer.send('pagina-index');
   });
 }
 
 function renderPanel(heroi){
-  console.log(heroi)
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('panel-default','panel-'+heroi.sub.toLowerCase());
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.alligment+')';
