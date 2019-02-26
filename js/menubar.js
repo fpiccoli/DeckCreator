@@ -67,8 +67,11 @@ function render(documento, path, json){
       ipcRenderer.send('pagina-editor');
     });
     documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
-      file.delete(path, array[index].Nickname);
-      render(documento, path, file.readDir(path));
+      if(file.delete(path, array[index].name)){
+        data.delete(array[index].name);
+        json = removeObj(json, array[index]);
+      }
+      render(documento, path, json);
     });
     document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
       document.querySelector('#input-novo-nome-'+index).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+index+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+index+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
@@ -86,11 +89,22 @@ function render(documento, path, json){
 
 function eventUpdateNome(documento, path, deck, index, json){
   let novoNome = documento.querySelector('#campo-nome-'+index).value;
-  let antigo = deck.Nickname;
+  let antigo = deck.name;
   if (file.update(path, novoNome, antigo, deck)){
-    render(documento, path, json);
+    data.update(deck, novoNome, antigo)
   } else{
-    deck.Nickname = antigo;
-    render(documento, path, json);
+    deck.name = antigo;
   }
+  render(documento, path, json);
+}
+
+function removeObj(lista, obj){
+  let count = 0;
+  for(let i in lista){
+    if(lista[i].name == obj.name){
+      lista.splice(i, 1);
+      break;
+    }
+  }
+  return lista;
 }

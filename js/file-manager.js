@@ -43,10 +43,11 @@ module.exports = {
   },
   delete(path, name){
     if(!confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ name +'"?')){
-      return;
+      return 0;
     }
     var filePath = path + '/My Games/Tabletop Simulator/Saves/Saved Objects/DeckCreator/' + name + '.json';
     fs.unlinkSync(filePath);
+    return 1;
   },
   readDir(path){
     let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Saves','/Saved Objects','/DeckCreator/']);
