@@ -20,7 +20,7 @@ app.on('ready', () => {
     // frame: false
   });
   // mainWindow.setMenu(null);
-  mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/pages/login.html`);
   mainWindow.maximize();
   mainSession = mainWindow.webContents.session;
 });
@@ -127,23 +127,21 @@ ipcMain.on('set-herois-cookie', (event, herois) => {
       console.log('cookie heroi'+(index+1)+' atualizado');
     });
   }
-
 });
 
-ipcMain.on('pagina-editor', () => {
-  mainWindow.loadURL(`file://${__dirname}/pages/editor.html`);
+ipcMain.on('set-cookie', (event, label, stringValue) => {
+  let newCookie = {url:'https://deckcreator.com', name: label, value: stringValue};
+  mainSession.cookies.set(newCookie, (error) => {
+    console.log('cookie '+label+' atualizado');
+  });
 });
 
-ipcMain.on('pagina-index', () => {
-  mainWindow.loadURL(`file://${__dirname}/pages/index.html`);
-});
-
-ipcMain.on('pagina-regras', () => {
-  mainWindow.loadURL(`file://${__dirname}/pages/regras.html`);
+ipcMain.on('redirecionar-pagina', (event, pagina) => {
+  mainWindow.loadURL(`file://${__dirname}/pages/`+pagina+`.html`);
 });
 
 ipcMain.on('clear-cookies', () => {
-  let cookies = ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome'];
+  let cookies = ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'login'];
   cookies.forEach(function (cookie, index, array){
     mainSession.cookies.remove('https://deckcreator.com', cookie, (error) => {
       console.log('cookie '+cookie+' removido');

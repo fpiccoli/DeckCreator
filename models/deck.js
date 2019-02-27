@@ -47,6 +47,6 @@ var schema = mongoose.Schema({
     }
   ],
   user: String
-}, { _id: false, collection: 'decks'});
+}, {collection: 'decks'});
 
 module.exports = mongoose.model('Deck', schema);

@@ -14,10 +14,14 @@ let herois = [];
 let buttons = [];
 let nomeDoTime = 'NovoDeck';
 
-menu.navbar(document);
-
 ipcRenderer.send('get-cookies');
 ipcRenderer.on('send-cookies', (event, cookies) => {
+  menu.navbar(document, cookies);
+  cookieLogin = cookie.filtraCookies(cookies, 'login');
+  if(cookieLogin.length == 0){
+    ipcRenderer.send('redirecionar-pagina','login');
+  }
+
   cookiesHeroi = cookie.filtraCookies(cookies, 'heroi');
   for (let i in cookiesHeroi){
     let json = JSON.parse(cookiesHeroi[i].value);
@@ -51,6 +55,19 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   addEventSelecionar(1);
   addEventSelecionar(2);
   addEventSelecionar(3);
+
+  document.querySelector("#salvar-deck").addEventListener('click' , function(){
+    if(!deckDefault()){
+      alert.message(document.querySelector('#alert-message'), 'Você precisa ter exatamente <b>50 cartas</b> para salvar um deck padrão!', 'warning')
+      return;
+    }
+    saveDeck(cookies);
+  });
+
+  document.querySelector("#salvar-deck-experimental").addEventListener('click' , function(){
+    saveDeck(cookies);
+  });
+
 });
 
 function addEventSelecionar(number){
@@ -60,25 +77,14 @@ function addEventSelecionar(number){
   });
 }
 
-document.querySelector("#salvar-deck").addEventListener('click' , function(){
-  if(!deckDefault()){
-    alert.message(document.querySelector('#alert-message'), 'Você precisa ter exatamente <b>50 cartas</b> para salvar um deck padrão!', 'warning')
-    return;
-  }
-  saveDeck();
-});
-
-document.querySelector("#salvar-deck-experimental").addEventListener('click' , function(){
-  saveDeck();
-});
-
-function saveDeck(){
+function saveDeck(cookies){
+  cookieLogin = cookie.filtraCookies(cookies, 'login');
   let object = {
     name: nomeDoTime,
     cards: listaDeCartas,
     heroes: herois,
     extra: [],
-    user: "mqt"
+    user: JSON.parse(cookieLogin[0].value).user
   }
   listaDeCartas.sort(dynamicSort('cardnumber'));
   data.save(object);
@@ -92,7 +98,7 @@ function exportDeck(object){
   ipcRenderer.on('return-path', (event, path) => {
     ipcRenderer.send('set-card-cookie', listaDeCartas);
     file.export(path, object.name, deckRetorno);
-    ipcRenderer.send('pagina-index');
+    ipcRenderer.send('redirecionar-pagina','index');
   });
 }
 

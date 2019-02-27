@@ -2,9 +2,11 @@ require('../config/mongo.js')('deckcreator');
 var mongoose = require('mongoose');
 const Classe = require('../models/classe.js');
 const Deck = require('../models/deck.js');
+const User = require('../models/user.js');
 
 var classeModel = mongoose.model('Classe');
 var deckModel = mongoose.model('Deck');
+var userModel = mongoose.model('User');
 
 module.exports = {
   listAll(){
@@ -53,10 +55,11 @@ module.exports = {
       console.log(error);
     })
   },
-  getCardByName(nome){
-    return null;
-  },
-  getHeroByName(nome){
-    return null;
+  login(user, pass){
+    return User.find({user: user, password: pass}).lean().then(function(retorno){
+      return retorno[0] != undefined;
+    },function(error){
+      console.log(error);
+    })
   }
 }

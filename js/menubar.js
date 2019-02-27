@@ -5,11 +5,18 @@ const html = require('./html/menu-decks.js');
 const regras = require('./html/regras.js');
 const sobre = require('./html/sobre.js');
 const data = require('./data-mongo.js');
+const cookie = require('./cookie-manager.js');
 
 module.exports = {
-  navbar(documento){
-    documento.querySelector("#link-fechar").addEventListener('click', function () {
-      ipcRenderer.send('fechar-janela-principal');
+  navbar(documento, cookies){
+    documento.querySelector("#logout").addEventListener('click', function () {
+      ipcRenderer.send('get-path', 'documents');
+      ipcRenderer.on('return-path', (event, path) => {
+        if(file.deleteLogin(path)){
+          ipcRenderer.send('clear-cookies');
+          ipcRenderer.send('redirecionar-pagina', 'login');
+        }
+      });
     });
     documento.querySelector("#clear-cache").addEventListener('click', function () {
       ipcRenderer.send('get-path', 'documents');
@@ -22,12 +29,12 @@ module.exports = {
       ipcRenderer.send('abrir-janela-efeitos');
     });
   },
-  sidebar(documento){
+  sidebar(documento, cookies){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
       ipcRenderer.send('get-path', 'documents');
       ipcRenderer.on('return-path', (event, path) => {
-        let decks = data.getDecks('mqt');
-
+        cookieLogin = cookie.filtraCookies(cookies, 'login');
+        let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
         decks.then((retorno) => {
           retorno.forEach(function (deck, index, array) {
             deck.cards.forEach(function(card){ delete card._id });
@@ -40,10 +47,10 @@ module.exports = {
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
       ipcRenderer.send('clear-cookies');
-      ipcRenderer.send('pagina-editor');
+      ipcRenderer.send('redirecionar-pagina','editor');
     });
     documento.querySelector('#editor-deck').addEventListener('click' , function(){
-      ipcRenderer.send('pagina-editor');
+      ipcRenderer.send('redirecionar-pagina','editor');
     });
     documento.querySelector("#regras-panel").addEventListener('click', function () {
       documento.querySelector('#menu-content').innerHTML = regras.html();
@@ -64,7 +71,7 @@ function render(documento, path, json){
       ipcRenderer.send('set-nome-cookie', array[index].name);
       ipcRenderer.send('set-card-cookie', cartas);
       ipcRenderer.send('set-herois-cookie', herois);
-      ipcRenderer.send('pagina-editor');
+      ipcRenderer.send('redirecionar-pagina','editor');
     });
     documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
       if(file.delete(path, array[index].name)){
