@@ -9,6 +9,13 @@
 
 Releases:
 
+    1.7.0b (27/02/2019)
+      - Novas Funcionalidades:
+          - Migração do Banco de Dados para a nuvem fazendo com que os decks agora não fiquem apenas salvos na máquina local do usuário.
+          - Página de login para que os decks sejam vinculados ao seu usuário.
+      - Cartas alteradas:
+          - Final Breath (Talent): Função alterada (Uso original).
+
     1.6.1 (02/12/2018)
       - Correções de bugs:
           - Corrigido problema de não aparecerem Spell/Talents defensivos.

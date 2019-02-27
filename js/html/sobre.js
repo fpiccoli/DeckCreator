@@ -7,6 +7,18 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.7.0b (27/02/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Migração do Banco de Dados para a nuvem fazendo com que os decks agora não fiquem apenas salvos na máquina local do usuário.', 'Página de login para que os decks sejam vinculados ao seu usuário.']
+      },
+      {
+        titulo: 'Cartas alteradas:',
+        itens: ['Final Breath (Talent): Função alterada (Uso original).']
+      }])
+    );
+
     text.push(h4('1.6.1 (02/12/2018)'));
     text.push(patch([
       {
