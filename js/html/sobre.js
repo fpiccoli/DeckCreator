@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.7.1b (27/02/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Corrigido o problema da página Novo Deck remover o cookie de sessão.','Corrigida busca de cartas não obter as cartas Spell/Enchantment/Talent com mais de uma página.']
+      }])
+    );
+
     text.push(h4('1.7.0b (27/02/2019)'));
     text.push(patch([
       {

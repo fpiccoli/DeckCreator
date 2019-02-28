@@ -146,31 +146,33 @@ document.querySelector('.cartas-deck').addEventListener('click', function () {
 async function renderCards(classe){
   let main = await data.getClassCards(classe.main);
   let sub = await data.getClassCards(classe.sub);
-  let mainCards = main.cards;
-  let subCards = sub.cards;
+  let mainCards = [];
+  let subCards = [];
 
-  mainCards = mainCards.filter(
-    function(carta){
-      return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
+  main.forEach(function (grupo, index, array){
+    if(grupo.cards){
+      let filtrado = filtraMain(grupo.cards);
+      filtrado.forEach(function (carta, i, array){
+        carta.deck = {id: grupo.id, face: grupo.face};
+      });
+      mainCards = mainCards.concat(filtrado);
     }
-  );
-  subCards = subCards.filter(
-    function(carta){
-      return (carta.subtype == 'GRD' || carta.subtype == 'EVD')
-    }
-  );
-
-  mainCards.forEach(function (carta, index, array){
-    carta.deck = {id: main.id, face: main.face};
   });
-  subCards.forEach(function (carta, index, array){
-    carta.deck = {id: sub.id, face: sub.face};
+  sub.forEach(function (grupo, index, array){
+    if(grupo.cards){
+      let filtrado = filtraSub(grupo.cards);
+      filtrado.forEach(function (carta, i, array){
+        carta.deck = {id: grupo.id, face: grupo.face};
+      });
+      subCards = subCards.concat(filtrado);
+    }
   });
 
   mainCards.sort(dynamicSort('cardnumber'));
   subCards.sort(dynamicSort('cardnumber'));
 
   let cartas = mainCards.concat(subCards);
+  console.log(cartas);
 
   document.querySelector('#skill-cards').innerHTML = htmlCartas.cartas(cartas);
 
@@ -260,6 +262,18 @@ function removeObj(lista, obj){
     }
   }
   return lista;
+}
+
+function filtraMain(lista){
+  return lista.filter(function(carta){
+    return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
+  });
+}
+
+function filtraSub(lista){
+  return lista.filter(function(carta){
+    return (carta.subtype == 'EVD' || carta.subtype == 'GRD')
+  });
 }
 
 function dynamicSort(property) {

@@ -149,6 +149,14 @@ ipcMain.on('clear-cookies', () => {
   });
 });
 
+ipcMain.on('delete-cookies', (event, lista) => {
+  lista.forEach(function (cookie, index, array){
+    mainSession.cookies.remove('https://deckcreator.com', cookie, (error) => {
+      console.log('cookie '+cookie+' removido');
+    });
+  });
+});
+
 ipcMain.on('console-log-main', (event, mensagem) => {
   console.log(mensagem);
 });

@@ -18,7 +18,11 @@ module.exports = {
   },
   getClassCards(classe){
     return classeModel.find({name: {'$regex': classe}}).lean().then(function(retorno){
-      return retorno[0];
+      let lista = []
+      retorno.forEach(function (classe, index, array){
+        lista = lista.concat(classe);
+      });
+      return lista;
     },function(error){
       console.log(error);
     })

@@ -9,6 +9,11 @@
 
 Releases:
 
+    1.7.1b (27/02/2019)
+      - Correções de bugs:
+          - Corrigido o problema da página Novo Deck remover o cookie de sessão.
+          - Corrigida busca de cartas não obter as cartas Spell/Enchantment/Talent com mais de uma página.
+
     1.7.0b (27/02/2019)
       - Novas Funcionalidades:
           - Migração do Banco de Dados para a nuvem fazendo com que os decks agora não fiquem apenas salvos na máquina local do usuário.

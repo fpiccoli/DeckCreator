@@ -46,7 +46,7 @@ module.exports = {
       });
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
-      ipcRenderer.send('clear-cookies');
+      ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome']);
       ipcRenderer.send('redirecionar-pagina','editor');
     });
     documento.querySelector('#editor-deck').addEventListener('click' , function(){
