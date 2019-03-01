@@ -25,6 +25,19 @@ module.exports = {
         alert.message(documento.querySelector("#alert-message"), 'Cache do <b>Tabletop Simulator</b> limpo com sucesso!', 'success');
       });
     });
+    documento.querySelector("#import-decks").addEventListener('click', function () {
+      ipcRenderer.send('get-path', 'documents');
+      ipcRenderer.on('return-path', (event, path) => {
+        cookieLogin = cookie.filtraCookies(cookies, 'login');
+        let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
+        decks.then((retorno) => {
+          retorno.forEach(function (deck, index, array) {
+            file.export(path, deck.name, deck);
+          });
+        }).catch(err => console.log(err));
+        alert.message(documento.querySelector("#alert-message"), 'Decks importados para o <b>Tabletop Simulator</b> com sucesso!', 'success');
+      });
+    });
     documento.querySelector("#lista-efeitos").addEventListener('click', function () {
       ipcRenderer.send('abrir-janela-efeitos');
     });
@@ -96,6 +109,11 @@ function render(documento, path, json){
 
 function eventUpdateNome(documento, path, deck, index, json){
   let novoNome = documento.querySelector('#campo-nome-'+index).value;
+  if(novoNome.length == 0){
+    alert.message(document.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning')
+    return;
+  }
+
   let antigo = deck.name;
   if (file.update(path, novoNome, antigo, deck)){
     data.update(deck, novoNome, antigo)

@@ -60,7 +60,7 @@ module.exports = {
     })
   },
   login(user, pass){
-    return User.find({user: user, password: pass}).lean().then(function(retorno){
+    return User.find({user: user.toLowerCase(), password: pass}).lean().then(function(retorno){
       return retorno[0] != undefined;
     },function(error){
       console.log(error);

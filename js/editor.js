@@ -121,21 +121,32 @@ function renderSidebar(buttons){
     });
   }
   document.querySelector("#update-nome").addEventListener('click', function(){
-    eventUpdateNome();
-  });
-  document.querySelector('#campo-nome').addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-      eventUpdateNome();
+    let nome = document.querySelector("#campo-nome").value;
+    if(validaNomeVazio(nome)){
+      eventUpdateNome(nome);
     }
   });
-  function eventUpdateNome(){
-    let campo = document.querySelector("#campo-nome");
-
-    nomeDoTime = campo.value;
-    campo.value = '';
+  document.querySelector('#campo-nome').addEventListener('keypress', function (e) {
+    let nome = document.querySelector("#campo-nome").value;
+    if (e.key === 'Enter') {
+      if(validaNomeVazio(nome)){
+        eventUpdateNome(nome);
+      }
+    }
+  });
+  function eventUpdateNome(nome){
+    nomeDoTime = nome;
+    nome = '';
     document.querySelector("#nome-time").textContent = nomeDoTime;
 
     ipcRenderer.send('set-nome-cookie', nomeDoTime);
+  }
+  function validaNomeVazio(nome){
+    if(nome.length == 0){
+      alert.message(document.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning')
+      return 0;
+    }
+    return 1;
   }
 }
 

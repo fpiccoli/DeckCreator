@@ -22,6 +22,22 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
 });
 
 document.querySelector('#login').addEventListener('click' , function(){
+  login();
+});
+
+document.querySelector('#user').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    login();
+  }
+});
+
+document.querySelector('#pass').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    login();
+  }
+});
+
+function login(){
   let user = document.querySelector('#user').value;
   let pass = md5(document.querySelector('#pass').value);
   if(user.length == 0){
@@ -30,7 +46,7 @@ document.querySelector('#login').addEventListener('click' , function(){
   else{
     validarLogin(user, pass);
   }
-});
+}
 
 async function validarLogin(user, pass){
   let json = {user: user, password: pass};
