@@ -9,6 +9,14 @@
 
 Releases:
 
+    1.7.2b (01/03/2019)
+      - Novas Funcionalidades:
+          - Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).
+      - Correções de bugs:
+          - Corrigido o login sendo Case Sensitive.
+          - Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.
+          - Corrigido o botão Limpar Cache do TTS não estar funcionando.
+
     1.7.1b (27/02/2019)
       - Correções de bugs:
           - Corrigido o problema da página Novo Deck remover o cookie de sessão.

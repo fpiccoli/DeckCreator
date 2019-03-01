@@ -7,6 +7,18 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.7.2b (01/03/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).']
+      },
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Corrigido o login sendo Case Sensitive.', 'Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.', 'Corrigido o botão Limpar Cache do TTS não estar funcionando.']
+      }])
+    );
+
     text.push(h4('1.7.1b (27/02/2019)'));
     text.push(patch([
       {
