@@ -183,7 +183,6 @@ async function renderCards(classe){
   subCards.sort(dynamicSort('cardnumber'));
 
   let cartas = mainCards.concat(subCards);
-  console.log(cartas);
 
   document.querySelector('#skill-cards').innerHTML = htmlCartas.cartas(cartas);
 
