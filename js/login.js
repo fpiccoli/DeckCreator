@@ -38,7 +38,7 @@ document.querySelector('#pass').addEventListener('keypress', function (e) {
 });
 
 function login(){
-  let user = document.querySelector('#user').value;
+  let user = document.querySelector('#user').value.toLowerCase();
   let pass = md5(document.querySelector('#pass').value);
   if(user.length == 0){
     alert.message(document.querySelector('#alert-message'), 'Informe o usuário!', 'warning');

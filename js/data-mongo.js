@@ -36,14 +36,14 @@ module.exports = {
   },
   save(deck){
     var query = {'name': deck.name};
-    Deck.findOneAndUpdate(query, deck, {upsert:true, useFindAndModify: false}, function(err, doc){
+    Deck.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){
       if (err) console.log(err)
     });
   },
   update(deck, novoNome, nomeAntigo){
     deck.name = novoNome;
     var query = {'name': nomeAntigo};
-    Deck.findOneAndUpdate(query, deck, {upsert:true, useFindAndModify: false}, function(err, doc){
+    Deck.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){
       if (err) console.log(err)
     });
   },
@@ -53,7 +53,9 @@ module.exports = {
     });
   },
   getDecks(user){
-    return deckModel.find({'user': user}).lean().then(function(retorno){
+    return deckModel.find({'user': user.toLowerCase()}).lean().then(function(retorno){
+      console.log(user);
+      console.log(retorno);
       return retorno;
     },function(error){
       console.log(error);
