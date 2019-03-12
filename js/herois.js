@@ -18,6 +18,10 @@ var model = mongoose.model('Classe');
 model.find().lean().then(function(retorno){
   let puros = data.listByType('Pure', retorno);
   let hibridos = data.listByType('Hybrid', retorno);
+
+  puros.sort(dynamicSort('name'));
+  hibridos.sort(dynamicSort('name'));
+
   render('pure', 2, puros, retorno);
   render('hybrid', 2, puros, retorno);
   buttonBuilder(retorno, puros, hibridos);
@@ -67,4 +71,16 @@ function buttonSelecionar(param, heroi, lista){
     ipcRenderer.send('heroi-selecionado', heroi, myURL.searchParams.get('posicao'));
     ipcRenderer.send('fechar-janela-herois');
   });
+}
+
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+    sortOrder = -1;
+    property = property.substr(1);
+  }
+  return function (a,b) {
+    var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+    return result * sortOrder;
+  }
 }

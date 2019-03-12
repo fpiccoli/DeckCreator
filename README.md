@@ -9,9 +9,12 @@
 
 Releases:
 
-    1.7.2b (01/03/2019)
+    1.7.0 (12/03/2019)
       - Novas Funcionalidades:
           - Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).
+      - Novas Classes:
+          - Oracle (Beta), com 14 cartas experimentais.
+          - Shaman (Beta), com 14 cartas experimentais.
       - Correções de bugs:
           - Corrigido o login sendo Case Sensitive.
           - Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.

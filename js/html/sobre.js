@@ -7,11 +7,15 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
-    text.push(h4('1.7.2b (01/03/2019)'));
+    text.push(h4('1.7.0 (12/03/2019)'));
     text.push(patch([
       {
         titulo: 'Novas Funcionalidades:',
         itens: ['Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).']
+      },
+      {
+        titulo: 'Novas Classes:',
+        itens: ['Oracle (Beta), com 14 cartas experimentais.','Shaman (Beta), com 14 cartas experimentais.']
       },
       {
         titulo: 'Correções de bugs:',

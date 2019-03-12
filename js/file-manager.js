@@ -86,7 +86,7 @@ module.exports = {
     return 0;
   },
   clearCache(path){
-    let caminho = validaPath(path, fileTree);
+    let caminho = validaPath(path, ['/My Games','/Tabletop Simulator','/Mods','/Images/']);
     let files = [];
 
     fs.readdirSync(caminho).forEach(file => {
