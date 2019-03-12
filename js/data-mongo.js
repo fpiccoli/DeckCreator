@@ -54,8 +54,6 @@ module.exports = {
   },
   getDecks(user){
     return deckModel.find({'user': user.toLowerCase()}).lean().then(function(retorno){
-      console.log(user);
-      console.log(retorno);
       return retorno;
     },function(error){
       console.log(error);
