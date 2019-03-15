@@ -9,6 +9,12 @@
 
 Releases:
 
+    1.7.1 (15/03/2019)
+      - Correções de bugs:
+          - Listagens de Decks e Efeitos voltaram a serem exibidas em ordem alfabética.
+          - Os alertas de confirmação de cadastros de decks voltaram a serem exibidos.
+          - Corrigido problema que permitia um usuário cadastrar um deck por cima do deck de outro usuário caso estivessem com o mesmo nome.
+
     1.7.0 (12/03/2019)
       - Novas Funcionalidades:
           - Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).

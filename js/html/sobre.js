@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.7.1 (15/03/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Listagens de Decks e Efeitos voltaram a serem exibidas em ordem alfabética.', 'Os alertas de confirmação de cadastros de decks voltaram a serem exibidos.', 'Corrigido problema que permitia um usuário cadastrar um deck por cima do deck de outro usuário caso estivessem com o mesmo nome.']
+      }])
+    );
+
     text.push(h4('1.7.0 (12/03/2019)'));
     text.push(patch([
       {
