@@ -19,6 +19,13 @@ Releases:
           - Corrigido o login sendo Case Sensitive.
           - Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.
           - Corrigido o botão Limpar Cache do TTS não estar funcionando.
+      - Cartas alteradas:
+          - Wisdom (Spell): Removida provisoriamente.
+          - Replicate (Spell): Removida provisoriamente.
+          - Hyperthmesia (Enchantment): Removida provisoriamente.
+          - Aura of Valor (Enchantment): Removida provisoriamente.
+          - Foresee (Spell): Transformada em uma nova carta do Oracle.
+          - Bloodletting (Spell): Transformada em uma nova carta do Shaman.
 
     1.7.1b (27/02/2019)
       - Correções de bugs:

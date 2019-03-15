@@ -20,6 +20,10 @@ module.exports = {
       {
         titulo: 'Correções de bugs:',
         itens: ['Corrigido o login sendo Case Sensitive.', 'Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.', 'Corrigido o botão Limpar Cache do TTS não estar funcionando.']
+      },
+      {
+        titulo: 'Cartas alteradas:',
+        itens: ['Wisdom (Spell): Removida provisoriamente.','Replicate (Spell): Removida provisoriamente.','Hyperthmesia (Enchantment): Removida provisoriamente.','Aura of Valor (Enchantment): Removida provisoriamente.','Foresee (Spell): Transformada em uma nova carta do Oracle.','Bloodletting (Spell): Transformada em uma nova carta do Shaman.']
       }])
     );
 
