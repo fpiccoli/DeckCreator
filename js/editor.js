@@ -1,5 +1,6 @@
 const { ipcRenderer }  = require('electron');
 const data = require('./data-mongo.js');
+const dataManager = require('./data-manager.js');
 const htmlMenu = require('./html/menu-cards.js');
 const htmlCartas = require('./html/cartas.js');
 const deck = require('./deck-builder.js');
@@ -86,7 +87,7 @@ function saveDeck(cookies){
     extra: [],
     user: JSON.parse(cookieLogin[0].value).user
   }
-  listaDeCartas.sort(dynamicSort('cardnumber'));
+  listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
   data.save(object);
   exportDeck(object);
 }
@@ -179,8 +180,8 @@ async function renderCards(classe){
     }
   });
 
-  mainCards.sort(dynamicSort('cardnumber'));
-  subCards.sort(dynamicSort('cardnumber'));
+  mainCards.sort(dataManager.dynamicSort('cardnumber'));
+  subCards.sort(dataManager.dynamicSort('cardnumber'));
 
   let cartas = mainCards.concat(subCards);
 
@@ -260,7 +261,7 @@ function deckDefault(){
 
 function addObj(carta){
   listaDeCartas.push(carta);
-  listaDeCartas.sort(dynamicSort('cardnumber'));
+  listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
 }
 
 function removeObj(lista, obj){
@@ -284,16 +285,4 @@ function filtraSub(lista){
   return lista.filter(function(carta){
     return (carta.subtype == 'EVD' || carta.subtype == 'GRD')
   });
-}
-
-function dynamicSort(property) {
-  var sortOrder = 1;
-  if(property[0] === "-") {
-    sortOrder = -1;
-    property = property.substr(1);
-  }
-  return function (a,b) {
-    var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-    return result * sortOrder;
-  }
 }

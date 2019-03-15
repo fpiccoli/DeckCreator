@@ -20,6 +20,7 @@ Releases:
           - Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.
           - Corrigido o botão Limpar Cache do TTS não estar funcionando.
       - Cartas alteradas:
+          - Shaman (Classe híbrida): Removida provisoriamente.
           - Wisdom (Spell): Removida provisoriamente.
           - Replicate (Spell): Removida provisoriamente.
           - Hyperthmesia (Enchantment): Removida provisoriamente.

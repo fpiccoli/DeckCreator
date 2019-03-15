@@ -23,7 +23,7 @@ module.exports = {
       },
       {
         titulo: 'Cartas alteradas:',
-        itens: ['Wisdom (Spell): Removida provisoriamente.','Replicate (Spell): Removida provisoriamente.','Hyperthmesia (Enchantment): Removida provisoriamente.','Aura of Valor (Enchantment): Removida provisoriamente.','Foresee (Spell): Transformada em uma nova carta do Oracle.','Bloodletting (Spell): Transformada em uma nova carta do Shaman.']
+        itens: ['Shaman (Classe híbrida): Removida provisoriamente.','Wisdom (Spell): Removida provisoriamente.','Replicate (Spell): Removida provisoriamente.','Hyperthmesia (Enchantment): Removida provisoriamente.','Aura of Valor (Enchantment): Removida provisoriamente.','Foresee (Spell): Transformada em uma nova carta do Oracle.','Bloodletting (Spell): Transformada em uma nova carta do Shaman.']
       }])
     );
 

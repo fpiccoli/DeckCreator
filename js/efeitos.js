@@ -1,13 +1,10 @@
 const html = require('./html/efeitos.js');
+const mongo = require('./data-mongo.js');
+const data = require('./data-manager.js');
 
-require('../config/mongo.js')('deckcreator');
-var mongoose = require('mongoose');
-const Efeito = require('../models/efeito.js');
+let lista = mongo.listEfeitos();
 
-var model = mongoose.model('Efeito');
-
-model.find().lean().then(function(retorno){
+lista.then((retorno) => {
+  retorno.sort(data.dynamicSort('-nameEN'));
   document.querySelector('#efeitos').innerHTML = html.efeitos(retorno);
-},function(error){
-  console.log(error);
-})
+}).catch(err => console.log(err));

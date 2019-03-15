@@ -3,10 +3,12 @@ var mongoose = require('mongoose');
 const Classe = require('../models/classe.js');
 const Deck = require('../models/deck.js');
 const User = require('../models/user.js');
+const Efeito = require('../models/efeito.js');
 
 var classeModel = mongoose.model('Classe');
 var deckModel = mongoose.model('Deck');
 var userModel = mongoose.model('User');
+var efeitoModel = mongoose.model('Efeito');
 
 module.exports = {
   listAll(){
@@ -62,6 +64,13 @@ module.exports = {
   login(user, pass){
     return User.find({user: user.toLowerCase(), password: pass}).lean().then(function(retorno){
       return retorno[0] != undefined;
+    },function(error){
+      console.log(error);
+    })
+  },
+  listEfeitos(){
+    return efeitoModel.find().lean().then(function(retorno){
+      return retorno;
     },function(error){
       console.log(error);
     })
