@@ -1,6 +1,4 @@
 const builder = require('./builder.js');
-const data = require('../data.js');
-const load = require('../loadJSON.js');
 const conta = require('../conta.js');
 
 module.exports = {
@@ -9,22 +7,18 @@ module.exports = {
     let panels = [];
     panels.push(builder.element('h1', {class:'page-header'}, [builder.text(decks.length +' decks encontrados: ')]));
 
-    decks.forEach(build);
-    function build(deck, index, array) {
+    decks.forEach(function (deck, index, array) {
       let herois = [];
       let cartas = [];
-      let deckName = deck.Nickname;
 
-      let rowTitle = title(deckName, index);
+      let rowTitle = title(deck.name, index);
 
-      let retornoLoad = load.montaObj(deck);
-      if (retornoLoad){
-        herois = retornoLoad.herois;
-        cartas = retornoLoad.cartas;
-      }
-      herois.push({class:'Spell', main:'Spell', icon:'xMlN', bg:'aiJl'})
-      herois.push({class:'Enchantment', main:'Enchantment', icon:'ZbmkU', bg:'7klK'})
-      herois.push({class:'Talent', main:'Talent', icon:'oAoH', bg:'tPiS'})
+      herois = herois.concat(deck.heroes);
+      cartas = herois.concat(deck.cards);
+
+      herois.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'1be1iq7sJOLYeo07ZrNrKgSCx30ln_8_R'})
+      herois.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'1QOaiH7ABjkmcLrij5Cz-Ir2Qh7FRc-zd'})
+      herois.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'1tDpQbbRL7rMfj2GBR2SXKFo8hSd3i1ef'})
 
       let elements = [];
 
@@ -34,8 +28,8 @@ module.exports = {
 
         let subElements = [];
 
-        subElements.push(builder.element('img', {src:'https://gdurl.com/'+heroi.icon, height:'55%', width:'55%', class:'center-icon'}, []));
-        subElements.push(builder.element('img', {src:'https://gdurl.com/'+heroi.bg, height:'40%', width:'40%'}, []));
+        subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', class:'center-icon'}, []));
+        subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.bg, height:'40%', width:'40%'}, []));
 
         subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
         subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));
@@ -54,7 +48,7 @@ module.exports = {
 
       let panelDefault = builder.element('div', {class: 'panel panel-default'}, [rowTitle, rowContent]);
       panels.push(builder.element('div', {class: 'panel-group', id:'accordion'}, [panelDefault]));
-    }
+    });
 
     return builder.replaceCamelCase(builder.build(panels));
   },

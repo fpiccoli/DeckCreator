@@ -9,6 +9,37 @@
 
 Releases:
 
+    1.7.0 (12/03/2019)
+      - Novas Funcionalidades:
+          - Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).
+      - Novas Classes:
+          - Oracle (Beta), com 14 cartas experimentais.
+          - Shaman (Beta), com 14 cartas experimentais.
+      - Correções de bugs:
+          - Corrigido o login sendo Case Sensitive.
+          - Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.
+          - Corrigido o botão Limpar Cache do TTS não estar funcionando.
+      - Cartas alteradas:
+          - Shaman (Classe híbrida): Removida provisoriamente.
+          - Wisdom (Spell): Removida provisoriamente.
+          - Replicate (Spell): Removida provisoriamente.
+          - Hyperthmesia (Enchantment): Removida provisoriamente.
+          - Aura of Valor (Enchantment): Removida provisoriamente.
+          - Foresee (Spell): Transformada em uma nova carta do Oracle.
+          - Bloodletting (Spell): Transformada em uma nova carta do Shaman.
+
+    1.7.1b (27/02/2019)
+      - Correções de bugs:
+          - Corrigido o problema da página Novo Deck remover o cookie de sessão.
+          - Corrigida busca de cartas não obter as cartas Spell/Enchantment/Talent com mais de uma página.
+
+    1.7.0b (27/02/2019)
+      - Novas Funcionalidades:
+          - Migração do Banco de Dados para a nuvem fazendo com que os decks agora não fiquem apenas salvos na máquina local do usuário.
+          - Página de login para que os decks sejam vinculados ao seu usuário.
+      - Cartas alteradas:
+          - Final Breath (Talent): Função alterada (Uso original).
+
     1.6.1 (02/12/2018)
       - Correções de bugs:
           - Corrigido problema de não aparecerem Spell/Talents defensivos.
@@ -26,14 +57,14 @@ Releases:
           - Ao excluir um deck, a lista de decks será recarregada corretamente.
           - Refatoração de código.
 
-  1.5.0 (26/11/2018)
+    1.5.0 (26/11/2018)
       - Novas Funcionalidades:
           - Homepage com FAQ e helpdesk.
       - Melhorias visuais:
           - Novos ícones no menu principal.
           - Melhoria na descrição dos efeitos para os iniciantes com exemplos mais descritivos.
 
-  1.4.0 (25/11/2018)
+    1.4.0 (25/11/2018)
       - Novas Funcionalidades:
           - Alterar nome do deck.
       - Correções de bugs:
@@ -48,16 +79,16 @@ Releases:
           - Adrenaline Rush (Berserker): Diminuição do custo.
           - Detect Magic (Warlock): Diminuição do custo.
 
-  1.3.1 (21/11/2018)
+    1.3.1 (21/11/2018)
       - Correções de bugs:
           - Refatoração de código.
 
-  1.3.0 (21/11/2018)
+    1.3.0 (21/11/2018)
       - Novas Funcionalidades:
           - Lista de efeitos das cartas.
           - Página com as regras do jogo.
 
-  1.2.0 (19/11/2018)
+    1.2.0 (19/11/2018)
       - Novas Funcionalidades:
           - Excluir Deck.
           - Limpar Cache do Tabletop Simulator.

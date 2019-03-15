@@ -2,7 +2,7 @@ module.exports = {
   obj(lista, obj){
     let count = 0;
     for(let i in lista){
-      if(lista[i].number == obj.number){
+      if(lista[i].cardnumber == obj.cardnumber){
         count++;
       }
     }
@@ -11,7 +11,7 @@ module.exports = {
   mainClass(lista, heroi){
     let count = 0;
     for(let i in lista){
-      if(lista[i].class.includes(heroi.main) && (lista[i].type == 'ATK' || lista[i].type == 'TEC' || lista[i].type == 'SKL' || lista[i].type == 'DOM')){
+      if(lista[i].class.includes(heroi.main) && (lista[i].subtype == 'ATK' || lista[i].subtype == 'TEC' || lista[i].subtype == 'SKL' || lista[i].subtype == 'DOM')){
         count++;
       }
     }
@@ -20,7 +20,7 @@ module.exports = {
   subClass(lista, heroi){
     let count = 0;
     for(let i in lista){
-      if(lista[i].class.includes(heroi.sub) && (lista[i].type == 'GRD' || lista[i].type == 'EVD')){
+      if(lista[i].class.includes(heroi.sub) && (lista[i].subtype == 'GRD' || lista[i].subtype == 'EVD')){
         count++;
       }
     }

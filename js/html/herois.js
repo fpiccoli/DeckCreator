@@ -1,9 +1,9 @@
 const builder = require('./builder.js');
-const data = require('../data.js');
+const data = require('../data-manager.js');
 
 module.exports = {
-  build(type, colunas){
-    let html = builder.build(classe(type, colunas));
+  build(type, colunas, puros, lista){
+    let html = builder.build(classe(type, colunas, puros, lista));
     html = builder.replaceCamelCase(html);
 
     if (html == '<div class="row"></div>'){
@@ -13,12 +13,11 @@ module.exports = {
   }
 }
 
-function classe(type, colunas){
-  let classes = data.listByType('Pure');
+function classe(type, colunas, classes, lista){
   let json = [];
 
   for (let i in classes){
-    let hibridos = data.getHybrid(classes[i].name);
+    let hibridos = data.getHybrid(classes[i].name, lista);
     let child = [];
     let cor = 'panel panel-danger';
 
@@ -84,7 +83,7 @@ function content(classe, selecionarHeroi){
 
   for (let i in classe.heroes)
   {
-    let img = builder.element('img', {src: 'https://gdurl.com/'+classe.heroes[i].imgurl, height: '100%', width: '100%'}, []);
+    let img = builder.element('img', {src: 'https://drive.google.com/uc?export=download&id='+classe.heroes[i].imgurl, height: '100%', width: '100%'}, []);
     let col = builder.element('div', {class: 'col-lg-12'}, [img]);
     let row = builder.element('div', {class: 'row'}, [col]);
     let heading = builder.element('div', {class: 'panel-heading'}, [row]);
@@ -98,7 +97,7 @@ function content(classe, selecionarHeroi){
 
     let clearfix = builder.element('span', {class: 'clearfix'}, []);
     let footer = builder.element('div', {class: 'panel-footer'}, [spanLeft, spanRight, clearfix]);
-    let link = builder.element('a', {href: '#', class: selecionarHeroi+'-'+classe.heroes[i].number.toLowerCase()}, [footer]);
+    let link = builder.element('a', {href: '#', class: selecionarHeroi+'-'+classe.heroes[i].cardnumber.toLowerCase()}, [footer]);
 
     json.push(builder.element('div', {class: 'col-lg-4'}, [panel, link]));
   }

@@ -84,436 +84,466 @@
 }
 
 .panel-bard {
-  border-color: #eee906;
+  border-color: #FFFF00;
 }
 .panel-bard > .panel-heading {
-  border-color: #eee906;
+  border-color: #FFFF00;
   color: white;
-  background-color: #eee906;
+  background-color: #FFFF00;
 }
 .panel-bard > a {
-  color: #eee906;
+  color: #FFFF00;
 }
 .panel-bard > a:hover {
-  color: #eee906;
+  color: #FFFF00;
 }
 
 .panel-alchemist {
-  border-color: #c5838a;
+  border-color: #FA8072;
 }
 .panel-alchemist > .panel-heading {
-  border-color: #c5838a;
+  border-color: #FA8072;
   color: white;
-  background-color: #c5838a;
+  background-color: #FA8072;
 }
 .panel-alchemist > a {
-  color: #c5838a;
+  color: #FA8072;
 }
 .panel-alchemist > a:hover {
-  color: #c5838a;
+  color: #FA8072;
 }
 
 .panel-amazon {
-  border-color: #ff04f1;
+  border-color: #FF00FF;
 }
 .panel-amazon > .panel-heading {
-  border-color: #ff04f1;
+  border-color: #FF00FF;
   color: white;
-  background-color: #ff04f1;
+  background-color: #FF00FF;
 }
 .panel-amazon > a {
-  color: #ff04f1;
+  color: #FF00FF;
 }
 .panel-amazon > a:hover {
-  color: #ff04f1;
+  color: #FF00FF;
 }
 
 .panel-barbarian {
-  border-color: #ff7b03;
+  border-color: #FF6600;
 }
 .panel-barbarian > .panel-heading {
-  border-color: #ff7b03;
+  border-color: #FF6600;
   color: white;
-  background-color: #ff7b03;
+  background-color: #FF6600;
 }
 .panel-barbarian > a {
-  color: #ff7b03;
+  color: #FF6600;
 }
 .panel-barbarian > a:hover {
-  color: #ff7b03;
+  color: #FF6600;
 }
 
 .panel-beast {
-  border-color: #9d6118;
+  border-color: #964B00;
 }
 .panel-beast > .panel-heading {
-  border-color: #9d6118;
+  border-color: #964B00;
   color: white;
-  background-color: #9d6118;
+  background-color: #964B00;
 }
 .panel-beast > a {
-  color: #9d6118;
+  color: #964B00;
 }
 .panel-beast > a:hover {
-  color: #9d6118;
+  color: #964B00;
 }
 
 .panel-berserker {
-  border-color: #670106;
+  border-color: #92000A;
 }
 .panel-berserker > .panel-heading {
-  border-color: #670106;
+  border-color: #92000A;
   color: white;
-  background-color: #670106;
+  background-color: #92000A;
 }
 .panel-berserker > a {
-  color: #670106;
+  color: #92000A;
 }
 .panel-berserker > a:hover {
-  color: #670106;
+  color: #92000A;
 }
 
 .panel-cleric {
-  border-color: #03a681;
+  border-color: #50C878;
 }
 .panel-cleric > .panel-heading {
-  border-color: #03a681;
+  border-color: #50C878;
   color: white;
-  background-color: #03a681;
+  background-color: #50C878;
 }
 .panel-cleric > a {
-  color: #03a681;
+  color: #50C878;
 }
 .panel-cleric > a:hover {
-  color: #03a681;
+  color: #50C878;
 }
 
 .panel-demon {
-  border-color: #a1555d;
+  border-color: #E0115F;
 }
 .panel-demon > .panel-heading {
-  border-color: #a1555d;
+  border-color: #E0115F;
   color: white;
-  background-color: #a1555d;
+  background-color: #E0115F;
 }
 .panel-demon > a {
-  color: #a1555d;
+  color: #E0115F;
 }
 .panel-demon > a:hover {
-  color: #a1555d;
+  color: #E0115F;
 }
 
 .panel-druid {
-  border-color: #016704;
+  border-color: #008000;
 }
 .panel-druid > .panel-heading {
-  border-color: #016704;
+  border-color: #008000;
   color: white;
-  background-color: #016704;
+  background-color: #008000;
 }
 .panel-druid > a {
-  color: #016704;
+  color: #008000;
 }
 .panel-druid > a:hover {
-  color: #016704;
+  color: #008000;
 }
 
 .panel-fighter {
-  border-color: #d88d5c;
+  border-color: #FBCEB1;
 }
 .panel-fighter > .panel-heading {
-  border-color: #d88d5c;
+  border-color: #FBCEB1;
   color: white;
-  background-color: #d88d5c;
+  background-color: #FBCEB1;
 }
 .panel-fighter > a {
-  color: #d88d5c;
+  color: #FBCEB1;
 }
 .panel-fighter > a:hover {
-  color: #d88d5c;
+  color: #FBCEB1;
 }
 
 .panel-goblin {
-  border-color: #87ff03;
+  border-color: #BFEF45;
 }
 .panel-goblin > .panel-heading {
-  border-color: #87ff03;
+  border-color: #BFEF45;
   color: white;
-  background-color: #87ff03;
+  background-color: #BFEF45;
 }
 .panel-goblin > a {
-  color: #87ff03;
+  color: #BFEF45;
 }
 .panel-goblin > a:hover {
-  color: #87ff03;
+  color: #BFEF45;
 }
 
 .panel-gremlin {
-  border-color: #04ff94;
+  border-color: #AAFFC3;
 }
 .panel-gremlin > .panel-heading {
-  border-color: #04ff94;
+  border-color: #AAFFC3;
   color: white;
-  background-color: #04ff94;
+  background-color: #AAFFC3;
 }
 .panel-gremlin > a {
-  color: #04ff94;
+  color: #AAFFC3;
 }
 .panel-gremlin > a:hover {
-  color: #04ff94;
+  color: #AAFFC3;
 }
 
 .panel-guardian {
-  border-color: #5c5300;
+  border-color: #808000;
 }
 .panel-guardian > .panel-heading {
-  border-color: #5c5300;
+  border-color: #808000;
   color: white;
-  background-color: #5c5300;
+  background-color: #808000;
 }
 .panel-guardian > a {
-  color: #5c5300;
+  color: #808000;
 }
 .panel-guardian > a:hover {
-  color: #5c5300;
+  color: #808000;
 }
 
 .panel-jester {
-  border-color: #437170;
+  border-color: #008080;
 }
 .panel-jester > .panel-heading {
-  border-color: #437170;
+  border-color: #008080;
   color: white;
-  background-color: #437170;
+  background-color: #008080;
 }
 .panel-jester > a {
-  color: #437170;
+  color: #008080;
 }
 .panel-jester > a:hover {
-  color: #437170;
+  color: #008080;
 }
 
 .panel-knight {
-  border-color: #828282;
+  border-color: #808080;
 }
 .panel-knight > .panel-heading {
-  border-color: #828282;
+  border-color: #808080;
   color: white;
-  background-color: #828282;
+  background-color: #808080;
 }
 .panel-knight > a {
-  color: #828282;
+  color: #808080;
 }
 .panel-knight > a:hover {
-  color: #828282;
+  color: #808080;
 }
 
 .panel-monk {
-  border-color: #c0a743;
+  border-color: #CC7722;
 }
 .panel-monk > .panel-heading {
-  border-color: #c0a743;
+  border-color: #CC7722;
   color: white;
-  background-color: #c0a743;
+  background-color: #CC7722;
 }
 .panel-monk > a {
-  color: #c0a743;
+  color: #CC7722;
 }
 .panel-monk > a:hover {
-  color: #c0a743;
+  color: #CC7722;
 }
 
 .panel-necromancer {
-  border-color: #0d0d0d;
+  border-color: #191919;
 }
 .panel-necromancer > .panel-heading {
-  border-color: #0d0d0d;
+  border-color: #191919;
   color: white;
-  background-color: #0d0d0d;
+  background-color: #191919;
 }
 .panel-necromancer > a {
-  color: #0d0d0d;
+  color: #191919;
 }
 .panel-necromancer > a:hover {
-  color: #0d0d0d;
+  color: #191919;
 }
 
 .panel-paladin {
-  border-color: #a6a386;
+  border-color: #F5F5DC;
 }
 .panel-paladin > .panel-heading {
-  border-color: #a6a386;
+  border-color: #F5F5DC;
   color: white;
-  background-color: #a6a386;
+  background-color: #F5F5DC;
 }
 .panel-paladin > a {
-  color: #a6a386;
+  color: #F5F5DC;
 }
 .panel-paladin > a:hover {
-  color: #a6a386;
+  color: #F5F5DC;
 }
 
 .panel-ranger {
-  border-color: #0435b3;
+  border-color: #007FFF;
 }
 .panel-ranger > .panel-heading {
-  border-color: #0435b3;
+  border-color: #007FFF;
   color: white;
-  background-color: #0435b3;
+  background-color: #007FFF;
 }
 .panel-ranger > a {
-  color: #0435b3;
+  color: #007FFF;
 }
 .panel-ranger > a:hover {
-  color: #0435b3;
+  color: #007FFF;
 }
 
 .panel-sorcerer {
-  border-color: #ff0471;
+  border-color: #C71585;
 }
 .panel-sorcerer > .panel-heading {
-  border-color: #ff0471;
+  border-color: #C71585;
   color: white;
-  background-color: #ff0471;
+  background-color: #C71585;
 }
 .panel-sorcerer > a {
-  color: #ff0471;
+  color: #C71585;
 }
 .panel-sorcerer > a:hover {
-  color: #ff0471;
+  color: #C71585;
 }
 
 .panel-spell {
-  border-color: #61506d;
+  border-color: #B57EDC;
 }
 .panel-spell > .panel-heading {
-  border-color: #61506d;
+  border-color: #B57EDC;
   color: white;
-  background-color: #61506d;
+  background-color: #B57EDC;
 }
 .panel-spell > a {
-  color: #61506d;
+  color: #B57EDC;
 }
 .panel-spell > a:hover {
-  color: #61506d;
+  color: #B57EDC;
 }
 
 .panel-talent {
-  border-color: #d4d5ff;
+  border-color: #C0C0C0;
 }
 .panel-talent > .panel-heading {
-  border-color: #d4d5ff;
+  border-color: #C0C0C0;
   color: white;
-  background-color: #d4d5ff;
+  background-color: #C0C0C0;
 }
 .panel-talent > a {
-  color: #d4d5ff;
+  color: #C0C0C0;
 }
 .panel-talent > a:hover {
-  color: #d4d5ff;
+  color: #C0C0C0;
 }
 
 .panel-thief {
-  border-color: #303048;
+  border-color: #000080;
 }
 .panel-thief > .panel-heading {
-  border-color: #303048;
+  border-color: #000080;
   color: white;
-  background-color: #303048;
+  background-color: #000080;
 }
 .panel-thief > a {
-  color: #303048;
+  color: #000080;
 }
 .panel-thief > a:hover {
-  color: #303048;
+  color: #000080;
 }
 
 .panel-vampire {
-  border-color: #7503ff;
+  border-color: #800080;
 }
 .panel-vampire > .panel-heading {
-  border-color: #7503ff;
+  border-color: #800080;
   color: white;
-  background-color: #7503ff;
+  background-color: #800080;
 }
 .panel-vampire > a {
-  color: #7503ff;
+  color: #800080;
 }
 .panel-vampire > a:hover {
-  color: #7503ff;
+  color: #800080;
 }
 
 .panel-warlock {
-  border-color: #271f15;
+  border-color: #6F4E37;
 }
 .panel-warlock > .panel-heading {
-  border-color: #271f15;
+  border-color: #6F4E37;
   color: white;
-  background-color: #271f15;
+  background-color: #6F4E37;
 }
 .panel-warlock > a {
-  color: #271f15;
+  color: #6F4E37;
 }
 .panel-warlock > a:hover {
-  color: #271f15;
+  color: #6F4E37;
 }
 
 .panel-warrior {
-  border-color: #ff2703;
+  border-color: #FF2400;
 }
 .panel-warrior > .panel-heading {
-  border-color: #ff2703;
+  border-color: #FF2400;
   color: white;
-  background-color: #ff2703;
+  background-color: #FF2400;
 }
 .panel-warrior > a {
-  color: #ff2703;
+  color: #FF2400;
 }
 .panel-warrior > a:hover {
-  color: #ff2703;
+  color: #FF2400;
 }
 
 .panel-wizard {
-  border-color: #06e4ff;
+  border-color: #00FFFF;
 }
 .panel-wizard > .panel-heading {
-  border-color: #06e4ff;
+  border-color: #00FFFF;
   color: white;
-  background-color: #06e4ff;
+  background-color: #00FFFF;
 }
 .panel-wizard > a {
-  color: #06e4ff;
+  color: #00FFFF;
 }
 .panel-wizard > a:hover {
-  color: #06e4ff;
+  color: #00FFFF;
 }
 
 .panel-ninja {
-  border-color: #84c4d7;
+  border-color: #0095B6;
 }
 .panel-ninja > .panel-heading {
-  border-color: #84c4d7;
+  border-color: #0095B6;
   color: white;
-  background-color: #84c4d7;
+  background-color: #0095B6;
 }
 .panel-ninja > a {
-  color: #84c4d7;
+  color: #0095B6;
 }
 .panel-ninja > a:hover {
-  color: #84c4d7;
+  color: #0095B6;
 }
 
 .panel-blacksmith {
-  border-color: #dcb500;
+  border-color: #FFBF00;
 }
 .panel-blacksmith > .panel-heading {
-  border-color: #dcb500;
+  border-color: #FFBF00;
   color: white;
-  background-color: #dcb500;
+  background-color: #FFBF00;
 }
 .panel-blacksmith > a {
-  color: #dcb500;
+  color: #FFBF00;
 }
 .panel-blacksmith > a:hover {
-  color: #dcb500;
+  color: #FFBF00;
+}
+
+.panel-oracle {
+  border-color: #D1E231;
+}
+.panel-oracle > .panel-heading {
+  border-color: #D1E231;
+  color: white;
+  background-color: #D1E231;
+}
+.panel-oracle > a {
+  color: #D1E231;
+}
+.panel-oracle > a:hover {
+  color: #D1E231;
+}
+
+.panel-shaman {
+  border-color: #8E4585;
+}
+.panel-shaman > .panel-heading {
+  border-color: #8E4585;
+  color: white;
+  background-color: #8E4585;
+}
+.panel-shaman > a {
+  color: #8E4585;
+}
+.panel-shaman > a:hover {
+  color: #8E4585;
 }

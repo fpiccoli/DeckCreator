@@ -1,6 +1,6 @@
+const data = require('./data-mongo.js');
 
 module.exports = {
-
   build(object){
     let json = {
       SaveName: '',
@@ -19,7 +19,6 @@ module.exports = {
     return json;
   },
   objectStates(object){
-
     let content = buildCards(object);
 
     let json = [];
@@ -136,7 +135,7 @@ function cardJSON(card){
 }
 
 function deckJSON(deck){
-  return '"' + deck.id + '":{"FaceURL": "http://gdurl.com/' + deck.face + '","BackURL": "http://gdurl.com/FXdw","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
+  return '"' + deck.id + '":{"FaceURL": "https://drive.google.com/uc?export=download&id=' + deck.face + '","BackURL": "https://drive.google.com/uc?export=download&id=15d1rszwKVEFO9sALb2Mu00iXCD3ojxus","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 
 function verificaSeExiste(decks, id){

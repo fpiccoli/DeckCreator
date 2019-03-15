@@ -7,6 +7,46 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.7.0 (12/03/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Agora é possível importar todos os decks que já estiverem cadastrados no seu usuário para a máquina local (pasta do TTS).']
+      },
+      {
+        titulo: 'Novas Classes:',
+        itens: ['Oracle (Beta), com 14 cartas experimentais.','Shaman (Beta), com 14 cartas experimentais.']
+      },
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Corrigido o login sendo Case Sensitive.', 'Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.', 'Corrigido o botão Limpar Cache do TTS não estar funcionando.']
+      },
+      {
+        titulo: 'Cartas alteradas:',
+        itens: ['Shaman (Classe híbrida): Removida provisoriamente.','Wisdom (Spell): Removida provisoriamente.','Replicate (Spell): Removida provisoriamente.','Hyperthmesia (Enchantment): Removida provisoriamente.','Aura of Valor (Enchantment): Removida provisoriamente.','Foresee (Spell): Transformada em uma nova carta do Oracle.','Bloodletting (Spell): Transformada em uma nova carta do Shaman.']
+      }])
+    );
+
+    text.push(h4('1.7.1b (27/02/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Corrigido o problema da página Novo Deck remover o cookie de sessão.','Corrigida busca de cartas não obter as cartas Spell/Enchantment/Talent com mais de uma página.']
+      }])
+    );
+
+    text.push(h4('1.7.0b (27/02/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Migração do Banco de Dados para a nuvem fazendo com que os decks agora não fiquem apenas salvos na máquina local do usuário.', 'Página de login para que os decks sejam vinculados ao seu usuário.']
+      },
+      {
+        titulo: 'Cartas alteradas:',
+        itens: ['Final Breath (Talent): Função alterada (Uso original).']
+      }])
+    );
+
     text.push(h4('1.6.1 (02/12/2018)'));
     text.push(patch([
       {

@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 const html = require('./html/herois.js');
-const data = require('./data.js');
+const mongo = require('./data-mongo.js');
+const data = require('./data-manager.js');
 const monta = require('./monta-heroi.js');
 
 let linkFechar = document.querySelector("#link-fechar");
@@ -9,18 +10,28 @@ let recarregar;
 document.querySelector('#accordion-pure-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
 document.querySelector('#accordion-hybrid-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
 
-setTimeout(function(){
-  render('pure', 2);
-  render('hybrid', 2);
-  buttonBuilder();
-}, 3000);
+let classes = mongo.listAll();
+
+classes.then((retorno) => {
+  let puros = data.listByType('Pure', retorno);
+  let hibridos = data.listByType('Hybrid', retorno);
+
+  puros.sort(data.dynamicSort('name'));
+  hibridos.sort(data.dynamicSort('name'));
+
+  render('pure', 2, puros, retorno);
+  render('hybrid', 2, puros, retorno);
+  buttonBuilder(retorno, puros, hibridos);
+
+}).catch(err => console.log(err));
+
 
 linkFechar.addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-herois');
 });
 
-function render(type, colunas){
-  let retorno = html.build(type, colunas);
+function render(type, colunas, puros, lista){
+  let retorno = html.build(type, colunas, puros, lista);
   document.querySelector('#accordion-'+type+'-panel').innerHTML = retorno;
   if (retorno.search("recarregar-herois") > 0){
     recarregar = document.querySelector("#recarregar-herois");
@@ -31,14 +42,11 @@ function render(type, colunas){
   }
 }
 
-function buttonBuilder(){
-  let puros = data.listByType('Pure');
-  let hibridos = data.listByType('Hybrid');
-
+function buttonBuilder(lista, puros, hibridos){
   for(let i in puros){
     for(let h in puros[i].heroes){
       let heroi = puros[i].heroes[h];
-      heroi = monta.heroiMenu(heroi, data, puros[i].main, puros[i].sub);
+      heroi = monta.heroi(heroi, data, lista, puros[i].main, puros[i].sub);
       buttonSelecionar(puros[i].name.toLowerCase(), heroi);
     }
   }
@@ -46,17 +54,16 @@ function buttonBuilder(){
     for(let h in hibridos[i].heroes){
       let heroi = hibridos[i].heroes[h];
 
-      heroi = monta.heroiMenu(heroi, data, hibridos[i].main, hibridos[i].sub);
-      buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), heroi);
-      buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), heroi);
+      heroi = monta.heroi(heroi, data, lista, hibridos[i].main, hibridos[i].sub);
+      buttonSelecionar(hibridos[i].main.toLowerCase()+'-'+hibridos[i].sub.toLowerCase(), heroi, lista);
+      buttonSelecionar(hibridos[i].sub.toLowerCase()+'-'+hibridos[i].main.toLowerCase(), heroi, lista);
     }
   }
 }
 
-function buttonSelecionar(param, heroi){
+function buttonSelecionar(param, heroi, lista){
   myURL = new URL(document.URL);
-  document.querySelector('.selecionar-'+param+'-'+heroi.number.toLowerCase()).addEventListener('click', function () {
-    heroi.type = data.getClasseByCard(heroi).type;
+  document.querySelector('.selecionar-'+param+'-'+heroi.cardnumber.toLowerCase()).addEventListener('click', function () {
     ipcRenderer.send('heroi-selecionado', heroi, myURL.searchParams.get('posicao'));
     ipcRenderer.send('fechar-janela-herois');
   });

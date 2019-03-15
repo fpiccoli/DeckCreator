@@ -1,7 +1,7 @@
 {
   "name": "deckcreator",
   "productName": "Deck Creator",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Criador de decks para Tabletop Simulator",
   "main": "main.js",
   "scripts": {
@@ -18,11 +18,13 @@
     "jquery": "^3.3.1",
     "json-beautify": "^1.0.1",
     "jsonfile": "^5.0.0",
+    "md5": "^2.2.1",
+    "mongoose": "^5.4.11",
     "popper.js": "^1.14.5"
   },
   "devDependencies": {
     "electron": "^3.0.4",
-    "electron-packager": "^12.2.0",
+    "electron-packager": "^13.0.1",
     "electron-winstaller": "^2.7.0"
   }
 }

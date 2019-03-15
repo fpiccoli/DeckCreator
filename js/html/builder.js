@@ -1,4 +1,3 @@
-const data = require('../data.js');
 const json2html = require('html2json').json2html;
 
 module.exports = {
