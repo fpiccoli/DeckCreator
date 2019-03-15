@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
 const html = require('./html/herois.js');
+const mongo = require('./data-mongo.js');
 const data = require('./data-manager.js');
 const monta = require('./monta-heroi.js');
 
@@ -9,13 +10,9 @@ let recarregar;
 document.querySelector('#accordion-pure-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
 document.querySelector('#accordion-hybrid-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
 
-require('../config/mongo.js')('deckcreator');
-var mongoose = require('mongoose');
-const Efeito = require('../models/classe.js');
+let classes = mongo.listAll();
 
-var model = mongoose.model('Classe');
-
-model.find().lean().then(function(retorno){
+classes.then((retorno) => {
   let puros = data.listByType('Pure', retorno);
   let hibridos = data.listByType('Hybrid', retorno);
 
@@ -25,9 +22,8 @@ model.find().lean().then(function(retorno){
   render('pure', 2, puros, retorno);
   render('hybrid', 2, puros, retorno);
   buttonBuilder(retorno, puros, hibridos);
-},function(error){
-  console.log(error);
-})
+
+}).catch(err => console.log(err));
 
 
 linkFechar.addEventListener('click', function () {
