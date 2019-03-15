@@ -16,7 +16,7 @@ module.exports = {
       return retorno;
     },function(error){
       console.log(error);
-    })
+    });
   },
   getClassCards(classe){
     return classeModel.find({name: {'$regex': classe}}).lean().then(function(retorno){
@@ -27,32 +27,54 @@ module.exports = {
       return lista;
     },function(error){
       console.log(error);
-    })
+    });
   },
   getClasseByCard(carta){
     return classeModel.find({'cards.cardnumber': carta.cardnumber}).lean().then(function(retorno){
       return retorno[0];
     },function(error){
       console.log(error);
-    })
+    });
   },
   save(deck){
-    var query = {'name': deck.name};
-    Deck.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){
-      if (err) console.log(err)
+    var query = {'name': deck.name, user: deck.user};
+    return Deck.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){
+      if (err) {
+        console.log(err)
+        return 0;
+      } else {
+        return 1;
+      }
     });
   },
   update(deck, novoNome, nomeAntigo){
     deck.name = novoNome;
     var query = {'name': nomeAntigo};
-    Deck.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){
-      if (err) console.log(err)
+    return Deck.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){
+      if (err) {
+        console.log(err)
+        return 0;
+      } else {
+        return 1;
+      }
     });
   },
   delete(nome){
-    deckModel.deleteOne({ 'name': nome }, function(err) {
-      if (err) console.log(err)
+    return deckModel.deleteOne({ 'name': nome }, function(err) {
+      if (err) {
+        console.log(err)
+        return 0;
+      } else {
+        return 1;
+      }
     });
+  },
+  validaDeckExistente(deck){
+    return deckModel.find({name: deck.name, user: deck.user.toLowerCase()}).lean().then(function(retorno){
+      return retorno.length;
+    },function(error){
+      console.log(error);
+    })
   },
   getDecks(user){
     return deckModel.find({'user': user.toLowerCase()}).lean().then(function(retorno){
@@ -66,7 +88,7 @@ module.exports = {
       return retorno[0] != undefined;
     },function(error){
       console.log(error);
-    })
+    });
   },
   listEfeitos(){
     return efeitoModel.find().lean().then(function(retorno){

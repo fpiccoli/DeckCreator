@@ -5,6 +5,7 @@ const html = require('./html/menu-decks.js');
 const regras = require('./html/regras.js');
 const sobre = require('./html/sobre.js');
 const data = require('./data-mongo.js');
+const dataManager = require('./data-manager.js');
 const cookie = require('./cookie-manager.js');
 
 module.exports = {
@@ -12,7 +13,8 @@ module.exports = {
     documento.querySelector("#logout").addEventListener('click', function () {
       ipcRenderer.send('get-path', 'documents');
       ipcRenderer.on('return-path', (event, path) => {
-        if(file.deleteLogin(path)){
+        if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja sair?')){
+          file.deleteLogin(path);
           ipcRenderer.send('clear-cookies');
           ipcRenderer.send('redirecionar-pagina', 'login');
         }
@@ -49,6 +51,7 @@ module.exports = {
         cookieLogin = cookie.filtraCookies(cookies, 'login');
         let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
         decks.then((retorno) => {
+          retorno.sort(dataManager.dynamicSort('name'));
           retorno.forEach(function (deck, index, array) {
             deck.cards.forEach(function(card){ delete card._id });
             deck.heroes.forEach(function(hero){ delete hero._id });
@@ -87,9 +90,11 @@ function render(documento, path, json){
       ipcRenderer.send('redirecionar-pagina','editor');
     });
     documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
-      if(file.delete(path, array[index].name)){
-        data.delete(array[index].name);
-        json = removeObj(json, array[index]);
+      if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ array[index].name +'"?')){
+        if(data.delete(array[index].name)){
+          file.delete(path, array[index].name);
+          json = removeObj(json, array[index]);
+        }
       }
       render(documento, path, json);
     });
@@ -110,15 +115,15 @@ function render(documento, path, json){
 function eventUpdateNome(documento, path, deck, index, json){
   let novoNome = documento.querySelector('#campo-nome-'+index).value;
   if(novoNome.length == 0){
-    alert.message(document.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning')
+    alert.message(document.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning');
     return;
   }
 
   let antigo = deck.name;
-  if (file.update(path, novoNome, antigo, deck)){
-    data.update(deck, novoNome, antigo)
-  } else{
-    deck.name = antigo;
+  if(alert.confirmDialog('Salvar Deck', 'Sim', 'Não', 'Deseja alterar o nome de "'+antigo+'" para  "'+novoNome+'"?')){
+    if(data.update(deck, novoNome, antigo)){
+      file.update(path, novoNome, antigo, deck);
+    }
   }
   render(documento, path, json);
 }

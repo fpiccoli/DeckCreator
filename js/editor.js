@@ -88,8 +88,21 @@ function saveDeck(cookies){
     user: JSON.parse(cookieLogin[0].value).user
   }
   listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
-  data.save(object);
-  exportDeck(object);
+
+  let validacao = data.validaDeckExistente(object);
+  validacao.then((deckJaExiste) => {
+    if(deckJaExiste){
+      if(alert.confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
+        if(data.save(object)){
+          exportDeck(object);
+        }
+      }
+    } else{
+      if(data.save(object)){
+        exportDeck(object);
+      }
+    }
+  }).catch(err => console.log(err));
 }
 
 function exportDeck(object){
