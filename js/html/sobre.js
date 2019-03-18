@@ -11,7 +11,7 @@ module.exports = {
     text.push(patch([
       {
         titulo: 'Correções de bugs:',
-        itens: ['Correção do Importar Decks para o TTS.']
+        itens: ['Corrigido problema que ocorria nos decks importados pelo botão Importar Decks para o TTS.']
       }])
     );
 

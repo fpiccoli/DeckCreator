@@ -11,7 +11,7 @@ Releases:
 
     1.7.2 (18/03/2019)
       - Correções de bugs:
-          - Correção do Importar Decks para o TTS.
+          - Corrigido problema que ocorria nos decks importados pelo botão Importar Decks para o TTS.
 
     1.7.1 (15/03/2019)
       - Correções de bugs:
