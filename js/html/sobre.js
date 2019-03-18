@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.7.2 (18/03/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Correção do Importar Decks para o TTS.']
+      }])
+    );
+
     text.push(h4('1.7.1 (15/03/2019)'));
     text.push(patch([
       {
