@@ -1,4 +1,5 @@
 const { ipcRenderer }  = require('electron');
+const deckBuilder = require('./deck-builder.js');
 const file = require('./file-manager.js');
 const alert = require('./alert-message.js');
 const html = require('./html/menu-decks.js');
@@ -34,7 +35,8 @@ module.exports = {
         let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
         decks.then((retorno) => {
           retorno.forEach(function (deck, index, array) {
-            file.export(path, deck.name, deck);
+            let deckRetorno = deckBuilder.build(deck);
+            file.export(path, deck.name, deckRetorno);
           });
         }).catch(err => console.log(err));
         alert.message(documento.querySelector("#alert-message"), 'Decks importados para o <b>Tabletop Simulator</b> com sucesso!', 'success');

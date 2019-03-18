@@ -80,6 +80,8 @@ function addEventSelecionar(number){
 
 function saveDeck(cookies){
   cookieLogin = cookie.filtraCookies(cookies, 'login');
+  listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
+
   let object = {
     name: nomeDoTime,
     cards: listaDeCartas,
@@ -87,7 +89,6 @@ function saveDeck(cookies){
     extra: [],
     user: JSON.parse(cookieLogin[0].value).user
   }
-  listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
 
   let validacao = data.validaDeckExistente(object);
   validacao.then((deckJaExiste) => {
