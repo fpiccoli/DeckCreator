@@ -88,14 +88,8 @@
 }
 .panel-bard > .panel-heading {
   border-color: #FFFF00;
-  color: white;
+  color: black;
   background-color: #FFFF00;
-}
-.panel-bard > a {
-  color: #FFFF00;
-}
-.panel-bard > a:hover {
-  color: #FFFF00;
 }
 
 .panel-alchemist {
@@ -106,12 +100,6 @@
   color: white;
   background-color: #FA8072;
 }
-.panel-alchemist > a {
-  color: #FA8072;
-}
-.panel-alchemist > a:hover {
-  color: #FA8072;
-}
 
 .panel-amazon {
   border-color: #FF00FF;
@@ -120,12 +108,6 @@
   border-color: #FF00FF;
   color: white;
   background-color: #FF00FF;
-}
-.panel-amazon > a {
-  color: #FF00FF;
-}
-.panel-amazon > a:hover {
-  color: #FF00FF;
 }
 
 .panel-barbarian {
@@ -136,12 +118,6 @@
   color: white;
   background-color: #FF6600;
 }
-.panel-barbarian > a {
-  color: #FF6600;
-}
-.panel-barbarian > a:hover {
-  color: #FF6600;
-}
 
 .panel-beast {
   border-color: #964B00;
@@ -150,12 +126,6 @@
   border-color: #964B00;
   color: white;
   background-color: #964B00;
-}
-.panel-beast > a {
-  color: #964B00;
-}
-.panel-beast > a:hover {
-  color: #964B00;
 }
 
 .panel-berserker {
@@ -166,12 +136,6 @@
   color: white;
   background-color: #92000A;
 }
-.panel-berserker > a {
-  color: #92000A;
-}
-.panel-berserker > a:hover {
-  color: #92000A;
-}
 
 .panel-cleric {
   border-color: #50C878;
@@ -180,12 +144,6 @@
   border-color: #50C878;
   color: white;
   background-color: #50C878;
-}
-.panel-cleric > a {
-  color: #50C878;
-}
-.panel-cleric > a:hover {
-  color: #50C878;
 }
 
 .panel-demon {
@@ -196,12 +154,6 @@
   color: white;
   background-color: #E0115F;
 }
-.panel-demon > a {
-  color: #E0115F;
-}
-.panel-demon > a:hover {
-  color: #E0115F;
-}
 
 .panel-druid {
   border-color: #008000;
@@ -211,26 +163,14 @@
   color: white;
   background-color: #008000;
 }
-.panel-druid > a {
-  color: #008000;
-}
-.panel-druid > a:hover {
-  color: #008000;
-}
 
 .panel-fighter {
   border-color: #FBCEB1;
 }
 .panel-fighter > .panel-heading {
   border-color: #FBCEB1;
-  color: white;
+  color: black;
   background-color: #FBCEB1;
-}
-.panel-fighter > a {
-  color: #FBCEB1;
-}
-.panel-fighter > a:hover {
-  color: #FBCEB1;
 }
 
 .panel-goblin {
@@ -241,12 +181,6 @@
   color: white;
   background-color: #BFEF45;
 }
-.panel-goblin > a {
-  color: #BFEF45;
-}
-.panel-goblin > a:hover {
-  color: #BFEF45;
-}
 
 .panel-gremlin {
   border-color: #AAFFC3;
@@ -255,12 +189,6 @@
   border-color: #AAFFC3;
   color: white;
   background-color: #AAFFC3;
-}
-.panel-gremlin > a {
-  color: #AAFFC3;
-}
-.panel-gremlin > a:hover {
-  color: #AAFFC3;
 }
 
 .panel-guardian {
@@ -271,12 +199,6 @@
   color: white;
   background-color: #808000;
 }
-.panel-guardian > a {
-  color: #808000;
-}
-.panel-guardian > a:hover {
-  color: #808000;
-}
 
 .panel-jester {
   border-color: #008080;
@@ -285,12 +207,6 @@
   border-color: #008080;
   color: white;
   background-color: #008080;
-}
-.panel-jester > a {
-  color: #008080;
-}
-.panel-jester > a:hover {
-  color: #008080;
 }
 
 .panel-knight {
@@ -301,12 +217,6 @@
   color: white;
   background-color: #808080;
 }
-.panel-knight > a {
-  color: #808080;
-}
-.panel-knight > a:hover {
-  color: #808080;
-}
 
 .panel-monk {
   border-color: #CC7722;
@@ -315,12 +225,6 @@
   border-color: #CC7722;
   color: white;
   background-color: #CC7722;
-}
-.panel-monk > a {
-  color: #CC7722;
-}
-.panel-monk > a:hover {
-  color: #CC7722;
 }
 
 .panel-necromancer {
@@ -331,26 +235,14 @@
   color: white;
   background-color: #191919;
 }
-.panel-necromancer > a {
-  color: #191919;
-}
-.panel-necromancer > a:hover {
-  color: #191919;
-}
 
 .panel-paladin {
   border-color: #F5F5DC;
 }
 .panel-paladin > .panel-heading {
   border-color: #F5F5DC;
-  color: white;
+  color: black;
   background-color: #F5F5DC;
-}
-.panel-paladin > a {
-  color: #F5F5DC;
-}
-.panel-paladin > a:hover {
-  color: #F5F5DC;
 }
 
 .panel-ranger {
@@ -361,12 +253,6 @@
   color: white;
   background-color: #007FFF;
 }
-.panel-ranger > a {
-  color: #007FFF;
-}
-.panel-ranger > a:hover {
-  color: #007FFF;
-}
 
 .panel-sorcerer {
   border-color: #C71585;
@@ -375,12 +261,6 @@
   border-color: #C71585;
   color: white;
   background-color: #C71585;
-}
-.panel-sorcerer > a {
-  color: #C71585;
-}
-.panel-sorcerer > a:hover {
-  color: #C71585;
 }
 
 .panel-spell {
@@ -391,12 +271,6 @@
   color: white;
   background-color: #B57EDC;
 }
-.panel-spell > a {
-  color: #B57EDC;
-}
-.panel-spell > a:hover {
-  color: #B57EDC;
-}
 
 .panel-talent {
   border-color: #C0C0C0;
@@ -405,12 +279,6 @@
   border-color: #C0C0C0;
   color: white;
   background-color: #C0C0C0;
-}
-.panel-talent > a {
-  color: #C0C0C0;
-}
-.panel-talent > a:hover {
-  color: #C0C0C0;
 }
 
 .panel-thief {
@@ -421,12 +289,6 @@
   color: white;
   background-color: #000080;
 }
-.panel-thief > a {
-  color: #000080;
-}
-.panel-thief > a:hover {
-  color: #000080;
-}
 
 .panel-vampire {
   border-color: #800080;
@@ -435,12 +297,6 @@
   border-color: #800080;
   color: white;
   background-color: #800080;
-}
-.panel-vampire > a {
-  color: #800080;
-}
-.panel-vampire > a:hover {
-  color: #800080;
 }
 
 .panel-warlock {
@@ -451,12 +307,6 @@
   color: white;
   background-color: #6F4E37;
 }
-.panel-warlock > a {
-  color: #6F4E37;
-}
-.panel-warlock > a:hover {
-  color: #6F4E37;
-}
 
 .panel-warrior {
   border-color: #FF2400;
@@ -465,12 +315,6 @@
   border-color: #FF2400;
   color: white;
   background-color: #FF2400;
-}
-.panel-warrior > a {
-  color: #FF2400;
-}
-.panel-warrior > a:hover {
-  color: #FF2400;
 }
 
 .panel-wizard {
@@ -481,12 +325,6 @@
   color: white;
   background-color: #00FFFF;
 }
-.panel-wizard > a {
-  color: #00FFFF;
-}
-.panel-wizard > a:hover {
-  color: #00FFFF;
-}
 
 .panel-ninja {
   border-color: #0095B6;
@@ -495,12 +333,6 @@
   border-color: #0095B6;
   color: white;
   background-color: #0095B6;
-}
-.panel-ninja > a {
-  color: #0095B6;
-}
-.panel-ninja > a:hover {
-  color: #0095B6;
 }
 
 .panel-blacksmith {
@@ -511,12 +343,6 @@
   color: white;
   background-color: #FFBF00;
 }
-.panel-blacksmith > a {
-  color: #FFBF00;
-}
-.panel-blacksmith > a:hover {
-  color: #FFBF00;
-}
 
 .panel-oracle {
   border-color: #D1E231;
@@ -526,12 +352,6 @@
   color: white;
   background-color: #D1E231;
 }
-.panel-oracle > a {
-  color: #D1E231;
-}
-.panel-oracle > a:hover {
-  color: #D1E231;
-}
 
 .panel-shaman {
   border-color: #8E4585;
@@ -540,10 +360,4 @@
   border-color: #8E4585;
   color: white;
   background-color: #8E4585;
-}
-.panel-shaman > a {
-  color: #8E4585;
-}
-.panel-shaman > a:hover {
-  color: #8E4585;
 }
