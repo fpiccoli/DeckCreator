@@ -9,8 +9,7 @@
     "start": "electron .",
     "build-win": "electron-packager D:/projetos/deckcreator/ DeckCreator --platform=win32 --arch=x64 --icon=build/icon.ico --out=release-builds/ --prune=true --asar --overwrite=true --quiet=true",
     "build-linux": "electron-packager D:/projetos/deckcreator/ DeckCreator --platform=linux --arch=x64 --icon=build/icon.ico --out=release-builds/ --prune=true --asar --overwrite=true --quiet=true",
-    "setup-win": "node installers/windows.js",
-    "setup-linux": "node installers/linux.js"
+    "setup-win": "node installers/windows.js"
   },
   "author": "",
   "license": "ISC",
