@@ -6,8 +6,14 @@ const path = os.homedir()+'\\Documents';
 
 module.exports = {
   saveLogin(nome, json){
-    let caminho = validaPath(['\\My Games','\\Tabletop Simulator\\']);
-    let file = caminho + nome + '.json';
+    let tree = [];
+    if(os.platform() == 'win32'){
+      tree.push('\\My Games');
+    }
+    tree.push('\\Tabletop Simulator');
+
+    let caminho = validaPath(tree);
+    let file = caminho + '\\' + nome + '.json';
 
     jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
       if (err) console.error(err)
@@ -15,7 +21,13 @@ module.exports = {
     return 1;
   },
   deleteLogin(){
-    var filePath = path + '\\My Games\\Tabletop Simulator\\dclogin.json';
+    tree = '';
+    if(os.platform() == 'win32'){
+      tree += '\\My Games';
+    }
+    tree += '\\Tabletop Simulator';
+
+    var filePath = path + tree + '\\dclogin.json';
 
     if(fs.existsSync(filePath)){
       fs.unlinkSync(filePath);
@@ -23,8 +35,17 @@ module.exports = {
     return 1;
   },
   export(nome, json){
-    let caminho = validaPath(['\\My Games','\\Tabletop Simulator','\\Saves','\\Saved Objects','\\DeckCreator\\']);
-    let file = caminho + nome + '.json';
+    let tree = [];
+    if(os.platform() == 'win32'){
+      tree.push('\\My Games');
+    }
+    tree.push('\\Tabletop Simulator');
+    tree.push('\\Saves');
+    tree.push('\\Saved Objects');
+    tree.push('\\DeckCreator');
+
+    let caminho = validaPath(tree);
+    let file = caminho + '\\' + nome + '.json';
 
     jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
       if (err) console.error(err)
@@ -32,10 +53,19 @@ module.exports = {
     return 1;
   },
   update(nome, antigo, json){
+    let tree = [];
+    if(os.platform() == 'win32'){
+      tree.push('\\My Games');
+    }
+    tree.push('\\Tabletop Simulator');
+    tree.push('\\Saves');
+    tree.push('\\Saved Objects');
+    tree.push('\\DeckCreator');
+
     json.Nickname = nome;
-    let caminho = validaPath(['\\My Games','\\Tabletop Simulator','\\Saves','\\Saved Objects','\\DeckCreator\\']);
-    let newFile = caminho + nome + '.json';
-    let oldFile = caminho + antigo + '.json';
+    let caminho = validaPath(tree);
+    let newFile = caminho + '\\' + nome + '.json';
+    let oldFile = caminho + '\\' + antigo + '.json';
     fs.unlinkSync(oldFile);
 
     json = {SaveName: '',GameMode: '',Gravity: 0.5,Date: '',Table: '',Sky: '',Note: '',Rules: '',XmlUI: '',LuaScript: '',ObjectStates: [json],LuaScriptState: ''};
@@ -46,20 +76,45 @@ module.exports = {
     return 1;
   },
   delete(name){
-    var filePath = path + '\\My Games\\Tabletop Simulator\\Saves\\Saved Objects\\DeckCreator\\' + name + '.json';
+    tree = '';
+    if(os.platform() == 'win32'){
+      tree += '\\My Games';
+    }
+    tree += '\\Tabletop Simulator';
+    tree += '\\Saves';
+    tree += '\\Saved Objects';
+    tree += '\\DeckCreator';
+
+    var filePath = path + tree + '\\' + name + '.json';
     if(fs.existsSync(filePath)){
       fs.unlinkSync(filePath);
     }
   },
-  readFile(nome, fileTree){
-    let file = validaPath(fileTree) + nome;
+  validaLogin(){
+    let tree = [];
+    if(os.platform() == 'win32'){
+      tree.push('\\My Games');
+    }
+    tree.push('\\Tabletop Simulator');
+
+    let caminho = validaPath(tree);
+
+    let file = caminho + '\\dclogin.json';
     if(fs.existsSync(file)){
       return jsonfile.readFileSync(file);
     }
     return 0;
   },
   clearCache(){
-    let caminho = validaPath(['\\My Games','\\Tabletop Simulator','\\Mods','\\Images\\']);
+    let tree = [];
+    if(os.platform() == 'win32'){
+      tree.push('\\My Games');
+    }
+    tree.push('\\Tabletop Simulator');
+    tree.push('\\Mods');
+    tree.push('\\Images');
+
+    let caminho = validaPath(tree);
     let files = [];
 
     fs.readdirSync(caminho).forEach(file => {
@@ -68,7 +123,7 @@ module.exports = {
 
     files.forEach(excluir);
     function excluir(file, index, array){
-      fs.unlinkSync(caminho + file);
+      fs.unlinkSync(caminho + '\\' + file);
     }
   }
 }

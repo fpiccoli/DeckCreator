@@ -12,7 +12,7 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     ipcRenderer.send('redirecionar-pagina','index');
   }
   const os = require('os')
-  let login = file.readFile('dclogin.json', ['\\My Games','\\Tabletop Simulator\\']);
+  let login = file.validaLogin();
   if(login){
     ipcRenderer.send('set-cookie', 'login', JSON.stringify(login));
     ipcRenderer.send('redirecionar-pagina','index');
