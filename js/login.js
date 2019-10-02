@@ -11,14 +11,13 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   if(cookieLogin.length == 1){
     ipcRenderer.send('redirecionar-pagina','index');
   }
-  ipcRenderer.send('get-path', 'documents');
-  ipcRenderer.on('return-path', (event, path) => {
-    let login = file.readFile(path, 'dclogin.json', ['/My Games','/Tabletop Simulator/']);
+   const os = require('os')
+    let login = file.readFile('dclogin.json', ['\\My Games','\\Tabletop Simulator\\']);
+    console.log(login);
     if(login){
       ipcRenderer.send('set-cookie', 'login', JSON.stringify(login));
       ipcRenderer.send('redirecionar-pagina','index');
     }
-  });
 });
 
 document.querySelector('#login').addEventListener('click' , function(){

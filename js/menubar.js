@@ -12,35 +12,26 @@ const cookie = require('./cookie-manager.js');
 module.exports = {
   navbar(documento, cookies){
     documento.querySelector("#logout").addEventListener('click', function () {
-      ipcRenderer.send('get-path', 'documents');
-      ipcRenderer.on('return-path', (event, path) => {
-        if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja sair?')){
-          file.deleteLogin(path);
-          ipcRenderer.send('clear-cookies');
-          ipcRenderer.send('redirecionar-pagina', 'login');
-        }
-      });
+      if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja sair?')){
+        file.deleteLogin();
+        ipcRenderer.send('clear-cookies');
+        ipcRenderer.send('redirecionar-pagina', 'login');
+      }
     });
     documento.querySelector("#clear-cache").addEventListener('click', function () {
-      ipcRenderer.send('get-path', 'documents');
-      ipcRenderer.on('return-path', (event, path) => {
-        file.clearCache(path);
-        alert.message(documento.querySelector("#alert-message"), 'Cache do <b>Tabletop Simulator</b> limpo com sucesso!', 'success');
-      });
+      file.clearCache();
+      alert.message(documento.querySelector("#alert-message"), 'Cache do <b>Tabletop Simulator</b> limpo com sucesso!', 'success');
     });
     documento.querySelector("#import-decks").addEventListener('click', function () {
-      ipcRenderer.send('get-path', 'documents');
-      ipcRenderer.on('return-path', (event, path) => {
-        cookieLogin = cookie.filtraCookies(cookies, 'login');
-        let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
-        decks.then((retorno) => {
-          retorno.forEach(function (deck, index, array) {
-            let deckRetorno = deckBuilder.build(deck);
-            file.export(path, deck.name, deckRetorno);
-          });
-        }).catch(err => console.log(err));
-        alert.message(documento.querySelector("#alert-message"), 'Decks importados para o <b>Tabletop Simulator</b> com sucesso!', 'success');
-      });
+      cookieLogin = cookie.filtraCookies(cookies, 'login');
+      let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
+      decks.then((retorno) => {
+        retorno.forEach(function (deck, index, array) {
+          let deckRetorno = deckBuilder.build(deck);
+          file.export(deck.name, deckRetorno);
+        });
+      }).catch(err => console.log(err));
+      alert.message(documento.querySelector("#alert-message"), 'Decks importados para o <b>Tabletop Simulator</b> com sucesso!', 'success');
     });
     documento.querySelector("#lista-efeitos").addEventListener('click', function () {
       ipcRenderer.send('abrir-janela-efeitos');
@@ -48,20 +39,17 @@ module.exports = {
   },
   sidebar(documento, cookies){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
-      ipcRenderer.send('get-path', 'documents');
-      ipcRenderer.on('return-path', (event, path) => {
-        cookieLogin = cookie.filtraCookies(cookies, 'login');
-        let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
-        decks.then((retorno) => {
-          retorno.sort(dataManager.dynamicSort('name'));
-          retorno.forEach(function (deck, index, array) {
-            deck.cards.forEach(function(card){ delete card._id });
-            deck.heroes.forEach(function(hero){ delete hero._id });
-          });
-          documento.querySelector('#menu-content').innerHTML = html.loading();
-          render(documento, path, retorno);
-        }).catch(err => console.log(err));
-      });
+      cookieLogin = cookie.filtraCookies(cookies, 'login');
+      let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
+      decks.then((retorno) => {
+        retorno.sort(dataManager.dynamicSort('name'));
+        retorno.forEach(function (deck, index, array) {
+          deck.cards.forEach(function(card){ delete card._id });
+          deck.heroes.forEach(function(hero){ delete hero._id });
+        });
+        documento.querySelector('#menu-content').innerHTML = html.loading();
+        render(documento, retorno);
+      }).catch(err => console.log(err));
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
       ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome']);
@@ -79,7 +67,7 @@ module.exports = {
   }
 }
 
-function render(documento, path, json){
+function render(documento, json){
   documento.querySelector('#menu-content').innerHTML = html.menu(json);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;
@@ -94,27 +82,27 @@ function render(documento, path, json){
     documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
       if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ array[index].name +'"?')){
         if(data.delete(array[index].name)){
-          file.delete(path, array[index].name);
+          file.delete(array[index].name);
           json = removeObj(json, array[index]);
         }
       }
-      render(documento, path, json);
+      render(documento, json);
     });
     document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
       document.querySelector('#input-novo-nome-'+index).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+index+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+index+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
       document.querySelector('#update-nome-'+index).addEventListener('click' , function(){
-        eventUpdateNome(document, path, deck, index, json);
+        eventUpdateNome(document, deck, index, json);
       });
       document.querySelector('#campo-nome-'+index).addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-          eventUpdateNome(document, path, deck, index, json);
+          eventUpdateNome(document, deck, index, json);
         }
       });
     });
   });
 }
 
-function eventUpdateNome(documento, path, deck, index, json){
+function eventUpdateNome(documento, deck, index, json){
   let novoNome = documento.querySelector('#campo-nome-'+index).value;
   if(novoNome.length == 0){
     alert.message(document.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning');
@@ -124,10 +112,10 @@ function eventUpdateNome(documento, path, deck, index, json){
   let antigo = deck.name;
   if(alert.confirmDialog('Salvar Deck', 'Sim', 'Não', 'Deseja alterar o nome de "'+antigo+'" para  "'+novoNome+'"?')){
     if(data.update(deck, novoNome, antigo)){
-      file.update(path, novoNome, antigo, deck);
+      file.update(novoNome, antigo, deck);
     }
   }
-  render(documento, path, json);
+  render(documento, json);
 }
 
 function removeObj(lista, obj){

@@ -108,13 +108,9 @@ function saveDeck(cookies){
 
 function exportDeck(object){
   let deckRetorno = deck.build(object);
-
-  ipcRenderer.send('get-path', 'documents');
-  ipcRenderer.on('return-path', (event, path) => {
-    ipcRenderer.send('set-card-cookie', listaDeCartas);
-    file.export(path, object.name, deckRetorno);
-    ipcRenderer.send('redirecionar-pagina','index');
-  });
+  ipcRenderer.send('set-card-cookie', listaDeCartas);
+  file.export(object.name, deckRetorno);
+  ipcRenderer.send('redirecionar-pagina','index');
 }
 
 function renderPanel(heroi){
