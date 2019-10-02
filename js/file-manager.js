@@ -2,7 +2,8 @@ const jsonfile = require('jsonfile');
 const fs = require('fs');
 const { ipcRenderer }  = require('electron');
 const os = require('os');
-const path = os.homedir()+'\\Documents';
+let path = '~\\.local\\share\\';
+if(os.platform() == 'win32') path = os.homedir()+'\\Documents';
 
 module.exports = {
   saveLogin(nome, json){
@@ -91,6 +92,7 @@ module.exports = {
     }
   },
   validaLogin(){
+    console.log(path);
     let tree = [];
     if(os.platform() == 'win32'){
       tree.push('\\My Games');
