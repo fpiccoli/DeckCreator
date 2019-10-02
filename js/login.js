@@ -11,13 +11,12 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   if(cookieLogin.length == 1){
     ipcRenderer.send('redirecionar-pagina','index');
   }
-   const os = require('os')
-    let login = file.readFile('dclogin.json', ['\\My Games','\\Tabletop Simulator\\']);
-    console.log(login);
-    if(login){
-      ipcRenderer.send('set-cookie', 'login', JSON.stringify(login));
-      ipcRenderer.send('redirecionar-pagina','index');
-    }
+  const os = require('os')
+  let login = file.readFile('dclogin.json', ['\\My Games','\\Tabletop Simulator\\']);
+  if(login){
+    ipcRenderer.send('set-cookie', 'login', JSON.stringify(login));
+    ipcRenderer.send('redirecionar-pagina','index');
+  }
 });
 
 document.querySelector('#login').addEventListener('click' , function(){
@@ -62,8 +61,5 @@ async function validarLogin(user, pass){
 }
 
 function manterUsuario(json){
-  ipcRenderer.send('get-path', 'documents');
-  ipcRenderer.on('return-path', (event, path) => {
-    file.saveLogin(path, 'dclogin', json);''
-  });
+  file.saveLogin('dclogin', json);
 }

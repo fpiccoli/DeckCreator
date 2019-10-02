@@ -1,8 +1,8 @@
 const jsonfile = require('jsonfile');
 const fs = require('fs');
 const { ipcRenderer }  = require('electron');
-const path = require('os').homedir()+'\\Documents';
-
+const os = require('os');
+const path = os.homedir()+'\\Documents';
 
 module.exports = {
   saveLogin(nome, json){
@@ -53,8 +53,6 @@ module.exports = {
   },
   readFile(nome, fileTree){
     let file = validaPath(fileTree) + nome;
-    console.log(file);
-    console.log(fs.existsSync(file));
     if(fs.existsSync(file)){
       return jsonfile.readFileSync(file);
     }
