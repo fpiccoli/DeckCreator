@@ -9,6 +9,12 @@
 
 Releases:
 
+    1.8.0 (02/10/2019)
+      - Novas Funcionalidades:
+          - Agora é possível usar a aplicação para criar decks no Linux.
+      - Correções de bugs:
+          - Refatoração do sistema de árvore de pastas.
+
     1.7.2 (18/03/2019)
       - Correções de bugs:
           - Corrigido problema que ocorria nos decks importados pelo botão Importar Decks para o TTS.

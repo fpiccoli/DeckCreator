@@ -7,6 +7,18 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.8.0 (02/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Agora é possível usar a aplicação para criar decks no Linux.']
+      },
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Refatoração do sistema de árvore de pastas.']
+      }])
+    );
+
     text.push(h4('1.7.2 (18/03/2019)'));
     text.push(patch([
       {
