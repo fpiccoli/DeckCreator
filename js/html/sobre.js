@@ -15,7 +15,7 @@ module.exports = {
       },
       {
         titulo: 'Correções de bugs:',
-        itens: ['Refatoração do sistema de árvore de pastas.']
+        itens: ['Refatoração do esquema de estrutura de pastas.']
       }])
     );
 

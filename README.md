@@ -13,7 +13,7 @@ Releases:
       - Novas Funcionalidades:
           - Agora é possível usar a aplicação para criar decks no Linux.
       - Correções de bugs:
-          - Refatoração do sistema de árvore de pastas.
+          - Refatoração do esquema de estrutura de pastas.
 
     1.7.2 (18/03/2019)
       - Correções de bugs:
