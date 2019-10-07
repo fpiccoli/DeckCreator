@@ -53,6 +53,12 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     document.querySelector("#nome-time").textContent = nomeDoTime;
   }
 
+  cookiesGrupo = cookie.filtraCookies(cookies, 'grupo');
+  if(cookiesGrupo[0]){
+    grupo = cookiesGrupo[0].value;
+    document.querySelector("#grupo").value = grupo;
+  }
+
   updateHeroPanels();
   updateOtherPanels();
 
@@ -77,7 +83,7 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
 function addEventSelecionar(number){
   document.querySelector('.selecionar-heroi-'+number).addEventListener('click' , function(){
     ipcRenderer.send('seleciona-heroi', number);
-    ipcRenderer.send('set-card-cookie', listaDeCartas);
+    ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   });
 }
 
@@ -90,7 +96,8 @@ function saveDeck(cookies){
     cards: listaDeCartas,
     heroes: herois,
     extra: [],
-    user: JSON.parse(cookieLogin[0].value).user
+    user: JSON.parse(cookieLogin[0].value).user,
+    grupo: document.querySelector("#grupo").value
   }
 
   let validacao = data.validaDeckExistente(object);
@@ -111,7 +118,7 @@ function saveDeck(cookies){
 
 function exportDeck(object){
   let deckRetorno = deck.build(object);
-  ipcRenderer.send('set-card-cookie', listaDeCartas);
+  ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   file.export(object.name, deckRetorno);
   ipcRenderer.send('redirecionar-pagina','index');
 }
@@ -131,9 +138,12 @@ function renderSidebar(buttons){
       let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');
 
       renderCards(buttons[i]);
-      ipcRenderer.send('set-card-cookie', listaDeCartas);
+      ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
     });
   }
+  document.querySelector("#grupo").addEventListener('change', function(){
+    ipcRenderer.send('set-cookie', 'grupo', document.querySelector("#grupo").value);
+  });
   document.querySelector("#update-nome").addEventListener('click', function(){
     let nome = document.querySelector("#campo-nome").value;
     if(validaNomeVazio(nome)){
@@ -152,8 +162,7 @@ function renderSidebar(buttons){
     nomeDoTime = nome;
     nome = '';
     document.querySelector("#nome-time").textContent = nomeDoTime;
-
-    ipcRenderer.send('set-nome-cookie', nomeDoTime);
+    ipcRenderer.send('set-cookie', 'nome', nomeDoTime);
   }
   function validaNomeVazio(nome){
     if(nome.length == 0){

@@ -68,18 +68,22 @@ module.exports = {
 }
 
 function render(documento, json){
-  documento.querySelector('#menu-content').innerHTML = html.menu(json);
+  documento.querySelector('#menu-content').innerHTML = html.accordion(json);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;
     let cartas = deck.cards;
 
-    documento.querySelector('#botao-editar-'+index).addEventListener('click' , function(){
-      ipcRenderer.send('set-nome-cookie', array[index].name);
-      ipcRenderer.send('set-card-cookie', cartas);
-      ipcRenderer.send('set-herois-cookie', herois);
+    let id = deck.user+'-'+dataManager.replaceAll(deck.name.toLowerCase(),' ','-');
+    documento.querySelector('#botao-editar-'+id).addEventListener('click' , function(){
+      ipcRenderer.send('set-cookie', 'nome', array[index].name);
+      ipcRenderer.send('set-cookie', 'cards', JSON.stringify(cartas));
+      herois.forEach(setCookie);
+      function setCookie(heroi, index, array){
+        ipcRenderer.send('set-cookie', 'heroi'+(index+1), JSON.stringify(heroi));
+      };
       ipcRenderer.send('redirecionar-pagina','editor');
     });
-    documento.querySelector('#botao-excluir-'+index).addEventListener('click' , function(){
+    documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
       if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ array[index].name +'"?')){
         if(data.delete(array[index].name)){
           file.delete(array[index].name);
@@ -88,14 +92,14 @@ function render(documento, json){
       }
       render(documento, json);
     });
-    document.querySelector('#botao-alterar-nome-'+index).addEventListener('click' , function(){
-      document.querySelector('#input-novo-nome-'+index).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+index+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+index+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
-      document.querySelector('#update-nome-'+index).addEventListener('click' , function(){
-        eventUpdateNome(document, deck, index, json);
+    document.querySelector('#botao-alterar-nome-'+id).addEventListener('click' , function(){
+      document.querySelector('#input-novo-nome-'+id).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+id+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+index+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
+      document.querySelector('#update-nome-'+id).addEventListener('click' , function(){
+        eventUpdateNome(document, deck, id, json);
       });
-      document.querySelector('#campo-nome-'+index).addEventListener('keypress', function (e) {
+      document.querySelector('#campo-nome-'+id).addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-          eventUpdateNome(document, deck, index, json);
+          eventUpdateNome(document, deck, id, json);
         }
       });
     });

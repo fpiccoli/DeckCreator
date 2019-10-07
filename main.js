@@ -99,32 +99,6 @@ ipcMain.on('heroi-selecionado', (event, heroi, posicao) => {
   });
 });
 
-ipcMain.on('set-card-cookie', (event, lista) => {
-  let newCookie = {url:'https://deckcreator.com', name: 'cards', value: JSON.stringify(lista)};
-
-  mainSession.cookies.set(newCookie, (error) => {
-    console.log('cookie cards atualizado');
-  });
-});
-
-ipcMain.on('set-nome-cookie', (event, stringNome) => {
-  let newCookie = {url:'https://deckcreator.com', name: 'nome', value: stringNome};
-
-  mainSession.cookies.set(newCookie, (error) => {
-    console.log('cookie nome do deck atualizado');
-  });
-});
-
-ipcMain.on('set-herois-cookie', (event, herois) => {
-  herois.forEach(setCookie)
-
-  function setCookie(heroi, index, array){
-    mainSession.cookies.set({url:'https://deckcreator.com', name: 'heroi'+(index+1), value: JSON.stringify(heroi)}, (error) => {
-      console.log('cookie heroi'+(index+1)+' atualizado');
-    });
-  }
-});
-
 ipcMain.on('set-cookie', (event, label, stringValue) => {
   let newCookie = {url:'https://deckcreator.com', name: label, value: stringValue};
   mainSession.cookies.set(newCookie, (error) => {
