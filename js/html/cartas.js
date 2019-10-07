@@ -10,7 +10,7 @@ module.exports = {
     function addCard(card, index, array){
       let childs = [];
 
-      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+card.imgurl, height: '100%', width: '100%'}, []));
+      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+card.imgurl, height: '100%', width: '100%', class:'card-img'}, []));
 
       if(card.stamp){
         childs.push(builder.element('img', {class:'selo-novidade', src:'https://drive.google.com/uc?export=download&id='+card.stamp, height: '20%', width: '25%'}, []));
@@ -34,7 +34,7 @@ module.exports = {
     function addCard(card, index, array){
       let childs = [];
 
-      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+card.imgurl, height: '100%', width: '100%'}, []));
+      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+card.imgurl, height: '100%', width: '100%', class:'card-img'}, []));
 
       if(card.stamp){
         childs.push(builder.element('img', {class:'selo-novidade', src:'https://drive.google.com/uc?export=download&id='+card.stamp, height: '20%', width: '25%'}, []));

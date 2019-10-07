@@ -1,3 +1,7 @@
+.card-img {
+  border-radius: 5%;
+}
+
 .alert {
   margin-bottom: 0px;
   padding: 13px;
@@ -360,4 +364,13 @@
   border-color: #8E4585;
   color: white;
   background-color: #8E4585;
+}
+
+.panel-witch {
+  border-color: #DC143C;
+}
+.panel-witch > .panel-heading {
+  border-color: #DC143C;
+  color: white;
+  background-color: #DC143C;
 }

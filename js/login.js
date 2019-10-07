@@ -5,6 +5,9 @@ const alert = require('./alert-message.js');
 const cookie = require('./cookie-manager.js');
 const file = require('./file-manager.js');
 
+var package = require('../package.json');
+document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
+
 ipcRenderer.send('get-cookies');
 ipcRenderer.on('send-cookies', (event, cookies) => {
   cookieLogin = cookie.filtraCookies(cookies, 'login');

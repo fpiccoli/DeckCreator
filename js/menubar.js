@@ -112,7 +112,7 @@ function eventUpdateNome(documento, deck, index, json){
   let antigo = deck.name;
   if(alert.confirmDialog('Salvar Deck', 'Sim', 'Não', 'Deseja alterar o nome de "'+antigo+'" para  "'+novoNome+'"?')){
     if(data.update(deck, novoNome, antigo)){
-      file.update(novoNome, antigo, deck);
+      file.update(novoNome, antigo, deckBuilder.build(deck));
     }
   }
   render(documento, json);

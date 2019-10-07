@@ -10,6 +10,9 @@ const cookie = require('./cookie-manager.js');
 const menu = require('./menubar.js');
 const alert = require('./alert-message.js');
 
+var package = require('../package.json');
+document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
+
 let listaDeCartas = [];
 let herois = [];
 let buttons = [];

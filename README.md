@@ -9,6 +9,14 @@
 
 Releases:
 
+    1.8.1 (xx/10/2019)
+      - Novas Classes:
+          - Witch (Beta), com 14 cartas experimentais.
+      - Correções de bugs:
+          - Correção no botão de alterar nome do deck.
+      - Cartas alteradas:
+          - Wisdom (Spell): Retorna ao jogo com o efeito alterado.
+
     1.8.0 (02/10/2019)
       - Novas Funcionalidades:
           - Agora é possível usar a aplicação para criar decks no Linux.
@@ -36,11 +44,11 @@ Releases:
           - Corrigido o login que agora aceita a tecla Enter no lugar de clicar no botão de conectar.
           - Corrigido o botão Limpar Cache do TTS não estar funcionando.
       - Cartas alteradas:
-          - Shaman (Classe híbrida): Removida provisoriamente.
-          - Wisdom (Spell): Removida provisoriamente.
-          - Replicate (Spell): Removida provisoriamente.
-          - Hyperthmesia (Enchantment): Removida provisoriamente.
-          - Aura of Valor (Enchantment): Removida provisoriamente.
+          - Shaman (Classe híbrida): Removida.
+          - Wisdom (Spell): Removida.
+          - Replicate (Spell): Removida.
+          - Hyperthmesia (Enchantment): Removida.
+          - Aura of Valor (Enchantment): Removida.
           - Foresee (Spell): Transformada em uma nova carta do Oracle.
           - Bloodletting (Spell): Transformada em uma nova carta do Shaman.
 

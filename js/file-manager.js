@@ -69,8 +69,6 @@ module.exports = {
     let oldFile = caminho + '/' + antigo + '.json';
     fs.unlinkSync(oldFile);
 
-    json = {SaveName: '',GameMode: '',Gravity: 0.5,Date: '',Table: '',Sky: '',Note: '',Rules: '',XmlUI: '',LuaScript: '',ObjectStates: [json],LuaScriptState: ''};
-
     jsonfile.writeFile(newFile, json, {spaces: 2}, function (err) {
       if (err) console.error(err)
     });
