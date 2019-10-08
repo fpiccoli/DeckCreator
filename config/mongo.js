@@ -2,6 +2,8 @@ const { ipcRenderer }  = require('electron');
 
 module.exports = function(db){
   var mongoose = require('mongoose');
+
+    ipcRenderer.send('console-log-main', db);
   // mongoose.connect('mongodb://localhost/teste', {useNewUrlParser: true}); //local
   mongoose.connect('mongodb+srv://readwrite:txcreadwrite@tymbox-8gad9.mongodb.net/'+db+'?ssl=true&authSource=admin', {useNewUrlParser: true}); //cloud
 

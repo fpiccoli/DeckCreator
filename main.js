@@ -35,8 +35,6 @@ ipcMain.on('seleciona-heroi', (event, param) => {
     let pos = mainWindow.getPosition();
     let size = mainWindow.getSize();
     heroisWindow = new BrowserWindow({
-      width: 1366,
-      height: 768,
       alwaysOnTop: true,
       frame: false,
       x: pos[0]+10,

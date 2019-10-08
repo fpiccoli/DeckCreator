@@ -136,9 +136,8 @@ function renderPanel(heroi){
 
 async function renderSidebar(buttons, cookies){
   let decks = await data.getDecks(JSON.parse(cookie.filtraCookies(cookies, 'login')[0].value).user);
-
-
-  document.querySelector('#side-menu').innerHTML = htmlMenu.items(buttons, decks);
+  document.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
+  document.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
@@ -148,8 +147,8 @@ async function renderSidebar(buttons, cookies){
       ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
     });
   }
-  document.querySelector("#grupo").addEventListener('change', function(){
-    ipcRenderer.send('set-cookie', 'grupo', document.querySelector("#grupo").value);
+  document.querySelector("#add-grupo").addEventListener('click', function(){
+    document.querySelector('#lista-grupos').innerHTML = htmlMenu.updateGrupo(decks, document.querySelector("#change-grupo").value);
   });
   document.querySelector("#update-nome").addEventListener('click', function(){
     let nome = document.querySelector("#campo-nome").value;

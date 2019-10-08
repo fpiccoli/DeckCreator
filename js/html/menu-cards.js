@@ -2,11 +2,8 @@ const builder = require('./builder.js');
 var groupBy = require('json-groupby');
 
 module.exports = {
-  items(buttons, decks){
+  addButtons(buttons){
     let json = [];
-
-    json.push(insereNome());
-    json.push(selecionaGrupo(decks));
 
     buttons.forEach(montaJson);
     function montaJson(button, index, array){
@@ -21,51 +18,63 @@ module.exports = {
 
       json.push(builder.element('li', null, elements));
     }
+
     return builder.build(json);
+  },
+  addGrupo(decks){
+    decks.forEach(function (deck, index, array) {
+      if(!deck.grupo) deck.grupo = 'Sem Grupo';
+    });
+    let decksGrupo = groupBy(decks, ['grupo']);
+    let grupos = [];
+    Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
+      if(nomeDoGrupo != 'Sem Grupo') grupos.push(nomeDoGrupo);
+    });
+
+    let options = [];
+    options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Selecione um grupo')]));
+    grupos.forEach(function (grupo, index, array) {
+      options.push(addOption(grupo));
+    });
+
+    let retorno = builder.build([builder.element('li', {class: 'sidebar-search', id: 'lista-grupos'}, [grupo(options)])]);
+
+    return builder.replaceCamelCase(retorno);
+  },
+  updateGrupo(decks, opcaoNova){
+    decks.forEach(function (deck, index, array) {
+      if(!deck.grupo) deck.grupo = 'Sem Grupo';
+    });
+    let decksGrupo = groupBy(decks, ['grupo']);
+    let grupos = [];
+    Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
+      if(nomeDoGrupo != 'Sem Grupo') grupos.push(nomeDoGrupo);
+    });
+
+    let options = [];
+    options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Selecione um grupo')]));
+    grupos.forEach(function (grupo, index, array) {
+      options.push(addOption(grupo));
+    });
+    options.push(addOption(opcaoNova));
+
+    let retorno = builder.build([grupo(options)]);
+
+    return builder.replaceCamelCase(retorno);
   }
 }
 
-function insereNome(){
-  let icon = builder.element('i', { class: 'fa fa-edit' }, []);
-  let btn = builder.element('button', { id:'update-nome', class:'btn btn-default', type:'button' }, [icon]);
-  let input = builder.element('input', { id:'campo-nome', type:'text', class:'form-control', placeholder:'Nome do Deck' }, []);
-  let span = builder.element('span', { class:'input-group-btn' }, [btn]);
-  let inputGroup = builder.element('div', {class: 'input-group custom-search-form'}, [input, span]);
-
-  return builder.element('li', {class: 'sidebar-search'}, [inputGroup]);
-}
-
-function selecionaGrupo(decks){
-  let options = [];
-
-  decks.forEach(function (deck, index, array) {
-    if(!deck.grupo) deck.grupo = 'Sem Grupo';
-  });
-  let decksGrupo = groupBy(decks, ['grupo']);
-  let grupos = [];
-  Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
-    if(nomeDoGrupo != 'Sem Grupo') grupos.push(nomeDoGrupo);
-  });
-
-  options.push(addOption('', 'Selecione um grupo'));
-  grupos.forEach(function (grupo, index, array) {
-    options.push(addOption(grupo, grupo));
-  });
-
+function grupo(options){
   let iconAdd = builder.element('i', { class: 'fa fa-plus' }, []);
-  let btnAdd = builder.element('button', { id:'add-grupo', class:'btn btn-default', type:'button' }, [iconAdd]);
-  let iconRemove = builder.element('i', { class: 'fa fa-minus' }, []);
-  let btnRemove = builder.element('button', { id:'remove-grupo', class:'btn btn-default', type:'button' }, [iconRemove]);
+  let btnAdd = builder.element('button', { class:'btn btn-default', dataToggle:'modal', dataTarget:'#myModal', type:'button' }, [iconAdd]);
 
   let spanAdd = builder.element('span', { class:'input-group-btn' }, [btnAdd]);
-  let spanRemove = builder.element('span', { class:'input-group-btn' }, [btnRemove]);
 
   let select = builder.element('select', {class: 'form-control', id: 'grupo'}, options);
-  let inputGroup = builder.element('div', {class: 'input-group custom-search-form'}, [spanAdd, select, spanRemove]);
 
-  return builder.element('li', {class: 'sidebar-search'}, [inputGroup]);
+  return inputGroup = builder.element('div', {class: 'input-group custom-search-form'}, [select, spanAdd]);
 }
 
-function addOption(valor, texto){
-  return builder.element('option', { class:'active', value:valor }, [builder.text(texto)]);;
+function addOption(texto){
+  return builder.element('option', { value: texto }, [builder.text(texto)]);;
 }

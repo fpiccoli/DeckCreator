@@ -25,7 +25,6 @@ classes.then((retorno) => {
 
 }).catch(err => console.log(err));
 
-
 linkFechar.addEventListener('click', function () {
   ipcRenderer.send('fechar-janela-herois');
 });
