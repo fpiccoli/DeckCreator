@@ -40,7 +40,16 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'1be1iq7sJOLYeo07ZrNrKgSCx30ln_8_R'})
   buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'1QOaiH7ABjkmcLrij5Cz-Ir2Qh7FRc-zd'})
   buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'1tDpQbbRL7rMfj2GBR2SXKFo8hSd3i1ef'})
-  renderSidebar(buttons);
+
+  renderSidebar(buttons, cookies).then(() => {
+    cookiesGrupo = cookie.filtraCookies(cookies, 'grupo');
+    if(cookiesGrupo[0]){
+      grupo = cookiesGrupo[0].value;
+      document.querySelector("#grupo").value = grupo;
+    } else{
+      document.querySelector("#grupo").value = '';
+    }
+  }).catch(err => console.log(err));
 
   cookiesCards = cookie.filtraCookies(cookies, 'cards');
   if(cookiesCards[0]){
@@ -51,12 +60,6 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   if(cookiesNome[0]){
     nomeDoTime = cookiesNome[0].value;
     document.querySelector("#nome-time").textContent = nomeDoTime;
-  }
-
-  cookiesGrupo = cookie.filtraCookies(cookies, 'grupo');
-  if(cookiesGrupo[0]){
-    grupo = cookiesGrupo[0].value;
-    document.querySelector("#grupo").value = grupo;
   }
 
   updateHeroPanels();
@@ -131,8 +134,12 @@ function renderPanel(heroi){
   document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://drive.google.com/uc?export=download&id='+heroi.icon+'" height="300%" width="300%"/>';
 }
 
-function renderSidebar(buttons){
-  document.querySelector('#side-menu').innerHTML = htmlMenu.items(buttons);
+async function renderSidebar(buttons, cookies){
+  let decks = await data.getDecks(JSON.parse(cookie.filtraCookies(cookies, 'login')[0].value).user);
+
+
+  document.querySelector('#side-menu').innerHTML = htmlMenu.items(buttons, decks);
+
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');

@@ -76,7 +76,11 @@ function render(documento, json){
     let id = deck.user+'-'+dataManager.replaceAll(deck.name.toLowerCase(),' ','-');
     documento.querySelector('#botao-editar-'+id).addEventListener('click' , function(){
       ipcRenderer.send('set-cookie', 'nome', array[index].name);
-      ipcRenderer.send('set-cookie', 'grupo', deck.grupo);
+      if(deck.grupo == 'Sem Grupo'){
+        ipcRenderer.send('delete-cookies', ['grupo']);
+      } else{
+        ipcRenderer.send('set-cookie', 'grupo', deck.grupo);
+      }
       ipcRenderer.send('set-cookie', 'cards', JSON.stringify(cartas));
       herois.forEach(setCookie);
       function setCookie(heroi, index, array){
