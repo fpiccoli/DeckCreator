@@ -52,7 +52,7 @@ module.exports = {
       }).catch(err => console.log(err));
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
-      ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome']);
+      ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'grupo']);
       ipcRenderer.send('redirecionar-pagina','editor');
     });
     documento.querySelector('#editor-deck').addEventListener('click' , function(){
@@ -76,6 +76,7 @@ function render(documento, json){
     let id = deck.user+'-'+dataManager.replaceAll(deck.name.toLowerCase(),' ','-');
     documento.querySelector('#botao-editar-'+id).addEventListener('click' , function(){
       ipcRenderer.send('set-cookie', 'nome', array[index].name);
+      ipcRenderer.send('set-cookie', 'grupo', deck.grupo);
       ipcRenderer.send('set-cookie', 'cards', JSON.stringify(cartas));
       herois.forEach(setCookie);
       function setCookie(heroi, index, array){

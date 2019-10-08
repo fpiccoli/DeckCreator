@@ -111,7 +111,7 @@ ipcMain.on('redirecionar-pagina', (event, pagina) => {
 });
 
 ipcMain.on('clear-cookies', () => {
-  let cookies = ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'login'];
+  let cookies = ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'login', 'grupo'];
   cookies.forEach(function (cookie, index, array){
     mainSession.cookies.remove('https://deckcreator.com', cookie, (error) => {
       console.log('cookie '+cookie+' removido');
