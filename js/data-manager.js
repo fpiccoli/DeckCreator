@@ -13,20 +13,6 @@ module.exports = {
       }
     );
   },
-  // getMainCardsByClass(nomeDaClasse, cartas){
-  //   return cartas.filter(
-  //     function(carta){
-  //       return carta.class.includes(nomeDaClasse) && (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
-  //     }
-  //   );
-  // },
-  // getSubCardsByClass(nomeDaClasse, cartas){
-  //   return cartas.filter(
-  //     function(carta){
-  //       return carta.class.includes(nomeDaClasse) && (carta.subtype == 'GRD' || carta.subtype == 'EVD')
-  //     }
-  //   );
-  // },
   getClasseByCard(card, classes){
     return classes.find(
       function(classe){
@@ -41,20 +27,14 @@ module.exports = {
       }
     );
   },
-  // getCardByName(name, cartas){
-  //   return cartas.find(
-  //     function(card){
-  //       return card.name == name
-  //     }
-  //   );
-  // },
-  // getHeroByName(name, herois){
-  //   return herois.find(
-  //     function(heroi){
-  //       return heroi.name == name
-  //     }
-  //   );
-  // }
+  replaceAll(str, de, para){
+    var pos = str.indexOf(de);
+    while (pos > -1){
+      str = str.replace(de, para);
+      pos = str.indexOf(de);
+    }
+    return (str.replace(/[^a-zA-Z0-9]/g,'_'));
+  },
   dynamicSort(property) {
     var sortOrder = 1;
     if(property[0] === "-") {

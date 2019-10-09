@@ -46,7 +46,8 @@ var schema = mongoose.Schema({
       imgurl: String
     }
   ],
-  user: String
+  user: String,
+  grupo: String
 }, {collection: 'decks'});
 
 module.exports = mongoose.model('Deck', schema);

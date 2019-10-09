@@ -20,6 +20,7 @@ module.exports = {
   },
   replaceCamelCase(html){
     html = this.replaceAll(html,"dataToggle", "data-toggle");
+    html = this.replaceAll(html,"dataTarget", "data-target");
     html = this.replaceAll(html,"dataParent", "data-parent");
     html = this.replaceAll(html,"ariaExpanded", "aria-expanded");
     html = this.replaceAll(html,"ariaValuenow", "aria-valuenow");

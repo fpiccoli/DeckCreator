@@ -40,7 +40,16 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'1be1iq7sJOLYeo07ZrNrKgSCx30ln_8_R'})
   buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'1QOaiH7ABjkmcLrij5Cz-Ir2Qh7FRc-zd'})
   buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'1tDpQbbRL7rMfj2GBR2SXKFo8hSd3i1ef'})
-  renderSidebar(buttons);
+
+  renderSidebar(buttons, cookies).then(() => {
+    cookiesGrupo = cookie.filtraCookies(cookies, 'grupo');
+    if(cookiesGrupo[0]){
+      grupo = cookiesGrupo[0].value;
+      document.querySelector("#grupo").value = grupo;
+    } else{
+      document.querySelector("#grupo").value = '';
+    }
+  }).catch(err => console.log(err));
 
   cookiesCards = cookie.filtraCookies(cookies, 'cards');
   if(cookiesCards[0]){
@@ -77,7 +86,7 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
 function addEventSelecionar(number){
   document.querySelector('.selecionar-heroi-'+number).addEventListener('click' , function(){
     ipcRenderer.send('seleciona-heroi', number);
-    ipcRenderer.send('set-card-cookie', listaDeCartas);
+    ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   });
 }
 
@@ -90,7 +99,8 @@ function saveDeck(cookies){
     cards: listaDeCartas,
     heroes: herois,
     extra: [],
-    user: JSON.parse(cookieLogin[0].value).user
+    user: JSON.parse(cookieLogin[0].value).user,
+    grupo: document.querySelector("#grupo").value
   }
 
   let validacao = data.validaDeckExistente(object);
@@ -111,7 +121,7 @@ function saveDeck(cookies){
 
 function exportDeck(object){
   let deckRetorno = deck.build(object);
-  ipcRenderer.send('set-card-cookie', listaDeCartas);
+  ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   file.export(object.name, deckRetorno);
   ipcRenderer.send('redirecionar-pagina','index');
 }
@@ -124,16 +134,22 @@ function renderPanel(heroi){
   document.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://drive.google.com/uc?export=download&id='+heroi.icon+'" height="300%" width="300%"/>';
 }
 
-function renderSidebar(buttons){
-  document.querySelector('#side-menu').innerHTML = htmlMenu.items(buttons);
+async function renderSidebar(buttons, cookies){
+  let decks = await data.getDecks(JSON.parse(cookie.filtraCookies(cookies, 'login')[0].value).user);
+  document.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
+  document.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
+
   for(let i in buttons){
     document.querySelector('#cards-'+buttons[i].class.toLowerCase().replace(' ','')).addEventListener('click', function () {
       let txt = '#cards-'+buttons[i].class.toLowerCase().toLowerCase().replace(' ','');
 
       renderCards(buttons[i]);
-      ipcRenderer.send('set-card-cookie', listaDeCartas);
+      ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
     });
   }
+  document.querySelector("#add-grupo").addEventListener('click', function(){
+    document.querySelector('#lista-grupos').innerHTML = htmlMenu.updateGrupo(decks, document.querySelector("#change-grupo").value);
+  });
   document.querySelector("#update-nome").addEventListener('click', function(){
     let nome = document.querySelector("#campo-nome").value;
     if(validaNomeVazio(nome)){
@@ -152,8 +168,7 @@ function renderSidebar(buttons){
     nomeDoTime = nome;
     nome = '';
     document.querySelector("#nome-time").textContent = nomeDoTime;
-
-    ipcRenderer.send('set-nome-cookie', nomeDoTime);
+    ipcRenderer.send('set-cookie', 'nome', nomeDoTime);
   }
   function validaNomeVazio(nome){
     if(nome.length == 0){
