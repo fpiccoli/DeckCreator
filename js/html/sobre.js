@@ -7,11 +7,11 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
-    text.push(h4('1.8.1 (07/10/2019)'));
+    text.push(h4('1.9.0 (09/10/2019)'));
     text.push(patch([
       {
-        titulo: 'Novas Classes:',
-        itens: ['Witch (Beta), com 14 cartas experimentais']
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Agora é possível agrupar os deck similares, evitando confusão quando se tem muitos decks cadastrados.']
       },
       {
         titulo: 'Correções de bugs:',
@@ -20,6 +20,14 @@ module.exports = {
       {
         titulo: 'Cartas alteradas:',
         itens: ['Wisdom (Spell): Retorna ao jogo com o efeito alterado.']
+      }])
+    );
+
+    text.push(h4('1.8.1 (07/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Correção no botão de alterar nome do deck.']
       }])
     );
 

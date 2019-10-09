@@ -31,7 +31,7 @@ function classe(type, colunas, classes, lista){
     }
 
     let text = builder.text(classes[i].name);
-    let link = builder.element('a', {dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel',  ariaExpanded:'false', class:'collapsed', href:'#'+type+'-'+classes[i].name.toLowerCase()}, [text]);
+    let link = builder.element('a', {dataToggle: 'collapse', dataParent:'#accordion-'+type+'-panel', class:'collapsed', href:'#'+type+'-'+classes[i].name.toLowerCase()}, [text]);
     let title = builder.element('div', {class: 'panel-title'}, [link]);
     let heading = builder.element('div', {class: 'panel-heading'}, [title]);
 

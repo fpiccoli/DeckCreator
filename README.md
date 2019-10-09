@@ -9,13 +9,17 @@
 
 Releases:
 
-    1.8.1 (xx/10/2019)
+    1.9.0 (09/10/2019)
+      - Novas Funcionalidades:
+          - Agora é possível agrupar os deck similares, evitando confusão quando se tem muitos decks cadastrados.
       - Novas Classes:
           - Witch (Beta), com 14 cartas experimentais.
-      - Correções de bugs:
-          - Correção no botão de alterar nome do deck.
       - Cartas alteradas:
           - Wisdom (Spell): Retorna ao jogo com o efeito alterado.
+
+    1.8.1 (07/10/2019)
+      - Correções de bugs:
+          - Correção no botão de alterar nome do deck.
 
     1.8.0 (02/10/2019)
       - Novas Funcionalidades:

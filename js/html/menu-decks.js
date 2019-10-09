@@ -9,10 +9,12 @@ module.exports = {
       if(!deck.grupo) deck.grupo = 'Sem Grupo';
     });
     let decksGrupo = groupBy(decks, ['grupo']);
-    let grupos = ['Sem Grupo'];
+    let grupos = [];
     Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
       if(nomeDoGrupo != 'Sem Grupo') grupos.push(nomeDoGrupo);
     });
+    grupos = grupos.sort();
+    grupos.push('Sem Grupo');
 
     let json = [];
     json.push(builder.element('div', {class: 'col-lg-12'}, [this.accordionHeader(grupos), this.accordionContent(grupos, decksGrupo)]));
