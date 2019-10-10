@@ -1,7 +1,7 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "Criador de decks para Tabletop Simulator",
   "main": "main.js",
   "scripts": {

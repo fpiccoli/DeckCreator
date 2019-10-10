@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.9.1 (10/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Correção no botão de alterar nome do deck.']
+      }])
+    );
+
     text.push(h4('1.9.0 (09/10/2019)'));
     text.push(patch([
       {
@@ -20,14 +28,6 @@ module.exports = {
       {
         titulo: 'Cartas alteradas:',
         itens: ['Wisdom (Spell): Retorna ao jogo com o efeito alterado.']
-      }])
-    );
-
-    text.push(h4('1.8.1 (07/10/2019)'));
-    text.push(patch([
-      {
-        titulo: 'Correções de bugs:',
-        itens: ['Correção no botão de alterar nome do deck.']
       }])
     );
 

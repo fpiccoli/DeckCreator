@@ -109,5 +109,5 @@ function title(name, index){
 function botao(type, color, index, title){
   let icon = builder.element('i', {class:'fa fa-'+type}, []);
   let btn = builder.element('button', {id:'botao-'+index, class:'btn btn-'+color+' btn-circle btn-xl', title: title}, [icon]);
-  return builder.element('div', {class: 'col-xs-4 text-center', id:'birbo-'+index}, [btn]);
+  return builder.element('div', {class: 'col-xs-4 text-center'}, [btn]);
 }

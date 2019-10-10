@@ -68,6 +68,7 @@ module.exports = {
 }
 
 function render(documento, json){
+  console.log(html.accordion(json));
   documento.querySelector('#menu-content').innerHTML = html.accordion(json);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;
@@ -98,7 +99,7 @@ function render(documento, json){
       render(documento, json);
     });
     document.querySelector('#botao-alterar-nome-'+id).addEventListener('click' , function(){
-      document.querySelector('#input-novo-nome-'+id).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+id+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+index+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
+      document.querySelector('#input-novo-nome-'+id).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+id+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+id+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
       document.querySelector('#update-nome-'+id).addEventListener('click' , function(){
         eventUpdateNome(document, deck, id, json);
       });
