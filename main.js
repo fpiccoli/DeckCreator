@@ -1,4 +1,6 @@
 const { app, BrowserWindow, ipcMain, session }  = require('electron');
+const { autoUpdater } = require('electron-updater');
+const isDev = require('electron-is-dev');
 let mainWindow;
 let mainSession;
 
@@ -12,8 +14,38 @@ if (setupEvents.handleSquirrelEvent()) {
 // Module to control application life.
 var path = require('path')
 
+autoUpdater.checkForUpdates();
+console.log('Running in development');
+
+autoUpdater.on('update-availabe', () => {
+    console.log('update available');
+});
+autoUpdater.on('checking-for-update', () => {
+    console.log('checking-for-update');
+});
+autoUpdater.on('update-not-available', () => {
+    console.log('update-not-available');
+});
+autoUpdater.on('update-downloaded', (e) => {
+    console.log(e);
+    const options = {
+        type: 'info',
+        title: 'Information',
+        message: "Uma atualização foi encontrada, deseja atualizar?",
+        buttons: ['Sim', 'Não']
+    };
+    dialog.showMessageBox(options, function (index) {
+        if (index === 0) {
+            autoUpdater.quitAndInstall();
+            app.isQuiting = true;
+            app.quit();
+        }
+    });
+
+});
 
 app.on('ready', () => {
+  if (!isDev) autoUpdater.checkForUpdatesAndNotify();
   mainWindow = new BrowserWindow({
     width: 1366,
     height: 768//,
