@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.10.0 (11/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Agora o aplicativo verifica se há atualizações e realiza o download automaticamente toda vez que for iniciado (Windows).']
+      }])
+    );
+
     text.push(h4('1.9.1 (10/10/2019)'));
     text.push(patch([
       {

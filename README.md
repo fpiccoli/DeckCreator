@@ -1,13 +1,10 @@
-
-  _____            _     _____                _             
- |  __ \          | |   / ____|              | |            
- | |  | | ___  ___| | _| |     _ __ ___  __ _| |_ ___  _ __
- | |  | |/ _ \/ __| |/ / |    | '__/ _ \/ _` | __/ _ \| '__|
- | |__| |  __/ (__|   <| |____| | |  __/ (_| | || (_) | |   
- |_____/ \___|\___|_|\_\\_____|_|  \___|\__,_|\__\___/|_|   
-
+DeckCreator
 
 Releases:
+
+    1.10.0 (11/10/2019)
+      - Novas Funcionalidades:
+          - Agora o aplicativo verifica se há atualizações e realiza o download automaticamente toda vez que for iniciado (Windows).
 
     1.9.1 (10/10/2019)
       - Correções de bugs:
