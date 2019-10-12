@@ -1,11 +1,10 @@
 const { ipcRenderer }  = require('electron');
+const property = require('./property.js');
 
-module.exports = function(db){
+module.exports = function(){
   var mongoose = require('mongoose');
 
-    ipcRenderer.send('console-log-main', db);
-  // mongoose.connect('mongodb://localhost/teste', {useNewUrlParser: true}); //local
-  mongoose.connect('mongodb+srv://readwrite:txcreadwrite@tymbox-8gad9.mongodb.net/'+db+'?ssl=true&authSource=admin', {useNewUrlParser: true}); //cloud
+  mongoose.connect(property.dbString(), {useNewUrlParser: true}); //cloud
 
   mongoose.connection.on('connected', function(){
     ipcRenderer.send('console-log-main', 'Conectado ao MongoDB.');

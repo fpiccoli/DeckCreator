@@ -1,4 +1,4 @@
-require('../config/mongo.js')('deckcreator');
+require('../config/mongo.js')();
 var mongoose = require('mongoose');
 const Classe = require('../models/classe.js');
 const Deck = require('../models/deck.js');

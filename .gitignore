@@ -5,3 +5,4 @@
 /release-builds-mrbc/
 /releases/
 electron-builder.json
+/config/property.js
