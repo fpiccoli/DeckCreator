@@ -1,15 +1,17 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "description": "Criador de decks para Tabletop Simulator",
+  "author": "fpiccoli <filipe_mqt@hotmail.com>",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "pack": "electron-builder --dir --config electron-builder.json",
-    "dist": "electron-builder -c electron-builder.json",
-    "publish": "electron-builder -c electron-builder.json -p always",
+    "pack": "electron-builder --dir --config electron-builder.json --linux --windows",
+    "dist": "electron-builder --config electron-builder.json --windows",
+    "dist-linux": "electron-builder --config electron-builder.json --linux",
+    "publish": "electron-builder -c electron-builder.json --windows -p always",
     "build-win": "electron-packager D:/projetos/deckcreator/ DeckCreator --platform=win32 --arch=x64 --icon=build/icon.ico --out=release-builds/ --prune=true --asar --overwrite=true --quiet=true",
     "build-linux": "electron-packager D:/projetos/deckcreator/ DeckCreator --platform=linux --arch=x64 --icon=build/icon.ico --out=release-builds/ --prune=true --asar --overwrite=true --quiet=true",
     "setup-win": "node installers/windows.js"
@@ -17,7 +19,6 @@
   "build": {
     "appId": "deckcreator"
   },
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.3.1",

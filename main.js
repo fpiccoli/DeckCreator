@@ -1,7 +1,6 @@
-const { app, BrowserWindow, ipcMain, session, dialog }  = require('electron');
+const { app, BrowserWindow, ipcMain, session, dialog } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
-const alert = require('./js/alert-message.js');
 let mainWindow;
 let mainSession;
 
@@ -15,9 +14,6 @@ if (setupEvents.handleSquirrelEvent()) {
 // Module to control application life.
 var path = require('path')
 
-autoUpdater.checkForUpdates();
-console.log('Running in development');
-
 autoUpdater.on('update-availabe', () => {
   console.log('update available');
 });
@@ -30,9 +26,9 @@ autoUpdater.on('update-not-available', () => {
 autoUpdater.on('update-downloaded', (e) => {
   console.log(e);
   const options = {
-      type: 'info',
-      title: 'Information',
-      message: "Uma atualização foi encontrada, deseja atualizar?",
+      type: 'question',
+      title: 'Update Disponível',
+      message: "Uma nova versão foi encontrada, deseja atualizar imediatamente?",
       buttons: ['Sim', 'Não']
   };
   dialog.showMessageBox(options, function (index) {
@@ -51,8 +47,7 @@ autoUpdater.on('update-downloaded', (e) => {
 });
 
 app.on('ready', () => {
-  // if (!isDev) autoUpdater.checkForUpdatesAndNotify();
-  autoUpdater.checkForUpdatesAndNotify();
+  if (!isDev) autoUpdater.checkForUpdatesAndNotify();
   mainWindow = new BrowserWindow({
     width: 1366,
     height: 768//,
