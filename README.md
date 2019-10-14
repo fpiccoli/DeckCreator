@@ -2,6 +2,11 @@ DeckCreator
 
 Releases:
 
+    1.10.1 (14/10/2019)
+      - Correção de bugs:
+          - Alteração no verificador de atualizações para mostrar o update com um ícone ao invés de exibir uma mensagem.
+          - Correção no acesso ao banco.
+
     1.10.0 (11/10/2019)
       - Novas Funcionalidades:
           - Agora o aplicativo verifica se há atualizações e realiza o download automaticamente toda vez que for iniciado (Windows).

@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.10.1 (14/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Alteração no verificador de atualizações para mostrar o update com um ícone ao invés de exibir uma mensagem.', 'Correção no acesso ao banco.']
+      }])
+    );
+
     text.push(h4('1.10.0 (11/10/2019)'));
     text.push(patch([
       {
