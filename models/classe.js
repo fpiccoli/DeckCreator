@@ -30,7 +30,8 @@ var schema = mongoose.Schema({
     }
   ],
   icon: String,
-  bg: String
+  bg: String,
+  font: String
 }, {collection: 'cards'});
 
 module.exports = mongoose.model('Classe', schema);

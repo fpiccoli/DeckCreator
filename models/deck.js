@@ -31,6 +31,7 @@ var schema = mongoose.Schema({
       imgurl: String,
       icon: String,
       bg: String,
+      font: String,
       deck:{
         id: String,
         face: String

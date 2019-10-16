@@ -62,9 +62,9 @@ function menu(decks){
     herois = herois.concat(deck.heroes);
     cartas = herois.concat(deck.cards);
 
-    herois.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bgcolor:'#B57EDC'})
-    herois.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bgcolor:'#CC8899'})
-    herois.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bgcolor:'#c0c0c0'})
+    herois.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'#B57EDC'})
+    herois.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'#CC8899'})
+    herois.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'#c0c0c0'})
 
     let elements = [];
 
@@ -74,7 +74,7 @@ function menu(decks){
 
       let subElements = [];
 
-      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', style:'background-color:'+heroi.bgcolor+'; border-radius:5px; padding:5px;'}, []));
+      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', style:'background-color:'+heroi.bg+'; border-radius:5px; padding:5px;'}, []));
 
       subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
       subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));

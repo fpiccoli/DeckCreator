@@ -37,9 +37,9 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bgcolor:'#B57EDC'})
-  buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bgcolor:'#CC8899'})
-  buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bgcolor:'#c0c0c0'})
+  buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'#B57EDC'})
+  buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'#CC8899'})
+  buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'#c0c0c0'})
 
   renderSidebar(buttons, cookies).then(() => {
     cookiesGrupo = cookie.filtraCookies(cookies, 'grupo');
@@ -127,8 +127,8 @@ function exportDeck(object){
 }
 
 function renderPanel(heroi){
-  console.log(heroi)
-  document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('heading-style','color: '+heroi.fontcolor+';background-color: '+heroi.bgcolor+';');
+  console.log(heroi);
+  document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('heading-style','color: '+heroi.font+';background-color:'+heroi.bg+';');
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.alligment+')';
   document.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';

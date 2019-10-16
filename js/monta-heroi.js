@@ -9,8 +9,7 @@ module.exports = {
     retorno.alligment = deck.alligment;
     retorno.icon = data.getClasseByName(deck.main, lista).icon;
     retorno.bg = data.getClasseByName(deck.sub, lista).bg;
-    retorno.bgcolor = deck.bgcolor;
-    retorno.fontcolor = deck.fontcolor;
+    retorno.font = data.getClasseByName(deck.sub, lista).font;
 
     delete retorno.deck.cards;
 
