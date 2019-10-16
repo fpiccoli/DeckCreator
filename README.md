@@ -4,6 +4,7 @@ Releases:
 
     1.10.2 (16/10/2019)
       - Correção de bugs:
+          - Correção das funções que dependiam de mensagens e que foram quebradas na atualização da versão do electron.
           - Refatoração dos ícones.
 
     1.10.1 (14/10/2019)

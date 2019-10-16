@@ -11,7 +11,7 @@ module.exports = {
     text.push(patch([
       {
         titulo: 'Correções de bugs:',
-        itens: ['Refatoração dos ícones.']
+        itens: ['Correção das funções que dependiam de mensagens e que foram quebradas na atualização da versão do electron.','Refatoração dos ícones.']
       }])
     );
 
