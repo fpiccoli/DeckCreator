@@ -3,7 +3,7 @@
   "productName": "DeckCreator",
   "version": "1.10.2",
   "description": "Criador de decks para Tabletop Simulator",
-  "author": "fpiccoli <filipe_mqt@hotmail.com>",
+  "author": "fpiccoli",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -37,6 +37,7 @@
     "electron": "^6.0.12",
     "electron-builder": "^21.2.0",
     "electron-packager": "^13.0.1",
-    "electron-winstaller": "^2.7.0"
+    "electron-winstaller": "^2.7.0",
+    "lodash.template": "^4.5.0"
   }
 }
