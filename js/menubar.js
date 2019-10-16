@@ -85,7 +85,7 @@ function render(documento, json){
     let herois = deck.heroes;
     let cartas = deck.cards;
 
-    let id = deck.user+'-'+dataManager.replaceAll(deck.name.toLowerCase(),' ','-');
+    let id = deck.user+'-'+dataManager.getNome(deck.name);
     documento.querySelector('#botao-editar-'+id).addEventListener('click' , function(){
       ipcRenderer.send('set-cookie', 'nome', array[index].name);
       if(deck.grupo == 'Sem Grupo'){

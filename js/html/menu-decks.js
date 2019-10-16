@@ -25,7 +25,7 @@ module.exports = {
     let lis = [];
 
     grupos.forEach(function (nomeDoGrupo, index, array) {
-      let a = builder.element('a', {href: '#'+dataManager.replaceAll(nomeDoGrupo.toLowerCase(),' ','-'), dataToggle:'tab'}, [builder.text(nomeDoGrupo)]);
+      let a = builder.element('a', {href: '#'+dataManager.getNome(nomeDoGrupo), dataToggle:'tab'}, [builder.text(nomeDoGrupo)]);
       let content = {};
       if (index == 0) content = {class: 'active'};
       lis.push(builder.element('li', content, [a]));
@@ -39,7 +39,7 @@ module.exports = {
     grupos.forEach(function (nomeDoGrupo, index, array) {
       let content = '';
       if (index == 0) content = ' active in';
-      divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.replaceAll(nomeDoGrupo.toLowerCase(),' ','-')}, menu(decksGrupo[nomeDoGrupo])));
+      divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo])));
     });
 
     return builder.element('div', {class: 'tab-content'}, divs);
@@ -57,14 +57,14 @@ function menu(decks){
     let herois = [];
     let cartas = [];
 
-    let rowTitle = title(deck.name, deck.user+'-'+dataManager.replaceAll(deck.name.toLowerCase(),' ','-'));
+    let rowTitle = title(deck.name, deck.user+'-'+dataManager.getNome(deck.name));
 
     herois = herois.concat(deck.heroes);
     cartas = herois.concat(deck.cards);
 
-    herois.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'1be1iq7sJOLYeo07ZrNrKgSCx30ln_8_R'})
-    herois.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'1QOaiH7ABjkmcLrij5Cz-Ir2Qh7FRc-zd'})
-    herois.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'1tDpQbbRL7rMfj2GBR2SXKFo8hSd3i1ef'})
+    herois.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bgcolor:'#B57EDC'})
+    herois.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bgcolor:'#CC8899'})
+    herois.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bgcolor:'#c0c0c0'})
 
     let elements = [];
 
@@ -74,8 +74,7 @@ function menu(decks){
 
       let subElements = [];
 
-      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', class:'center-icon'}, []));
-      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.bg, height:'40%', width:'40%'}, []));
+      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', style:'background-color:'+heroi.bgcolor+'; border-radius:5px; padding:5px;'}, []));
 
       subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
       subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));
@@ -84,7 +83,7 @@ function menu(decks){
       childDeck = builder.element('div', {class:'col-xs-9 text-right'}, elements);
     });
 
-    let id = deck.user+'-'+dataManager.replaceAll(deck.name.toLowerCase(),' ','-');
+    let id = deck.user+'-'+dataManager.getNome(deck.name);
     let botaoAlterarNome = botao('tag', 'info', 'alterar-nome-'+id, 'Alterar Nome');
     let botaoEditar = botao('edit', 'primary', 'editar-'+id, 'Editar Deck');
     let botaoExcluir = botao('trash', 'danger', 'excluir-'+id, 'Excluir Deck');

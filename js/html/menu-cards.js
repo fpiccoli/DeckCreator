@@ -1,5 +1,6 @@
 const builder = require('./builder.js');
 var groupBy = require('json-groupby');
+const dataManager = require('../data-manager.js');
 
 module.exports = {
   addButtons(buttons){
@@ -10,11 +11,11 @@ module.exports = {
       let childs = [];
       let elements = [];
 
-      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+button.bg, height:'50%', width:'25%'}, []));
-      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+button.icon, height:'50%', width:'25%', class:'center-icon-menu'}, []));
+      console.log(button);
+      childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+button.icon, height:'50%', width:'25%', style:'background-color:'+button.bgcolor+'; border-radius:5px; padding:5px;'}, []));
 
       childs.push(builder.element('div', {class: 'text-center'}, [builder.text(button.class)]));
-      elements.push(builder.element('a', {href:'#', class: 'text-center', id:'cards-'+button.class.toLowerCase().toLowerCase().replace(' ','')}, childs));
+      elements.push(builder.element('a', {href:'#', class: 'text-center', id:'cards-'+dataManager.getNome(button.class)}, childs));
 
       json.push(builder.element('li', null, elements));
     }

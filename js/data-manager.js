@@ -45,5 +45,10 @@ module.exports = {
       var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
       return result * sortOrder;
     }
+  },
+  getNome(string){
+    string = this.replaceAll(string, ' ','-');
+    string = this.replaceAll(string, 'á','a');
+    return string.toLowerCase();
   }
 }

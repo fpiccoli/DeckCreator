@@ -26,7 +26,7 @@ function listaNav(menus){
 
   menus.forEach(monta);
   function monta(item, index, array){
-    let a = builder.element('a', {href:'#nav-'+item.replace('á','a').toLowerCase(), dataToggle:'tab'}, [builder.text(item)]);
+    let a = builder.element('a', {href:'#nav-'+data.getNome(item), dataToggle:'tab'}, [builder.text(item)]);
 
     let classe = null;
     if (index == 0){
