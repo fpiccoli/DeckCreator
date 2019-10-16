@@ -11,6 +11,18 @@ const cookie = require('./cookie-manager.js');
 
 module.exports = {
   navbar(documento, cookies){
+
+    ipcRenderer.send('update-check');
+    ipcRenderer.on('update-ready', (event, downloaded) => {
+      if(downloaded){
+        documento.querySelector('#update-ready').innerHTML = '<a class="dropdown-toggle" title="Nova atuallização!" data-toggle="dropdown" href="#"><i class="fa fa-exclamation"></i></a><ul class="dropdown-menu dropdown-user"><li><a id="do-update" href="#">Reiniciar e atualizar</a></li></ul>'
+
+        documento.querySelector("#do-update").addEventListener('click' , function(){
+          ipcRenderer.send('do-update');
+        });
+      }
+    });
+
     documento.querySelector("#logout").addEventListener('click', function () {
       if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja sair?')){
         file.deleteLogin();
@@ -68,7 +80,6 @@ module.exports = {
 }
 
 function render(documento, json){
-  console.log(html.accordion(json));
   documento.querySelector('#menu-content').innerHTML = html.accordion(json);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;

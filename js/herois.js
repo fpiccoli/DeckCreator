@@ -30,7 +30,6 @@ linkFechar.addEventListener('click', function () {
 });
 
 function render(type, colunas, puros, lista){
-  console.log(html.build(type, colunas, puros, lista));
   let retorno = html.build(type, colunas, puros, lista);
   document.querySelector('#accordion-'+type+'-panel').innerHTML = retorno;
   if (retorno.search("recarregar-herois") > 0){

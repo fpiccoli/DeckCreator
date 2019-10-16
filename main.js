@@ -3,16 +3,17 @@ const { autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
 let mainWindow;
 let mainSession;
+let downloaded = false;
 
 //handle setupevents as quickly as possible
-const setupEvents = require('./installers/setupEvents')
+const setupEvents = require('./installers/setupEvents');
 if (setupEvents.handleSquirrelEvent()) {
   // squirrel event handled and app will exit in 1000ms, so don't do anything else
   return;
 }
 
 // Module to control application life.
-var path = require('path')
+var path = require('path');
 
 autoUpdater.on('update-availabe', () => {
   console.log('update available');
@@ -24,34 +25,31 @@ autoUpdater.on('update-not-available', () => {
   console.log('update-not-available');
 });
 autoUpdater.on('update-downloaded', (e) => {
+  downloaded = true;
   console.log(e);
-  const options = {
-      type: 'question',
-      title: 'Update Disponível',
-      message: "Uma nova versão foi encontrada, deseja atualizar imediatamente?",
-      buttons: ['Sim', 'Não']
-  };
-  dialog.showMessageBox(options, function (index) {
-      if (index === 0) {
-          autoUpdater.quitAndInstall();
-          app.isQuiting = true;
-          app.quit();
-      }
-  });
-  // if(alert.confirmDialog('Update disponível', 'Sim', 'Não', 'Uma atualização foi encontrada, deseja atualizar?')){
-  //   autoUpdater.quitAndInstall();
-  //   app.isQuiting = true;
-  //   app.quit();
-  // }
+});
 
+ipcMain.on("update-check", (event) => {
+  event.sender.send("update-ready", downloaded);
+});
+
+ipcMain.on("do-update", (event) => {
+  autoUpdater.quitAndInstall();
+  app.isQuiting = true;
+  app.quit();
 });
 
 app.on('ready', () => {
-  if (!isDev) autoUpdater.checkForUpdatesAndNotify();
+  setInterval(function(){
+    if (!isDev) autoUpdater.checkForUpdatesAndNotify();
+  }, 60000);
   mainWindow = new BrowserWindow({
     width: 1366,
-    height: 768//,
+    height: 768,
     // frame: false
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
   // mainWindow.setMenu(null);
   mainWindow.loadURL(`file://${__dirname}/pages/login.html`);
@@ -74,7 +72,10 @@ app.on('ready', () => {
         x: pos[0]+10,
         y: pos[1]+10,
         width: size[0],
-        height: size[1]
+        height: size[1],
+        webPreferences: {
+          nodeIntegration: true
+        }
       });
       heroisWindow.on('closed', () => {
         heroisWindow = null;
@@ -95,7 +96,10 @@ app.on('ready', () => {
           x: pos[0]+10,
           y: pos[1]+10,
           width: size[0]/4,
-          height: size[1]
+          height: size[1],
+          webPreferences: {
+            nodeIntegration: true
+          }
         });
         efeitosWindow.on('closed', () => {
           efeitosWindow = null;
