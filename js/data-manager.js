@@ -9,7 +9,7 @@ module.exports = {
   getHybrid(nomeDaClasse, classes){
     return classes.filter(
       function(classe){
-        return (classe.main == nomeDaClasse || classe.sub == nomeDaClasse) && classe.subtype == 'Hybrid'
+        return (classe.main == nomeDaClasse || classe.sub == nomeDaClasse) && classe.subtype == 'Hybrid';
       }
     );
   },
@@ -50,5 +50,23 @@ module.exports = {
     string = this.replaceAll(string, ' ','-');
     string = this.replaceAll(string, 'á','a');
     return string.toLowerCase();
+  },
+  filtraMain(lista, game){
+    return lista.filter(function(carta){
+      if(game == 'M&D'){
+        return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
+      } else if(game == 'MRBC'){
+        return (carta.subtype == 'POW' || carta.subtype == 'INT' || carta.subtype == 'SPE' || carta.subtype == 'ENV')
+      }
+    });
+  },
+  filtraSub(lista, game){
+    return lista.filter(function(carta){
+      if(game == 'M&D'){
+        return (carta.subtype == 'EVD' || carta.subtype == 'GRD')
+      } else if(game == 'MRBC'){
+        return (carta.subtype == 'DGE' || carta.subtype == 'BLK')
+      }
+    });
   }
 }

@@ -40,9 +40,12 @@ ipcMain.on("do-update", (event) => {
 });
 
 app.on('ready', () => {
-  setInterval(function(){
-    if (!isDev) autoUpdater.checkForUpdatesAndNotify();
-  }, 60000);
+  if (!isDev){
+    autoUpdater.checkForUpdatesAndNotify();
+    setInterval(function(){
+      autoUpdater.checkForUpdatesAndNotify();
+    }, 60000);
+  }
   mainWindow = new BrowserWindow({
     width: 1366,
     height: 768,
@@ -51,8 +54,12 @@ app.on('ready', () => {
       nodeIntegration: true
     }
   });
-  // mainWindow.setMenu(null);
-  mainWindow.loadURL(`file://${__dirname}/pages/login.html`);
+  if(isDev){
+    mainWindow.toggleDevTools();
+  }else{
+    mainWindow.setMenu(null);
+  }
+  mainWindow.loadURL(`file://${__dirname}/pages/prelogin.html`);
     mainWindow.maximize();
     mainSession = mainWindow.webContents.session;
   });
@@ -105,7 +112,11 @@ app.on('ready', () => {
           efeitosWindow = null;
         })
       }
-      // efeitosWindow.setMenu(null);
+      if(isDev){
+        efeitosWindow.toggleDevTools();
+      }else{
+        efeitosWindow.setMenu(null);
+      }
       efeitosWindow.loadURL(`file://${__dirname}/pages/efeitos.html`);
       });
 

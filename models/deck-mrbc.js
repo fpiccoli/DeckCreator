@@ -50,6 +50,6 @@ var schema = mongoose.Schema({
   user: String,
   grupo: String,
   game: String
-}, {collection: 'decks'});
+}, {collection: 'mrbc_decks'});
 
-module.exports = mongoose.model('Deck', schema);
+module.exports = mongoose.model('DeckMRBC', schema);

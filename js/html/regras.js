@@ -1,4 +1,5 @@
 const builder = require('./builder.js');
+const dataManager = require('../data-manager.js');
 
 module.exports = {
   html(){
@@ -26,7 +27,7 @@ function listaNav(menus){
 
   menus.forEach(monta);
   function monta(item, index, array){
-    let a = builder.element('a', {href:'#nav-'+data.getNome(item), dataToggle:'tab'}, [builder.text(item)]);
+    let a = builder.element('a', {href:'#nav-'+dataManager.getNome(item), dataToggle:'tab'}, [builder.text(item)]);
 
     let classe = null;
     if (index == 0){

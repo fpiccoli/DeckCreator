@@ -8,9 +8,11 @@ module.exports = {
     retorno.subtype = deck.subtype;
     retorno.alligment = deck.alligment;
     retorno.icon = data.getClasseByName(deck.main, lista).icon;
-    retorno.bg = data.getClasseByName(deck.sub, lista).bg;
-    retorno.font = data.getClasseByName(deck.sub, lista).font;
-
+    let getSub = data.getClasseByName(deck.sub, lista);
+    if(getSub){
+      retorno.bg = getSub.bg;
+      retorno.font = getSub.font;
+    }
     delete retorno.deck.cards;
 
     return retorno;

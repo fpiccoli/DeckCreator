@@ -9,6 +9,7 @@ const file = require('./file-manager.js');
 const cookie = require('./cookie-manager.js');
 const menu = require('./menubar.js');
 const alert = require('./alert-message.js');
+let user;
 
 var package = require('../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
@@ -24,6 +25,9 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
   cookieLogin = cookie.filtraCookies(cookies, 'login');
   if(cookieLogin.length == 0){
     ipcRenderer.send('redirecionar-pagina','login');
+  } else if(cookieLogin[0]){
+    let loginJson = JSON.parse(cookieLogin[0].value);
+    user = {name: loginJson.user, game: loginJson.game};
   }
 
   cookiesHeroi = cookie.filtraCookies(cookies, 'heroi');
@@ -37,9 +41,19 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
     buttons.push(herois[i]);
   }
 
-  buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'#B57EDC'})
-  buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'#CC8899'})
-  buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'#c0c0c0'})
+  function renderSpecial(){
+    if(!user) return;
+    if(user.game == 'M&D'){
+      buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'#B57EDC'})
+      buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'#CC8899'})
+      buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'#c0c0c0'})
+    }
+    else if(user.game == 'MRBC'){
+      buttons.push({class:'Breeder-SPE', main:'Breeder-SPE', sub:'Breeder-SPE', icon:'1PwRtWS3sAKngZNE9njZr_YsHQPaZpBOZ', bg:'#483939'})
+      buttons.push({class:'Breeder-ENV', main:'Breeder-ENV', sub:'Breeder-ENV', icon:'1PwRtWS3sAKngZNE9njZr_YsHQPaZpBOZ', bg:'#483939'})
+      buttons.push({class:'Any Monster', main:'Any Monster', sub:'Any Monster', icon:'1cTOPQh_UbGKeWzEkUuCjPjxYSTeqTseJ', bg:'#f7f7f9'})
+    }
+  }
 
   renderSidebar(buttons, cookies).then(() => {
     cookiesGrupo = cookie.filtraCookies(cookies, 'grupo');
@@ -64,6 +78,7 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
 
   updateHeroPanels();
   updateOtherPanels();
+  renderSpecial();
 
   addEventSelecionar(1);
   addEventSelecionar(2);
@@ -74,11 +89,11 @@ ipcRenderer.on('send-cookies', (event, cookies) => {
       alert.message(document.querySelector('#alert-message'), 'Você precisa ter exatamente <b>50 cartas</b> para salvar um deck padrão!', 'warning')
       return;
     }
-    saveDeck(cookies);
+    saveDeck();
   });
 
   document.querySelector("#salvar-deck-experimental").addEventListener('click' , function(){
-    saveDeck(cookies);
+    saveDeck();
   });
 
 });
@@ -90,8 +105,8 @@ function addEventSelecionar(number){
   });
 }
 
-function saveDeck(cookies){
-  cookieLogin = cookie.filtraCookies(cookies, 'login');
+function saveDeck(){
+  if(!user) return;
   listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
 
   let object = {
@@ -99,20 +114,21 @@ function saveDeck(cookies){
     cards: listaDeCartas,
     heroes: herois,
     extra: [],
-    user: JSON.parse(cookieLogin[0].value).user,
-    grupo: document.querySelector("#grupo").value
+    user: user.name,
+    grupo: document.querySelector("#grupo").value,
+    game: user.game
   }
 
-  let validacao = data.validaDeckExistente(object);
+  let validacao = data.validaDeckExistente(object, user.game);
   validacao.then((deckJaExiste) => {
     if(deckJaExiste){
       if(alert.confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
-        if(data.save(object)){
+        if(data.save(object, user.game)){
           exportDeck(object);
         }
       }
     } else{
-      if(data.save(object)){
+      if(data.save(object, user.game)){
         exportDeck(object);
       }
     }
@@ -122,12 +138,11 @@ function saveDeck(cookies){
 function exportDeck(object){
   let deckRetorno = deck.build(object);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
-  file.export(object.name, deckRetorno);
+  file.export(object.name, deckRetorno, user.game);
   ipcRenderer.send('redirecionar-pagina','index');
 }
 
 function renderPanel(heroi){
-  console.log(heroi);
   document.querySelector('#panel'+heroi.panel).innerHTML = document.querySelector('#panel'+heroi.panel).innerHTML.replace('heading-style','color: '+heroi.font+';background-color:'+heroi.bg+';');
   document.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
   document.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.alligment+')';
@@ -136,7 +151,7 @@ function renderPanel(heroi){
 }
 
 async function renderSidebar(buttons, cookies){
-  let decks = await data.getDecks(JSON.parse(cookie.filtraCookies(cookies, 'login')[0].value).user);
+  let decks = await data.getDecks(user.name, user.game);
   document.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
   document.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
@@ -185,14 +200,19 @@ document.querySelector('.cartas-deck').addEventListener('click', function () {
 });
 
 async function renderCards(classe){
-  let main = await data.getClassCards(classe.main);
-  let sub = await data.getClassCards(classe.sub);
+  let main = await data.getClassCards(classe.main, user.game);
+  let sub = [];
+  if(classe.sub == '???'){
+    sub = await data.getClassCards(classe.main, user.game);
+  } else{
+    sub = await data.getClassCards(classe.sub, user.game);
+  }
   let mainCards = [];
   let subCards = [];
 
   main.forEach(function (grupo, index, array){
     if(grupo.cards){
-      let filtrado = filtraMain(grupo.cards);
+      let filtrado = dataManager.filtraMain(grupo.cards, user.game);
       filtrado.forEach(function (carta, i, array){
         carta.deck = {id: grupo.id, face: grupo.face};
       });
@@ -201,7 +221,7 @@ async function renderCards(classe){
   });
   sub.forEach(function (grupo, index, array){
     if(grupo.cards){
-      let filtrado = filtraSub(grupo.cards);
+      let filtrado = dataManager.filtraSub(grupo.cards, user.game);
       filtrado.forEach(function (carta, i, array){
         carta.deck = {id: grupo.id, face: grupo.face};
       });
@@ -263,7 +283,7 @@ function renderLista(cartas){
 
 function updateHeroPanels(){
   for(let i in herois){
-    let valor = conta.mainClass(listaDeCartas, herois[i]) + conta.subClass(listaDeCartas, herois[i]);
+    let valor = conta.mainClass(listaDeCartas, herois[i], user.game) + conta.subClass(listaDeCartas, herois[i], user.game);
     document.querySelector('#qtde-heroi-'+herois[i].panel).textContent = valor;
   }
 }
@@ -273,13 +293,48 @@ function updateCardPanels(carta){
 }
 
 function updateOtherPanels(){
+  let talentStyle;
+  let spellStyle;
+  let talentIcon;
+  let spellIcon;
+  let talentText;
+  let spellText;
+  let qtdeTalent = 0;
+  let qtdeSpell = 0;
+
   let percentual = listaDeCartas.length*100/50;
   document.querySelector('#all-cards').textContent = listaDeCartas.length;
   document.querySelector('#status-value').textContent = percentual+'%';
   document.querySelector('#status-bar').innerHTML = htmlCartas.statusbar(percentual);
-  document.querySelector('#spell-cards').textContent = conta.class(listaDeCartas, 'Spell') + conta.class(listaDeCartas, 'Enchantment');
-  document.querySelector('#talent-cards').textContent = conta.class(listaDeCartas, 'Talent');
+
+
+  if(user.game == 'M&D'){
+    qtdeTalent = conta.class(listaDeCartas, 'Talent', user.game);
+    qtdeSpell = conta.class(listaDeCartas, 'Spell', user.game) + conta.class(listaDeCartas, 'Enchantment', user.game);
+    talentStyle = 'style="color: white;background-color: #c0c0c0;"';
+    spellStyle = 'style="color: white;background-color: #B57EDC;"';
+    talentIcon = '<img src="https://drive.google.com/uc?export=download&id=1WrooGrmv1Uand440zPn9QojbY_SA6WzB" height="300%" width="300%"/>';
+    spellIcon = '<img src="https://drive.google.com/uc?export=download&id=12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV" height="150%" width="150%"/><img src="https://drive.google.com/uc?export=download&id=1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW" height="150%" width="150%"/>';
+    talentText = 'Talent</br>All Classes';
+    spellText = 'Spell +</br>Enchantment';
+  } else if(user.game == 'MRBC'){
+    qtdeTalent = conta.class(listaDeCartas, 'Any Monster', user.game);
+    qtdeSpell = conta.class(listaDeCartas, 'Breeder', user.game);
+    talentStyle = 'style="color: black;background-color: #f7f7f9;"';
+    spellStyle = 'style="color: white;background-color: #483939;"';
+    talentIcon = '<img src="https://drive.google.com/uc?export=download&id=1cTOPQh_UbGKeWzEkUuCjPjxYSTeqTseJ" height="300%" width="300%"/>';
+    spellIcon = '<img src="https://drive.google.com/uc?export=download&id=1PwRtWS3sAKngZNE9njZr_YsHQPaZpBOZ" height="300%" width="300%"/>';
+    talentText = 'Any Monster';
+    spellText = 'Breeder';
+  }
+
+  let talentHtml = '<div class="panel-heading" '+talentStyle+'><div class="row"><div class="col-xs-3">'+talentIcon+'</div><div class="col-xs-9 text-right"><div class="huge">'+qtdeTalent+'</div><div>'+talentText+'</div></div></div></div>';
+  let spellHtml = '<div class="panel-heading" '+spellStyle+'"><div class="row"><div class="col-xs-3">'+spellIcon+'</div><div class="col-xs-9 text-right"><div class="huge">'+qtdeSpell+'</div><div>'+spellText+'</div></div></div></div>';
+
+  document.querySelector('#talent-panel').innerHTML = talentHtml;
+  document.querySelector('#spell-panel').innerHTML = spellHtml;
 }
+
 
 function deckDefault(){
   if(listaDeCartas.length == 50){
@@ -302,16 +357,4 @@ function removeObj(lista, obj){
     }
   }
   return lista;
-}
-
-function filtraMain(lista){
-  return lista.filter(function(carta){
-    return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')
-  });
-}
-
-function filtraSub(lista){
-  return lista.filter(function(carta){
-    return (carta.subtype == 'EVD' || carta.subtype == 'GRD')
-  });
 }

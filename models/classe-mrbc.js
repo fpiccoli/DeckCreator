@@ -32,6 +32,6 @@ var schema = mongoose.Schema({
   icon: String,
   bg: String,
   font: String
-}, {collection: 'cards'});
+}, {collection: 'mrbc'});
 
-module.exports = mongoose.model('ClasseM&D', schema);
+module.exports = mongoose.model('ClasseMRBC', schema);
