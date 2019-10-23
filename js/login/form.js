@@ -7,13 +7,11 @@ const validar = require('./validar.js');
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
 
-ipcRenderer.send('get-cookies');
-ipcRenderer.on('send-cookies', (event, cookies) => {
-  cookieLogin = cookie.filtraCookies(cookies, 'login');
-  if(cookieLogin.length == 1){
+cookie.login().then((user) => {
+  if(user){
     ipcRenderer.send('redirecionar-pagina','index');
   }
-});
+}).catch(err => console.log(err));
 
 document.querySelector('#login').addEventListener('click' , function(){
   login();

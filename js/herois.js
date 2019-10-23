@@ -12,15 +12,11 @@ let user;
 document.querySelector('#accordion-pure-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">LOADING...</button>';
 document.querySelector('#accordion-hybrid-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">LOADING...</button>';
 
-ipcRenderer.send('get-cookies');
-ipcRenderer.on('send-cookies', (event, cookies) => {
-  cookieLogin = cookie.filtraCookies(cookies, 'login');
-  if(cookieLogin[0]){
-    let loginJson = JSON.parse(cookieLogin[0].value);
-    user = {name: loginJson.user, game: loginJson.game};
+cookie.login().then((retorno) => {
+  if(retorno){
+    getHerois(retorno.game);
   }
-  getHerois(user.game);
-});
+}).catch(err => console.log(err));
 
 function getHerois(game){
   let classes = mongo.listAll(game);

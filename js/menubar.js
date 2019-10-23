@@ -10,8 +10,7 @@ const dataManager = require('./data-manager.js');
 const cookie = require('./cookie-manager.js');
 
 module.exports = {
-  navbar(documento, cookies){
-
+  navbar(documento, user){
     ipcRenderer.send('update-check');
     ipcRenderer.on('update-ready', (event, downloaded) => {
       if(downloaded){
@@ -34,8 +33,8 @@ module.exports = {
       alert.message(documento.querySelector("#alert-message"), 'Cache do <b>Tabletop Simulator</b> limpo com sucesso!', 'success');
     });
     documento.querySelector("#import-decks").addEventListener('click', function () {
-      cookieLogin = cookie.filtraCookies(cookies, 'login');
-      let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user);
+      // cookieLogin = cookie.filtraCookies(cookies, 'login');
+      let decks = data.getDecks(user.name);
       decks.then((retorno) => {
         retorno.forEach(function (deck, index, array) {
           let deckRetorno = deckBuilder.build(deck);
@@ -48,11 +47,11 @@ module.exports = {
       ipcRenderer.send('abrir-janela-efeitos');
     });
   },
-  sidebar(documento, cookies){
+  sidebar(documento, user){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
-      cookieLogin = cookie.filtraCookies(cookies, 'login');
+      // cookieLogin = cookie.filtraCookies(cookies, 'login');
         //TODO COOKIE USER
-      let decks = data.getDecks(JSON.parse(cookieLogin[0].value).user, 'MRBC');
+      let decks = data.getDecks(user.name, user.game);
       decks.then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {
@@ -60,7 +59,7 @@ module.exports = {
           deck.heroes.forEach(function(hero){ delete hero._id });
         });
         documento.querySelector('#menu-content').innerHTML = html.loading();
-        render(documento, retorno, cookies);
+        render(documento, retorno, user);
       }).catch(err => console.log(err));
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
@@ -79,7 +78,7 @@ module.exports = {
   }
 }
 
-function render(documento, json, cookies){
+function render(documento, json, user){
   documento.querySelector('#menu-content').innerHTML = html.accordion(json);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;
@@ -102,31 +101,31 @@ function render(documento, json, cookies){
     });
     documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
       if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ array[index].name +'"?')){
-        cookieLogin = cookie.filtraCookies(cookies, 'login');
+        // cookieLogin = cookie.filtraCookies(cookies, 'login');
         //TODO COOKIE USER
-        if(data.delete(array[index].name, JSON.parse(cookieLogin[0].value).user, 'MRBC')){
+        if(data.delete(array[index].name, user.name, user.game)){
           //TODO COOKIE USER
-          file.delete(array[index].name, 'MRBC');
+          file.delete(array[index].name, user.game);
           json = removeObj(json, array[index]);
         }
       }
-      render(documento, json, cookies);
+      render(documento, json, user);
     });
     document.querySelector('#botao-alterar-nome-'+id).addEventListener('click' , function(){
       document.querySelector('#input-novo-nome-'+id).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+id+'" type="text" class="form-control" placeholder="Novo Nome"><span class="input-group-btn"><button id="update-nome-'+id+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
       document.querySelector('#update-nome-'+id).addEventListener('click' , function(){
-        eventUpdateNome(document, deck, id, json);
+        eventUpdateNome(document, deck, id, json, user);
       });
       document.querySelector('#campo-nome-'+id).addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-          eventUpdateNome(document, deck, id, json);
+          eventUpdateNome(document, deck, id, json, user);
         }
       });
     });
   });
 }
 
-function eventUpdateNome(documento, deck, index, json){
+function eventUpdateNome(documento, deck, index, json, user){
   let novoNome = documento.querySelector('#campo-nome-'+index).value;
   if(novoNome.length == 0){
     alert.message(document.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning');
@@ -136,9 +135,9 @@ function eventUpdateNome(documento, deck, index, json){
   let antigo = deck.name;
   if(alert.confirmDialog('Salvar Deck', 'Sim', 'Não', 'Deseja alterar o nome de "'+antigo+'" para  "'+novoNome+'"?')){
     //TODO COOKIE USER
-    if(data.update(deck, novoNome, antigo, 'MRBC')){
+    if(data.update(deck, novoNome, antigo, user.game)){
       //TODO COOKIE USER
-      file.update(novoNome, antigo, deckBuilder.build(deck), 'MRBC');
+      file.update(novoNome, antigo, deckBuilder.build(deck), user.game);
     }
   }
   render(documento, json);

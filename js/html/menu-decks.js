@@ -39,7 +39,9 @@ module.exports = {
     grupos.forEach(function (nomeDoGrupo, index, array) {
       let content = '';
       if (index == 0) content = ' active in';
-      divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo])));
+
+      if(decksGrupo[nomeDoGrupo]) divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo])));
+      else divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, [builder.element('div', {class: 'brtre'}, [])]));
     });
 
     return builder.element('div', {class: 'tab-content'}, divs);
@@ -95,7 +97,6 @@ function menu(decks){
     let panelDefault = builder.element('div', {class: 'panel panel-default'}, [rowTitle, rowContent]);
     panels.push(builder.element('div', {class: 'panel-group', id:'accordion'}, [panelDefault]));
   });
-
   return panels;
 }
 
