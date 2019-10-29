@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.10.5-beta (29/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Correções no menu da página editor.','Correções nos fundos das cartas MRBC.','Correções no botão Alterar Herói.']
+      }])
+    );
+
     text.push(h4('1.10.4-beta (29/10/2019)'));
     text.push(patch([
       {

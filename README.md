@@ -2,6 +2,12 @@ DeckCreator
 
 Releases:
 
+    1.10.5-beta (29/10/2019)
+      - Correções de bugs:
+          - Correções no menu da página editor.
+          - Correções nos fundos das cartas MRBC.
+          - Correções no botão Alterar Herói.
+
     1.10.4-beta (29/10/2019)
       - Correções de bugs:
           - Correções na contagem de cartas na listagem de decks.

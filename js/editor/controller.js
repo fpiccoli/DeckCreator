@@ -7,6 +7,7 @@ const cookie = require('../cookie-manager.js');
 const alert = require('../alert-message.js');
 const render = require('./render.js');
 const update = require('./update.js');
+const menu = require('../menubar.js');
 let user;
 
 var package = require('../../package.json');
@@ -20,6 +21,7 @@ let nomeDoTime = 'NovoDeck';
 cookie.login().then((retorno) => {
   if(retorno){
     user = retorno;
+    menu.navbar(document, user);
     update.otherPanels(listaDeCartas, user, document);
     renderHerois();
   } else{
@@ -70,9 +72,6 @@ cookie.nome().then((retorno) => {
 }).catch(err => console.log(err));
 
 
-addEventSelecionar(1);
-addEventSelecionar(2);
-addEventSelecionar(3);
 
 document.querySelector("#salvar-deck").addEventListener('click' , function(){
   if(!deckDefault()){
@@ -85,13 +84,6 @@ document.querySelector("#salvar-deck").addEventListener('click' , function(){
 document.querySelector("#salvar-deck-experimental").addEventListener('click' , function(){
   saveDeck();
 });
-
-function addEventSelecionar(number){
-  document.querySelector('.selecionar-heroi-'+number).addEventListener('click' , function(){
-    ipcRenderer.send('seleciona-heroi', number);
-    ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
-  });
-}
 
 function saveDeck(){
   cookie.nome().then((retorno) => {
@@ -122,19 +114,19 @@ function save(nome){
     if(deckJaExiste){
       if(alert.confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
         if(data.save(object, user.game)){
-          exportDeck(object);
+          exportDeck(object, user.game);
         }
       }
     } else{
       if(data.save(object, user.game)){
-        exportDeck(object);
+        exportDeck(object, user.game);
       }
     }
   }).catch(err => console.log(err));
 }
 
-function exportDeck(object){
-  let deckRetorno = deck.build(object);
+function exportDeck(object, game){
+  let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   file.export(object.name, deckRetorno, user.game);
   ipcRenderer.send('redirecionar-pagina','index');

@@ -15,6 +15,10 @@ module.exports = {
     documento.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://drive.google.com/uc?export=download&id='+heroi.icon+'" height="300%" width="300%"/>';
   },
   async sidebar(buttons, user, listaDeCartas, herois, documento){
+    addEventSelecionar(1, listaDeCartas);
+    addEventSelecionar(2, listaDeCartas);
+    addEventSelecionar(3, listaDeCartas);
+
     let decks = await data.getDecks(user.name, user.game);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
@@ -158,6 +162,13 @@ function validaNomeVazio(nome, documento){
     return 0;
   }
   return 1;
+}
+
+function addEventSelecionar(number, listaDeCartas){
+  document.querySelector('.selecionar-heroi-'+number).addEventListener('click' , function(){
+    ipcRenderer.send('seleciona-heroi', number);
+    ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
+  });
 }
 
 function addObj(lista, carta){
