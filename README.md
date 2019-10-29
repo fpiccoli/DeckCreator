@@ -2,6 +2,14 @@ DeckCreator
 
 Releases:
 
+    1.10.4-beta (29/10/2019)
+      - Correções de bugs:
+          - Correções na contagem de cartas na listagem de decks.
+
+    1.10.3-beta (23/10/2019)
+      - Novas Funcionalidades:
+          - Possibilidade de criar decks para o jogo M&D e também MRBC.
+
     1.10.2 (16/10/2019)
       - Correção de bugs:
           - Correção das funções que dependiam de mensagens e que foram quebradas na atualização da versão do electron.
@@ -63,12 +71,12 @@ Releases:
           - Foresee (Spell): Transformada em uma nova carta do Oracle.
           - Bloodletting (Spell): Transformada em uma nova carta do Shaman.
 
-    1.7.1b (27/02/2019)
+    1.7.1-beta (27/02/2019)
       - Correções de bugs:
           - Corrigido o problema da página Novo Deck remover o cookie de sessão.
           - Corrigida busca de cartas não obter as cartas Spell/Enchantment/Talent com mais de uma página.
 
-    1.7.0b (27/02/2019)
+    1.7.0-beta (27/02/2019)
       - Novas Funcionalidades:
           - Migração do Banco de Dados para a nuvem fazendo com que os decks agora não fiquem apenas salvos na máquina local do usuário.
           - Página de login para que os decks sejam vinculados ao seu usuário.

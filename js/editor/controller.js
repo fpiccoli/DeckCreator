@@ -7,10 +7,6 @@ const cookie = require('../cookie-manager.js');
 const alert = require('../alert-message.js');
 const render = require('./render.js');
 const update = require('./update.js');
-// const htmlMenu = require('../html/menu-cards.js');
-// const htmlCartas = require('../html/cartas.js');
-// const menu = require('../menubar.js');
-// const conta = require('../conta.js');
 let user;
 
 var package = require('../../package.json');

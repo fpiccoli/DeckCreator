@@ -52,4 +52,4 @@ var schema = mongoose.Schema({
   game: String
 }, {collection: 'decks'});
 
-module.exports = mongoose.model('Deck', schema);
+module.exports = mongoose.model('DeckM&D', schema);

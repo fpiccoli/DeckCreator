@@ -33,7 +33,6 @@ module.exports = {
       alert.message(documento.querySelector("#alert-message"), 'Cache do <b>Tabletop Simulator</b> limpo com sucesso!', 'success');
     });
     documento.querySelector("#import-decks").addEventListener('click', function () {
-      // cookieLogin = cookie.filtraCookies(cookies, 'login');
       let decks = data.getDecks(user.name);
       decks.then((retorno) => {
         retorno.forEach(function (deck, index, array) {
@@ -49,8 +48,6 @@ module.exports = {
   },
   sidebar(documento, user){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
-      // cookieLogin = cookie.filtraCookies(cookies, 'login');
-        //TODO COOKIE USER
       let decks = data.getDecks(user.name, user.game);
       decks.then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
@@ -79,7 +76,7 @@ module.exports = {
 }
 
 function render(documento, json, user){
-  documento.querySelector('#menu-content').innerHTML = html.accordion(json);
+  documento.querySelector('#menu-content').innerHTML = html.accordion(json, user.game);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;
     let cartas = deck.cards;
@@ -101,10 +98,7 @@ function render(documento, json, user){
     });
     documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
       if(alert.confirmDialog('Remover Deck', 'Sim', 'Não', 'Tem certeza que deseja remover o deck "'+ array[index].name +'"?')){
-        // cookieLogin = cookie.filtraCookies(cookies, 'login');
-        //TODO COOKIE USER
         if(data.delete(array[index].name, user.name, user.game)){
-          //TODO COOKIE USER
           file.delete(array[index].name, user.game);
           json = removeObj(json, array[index]);
         }
@@ -134,9 +128,7 @@ function eventUpdateNome(documento, deck, index, json, user){
 
   let antigo = deck.name;
   if(alert.confirmDialog('Salvar Deck', 'Sim', 'Não', 'Deseja alterar o nome de "'+antigo+'" para  "'+novoNome+'"?')){
-    //TODO COOKIE USER
     if(data.update(deck, novoNome, antigo, user.game)){
-      //TODO COOKIE USER
       file.update(novoNome, antigo, deckBuilder.build(deck), user.game);
     }
   }
