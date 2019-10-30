@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.11.0 (30/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Implementação das funcionalidades beta após correções de bugs.','Todo o sistema agora foi traduzido para o inglês.']
+      }])
+    );
+
     text.push(h4('1.10.5-beta (29/10/2019)'));
     text.push(patch([
       {

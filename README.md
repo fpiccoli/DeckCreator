@@ -4,7 +4,7 @@ Releases:
 
     1.11.0 (30/10/2019)
       - Novas Funcionalidades:
-          - Possibilidade de criar decks para o jogo M&D e também MRBC.
+          - Implementação das funcionalidades beta após correções de bugs.
           - Todo o sistema agora foi traduzido para o inglês.
 
     1.10.5-beta (29/10/2019)
