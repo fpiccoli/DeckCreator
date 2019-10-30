@@ -48,7 +48,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><i class="fa fa-home"></i> Deck Creator</a>
+        <a class="navbar-brand" href="index.html"><i class="fa fa-home"></i> DeckCreator</a>
       </div>
 
       <ul class="nav navbar-top-links navbar-right">
@@ -56,23 +56,16 @@
         </li>
         <li class="dropdown panel-yellow" id="update-ready">
         </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-list-ul"></i> <i class="fa fa-caret-down"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-user">
-            <li><a id="lista-efeitos" href="#">Lista de efeitos</a>
-            </li>
-          </ul>
+        <li class="dropdown" id="btn-lista-efeitos">
         </li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="glyphicon glyphicon-cloud-download"></span> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
-            <li><a id="clear-cache" href="#">Limpar cache do TTS</a>
+            <li><a id="clear-cache" href="#">Sync Decks</a>
             </li>
-            <li><a id="import-decks" href="#">Importar decks para o TTS</a>
+            <li><a id="import-decks" href="#">Clean Cache of TTS</a>
             </li>
           </ul>
         </li>
@@ -85,19 +78,19 @@
         <div class="sidebar-nav navbar-collapse">
           <ul class="nav in" id="side-menu">
             <li>
-              <a href="#" id="novo-deck"><i class="fa fa-pencil"></i> Novo Deck</a>
+              <a href="#" id="novo-deck"><i class="fa fa-pencil"></i> New Deck</a>
             </li>
             <li>
               <a href="#" id="editor-deck"><i class="fa fa-edit"></i> Editor</a>
             </li>
             <li>
-              <a href="#" id="load-decks"><i class="fa fa-search"></i> Meus Decks</a>
+              <a href="#" id="load-decks"><i class="fa fa-search"></i> My Decks</a>
             </li>
             <li>
-              <a href="#" id="regras-panel"><i class="fa fa-list-ul"></i> Regras</a>
+              <a href="#" id="regras-panel"><i class="fa fa-list-ul"></i> Rules</a>
             </li>
             <li>
-              <a href="#" id="sobre-semver"><i class="fa fa-info-circle"></i> Sobre</a>
+              <a href="#" id="sobre-semver"><i class="fa fa-info-circle"></i> About</a>
             </li>
           </ul>
         </div>
@@ -113,123 +106,116 @@
         <div id="menu-content">
           <div>
             <div class="col-lg-12">
-              <h1 class="page-header">Bem-vindo ao DeckCreator!</h1>
+              <h1 class="page-header">Welcome to DeckCreator!</h1>
               <h3>F.A.Q.</h3>
-              <h4>O que é o DeckCreator?</h4>
+              <h4>What is DeckCreator?</h4>
               <p>
-                Uma poderosa ferramenta capaz de facilitar a sua vida substituindo todo o tempo que você perderia organizando e montando um deck dentro do Tabletop Simulator para cerca de alguns milionésimos de segundos de cavaleiros do zodíaco
-                (msCDZ é uma unidade de medida muito usada nos anos 90 que usava a quantidade meteoros de pegásuu como contagem de tempo. Você não perguntou ainda, mas eu já me adiantei em responder).
+                An app to create decks for the MRBC mod in the Tabletop Simulator.
+              </p>
+              <h4>I don't have Tabletop Simulator, can I still create a deck?</h4>
+              <p>
+                Yes, you can. Using saved decks on Tabletop Simulator is just a plus.
+              </p>
+              <h4>What is Tabletop Simulator?</h4>
+              <p>
+                A great game that allows people to play Board Games online and creating mods of custom games.
               </p>
               <p>
-                Com todo esse tempo livre você agora pode usá-lo melhor pensando em estratégias novas e como montar um deck cabuloso para derrotar seus adversários da forma mais humilhante possível.
+                <a href="https://store.steampowered.com/app/286160/Tabletop_Simulator/?snr=1_7_15__13" target="_blank">Check it out TTS on steam!</a>
               </p>
-              <h4>O que ele faz?</h4>
+              <h4>Can I change the path where I save my decks?</h4>
               <p>
-                Basicamente ele exibe todas classes disponíveis no jogo, assim como todas as suas classes híbridas e todas as suas cartas de ação.
-                Isso permite visualizar todas as opções de fabricação de deck da maneira mais intuitiva imaginável.
+                Currently, no. For now it's just to be easy to use with TTS.
               </p>
+              <h4>Do DeckCreator works on Linux?</h4>
               <p>
-                Além disso, o DeckCreator salva a sua criação diretamente na pasta do Tabletop Simulator, permitindo assim importá-lo dentro do jogo com extrema facilidade até para o mais burro dos jumentos.
+                Yes, it does! Although, it does not autoupdates in Linux/OS.
               </p>
-              <h4>Como ele faz?</h4>
+              <h4>Do DeckCreator works on Mac?</h4>
               <p>
-                Com a potência de milhões de partículas subatômicas geradas através de nanorobôs criados na china e confeccionadas por um monge budista ciborgue no pico do Himalaia. Mentira.
-                Não interessa como ele faz, o importante é que funcione. Siga para o próximo tópico.
-              </p>
-              <h4>Devo me preocupar com a minha saúde?</h4>
-              <p>
-                Deve.
-              </p>
-              <h4>Como eu uso o DeckCreator?</h4>
-              <p>
-                Siga as intruções abaixo como um menu de ajuda para saber mais sobre cada botão existente na interface do DeckCreator.
+                Currently, no.
               </p>
             </div>
             <div class="col-lg-12">
               <div class="col-lg-6">
-                <h3 class="page-header">Menu Lateral:</h3>
+                <h3 class="page-header">Side Menu:</h3>
                 <ul class="nav nav-tabs">
-                  <li><a href="#nav-novo" data-toggle="tab">Novo Deck</a>
+                  <li><a href="#nav-novo" data-toggle="tab">New Deck</a>
                   </li>
                   <li><a href="#nav-editor" data-toggle="tab">Editor</a>
                   </li>
-                  <li><a href="#nav-decks" data-toggle="tab">Meus Decks</a>
+                  <li><a href="#nav-decks" data-toggle="tab">My Decks</a>
                   </li>
-                  <li><a href="#nav-regras" data-toggle="tab">Regras</a>
+                  <li><a href="#nav-regras" data-toggle="tab">Rules</a>
                   </li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane fade" id="nav-novo">
                     <h4>&nbsp;</h4>
                     <p>
-                      Direciona para a tela do Editor de Decks para a criação de um deck do zero (qualquer deck que já estivesse aberto na seção e não estiver salvo será perdido).
+                      Redirects to the Deck Editor page to create a deck from scratch (any deck that was already open in the section and not saved will be lost).
                     </p>
                   </div>
                   <div class="tab-pane fade" id="nav-editor">
                     <h4>&nbsp;</h4>
                     <p>
-                      Direciona para a página do Editor de Decks para continuar a edição de onde parou (caso não tenha sido iniciado um deck, ele inicia a criação de um deck novo).
+                      Redirects to the Deck Editor page to continue editing where you left off (if a deck has not been started, it will start creating a new deck).
                     </p>
                   </div>
                   <div class="tab-pane fade" id="nav-decks">
                     <h4>&nbsp;</h4>
                     <p>
-                      Busca os decks salvos pelo DeckCreator na pasta do Tabletop Simulator e exibe em uma listagem para que possam ter o nome alterado, serem editados ou excluídos.
-                    </p>
-                    <p>
-                      O caminho padrão no windows é C:\...&lt;Meus Documentos&gt;\My Games\Tabletop Simulator\Saves\Saved Objects\DeckCreator
+                      Searches for previously DeckCreator saved decks and displays them in a list so they can be renamed, edited, or deleted.
                     </p>
                   </div>
                   <div class="tab-pane fade" id="nav-regras">
                     <h4>&nbsp;</h4>
                     <p>
-                      Direciona para a página com as regras básicas do jogo a serem consultadas como estudo ou validação de detalhes do jogo como, por exemplo, o funcionamento da batalha, regra de arredondamento, quais os turnos existentes, etc.
+                      Redirects to the page with the basic rules of the game to refer as study or validation of game details such as battle operation, rounding rule, which turns exist, etc.
                     </p>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6">
-                <h3 class="page-header">Menu Superior:</h3>
+                <h3 class="page-header">Top Menu:</h3>
                 <ul class="nav nav-tabs">
-                  <li><a href="#nav-efeitos" data-toggle="tab">Lista de Efeitos</a>
+                  <li><a href="#nav-sync" data-toggle="tab">Sync Decks</a>
                   </li>
-                  <li><a href="#nav-cache" data-toggle="tab">Limpar Cache do TTS</a>
+                  <li><a href="#nav-cache" data-toggle="tab">Clean Cache of TTS</a>
                   </li>
-                  <li><a href="#nav-salvar" data-toggle="tab">Salvar Deck (Página Editor)</a>
+                  <li><a href="#nav-salvar" data-toggle="tab">Save Deck (Editor Page)</a>
                   </li>
                 </ul>
                 <div class="tab-content">
-                  <div class="tab-pane fade" id="nav-efeitos">
+                  <div class="tab-pane fade" id="nav-sync">
                     <h4>&nbsp;</h4>
                     <p>
-                      Todas as cartas possuem uma descrição de sua ação dentro do jogo (exceto as cartas que não possuem efeito e não possuem texto).
-                      A maioria desses efeitos são compartilhados entre as cartas e existe uma nomenclatura própria do jogo para facilitar o entendimento.
-                    </p>
-                    <p>
-                      Ao clicar nesta opção você tem acesso a todos os efeitos básicos usados no jogo e que mais se repetem em uma nova janela, para poder usar como cola.
-                      Cartas com efeitos mais específicos possuem um texto maior e auto-explicativo.
+                      If you have switched computers and have decks saved in the cloud that are not yet downloaded to your new computer, use this option to download all and sync to your local folder.
                     </p>
                   </div>
                   <div class="tab-pane fade" id="nav-cache">
                     <h4>&nbsp;</h4>
                     <p>
-                      O Tabletop Simulator costuma salvar os arquivos de imagens dos mods no computador de todos os jogadores que entrarem no servidor.
-                      Ele faz isso para manter um cache local e pré-carregar as imagens, no nosso caso, todas as imagens das cartas e não ter que baixá-las toda vez que entrar no servidor.
-                      O problema que isso gera, quando há alguma alteração em qualquer carta que seja, é que as suas imagens locais não estarão correspondentes as imagens do servidor.
-                      Ou seja, o que você vê não é o mesmo que aparece para as outras pessoas.
+                      Tabletop Simulator usually saves the mods image files to the computer of all players entering the server.
+                      It does that to maintain a local cache and preload the images, in our case, all the card images so you do not have to download them every time it enters the server.
+                      The problem this generates when there is any change in the mod whatsoever is that your local images will not match the server images.
+                      That is, what you see is not the same as what appears to other people.
                     </p>
                     <p>
-                      Portanto clique nesta opção antes de entrar no servidor quando existir uma alteração em alguma carta para fazer com que o Tabletop baixe as imagens novamente.
-                      Ou também você pode usar esta opção para simplesmente limpar a pasta e remover arquivos antigos do TTS e que não são mais utilizados para liberar espaço no seu computador.
+                      So click this option before entering the server when there is a change in the mod to force Tabletop download the mod again.
+                      Or you can also use this option to simply clear the folder and remove old TTS files that are no longer used to free up space on your computer.
                     </p>
                   </div>
                   <div class="tab-pane fade" id="nav-salvar">
                     <h4>&nbsp;</h4>
                     <p>
-                      O aplicativo salvará o seu deck no formato .json diretamente na pasta do DeckCreator dentro do diretório do Tabletop Simulator para poder ser importado dentro do jogo facilmente.
+                      The app will save your deck in the cloud and in the .json format directly to the DeckCreator folder within the Tabletop Simulator directory so that it can be easily imported into the game.
                     </p>
                     <p>
-                      O caminho padrão no windows é C:\...&lt;Meus Documentos&gt;\My Games\Tabletop Simulator\Saves\Saved Objects\DeckCreator
+                      Windows default path: %USERPROFILE%\Documents\My Games\Tabletop Simulator\Saves\Saved Objects\DeckCreator
+                    </p>
+                    <p>
+                      Linux default path ~/.local/share/Tabletop Simulator/Saves/Saved Objects/DeckCreator
                     </p>
                   </div>
                 </div>

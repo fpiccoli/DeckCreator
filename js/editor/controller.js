@@ -16,7 +16,7 @@ document.querySelector('#title').innerHTML = package.productName + ' v' + packag
 let listaDeCartas = [];
 let herois = [];
 let buttons = [];
-let nomeDoTime = 'NovoDeck';
+let nomeDoTime = 'NewDeck';
 
 cookie.login().then((retorno) => {
   if(retorno){
@@ -71,30 +71,27 @@ cookie.nome().then((retorno) => {
   }
 }).catch(err => console.log(err));
 
-
-
 document.querySelector("#salvar-deck").addEventListener('click' , function(){
-  if(!deckDefault()){
-    alert.message(document.querySelector('#alert-message'), 'Você precisa ter exatamente <b>50 cartas</b> para salvar um deck padrão!', 'warning');
+  if(herois.length == 0){
+    alert.message(document.querySelector('#alert-message'), 'You need to add a card to the deck!', 'warning');
     return;
   }
   saveDeck();
 });
 
-document.querySelector("#salvar-deck-experimental").addEventListener('click' , function(){
-  saveDeck();
-});
-
 function saveDeck(){
   cookie.nome().then((retorno) => {
-    save(retorno);
+    if(retorno){
+      nomeDoTime = retorno
+    }
+    save(nomeDoTime);
   }).catch(err => console.log(err));
 }
 
 function save(nome){
   if(!user) return;
   if(!document.querySelector("#grupo")){
-    alert.message(document.querySelector('#alert-message'), 'Tente novamente!', 'warning');
+    alert.message(document.querySelector('#alert-message'), 'Try again later!', 'warning');
     return;
   }
   listaDeCartas.sort(dataManager.dynamicSort('cardnumber'));
@@ -112,7 +109,7 @@ function save(nome){
   let validacao = data.validaDeckExistente(object, user.game);
   validacao.then((deckJaExiste) => {
     if(deckJaExiste){
-      if(alert.confirmDialog('Deck já existente', 'Quero salvar por cima', 'Vou alterar o nome', 'Já existe um deck salvo com esse nome, o que deseja fazer?')){
+      if(alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')){
         if(data.save(object, user.game)){
           exportDeck(object, user.game);
         }
@@ -135,10 +132,3 @@ function exportDeck(object, game){
 document.querySelector('.cartas-deck').addEventListener('click', function () {
   render.lista(listaDeCartas, user, herois, document);
 });
-
-function deckDefault(){
-  if(listaDeCartas.length == 50){
-    return true;
-  }
-  return false;
-}

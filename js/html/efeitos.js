@@ -1,16 +1,19 @@
 const builder = require('./builder.js');
 const json2html = require('html2json').json2html;
+const dataManager = require('../data-manager.js');
 
 module.exports = {
   efeitos(lista){
     let efeitos = lista;
     let json = [];
 
+    efeitos.sort(dataManager.dynamicSort('nameBR'));
+
     efeitos.forEach(build);
     function build(efeito, index, array){
       let childs = [];
 
-      let nome = builder.text(efeito.nameEN);
+      let nome = builder.text(efeito.nameBR);
       let link = builder.element('a', {dataToggle:'collapse', dataParent:'#efeitos', href:'#efeito'+index, ariaExpanded:'false', class:'collapsed'}, [nome]);
       let title = builder.element('h4', {class: 'panel-title'}, [link]);
       let heading = builder.element('div', {class: 'panel-heading'}, [title]);

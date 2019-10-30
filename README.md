@@ -2,6 +2,11 @@ DeckCreator
 
 Releases:
 
+    1.11.0 (30/10/2019)
+      - Novas Funcionalidades:
+          - Possibilidade de criar decks para o jogo M&D e também MRBC.
+          - Todo o sistema agora foi traduzido para o inglês.
+
     1.10.5-beta (29/10/2019)
       - Correções de bugs:
           - Correções no menu da página editor.

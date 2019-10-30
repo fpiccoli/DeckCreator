@@ -11,7 +11,7 @@ module.exports = {
     documento.querySelector('#panel'+heroi.panel).innerHTML = documento.querySelector('#panel'+heroi.panel).innerHTML.replace('heading-style','color: '+heroi.font+';background-color:'+heroi.bg+';');
     documento.querySelector('#nome-heroi-'+heroi.panel).textContent = heroi.name;
     documento.querySelector('#classe-heroi-'+heroi.panel).textContent = heroi.class + ' ('+heroi.alligment+')';
-    documento.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Alterar';
+    documento.querySelector('#txt-heroi-'+heroi.panel).textContent = 'Change';
     documento.querySelector('#img-heroi-'+heroi.panel).innerHTML = '<img src="https://drive.google.com/uc?export=download&id='+heroi.icon+'" height="300%" width="300%"/>';
   },
   async sidebar(buttons, user, listaDeCartas, herois, documento){
@@ -158,7 +158,7 @@ function eventUpdateNome(nome, documento){
 
 function validaNomeVazio(nome, documento){
   if(nome.length == 0){
-    alert.message(documento.querySelector('#alert-message'), 'Você precisa digitar um nome válido!', 'warning')
+    alert.message(documento.querySelector('#alert-message'), 'You must enter a valid name!', 'warning')
     return 0;
   }
   return 1;

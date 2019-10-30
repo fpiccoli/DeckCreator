@@ -16,7 +16,7 @@ module.exports = {
       }
       else{
         ipcRenderer.send('redirecionar-pagina','login');
-        alert.message(documento.querySelector('#alert-message'), 'Login incorreto!', 'danger');
+        alert.message(documento.querySelector('#alert-message'), 'Login incorrect!', 'danger');
       }
     }).catch(err => ipcRenderer.send('console-log-main', err));
   }

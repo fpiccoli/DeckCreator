@@ -6,15 +6,15 @@ var groupBy = require('json-groupby');
 module.exports = {
   accordion(decks, game){
     decks.forEach(function (deck, index, array) {
-      if(!deck.grupo) deck.grupo = 'Sem Grupo';
+      if(!deck.grupo) deck.grupo = 'Other Decks';
     });
     let decksGrupo = groupBy(decks, ['grupo']);
     let grupos = [];
     Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
-      if(nomeDoGrupo != 'Sem Grupo') grupos.push(nomeDoGrupo);
+      if(nomeDoGrupo != 'Other Decks') grupos.push(nomeDoGrupo);
     });
     grupos = grupos.sort();
-    grupos.push('Sem Grupo');
+    grupos.push('Other Decks');
 
     let json = [];
     json.push(builder.element('div', {class: 'col-lg-12'}, [this.accordionHeader(grupos), this.accordionContent(grupos, decksGrupo, game)]));
