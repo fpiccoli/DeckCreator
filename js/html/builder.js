@@ -29,6 +29,6 @@ module.exports = {
     return html;
   },
   loading(){
-    return '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">CARREGANDO...</button>';
+    return '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">LOADING...</button>';
   }
 }

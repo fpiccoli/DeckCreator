@@ -7,6 +7,38 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.11.0 (30/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Implementação das funcionalidades beta após correções de bugs.','Todo o sistema agora foi traduzido para o inglês.']
+      }])
+    );
+
+    text.push(h4('1.10.5-beta (29/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Correções no menu da página editor.','Correções nos fundos das cartas MRBC.','Correções no botão Alterar Herói.']
+      }])
+    );
+
+    text.push(h4('1.10.4-beta (29/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Correções de bugs:',
+        itens: ['Correções na contagem de cartas na listagem de decks.']
+      }])
+    );
+
+    text.push(h4('1.10.3-beta (23/10/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Possibilidade de criar decks para o jogo M&D e também MRBC.']
+      }])
+    );
+
     text.push(h4('1.10.2 (16/10/2019)'));
     text.push(patch([
       {
@@ -103,7 +135,7 @@ module.exports = {
       }])
     );
 
-    text.push(h4('1.7.1b (27/02/2019)'));
+    text.push(h4('1.7.1-beta (27/02/2019)'));
     text.push(patch([
       {
         titulo: 'Correções de bugs:',
@@ -111,7 +143,7 @@ module.exports = {
       }])
     );
 
-    text.push(h4('1.7.0b (27/02/2019)'));
+    text.push(h4('1.7.0-beta (27/02/2019)'));
     text.push(patch([
       {
         titulo: 'Novas Funcionalidades:',

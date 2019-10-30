@@ -35,7 +35,10 @@ module.exports = {
     }
     return 1;
   },
-  export(nome, json){
+  export(nome, json, game){
+    let addGame = '';
+    if(game == 'MRBC') addGame = 'MRBC';
+
     let tree = [];
     if(os.platform() == 'win32'){
       tree.push('/My Games');
@@ -43,7 +46,7 @@ module.exports = {
     tree.push('/Tabletop Simulator');
     tree.push('/Saves');
     tree.push('/Saved Objects');
-    tree.push('/DeckCreator');
+    tree.push('/DeckCreator'+addGame);
 
     let caminho = validaPath(tree);
     let file = caminho + '/' + nome + '.json';
@@ -53,7 +56,10 @@ module.exports = {
     });
     return 1;
   },
-  update(nome, antigo, json){
+  update(nome, antigo, json, game){
+    let addGame = '';
+    if(game == 'MRBC') addGame = 'MRBC';
+
     let tree = [];
     if(os.platform() == 'win32'){
       tree.push('/My Games');
@@ -61,7 +67,7 @@ module.exports = {
     tree.push('/Tabletop Simulator');
     tree.push('/Saves');
     tree.push('/Saved Objects');
-    tree.push('/DeckCreator');
+    tree.push('/DeckCreator'+addGame);
 
     json.Nickname = nome;
     let caminho = validaPath(tree);
@@ -74,7 +80,10 @@ module.exports = {
     });
     return 1;
   },
-  delete(name){
+  delete(name, game){
+    let addGame = '';
+    if(game == 'MRBC') addGame = 'MRBC';
+
     tree = '';
     if(os.platform() == 'win32'){
       tree += '/My Games';
@@ -82,7 +91,7 @@ module.exports = {
     tree += '/Tabletop Simulator';
     tree += '/Saves';
     tree += '/Saved Objects';
-    tree += '/DeckCreator';
+    tree += '/DeckCreator'+addGame;
 
     var filePath = path + tree + '/' + name + '.json';
     if(fs.existsSync(filePath)){

@@ -48,7 +48,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><i class="fa fa-home"></i> Deck Creator</a>
+        <a class="navbar-brand" href="index.html"><i class="fa fa-home"></i> DeckCreator</a>
       </div>
 
       <ul class="nav navbar-top-links navbar-right">
@@ -56,14 +56,7 @@
         </li>
         <li class="dropdown panel-yellow" id="update-ready">
         </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-list-ul"></i> <i class="fa fa-caret-down"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-user">
-            <li><a id="lista-efeitos" href="#">Lista de efeitos</a>
-            </li>
-          </ul>
+        <li class="dropdown" id="btn-lista-efeitos">
         </li>
 
         <li class="dropdown">
@@ -71,9 +64,9 @@
             <span class="glyphicon glyphicon-cloud-download"></span> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
-            <li><a id="clear-cache" href="#">Limpar cache do TTS</a>
+            <li><a id="clear-cache" href="#">Sync Decks</a>
             </li>
-            <li><a id="import-decks" href="#">Importar decks para o TTS</a>
+            <li><a id="import-decks" href="#">Clean Cache of TTS</a>
             </li>
           </ul>
         </li>
@@ -83,258 +76,247 @@
             <span class="glyphicon glyphicon-floppy-disk"></span> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
-            <li><a id="salvar-deck"  href="#">Salvar deck (Padrão)</a>
-            </li>
-            <li><a id="salvar-deck-experimental"  href="#">Salvar deck (Experimental)</a>
+            <li><a id="salvar-deck"  href="#">Save deck</a>
             </li>
           </ul>
         </li>
-        <li class="dropdown panel-info">
+        <li class="dropdown panel-red" title="Logout">
+          <a id="logout" href="#"><i class="fa fa-sign-out fa-fw"></i></a>
+        </li>
+      </ul>
 
-          <li class="dropdown panel-red" title="Logout">
-            <a id="logout" href="#"><i class="fa fa-sign-out fa-fw"></i></a>
-          </li>
-        </ul>
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav in" id="side-menu">
+            <li class="sidebar-search">
+              <div class="input-group custom-search-form">
+                <input id="campo-nome" type="text" class="form-control" placeholder="Deck Name"/>
+                <span class="input-group-btn">
+                  <button id="update-nome" class="btn btn-default" type="button">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-        <div class="navbar-default sidebar" role="navigation">
-          <div class="sidebar-nav navbar-collapse">
-            <ul class="nav in" id="side-menu">
-              <li class="sidebar-search">
-                <div class="input-group custom-search-form">
-                  <input id="campo-nome" type="text" class="form-control" placeholder="Nome do Deck"/>
-                  <span class="input-group-btn">
-                    <button id="update-nome" class="btn btn-default" type="button">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                  </span>
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 id="nome-time" class="page-header">NewDeck</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div id="panel1" class="col-lg-2">
+          <div class="panel panel-default">
+            <div class="panel-heading" style="heading-style">
+              <div class="row">
+                <div id='img-heroi-1' class="col-xs-3">
+                  <i class="fa fa-question fa-5x"></i>
                 </div>
-              </li>
-            </ul>
+                <div class="col-xs-9 text-right">
+                  <div id="qtde-heroi-1" class="huge">0</div>
+                  <div id="nome-heroi-1">Hero 1</div>
+                  <div id="classe-heroi-1">Class</div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="selecionar-heroi-1">
+              <div class="panel-footer">
+                <span id='txt-heroi-1' class="pull-left">Select</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+              </div>
+            </a>
           </div>
         </div>
-      </nav>
-
-      <div id="page-wrapper">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1 id="nome-time" class="page-header">NovoDeck</h1>
+        <div id="panel2" class="col-lg-2">
+          <div class="panel panel-default">
+            <div class="panel-heading" style="heading-style">
+              <div class="row">
+                <div id='img-heroi-2' class="col-xs-3">
+                  <i class="fa fa-question fa-5x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                  <div id="qtde-heroi-2" class="huge">0</div>
+                  <div id="nome-heroi-2">Hero 2</div>
+                  <div id="classe-heroi-2">Class</div>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="selecionar-heroi-2">
+              <div class="panel-footer">
+                <span id='txt-heroi-2' class="pull-left">Select</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+              </div>
+            </a>
           </div>
         </div>
-        <div class="row">
-          <div id="panel1" class="col-lg-2">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="heading-style">
-                <div class="row">
-                  <div id='img-heroi-1' class="col-xs-3">
-                    <i class="fa fa-question fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div id="qtde-heroi-1" class="huge">0</div>
-                    <div id="nome-heroi-1">Herói 1</div>
-                    <div id="classe-heroi-1">Classe</div>
-                  </div>
+        <div id="panel3" class="col-lg-2">
+          <div class="panel panel-default">
+            <div class="panel-heading" style="heading-style">
+              <div class="row">
+                <div id='img-heroi-3' class="col-xs-3">
+                  <i class="fa fa-question fa-5x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                  <div id="qtde-heroi-3" class="qtde-heroi-3 huge">0</div>
+                  <div id="nome-heroi-3">Hero 3</div>
+                  <div id="classe-heroi-3">Class</div>
                 </div>
               </div>
-              <a href="#" class="selecionar-heroi-1">
-                <div class="panel-footer">
-                  <span id='txt-heroi-1' class="pull-left">Selecionar</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
             </div>
-          </div>
-          <div id="panel2" class="col-lg-2">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="heading-style">
-                <div class="row">
-                  <div id='img-heroi-2' class="col-xs-3">
-                    <i class="fa fa-question fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div id="qtde-heroi-2" class="huge">0</div>
-                    <div id="nome-heroi-2">Herói 2</div>
-                    <div id="classe-heroi-2">Classe</div>
-                  </div>
-                </div>
+            <a href="#" class="selecionar-heroi-3">
+              <div class="panel-footer">
+                <span id='txt-heroi-3' class="pull-left">Select</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
               </div>
-              <a href="#" class="selecionar-heroi-2">
-                <div class="panel-footer">
-                  <span id='txt-heroi-2' class="pull-left">Selecionar</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
-            </div>
+            </a>
           </div>
-          <div id="panel3" class="col-lg-2">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="heading-style">
-                <div class="row">
-                  <div id='img-heroi-3' class="col-xs-3">
-                    <i class="fa fa-question fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div id="qtde-heroi-3" class="qtde-heroi-3 huge">0</div>
-                    <div id="nome-heroi-3">Herói 3</div>
-                    <div id="classe-heroi-3">Classe</div>
-                  </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="panel panel-default" id="talent-panel">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
                 </div>
-              </div>
-              <a href="#" class="selecionar-heroi-3">
-                <div class="panel-footer">
-                  <span id='txt-heroi-3' class="pull-left">Selecionar</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-2">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="color: white;background-color: #c0c0c0;">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <img src="https://drive.google.com/uc?export=download&id=1WrooGrmv1Uand440zPn9QojbY_SA6WzB" height="300%" width="300%"/>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div id="talent-cards" class="huge">0</div>
-                    <div>Talent</div>
-                    <div>All Classes</div>
-                  </div>
+                <div class="col-xs-9 text-right">
+                  <div class="huge">0</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-2">
-            <div class="panel panel-default">
-              <div class="panel-heading" style="color: white;background-color: #B57EDC;">
-                <div class="row">
-                  <div class="col-xs-3">
-                    <img src="https://drive.google.com/uc?export=download&id=12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV" height="150%" width="150%"/>
-                    <img src="https://drive.google.com/uc?export=download&id=1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW" height="150%" width="150%"/>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                    <div id="spell-cards" class="huge">0</div>
-                    <div>Spell +</div>
-                    <div>Enchantment</div>
-                  </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="panel panel-default" id="spell-panel">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-3">
+                </div>
+                <div class="col-xs-9 text-right">
+                  <div class="huge">0</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-2">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-8">
-                    <div>
-                      <p><strong>Deck Status</strong></p>
-                      <p><span class="text-muted" id="status-value">0%</span></p>
-                      <div class="progress progress-striped active" id="status-bar">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-                      </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xs-8">
+                  <div>
+                    <p><strong>Deck Status</strong></p>
+                    <p><span class="text-muted" id="status-value">0%</span></p>
+                    <div class="progress progress-striped active" id="status-bar">
+                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                     </div>
                   </div>
-                  <div class="col-xs-4 text-right">
-                    <div id="all-cards" class="huge">0</div>
-                    <div>Total</div>
-                  </div>
+                </div>
+                <div class="col-xs-4 text-right">
+                  <div id="all-cards" class="huge">0</div>
+                  <div>Total</div>
                 </div>
               </div>
-              <a href="#" class="cartas-deck">
-                <div class="panel-footer">
-                  <span id='txt-heroi-2' class="pull-left">Ver Cartas</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-                </div>
-              </a>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Skill Cards
-                <!-- <div class="pull-right">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                      Ações
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                      <li><a href="#">Action</a>
-                      </li>
-                      <li><a href="#">Another action</a>
-                      </li>
-                      <li><a href="#">Something else here</a>
-                      </li>
-                      <li class="divider"></li>
-                      <li><a href="#">Salvar Deck</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div> -->
+            <a href="#" class="cartas-deck">
+              <div class="panel-footer">
+                <span id='txt-heroi-2' class="pull-left">See Cards</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
               </div>
-
-              <div id="skill-cards" class="panel-body">
-              </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
-      <div class="panel-body">
-        <!-- Button trigger modal -->
-        <!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Launch Demo Modal
-        </button> -->
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Adicionar novo grupo</h4>
-              </div>
-              <div class="modal-body">
-                <div class="input-group custom-search-form">
-                  <input id="change-grupo" type="text" class="form-control" placeholder="Novo Grupo"/>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-grupo">Adicionar</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <i class="fa fa-bar-chart-o fa-fw"></i> Skill Cards
+              <!-- <div class="pull-right">
+              <div class="btn-group">
+              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+              Ações
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+            <li><a href="#">Action</a>
+          </li>
+          <li><a href="#">Another action</a>
+        </li>
+        <li><a href="#">Something else here</a>
+      </li>
+      <li class="divider"></li>
+      <li><a href="#">Salvar Deck</a>
+    </li>
+  </ul>
+</div>
+</div> -->
+</div>
 
+<div id="skill-cards" class="panel-body">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="panel-body">
+  <!-- Button trigger modal -->
+  <!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch Demo Modal
+</button> -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Add new group</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group custom-search-form">
+          <input id="change-grupo" type="text" class="form-control" placeholder="New Grupo"/>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="add-grupo">Add</button>
+      </div>
     </div>
-    <!-- jQuery -->
-    <script>window.$ = window.jQuery = require('jquery');</script>
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+</div>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+</div>
+<!-- jQuery -->
+<script>window.$ = window.jQuery = require('jquery');</script>
+<script src="../vendor/jquery/jquery.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="../vendor/raphael/raphael.min.js"></script>
-    <!-- <script src="../vendor/morrisjs/morris.min.js"></script> -->
-    <!-- <script src="../data/morris-data.js"></script> -->
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+<!-- Morris Charts JavaScript -->
+<script src="../vendor/raphael/raphael.min.js"></script>
+<!-- <script src="../vendor/morrisjs/morris.min.js"></script> -->
+<!-- <script src="../data/morris-data.js"></script> -->
 
-    <script>require('../js/editor.js')</script>
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
 
-  </body>
+<script>require('../js/editor/controller.js')</script>
 
-  </html>
+</body>
+
+</html>

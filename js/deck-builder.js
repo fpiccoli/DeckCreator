@@ -1,7 +1,8 @@
 const data = require('./data-mongo.js');
+const { ipcRenderer }  = require('electron');
 
 module.exports = {
-  build(object){
+  build(object, game){
     let json = {
       SaveName: '',
       GameMode: '',
@@ -13,13 +14,13 @@ module.exports = {
       Rules: '',
       XmlUI: '',
       LuaScript: '',
-      ObjectStates: this.objectStates(object),
+      ObjectStates: this.objectStates(object, game),
       LuaScriptState: '',
     }
     return json;
   },
-  objectStates(object){
-    let content = buildCards(object);
+  objectStates(object, game){
+    let content = buildCards(object, game);
 
     let json = [];
     json.push({
@@ -56,7 +57,7 @@ module.exports = {
   }
 }
 
-function buildCards(object){
+function buildCards(object, game){
   let json;
   let retorno = '{';
   let decks = [];
@@ -64,7 +65,7 @@ function buildCards(object){
   let content = {cards: [], listaDeIds: []};
 
   for(let i in object.cards){
-    json = deckJSON(object.cards[i].deck);
+    json = deckJSON(object.cards[i].deck, game);
     object.cards[i].deckJSON = JSON.parse("{"+json+"}");
     if(!verificaSeExiste(decks, object.cards[i].deck.id)){
       if(decks.length > 0){
@@ -81,7 +82,7 @@ function buildCards(object){
   }
 
   for(let i in object.heroes){
-    json = deckJSON(object.heroes[i].deck);
+    json = deckJSON(object.heroes[i].deck, game);
     object.heroes[i].deckJSON = JSON.parse("{"+json+"}");
     if(!verificaSeExiste(decks, object.heroes[i].deck.id)){
       if(decks.length > 0){
@@ -134,8 +135,21 @@ function cardJSON(card){
   }
 }
 
-function deckJSON(deck){
-  return '"' + deck.id + '":{"FaceURL": "https://drive.google.com/uc?export=download&id=' + deck.face + '","BackURL": "https://drive.google.com/uc?export=download&id=15d1rszwKVEFO9sALb2Mu00iXCD3ojxus","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
+function deckJSON(deck, game){
+  let back = 'https://drive.google.com/uc?export=download&id=';
+
+  ipcRenderer.send('console-log-main', game);
+
+
+  if(game == 'M&D'){
+    back += '15d1rszwKVEFO9sALb2Mu00iXCD3ojxus'
+  }
+  else if(game == 'MRBC'){
+    back += '1UKrGHayxga-bEIvMHSEDG4HRJJe6rL2c'
+  }
+
+  ipcRenderer.send('console-log-main', back);
+  return '"' + deck.id + '":{"FaceURL": "https://drive.google.com/uc?export=download&id=' + deck.face + '","BackURL": "' + back + '","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 
 function verificaSeExiste(decks, id){

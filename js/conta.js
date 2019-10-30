@@ -8,20 +8,32 @@ module.exports = {
     }
     return count;
   },
-  mainClass(lista, heroi){
+  mainClass(lista, heroi, game){
     let count = 0;
     for(let i in lista){
-      if(lista[i].class.includes(heroi.main) && (lista[i].subtype == 'ATK' || lista[i].subtype == 'TEC' || lista[i].subtype == 'SKL' || lista[i].subtype == 'DOM')){
-        count++;
+      if(game == 'M&D'){
+        if(lista[i].class.includes(heroi.main) && (lista[i].subtype == 'ATK' || lista[i].subtype == 'TEC' || lista[i].subtype == 'SKL' || lista[i].subtype == 'DOM')){
+          count++;
+        }
+      } else if(game == 'MRBC'){
+        if(lista[i].class.includes(heroi.main) && (lista[i].subtype == 'POW' || lista[i].subtype == 'INT' || lista[i].subtype == 'SPE' || lista[i].subtype == 'ENV')){
+          count++;
+        }
       }
     }
     return count;
   },
-  subClass(lista, heroi){
+  subClass(lista, heroi, game){
     let count = 0;
     for(let i in lista){
-      if(lista[i].class.includes(heroi.sub) && (lista[i].subtype == 'GRD' || lista[i].subtype == 'EVD')){
-        count++;
+      if(game == 'M&D'){
+        if(lista[i].class.includes(heroi.sub) && (lista[i].subtype == 'EVD' || lista[i].subtype == 'GRD')){
+          count++;
+        }
+      } else if(game == 'MRBC'){
+        if(lista[i].class.includes(heroi.sub) && (lista[i].subtype == 'DGE' || lista[i].subtype == 'BLK')){
+          count++;
+        }
       }
     }
     return count;
