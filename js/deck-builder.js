@@ -138,9 +138,6 @@ function cardJSON(card){
 function deckJSON(deck, game){
   let back = 'https://drive.google.com/uc?export=download&id=';
 
-  ipcRenderer.send('console-log-main', game);
-
-
   if(game == 'M&D'){
     back += '15d1rszwKVEFO9sALb2Mu00iXCD3ojxus'
   }
@@ -148,7 +145,6 @@ function deckJSON(deck, game){
     back += '1UKrGHayxga-bEIvMHSEDG4HRJJe6rL2c'
   }
 
-  ipcRenderer.send('console-log-main', back);
   return '"' + deck.id + '":{"FaceURL": "https://drive.google.com/uc?export=download&id=' + deck.face + '","BackURL": "' + back + '","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 

@@ -83,7 +83,7 @@ function menu(decks, game){
 
       let subElements = [];
 
-      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, height:'55%', width:'55%', style:'background-color:'+heroi.bg+'; border-radius:5px; padding:5px;'}, []));
+      subElements.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+heroi.icon, draggable:"false", height:'55%', width:'55%', style:'background-color:'+heroi.bg+'; border-radius:5px; padding:5px;'}, []));
 
       subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
       subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));

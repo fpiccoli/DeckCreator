@@ -30,7 +30,7 @@ module.exports = {
     });
     documento.querySelector("#clear-cache").addEventListener('click', function () {
       file.clearCache();
-      alert.message(documento.querySelector("#alert-message"), '<b>Tabletop Simulator</b> cache successfully cleaned!', 'success');
+      alert.message(documento.querySelector("#alert-message"), '<b>Tabletop Simulator</b> cache successfully cleared!', 'success');
     });
     documento.querySelector("#import-decks").addEventListener('click', function () {
       let decks = data.getDecks(user.name, user.game);

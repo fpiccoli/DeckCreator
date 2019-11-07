@@ -63,9 +63,9 @@
             <span class="glyphicon glyphicon-cloud-download"></span> <i class="fa fa-caret-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-user">
-            <li><a id="clear-cache" href="#">Sync Decks</a>
+            <li><a id="clear-cache" href="#">Clear Cache</a>
             </li>
-            <li><a id="import-decks" href="#">Clean Cache of TTS</a>
+            <li><a id="import-decks" href="#">Sync Decks</a>
             </li>
           </ul>
         </li>
@@ -179,20 +179,14 @@
               <div class="col-lg-6">
                 <h3 class="page-header">Top Menu:</h3>
                 <ul class="nav nav-tabs">
-                  <li><a href="#nav-sync" data-toggle="tab">Sync Decks</a>
+                  <li><a href="#nav-cache" data-toggle="tab">Clear Cache</a>
                   </li>
-                  <li><a href="#nav-cache" data-toggle="tab">Clean Cache of TTS</a>
+                  <li><a href="#nav-sync" data-toggle="tab">Sync Decks</a>
                   </li>
                   <li><a href="#nav-salvar" data-toggle="tab">Save Deck (Editor Page)</a>
                   </li>
                 </ul>
                 <div class="tab-content">
-                  <div class="tab-pane fade" id="nav-sync">
-                    <h4>&nbsp;</h4>
-                    <p>
-                      If you have switched computers and have decks saved in the cloud that are not yet downloaded to your new computer, use this option to download all and sync to your local folder.
-                    </p>
-                  </div>
                   <div class="tab-pane fade" id="nav-cache">
                     <h4>&nbsp;</h4>
                     <p>
@@ -204,6 +198,24 @@
                     <p>
                       So click this option before entering the server when there is a change in the mod to force Tabletop download the mod again.
                       Or you can also use this option to simply clear the folder and remove old TTS files that are no longer used to free up space on your computer.
+                    </p>
+                    <p>
+                      Windows default path: %USERPROFILE%\Documents\Mods\Images
+                    </p>
+                    <p>
+                      Linux default path ~/.local/share/Tabletop Simulator/Mods/Images
+                    </p>
+                  </div>
+                  <div class="tab-pane fade" id="nav-sync">
+                    <h4>&nbsp;</h4>
+                    <p>
+                      If you have switched computers and have decks saved in the cloud that are not yet downloaded to your new computer, use this option to download all and sync to your local folder.
+                    </p>
+                    <p>
+                      Windows default path: %USERPROFILE%\Documents\My Games\Tabletop Simulator\Saves\Saved Objects\DeckCreator
+                    </p>
+                    <p>
+                      Linux default path ~/.local/share/Tabletop Simulator/Saves/Saved Objects/DeckCreator
                     </p>
                   </div>
                   <div class="tab-pane fade" id="nav-salvar">

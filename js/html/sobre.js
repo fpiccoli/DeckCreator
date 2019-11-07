@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.11.1 (07/11/2019)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Correção dos botões de Sync Decks e Clean Cache que estavam com funcionalidades trocadas.','Agora imagens das cartas não podem ser arrastadas.']
+      }])
+    );
+
     text.push(h4('1.11.0 (30/10/2019)'));
     text.push(patch([
       {
