@@ -2,8 +2,12 @@ DeckCreator
 
 Releases:
 
+    1.11.2 (11/11/2019)
+      - Correções de bugs:
+          - Correção de falhas de vulnerabilidade.
+
     1.11.1 (07/11/2019)
-      - Novas Funcionalidades:
+      - Correções de bugs:
           - Correção dos botões de Sync Decks e Clean Cache que estavam com funcionalidades trocadas.
           - Agora imagens das cartas não podem ser arrastadas.
 
