@@ -13,6 +13,10 @@ cookie.login().then((user) => {
   }
 }).catch(err => console.log(err));
 
+document.querySelector('#register').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','register');
+});
+
 document.querySelector('#login').addEventListener('click' , function(){
   login();
 });

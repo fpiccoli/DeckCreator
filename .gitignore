@@ -6,3 +6,4 @@
 /releases/
 electron-builder.json
 /config/property.js
+/js/login/property.js

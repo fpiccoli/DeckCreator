@@ -1,10 +1,11 @@
-require('../config/mongo.js')();
+require('../config/mongo.js')('OLD');
 var mongoose = require('mongoose');
 const Classe = require('../models/classe.js');
 const ClasseMRBC = require('../models/classe-mrbc.js');
 const Deck = require('../models/deck.js');
 const DeckMRBC = require('../models/deck-mrbc.js');
 const User = require('../models/user.js');
+const Code = require('../models/codigo.js');
 const Efeito = require('../models/efeito.js');
 
 var userModel = mongoose.model('User');
@@ -88,6 +89,28 @@ module.exports = {
       return retorno[0];
     },function(error){
       console.log(error);
+    });
+  },
+  register(obj){
+    var query = {user: obj.user, email: obj.email};
+    return User.findOneAndUpdate(query, obj, {upsert: true, useFindAndModify: false}, function(err, doc){
+      if (err) {
+        console.log(err)
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+  },
+  code(obj){
+    var query = {email: obj.email};
+    return Code.findOneAndUpdate(query, obj, {upsert: true, useFindAndModify: false,  setDefaultsOnInsert: true}, function(err, doc){
+      if (err) {
+        console.log(err)
+        return 0;
+      } else {
+        return 1;
+      }
     });
   },
   listEfeitos(){
