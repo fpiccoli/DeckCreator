@@ -1,10 +1,10 @@
 const file = require('../file-manager.js');
-const data = require('../data-mongo.js');
+const dataUser = require('../data/user.js');
 const alert = require('../alert-message.js');
 
 module.exports = {
   login(user, pass, documento, ipcRenderer){
-    data.login(user, pass).then((retorno) => {
+    dataUser.find({user: user, password: pass, active: true}).then((retorno) => {
       if(retorno){
         if(documento){
           if(documento.querySelector('#lembrar').checked){
@@ -15,7 +15,6 @@ module.exports = {
         ipcRenderer.send('redirecionar-pagina','index');
       }
       else{
-        ipcRenderer.send('redirecionar-pagina','login');
         alert.message(documento.querySelector('#alert-message'), 'Login incorrect!', 'danger');
       }
     }).catch(err => ipcRenderer.send('console-log-main', err));

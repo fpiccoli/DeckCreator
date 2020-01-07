@@ -1,7 +1,7 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.11.2",
+  "version": "1.12.0",
   "description": "Criador de decks para Tabletop Simulator",
   "author": "fpiccoli",
   "main": "main.js",
@@ -29,6 +29,7 @@
     "json-groupby": "^1.1.0",
     "jsonfile": "^5.0.0",
     "md5": "^2.2.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.10",
     "nodemailer": "^6.4.2",
     "popper.js": "^1.14.5"

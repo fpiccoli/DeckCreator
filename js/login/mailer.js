@@ -11,7 +11,7 @@ async function main(email, codigo) {
   let transporter = nodemailer.createTransport(property.auth());
 
   let info = await transporter.sendMail({
-    from: '"DeckCreator 👻" <tymboxcookie@gmail.com>',
+    from: '"DeckCreator 🃏" <tymboxcookie@gmail.com>',
     to: email,
     subject: 'Teste enviar email ✔',
     text: 'Oi?',

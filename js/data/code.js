@@ -3,6 +3,13 @@ var mongoose = require('mongoose');
 const Code = require('../../models/codigo.js');
 
 module.exports = {
+  find(query){
+    return Code.find(query).lean().then(function(retorno){
+      return retorno[0];
+    },function(error){
+      console.log(error);
+    });
+  },
   save(obj){
     var query = {email: obj.email};
     return Code.findOneAndUpdate(query, obj, {upsert: true, useFindAndModify: false,  setDefaultsOnInsert: true}, function(err, doc){

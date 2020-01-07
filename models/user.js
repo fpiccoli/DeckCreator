@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var schema = mongoose.Schema({
   user: String,
   email: String,
-  pass: String,
+  password: String,
   game: String,
   active: Boolean
 }, {collection: 'users', versionKey: false});
