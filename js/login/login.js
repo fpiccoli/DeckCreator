@@ -17,6 +17,10 @@ document.querySelector('#register').addEventListener('click' , function(){
   ipcRenderer.send('redirecionar-pagina','register');
 });
 
+document.querySelector('#forgot').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','senha-esqueci');
+});
+
 document.querySelector('#login').addEventListener('click' , function(){
   login();
 });

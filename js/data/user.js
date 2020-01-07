@@ -11,9 +11,7 @@ module.exports = {
     });
   },
   find(query){
-    console.log(JSON.stringify(query));
     return User.find(query).lean().then(function(retorno){
-      console.log(retorno);
       return retorno[0];
     },function(error){
       console.log(error);
@@ -33,6 +31,17 @@ module.exports = {
   activate(email){
     var obj = {email: email, active: true};
     return User.findOneAndUpdate({email: email}, obj, {upsert: true, useFindAndModify: false}, function(err, doc){
+      if (err) {
+        console.log(err)
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+  },
+  update(obj){
+    var query = {email: obj.email};
+    return User.findOneAndUpdate(query, obj, {upsert: true, useFindAndModify: false}, function(err, doc){
       if (err) {
         console.log(err)
         return 0;
