@@ -23,7 +23,7 @@ function change(){
       let codigo = Math.random().toString(36).substring(2, 5).toUpperCase() + Math.random().toString(36).substring(2, 5).toUpperCase();
 
       if(dataCode.save({email: email.toLowerCase(), codigo: codigo, data: new Date()})){
-        mailer.send(email, codigo).then(() => {
+        mailer.forgotPassword(email, codigo).then(() => {
           ipcRenderer.send('redirecionar-pagina','senha-trocar');
         }).catch(err => console.log(err));
       }
