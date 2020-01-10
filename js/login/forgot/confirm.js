@@ -14,12 +14,12 @@ document.querySelector('#confirm').addEventListener('click' , function(){
     alert.message(document.querySelector('#alert-message'), 'Enter the email!', 'warning');
     return;
   }
-  if(!codigo){
-    alert.message(document.querySelector('#alert-message'), 'Enter the code!', 'warning');
+  if(codigo.length != 6){
+    alert.message(document.querySelector('#alert-message'), 'Code must have exactly 6 characters!', 'warning');
     return;
   }
-  if(!document.querySelector('#pass').value){
-    alert.message(document.querySelector('#alert-message'), 'Enter the new password!', 'warning');
+  if(document.querySelector('#pass').value.length < 6){
+    alert.message(document.querySelector('#alert-message'), 'Password must be at least 6 characters!', 'warning');
     return;
   }
 
@@ -40,7 +40,7 @@ document.querySelector('#confirm').addEventListener('click' , function(){
       }
 
     } else{
-      alert.message(document.querySelector('#alert-message'), 'Invalid code!', 'danger');
+      alert.message(document.querySelector('#alert-message'), 'Invalid code or email!', 'danger');
     }
   }).catch(err => console.log(err));
 

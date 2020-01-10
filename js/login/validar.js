@@ -4,7 +4,14 @@ const alert = require('../alert-message.js');
 
 module.exports = {
   login(user, pass, documento, ipcRenderer){
-    dataUser.find({user: user, password: pass, active: true}).then((retorno) => {
+    var userFind = dataUser.find({
+      $and: [
+        {$or: [{user: user.toLowerCase()}, {email: user.toLowerCase()} ]},
+        {active: true}
+      ]
+    });
+
+    userFind.then((retorno) => {
       if(retorno){
         if(documento){
           if(documento.querySelector('#lembrar').checked){

@@ -10,6 +10,21 @@ document.querySelector('#register').addEventListener('click' , function(){
   let email = document.querySelector('#email').value.toLowerCase();
   let pass = md5(document.querySelector('#pass').value);
 
+  if(user.length < 3){
+    alert.message(document.querySelector('#alert-message'), 'User must be at least 3 characters!', 'warning');
+    return;
+  }
+
+  if(email.length == 0){
+    alert.message(document.querySelector('#alert-message'), 'Enter the email!', 'warning');
+    return;
+  }
+
+  if(document.querySelector('#pass').value.length < 6){
+    alert.message(document.querySelector('#alert-message'), 'Password must be at least 6 characters!', 'warning');
+    return;
+  }
+
   var userFind = dataUser.find({
     $and: [
       {$or: [{user: user.toLowerCase()}, {email: email.toLowerCase()} ]},
