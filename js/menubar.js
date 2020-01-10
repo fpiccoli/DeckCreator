@@ -5,7 +5,7 @@ const alert = require('./alert-message.js');
 const html = require('./html/menu-decks.js');
 const regras = require('./html/regras.js');
 const sobre = require('./html/sobre.js');
-const data = require('./data-mongo.js');
+const dataDeck = require('../js/data/deck.js');
 const dataManager = require('./data-manager.js');
 const cookie = require('./cookie-manager.js');
 
@@ -33,7 +33,8 @@ module.exports = {
       alert.message(documento.querySelector("#alert-message"), '<b>Tabletop Simulator</b> cache successfully cleared!', 'success');
     });
     documento.querySelector("#import-decks").addEventListener('click', function () {
-      let decks = data.getDecks(user.name, user.game);
+      let decks = dataDeck.find(user.name, user.game);
+      file.clearLocalFile(user.game);
       decks.then((retorno) => {
         retorno.forEach(function (deck, index, array) {
           let deckRetorno = deckBuilder.build(deck, user.game);
@@ -52,7 +53,7 @@ module.exports = {
   },
   sidebar(documento, user){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
-      let decks = data.getDecks(user.name, user.game);
+      let decks = dataDeck.find(user.name, user.game);
       decks.then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {
@@ -102,7 +103,7 @@ function render(documento, json, user){
     });
     documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
       if(alert.confirmDialog('Remove Deck', 'Sure!', 'Nope', 'Are you sure you want to remove the deck "'+ array[index].name +'"?')){
-        if(data.delete(array[index].name, user.name, user.game)){
+        if(dataDeck.delete(array[index].name, user.name, user.game)){
           file.delete(array[index].name, user.game);
           json = removeObj(json, array[index]);
         }
@@ -132,7 +133,7 @@ function eventUpdateNome(documento, deck, index, json, user){
 
   let antigo = deck.name;
   if(alert.confirmDialog('Name Change', 'Sure!', 'Nope', 'Do you want to change the name of "'+antigo+'" to "'+novoNome+'"?')){
-    if(data.update(deck, novoNome, antigo, user.game)){
+    if(dataDeck.update(deck, novoNome, antigo, user.game)){
       file.update(novoNome, antigo, deckBuilder.build(deck, user.game), user.game);
     }
   }

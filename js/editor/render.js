@@ -1,5 +1,6 @@
 const { ipcRenderer }  = require('electron');
-const data = require('../data-mongo.js');
+const dataDeck = require('../../js/data/deck.js');
+const dataClasse = require('../../js/data/classe.js');
 const htmlMenu = require('../html/menu-cards.js');
 const dataManager = require('../data-manager.js');
 const htmlCartas = require('../html/cartas.js');
@@ -19,7 +20,7 @@ module.exports = {
     addEventSelecionar(2, listaDeCartas);
     addEventSelecionar(3, listaDeCartas);
 
-    let decks = await data.getDecks(user.name, user.game);
+    let decks = await dataDeck.find(user.name, user.game);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
@@ -114,12 +115,12 @@ function layout(carta, user, listaDeCartas, herois, documento){
 }
 
 async function buscaCartas(classe, user){
-  let main = await data.getClassCards(classe.main, user.game);
+  let main = await dataClasse.getClassCards(classe.main, user.game);
   let sub = [];
   if(classe.sub == '???'){
-    sub = await data.getClassCards(classe.main, user.game);
+    sub = await dataClasse.getClassCards(classe.main, user.game);
   } else{
-    sub = await data.getClassCards(classe.sub, user.game);
+    sub = await dataClasse.getClassCards(classe.sub, user.game);
   }
   let mainCards = [];
   let subCards = [];

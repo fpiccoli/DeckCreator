@@ -1,5 +1,4 @@
 require('../../config/mongo.js')('User');
-var mongoose = require('mongoose');
 const User = require('../../models/user.js');
 
 module.exports = {

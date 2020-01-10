@@ -133,6 +133,34 @@ module.exports = {
     function excluir(file, index, array){
       fs.unlinkSync(caminho + '/' + file);
     }
+  },
+  clearLocalFile(game){
+    let addGame = '';
+    if(game == 'MRBC') addGame = 'MRBC';
+
+    let tree = [];
+    if(os.platform() == 'win32'){
+      tree.push('/My Games');
+    }
+    tree.push('/Tabletop Simulator');
+    tree.push('/Saves');
+    tree.push('/Saved Objects');
+    tree.push('/DeckCreator'+addGame);
+
+    let caminho = validaPath(tree);
+    let files = [];
+
+    console.log(caminho);
+    fs.readdirSync(caminho).forEach(file => {
+      files.push(file);
+      console.log(file);
+    })
+
+    console.log(files);
+    files.forEach(excluir);
+    function excluir(file, index, array){
+      fs.unlinkSync(caminho + '/' + file);
+    }
   }
 }
 

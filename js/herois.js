@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 const html = require('./html/herois.js');
-const mongo = require('./data-mongo.js');
+const dataClasse = require('../js/data/classe.js');
 const dataManager = require('./data-manager.js');
 const monta = require('./monta-heroi.js');
 const cookie = require('./cookie-manager.js');
@@ -19,7 +19,7 @@ cookie.login().then((retorno) => {
 }).catch(err => console.log(err));
 
 function getHerois(game){
-  let classes = mongo.listAll(game);
+  let classes = dataClasse.listAll(game);
 
   classes.then((retorno) => {
     let puros = dataManager.listByType('Pure', retorno);

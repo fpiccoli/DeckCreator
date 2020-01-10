@@ -1,8 +1,8 @@
 const html = require('./html/efeitos.js');
-const mongo = require('./data-mongo.js');
 const data = require('./data-manager.js');
+const dataEfeito = require('./data/efeito.js');
 
-let lista = mongo.listEfeitos();
+let lista = dataEfeito.listAll();
 
 lista.then((retorno) => {
   retorno.sort(data.dynamicSort('-nameEN'));

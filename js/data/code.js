@@ -1,5 +1,4 @@
 require('../../config/mongo.js')('Code');
-var mongoose = require('mongoose');
 const Code = require('../../models/codigo.js');
 
 module.exports = {

@@ -1,5 +1,5 @@
 const { ipcRenderer }  = require('electron');
-const data = require('../data-mongo.js');
+const dataDeck = require('../../js/data/deck.js');
 const dataManager = require('../data-manager.js');
 const deck = require('../deck-builder.js');
 const file = require('../file-manager.js');
@@ -106,16 +106,16 @@ function save(nome){
     game: user.game
   }
 
-  let validacao = data.validaDeckExistente(object, user.game);
+  let validacao = dataDeck.exists(object, user.game);
   validacao.then((deckJaExiste) => {
     if(deckJaExiste){
       if(alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')){
-        if(data.save(object, user.game)){
+        if(dataDeck.save(object, user.game)){
           exportDeck(object, user.game);
         }
       }
     } else{
-      if(data.save(object, user.game)){
+      if(dataDeck.save(object, user.game)){
         exportDeck(object, user.game);
       }
     }

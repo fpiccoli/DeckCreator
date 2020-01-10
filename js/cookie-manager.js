@@ -6,10 +6,10 @@ module.exports = {
     return new Promise(resolve => {
       getCookiePromise().then(retorno => {
         let user;
-        cookie = filtraCookies(retorno, 'login');
-        if(cookie.length == 0){
-        } else if(cookie[0]){
-          let loginJson = JSON.parse(cookie[0].value);
+        cookies = filtraCookies(retorno, 'login');
+        if(cookies.length == 0){
+        } else if(cookies[0]){
+          let loginJson = JSON.parse(cookies[0].value);
           user = {name: loginJson.user, game: loginJson.game};
         }
         resolve(user);
@@ -20,10 +20,10 @@ module.exports = {
     return new Promise(resolve => {
       getCookiePromise().then(retorno => {
         let herois = [];
-        cookie = filtraCookies(retorno, 'heroi');
-        for (let i in cookie){
-          let json = JSON.parse(cookie[i].value);
-          json.panel = cookie[i].name.replace('heroi','');
+        cookies = filtraCookies(retorno, 'heroi');
+        for (let i in cookies){
+          let json = JSON.parse(cookies[i].value);
+          json.panel = cookies[i].name.replace('heroi','');
           herois.push(json);
         }
         resolve(herois);
@@ -34,9 +34,9 @@ module.exports = {
     return new Promise(resolve => {
       getCookiePromise().then(retorno => {
         let grupo = '';
-        cookie = filtraCookies(retorno, 'grupo');
-        if(cookie[0]){
-          grupo = cookie[0].value;
+        cookies = filtraCookies(retorno, 'grupo');
+        if(cookies[0]){
+          grupo = cookies[0].value;
         }
         resolve(grupo);
       });
@@ -46,9 +46,9 @@ module.exports = {
     return new Promise(resolve => {
       getCookiePromise().then(retorno => {
         let cards;
-        cookie = filtraCookies(retorno, 'cards');
-        if(cookie[0]){
-          cards = JSON.parse(cookie[0].value);
+        cookies = filtraCookies(retorno, 'cards');
+        if(cookies[0]){
+          cards = JSON.parse(cookies[0].value);
         }
         resolve(cards);
       });
@@ -58,9 +58,9 @@ module.exports = {
     return new Promise(resolve => {
       getCookiePromise().then(retorno => {
         let nome;
-        cookie = filtraCookies(retorno, 'nome');
-        if(cookie[0]){
-          nome = cookie[0].value;
+        cookies = filtraCookies(retorno, 'nome');
+        if(cookies[0]){
+          nome = cookies[0].value;
         }
         resolve(nome);
       });

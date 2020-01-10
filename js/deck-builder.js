@@ -1,4 +1,3 @@
-const data = require('./data-mongo.js');
 const { ipcRenderer }  = require('electron');
 
 module.exports = {
