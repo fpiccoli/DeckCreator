@@ -47,7 +47,7 @@ function sendEmail(user, email, pass){
   if(dataUser.save({user: user.toLowerCase(), email: email.toLowerCase(), password: pass, game:'MRBC', codigo: codigo, active: false})){
     if(dataCode.save({email: email.toLowerCase(), codigo: codigo, data: new Date()})){
       mailer.registration(user, email, codigo).then(() => {
-        ipcRenderer.send('redirecionar-pagina','ativar');
+        // ipcRenderer.send('redirecionar-pagina','ativar');
       }).catch(err => console.log(err));
     }
   }

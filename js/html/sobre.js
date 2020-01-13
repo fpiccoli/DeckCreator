@@ -7,6 +7,14 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h3('Releases:'));
 
+    text.push(h4('1.12.0 (13/01/2020)'));
+    text.push(patch([
+      {
+        titulo: 'Novas Funcionalidades:',
+        itens: ['Registro de usuário.','Esqueci minha senha.','Lançamento da primeira release oficial.']
+      }])
+    );
+
     text.push(h4('1.11.2 (11/11/2019)'));
     text.push(patch([
       {
@@ -258,6 +266,8 @@ module.exports = {
         itens: ['Imagens de híbridos agora aparecem corretamente ao carregar deck.', 'Imagens de híbridos agora aparecem corretamente no menu de decks.']
       }])
     );
+
+    console.log(JSON.stringify(text))
 
     let json = builder.element('div', {class:'col-lg-12'}, text)
 
