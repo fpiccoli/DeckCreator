@@ -1,3 +1,5 @@
+const Moment = require('moment');
+
 module.exports = {
   listByType(tipo, classes){
     return classes.filter(
@@ -45,6 +47,15 @@ module.exports = {
       var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
       return result * sortOrder;
     }
+  },
+  dateSort(array, asc) {
+    let sortedArray = [];
+    if(asc){
+      sortedArray = array.sort((a,b) => new Moment(a.data, 'DD/MM/YYYY') - new Moment(b.data, 'DD/MM/YYYY'))
+    } else {
+      sortedArray  = array.sort((a,b) => new Moment(b.data, 'DD/MM/YYYY') - new Moment(a.data, 'DD/MM/YYYY'))
+    }
+    return sortedArray;
   },
   getNome(string){
     string = this.replaceAll(string, ' ','-');

@@ -6,6 +6,7 @@ Releases:
       - Novas Funcionalidades:
           - Registro de usuário.
           - Esqueci minha senha.
+          - Versionamento agora inserido pelo banco de dados.
           - Lançamento da primeira release oficial.
 
     1.11.2 (11/11/2019)

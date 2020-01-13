@@ -5,6 +5,7 @@ const alert = require('./alert-message.js');
 const html = require('./html/menu-decks.js');
 const regras = require('./html/regras.js');
 const sobre = require('./html/sobre.js');
+const dataVersao = require('../js/data/version.js');
 const dataDeck = require('../js/data/deck.js');
 const dataManager = require('./data-manager.js');
 const cookie = require('./cookie-manager.js');
@@ -75,7 +76,9 @@ module.exports = {
       documento.querySelector('#menu-content').innerHTML = regras.html(user.game);
     });
     documento.querySelector("#sobre-semver").addEventListener('click', function () {
-      documento.querySelector('#menu-content').innerHTML = sobre.html();
+      dataVersao.listAll().then((retorno) => {
+        documento.querySelector('#menu-content').innerHTML = sobre.html(retorno, dataManager);
+      }).catch(err => console.log(err));
     });
   }
 }
