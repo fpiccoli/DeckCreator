@@ -7,6 +7,7 @@ module.exports = {
     var userFind = dataUser.find({
       $and: [
         {$or: [{user: user.toLowerCase()}, {email: user.toLowerCase()} ]},
+        {password: pass},
         {active: true}
       ]
     });
