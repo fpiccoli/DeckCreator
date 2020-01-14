@@ -17,7 +17,7 @@ module.exports = {
     });
   },
   save(obj){
-    var query = {user: obj.user, email: obj.email};
+    var query = {email: obj.email};
     return User.findOneAndUpdate(query, obj, {upsert: true, useFindAndModify: false}, function(err, doc){
       if (err) {
         console.log(err)

@@ -85,6 +85,11 @@ ipcMain.on('seleciona-heroi', (event, param) => {
         nodeIntegration: true
       }
     });
+    if(isDev){
+      heroisWindow.toggleDevTools();
+    }else{
+      heroisWindow.setMenu(null);
+    }
     heroisWindow.on('closed', () => {
       heroisWindow = null;
     });

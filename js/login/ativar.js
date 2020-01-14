@@ -4,6 +4,10 @@ const alert = require('../alert-message.js');
 const dataCode = require('../data/code.js');
 const dataUser = require('../data/user.js');
 
+document.querySelector('#back').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','register');
+});
+
 document.querySelector('#ativar').addEventListener('click' , function(){
   let email = document.querySelector('#email').value.toLowerCase();
   let codigo = document.querySelector('#codigo').value.toUpperCase();

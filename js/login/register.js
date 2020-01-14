@@ -5,6 +5,14 @@ const dataCode = require('../data/code.js');
 const mailer = require('./mailer.js');
 const alert = require('../alert-message.js');
 
+document.querySelector('#back').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','login');
+});
+
+document.querySelector('#activate').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','ativar');
+});
+
 document.querySelector('#register').addEventListener('click' , function(){
   let user = document.querySelector('#user').value.toLowerCase();
   let email = document.querySelector('#email').value.toLowerCase();

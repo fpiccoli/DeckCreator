@@ -3,6 +3,8 @@ DeckCreator
 Releases:
 
     1.12.2 (14/01/2020)
+      - Melhorias visuais:
+          - Textos informativos para tela de registro e ativação.
       - Correões de bugs:
           - Correção no auto-updater.
 
