@@ -9,29 +9,35 @@ module.exports = {
     <p>In order to activate your account, you need to input your temporary access code:</p>
     <p><b>`+codigo+`</b></p>
     <p>If you have any problems, please send an email to <b>support@getdeckcreator.com</b>.</p>
-    <p>Enjoy!</p>`
+    <p>Enjoy!</p>`;
 
-    return main(user, email, codigo, 'Please, confirm your registration ✔', message).catch(console.error);
+    return main(user, email, `Your access code is: <b>`+codigo+`</b>`, 'Please, confirm your registration', message).catch(console.error);
+  },
+  alert(user, email, codigo){
+    let message = `Usuário <b>`+user+`</b> (`+email+`)</p>
+    <p>Acaba de ser registrado!`;
+
+    return main(user, 'support@getdeckcreator.com', `Novo Registro: <b>`+user+`</b> (`+email+`)`, 'Novo usuário cadastrado', message).catch(console.error);
   },
   forgotPassword(email, codigo){
     let message = `<p>You've requested to change your password.</p>
     <p>In order to confirm the changes in your password, you need to input your temporary access code:</p>
     <p><b>`+codigo+`</b></p>
     <p>If you have any problems, please send an email to <b>support@getdeckcreator.com</b>.</p>
-    <p>Enjoy!</p>`
+    <p>Enjoy!</p>`;
 
-    return main('', email, codigo, 'Forgot your password?', message).catch(console.error);
+    return main('', email, `Your access code is: <b>`+codigo+`</b>`, 'Forgot your password?', message).catch(console.error);
   }
 }
 
-async function main(user, email, codigo, sub, message) {
+async function main(user, email, preheader, sub, message) {
   let transporter = nodemailer.createTransport(property.auth());
 
   let info = await transporter.sendMail({
-    from: '"DeckCreator 🃏" <support@getdeckcreator.com>',
+    from: '"DeckCreator" <support@getdeckcreator.com>',
     to: email,
     subject: sub,
-    html: template.html(user, codigo, message)
+    html: template.html(user, preheader, message)
   });
 
   console.log('Message sent: %s', info.messageId);

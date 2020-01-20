@@ -2,6 +2,12 @@ DeckCreator
 
 Releases:
 
+    1.12.3 (20/01/2020)
+      - Melhorias visuais:
+          - Textos informativos para tela de esqueci minha senha.
+      - Correões de bugs:
+          - Pequena alteração no envio de email.
+
     1.12.2 (14/01/2020)
       - Melhorias visuais:
           - Textos informativos para tela de registro e ativação.

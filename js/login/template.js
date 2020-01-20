@@ -1,5 +1,5 @@
 module.exports = {
-  html(user, codigo, message){
+  html(user, preheader, message){
 
     return `<!doctype html>
     <html>
@@ -336,7 +336,7 @@ module.exports = {
         </style>
       </head>
       <body class="">
-        <span class="preheader">Your access code is: <b>`+codigo+`</b></span>
+        <span class="preheader">`+preheader+`</span>
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
           <tr>
             <td>&nbsp;</td>

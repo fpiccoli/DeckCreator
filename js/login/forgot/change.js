@@ -8,6 +8,10 @@ document.querySelector('#change').addEventListener('click' , function(){
   change();
 });
 
+document.querySelector('#back').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','login');
+});
+
 function change(){
   let email = document.querySelector('#email').value.toLowerCase();
 
