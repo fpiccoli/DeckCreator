@@ -22,6 +22,7 @@ module.exports = {
 
     let decks = await dataDeck.find(user.name, user.game);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
+    documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic(decks);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
     for(let i in buttons){

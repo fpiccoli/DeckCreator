@@ -62,6 +62,7 @@ module.exports = {
           deck.heroes.forEach(function(hero){ delete hero._id });
         });
         documento.querySelector('#menu-content').innerHTML = html.loading();
+
         render(documento, retorno, user);
       }).catch(err => console.log(err));
     });
@@ -96,6 +97,11 @@ function render(documento, json, user){
         ipcRenderer.send('delete-cookies', ['grupo']);
       } else{
         ipcRenderer.send('set-cookie', 'grupo', deck.grupo);
+      }
+      if(deck.public){
+        ipcRenderer.send('set-cookie', 'public', 'true');
+      } else{
+        ipcRenderer.send('set-cookie', 'public', 'false');
       }
       ipcRenderer.send('set-cookie', 'cards', JSON.stringify(cartas));
       herois.forEach(setCookie);

@@ -49,6 +49,7 @@ var schema = mongoose.Schema({
   ],
   user: String,
   grupo: String,
+  public: Boolean,
   game: String
 }, {collection: 'decks'});
 

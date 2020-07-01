@@ -41,6 +41,18 @@ module.exports = {
 
     return builder.replaceCamelCase(retorno);
   },
+  addPublic(decks){
+    let options = [];
+    options.push(builder.element('option', { class:'active', value: 'false' }, [builder.text('Private')]));
+    options.push(builder.element('option', { class:'active', value: 'true' }, [builder.text('Public')]));
+
+    let select = builder.element('select', {class: 'form-control', id: 'select-public'}, options);
+    let inputGroup = builder.element('div', {class: 'input-group-btn custom-search-form'}, [select]);
+
+    let retorno = builder.build([builder.element('li', {class: 'sidebar-search'/*, id: 'select-public'*/}, [inputGroup])]);
+
+    return builder.replaceCamelCase(retorno);
+  },
   updateGrupo(decks, opcaoNova){
     decks.forEach(function (deck, index, array) {
       if(!deck.grupo) deck.grupo = 'Other Decks';

@@ -59,7 +59,7 @@ function menu(decks, game){
     let herois = [];
     let cartas = [];
 
-    let rowTitle = title(deck.name, deck.user+'-'+dataManager.getNome(deck.name));
+    let rowTitle = title(deck, deck.user+'-'+dataManager.getNome(deck.name));
 
     herois = herois.concat(deck.heroes);
     cartas = herois.concat(deck.cards);
@@ -107,8 +107,13 @@ function menu(decks, game){
   return panels;
 }
 
-function title(name, index){
-  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [builder.text(name)]);
+function title(deck, index){
+  let publico = '(Private)';
+  if (deck.public){
+    publico = '('+'Public'+')';
+  }
+
+  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [builder.text(deck.name + ' ' + publico)]);
   let title = builder.element('h4', {class: 'panel-title'}, [collapse]);
   return builder.element('div', {class: 'panel-heading'}, [title]);
 }

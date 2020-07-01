@@ -46,13 +46,24 @@ function renderHerois(){
 function renderSidebar(usuario){
   render.sidebar(buttons, usuario, listaDeCartas, herois, document).then(() => {
     renderGrupo();
+    renderPublic();
   }).catch(err => console.log(err));
 }
 
 function renderGrupo(){
   cookie.grupo().then((retorno) => {
-    if(retorno){
+    if(retorno != 'Other Decks'){
       document.querySelector("#grupo").value = retorno;
+    } else{
+      document.querySelector("#grupo").value = '';
+    }
+  }).catch(err => console.log(err));
+}
+
+function renderPublic(){
+  cookie.public().then((retorno) => {
+    if(retorno){
+      document.querySelector("#select-public").value = retorno;
     } else{
       document.querySelector("#grupo").value = '';
     }
@@ -103,6 +114,7 @@ function save(nome){
     extra: [],
     user: user.name,
     grupo: document.querySelector("#grupo").value,
+    public: document.querySelector("#select-public").value == 'true',
     game: user.game
   }
 
