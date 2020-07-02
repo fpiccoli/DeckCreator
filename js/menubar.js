@@ -2,7 +2,9 @@ const { ipcRenderer }  = require('electron');
 const deckBuilder = require('./deck-builder.js');
 const file = require('./file-manager.js');
 const alert = require('./alert-message.js');
-const html = require('./html/menu-decks.js');
+const builder = require('./html/builder.js');
+const htmlMyDecks = require('./html/decks-my.js');
+const htmlPublicDecks = require('./html/decks-public.js');
 const regras = require('./html/regras.js');
 const sobre = require('./html/sobre.js');
 const dataVersao = require('../js/data/version.js');
@@ -61,9 +63,24 @@ module.exports = {
           deck.cards.forEach(function(card){ delete card._id });
           deck.heroes.forEach(function(hero){ delete hero._id });
         });
-        documento.querySelector('#menu-content').innerHTML = html.loading();
+        documento.querySelector('#menu-content').innerHTML = builder.loading();
 
+        documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(retorno, user.game);
         render(documento, retorno, user);
+      }).catch(err => console.log(err));
+    });
+    documento.querySelector('#public-decks').addEventListener('click' , function(){
+      let decks = dataDeck.list(user.game);
+      decks.then((retorno) => {
+        retorno.sort(dataManager.dynamicSort('name'));
+        retorno.forEach(function (deck, index, array) {
+          deck.cards.forEach(function(card){ delete card._id });
+          deck.heroes.forEach(function(hero){ delete hero._id });
+        });
+        documento.querySelector('#menu-content').innerHTML = builder.loading();
+
+        documento.querySelector('#menu-content').innerHTML = htmlPublicDecks.accordion(retorno, user);
+        renderPublic(documento, retorno, user);
       }).catch(err => console.log(err));
     });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
@@ -85,7 +102,6 @@ module.exports = {
 }
 
 function render(documento, json, user){
-  documento.querySelector('#menu-content').innerHTML = html.accordion(json, user.game);
   json.forEach(function (deck, index, array) {
     let herois = deck.heroes;
     let cartas = deck.cards;
@@ -117,6 +133,7 @@ function render(documento, json, user){
           json = removeObj(json, array[index]);
         }
       }
+      documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
       render(documento, json, user);
     });
     document.querySelector('#botao-alterar-nome-'+id).addEventListener('click' , function(){
@@ -130,6 +147,37 @@ function render(documento, json, user){
         }
       });
     });
+  });
+}
+
+function renderPublic(documento, json, user){
+  json.forEach(function (deck, index, array) {
+    let herois = deck.heroes;
+    let cartas = deck.cards;
+
+    let id = deck.user+'-'+dataManager.getNome(deck.name);
+
+    if(deck.user != user.name){
+      documento.querySelector('#botao-import-'+id).addEventListener('click' , function(){
+
+        let object = {
+          name: deck.user + "'s " + deck.name,
+          cards: cartas,
+          heroes: herois,
+          extra: [],
+          user: user.name,
+          grupo: 'Imported Decks',
+          public: false,
+          game: user.game
+        }
+        if(dataDeck.save(object, user.game)){
+          let deckRetorno = deckBuilder.build(object, user.game);
+          file.export(object.name, deckRetorno, user.game);
+          alert.message(documento.querySelector("#alert-message"), '<b>' + deck.user + "'s " + deck.name + '</b> successfully imported to your decks!', 'success');
+        }
+      });
+    }
+
   });
 }
 

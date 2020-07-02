@@ -2,6 +2,10 @@ DeckCreator
 
 Releases:
 
+    1.13.0 (03/07/2020)
+      - Novas Funcionalidades:
+          - Cadastrar deck público e a possibilidade de importar decks públicos de outros usuários.
+
     1.12.3 (20/01/2020)
       - Melhorias visuais:
           - Textos informativos para tela de esqueci minha senha.
