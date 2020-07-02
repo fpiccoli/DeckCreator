@@ -5,6 +5,9 @@ const htmlPublicDecks = require('../html/decks-public.js');
 const dataDeck = require('../../js/data/deck.js');
 const dataManager = require('../data-manager.js');
 const render = require('./render.js');
+const alert = require('../alert-message.js');
+const file = require('../file-manager.js');
+const deckBuilder = require('../deck-builder.js');
 
 module.exports = {
   navbar(documento, user){
