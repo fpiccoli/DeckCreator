@@ -150,13 +150,10 @@ module.exports = {
     let caminho = validaPath(tree);
     let files = [];
 
-    console.log(caminho);
     fs.readdirSync(caminho).forEach(file => {
       files.push(file);
-      console.log(file);
     })
 
-    console.log(files);
     files.forEach(excluir);
     function excluir(file, index, array){
       fs.unlinkSync(caminho + '/' + file);

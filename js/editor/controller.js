@@ -7,7 +7,7 @@ const cookie = require('../cookie-manager.js');
 const alert = require('../alert-message.js');
 const render = require('./render.js');
 const update = require('./update.js');
-const menu = require('../menubar.js');
+const menu = require('../menu/controller.js');
 let user;
 
 var package = require('../../package.json');

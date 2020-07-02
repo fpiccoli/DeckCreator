@@ -45,8 +45,6 @@ module.exports = {
     });
   },
   save(deck, game){
-    console.log(deck);
-    console.log(game);
     var query = {'name': deck.name, user: deck.user};
     var deckModel = mongoose.model('Deck'+game);
     return deckModel.findOneAndUpdate(query, deck, {upsert: true, useFindAndModify: false}, function(err, doc){

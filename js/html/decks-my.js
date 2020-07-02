@@ -90,9 +90,9 @@ function menu(decks, game){
     });
 
     let id = deck.user+'-'+dataManager.getNome(deck.name);
-    let botaoAlterarNome = botao('tag', 'info', 'alterar-nome-'+id, 'Update Name');
+    let botaoAlterarNome = botao('tag', 'info', 'alterar-nome-'+id, 'Change Name');
     let botaoEditar = botao('edit', 'primary', 'editar-'+id, 'Edit Deck');
-    let botaoExcluir = botao('trash', 'danger', 'excluir-'+id, 'Delete Deck');
+    let botaoExcluir = botao('trash', 'danger', 'excluir-'+id, 'Remove Deck');
     childBotoes = builder.element('div', {class:'col-xs-3 text-right'}, [botaoAlterarNome, botaoEditar, botaoExcluir, builder.element('div', {id:'input-novo-nome-'+id}, [])]);
 
     let panelBody = builder.element('div', {class: 'panel-body'}, [childDeck, childBotoes]);
