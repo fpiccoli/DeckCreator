@@ -2,7 +2,13 @@ DeckCreator
 
 Releases:
 
-    1.13.0 (03/07/2020)
+    1.13.1 (03/07/2020)
+      - Melhorias visuais:
+          - Cartas aumentam de tamanho no editor ao serem focadas pelo cursor do mouse.
+      - Correções de bugs:
+          - Correções na exibição de decks públicos.
+
+    1.13.0 (02/07/2020)
       - Novas Funcionalidades:
           - Cadastrar deck público e a possibilidade de importar decks públicos de outros usuários.
 

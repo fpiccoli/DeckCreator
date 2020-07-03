@@ -105,9 +105,9 @@ function menu(decks, game){
 }
 
 function title(deck, index){
-  let publico = '(Private)';
+  let publico = '<i class="fa fa-lock"></i> <small>(Private)</small>';
   if (deck.public){
-    publico = '('+'Public'+')';
+    publico = '<i class="fa fa-globe"></i> <small>('+'Public'+')</small>';
   }
 
   let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [builder.text(deck.name + ' ' + publico)]);

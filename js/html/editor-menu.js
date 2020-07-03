@@ -43,6 +43,10 @@ module.exports = {
   },
   addPublic(decks){
     let options = [];
+    let public = options.push(builder.element('i', { class:'fa fa-globe'}, []));
+    let private = options.push(builder.element('i', { class:'fa fa-lock'}, []));
+// <i class="fa fa-globe"></i>
+
     options.push(builder.element('option', { class:'active', value: 'false' }, [builder.text('Private')]));
     options.push(builder.element('option', { class:'active', value: 'true' }, [builder.text('Public')]));
 

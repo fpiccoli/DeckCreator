@@ -8,6 +8,9 @@ const render = require('./render.js');
 const alert = require('../alert-message.js');
 const file = require('../file-manager.js');
 const deckBuilder = require('../deck-builder.js');
+const regras = require('../html/regras.js');
+const sobre = require('../html/sobre.js');
+const dataVersao = require('../data/version.js');
 
 module.exports = {
   navbar(documento, user){
