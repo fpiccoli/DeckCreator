@@ -1,9 +1,9 @@
 const { ipcRenderer }  = require('electron');
 const dataDeck = require('../../js/data/deck.js');
 const dataClasse = require('../../js/data/classe.js');
-const htmlMenu = require('../html/menu-cards.js');
+const htmlMenu = require('../html/editor-menu.js');
 const dataManager = require('../data-manager.js');
-const htmlCartas = require('../html/cartas.js');
+const htmlCartas = require('../html/editor-cartas.js');
 const update = require('./update.js');
 const conta = require('../conta.js');
 
@@ -22,6 +22,7 @@ module.exports = {
 
     let decks = await dataDeck.find(user.name, user.game);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
+    documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic(decks);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
     for(let i in buttons){
@@ -171,6 +172,13 @@ function addEventSelecionar(number, listaDeCartas){
     ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   });
 }
+// function addEventSelecionar(number, listaDeCartas){
+//   document.querySelector('.selecionar-heroi-'+number).addEventListener('focus' , function(){
+//     if (e.key === 'E') {
+//       console.log('apertado');
+//     }
+//   });
+// }
 
 function addObj(lista, carta){
   lista.push(carta);

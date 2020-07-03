@@ -12,6 +12,14 @@ module.exports = {
       console.log(error);
     })
   },
+  list(game){
+    var deckModel = mongoose.model('Deck'+game);
+    return deckModel.find({'public': true}).lean().then(function(retorno){
+      return retorno;
+    },function(error){
+      console.log(error);
+    })
+  },
   delete(nome, user, game){
     var deckModel = mongoose.model('Deck'+game);
     return deckModel.deleteOne({ name: nome, user: user }, function(err) {

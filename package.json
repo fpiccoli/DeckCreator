@@ -1,7 +1,7 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.12.3",
+  "version": "1.13.0",
   "description": "Criador de decks para Tabletop Simulator",
   "author": "fpiccoli",
   "main": "main.js",
@@ -24,7 +24,7 @@
     "electron-is-dev": "^1.1.0",
     "electron-updater": "^4.0.4",
     "html2json": "^1.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "json-beautify": "^1.0.1",
     "json-groupby": "^1.1.0",
     "jsonfile": "^5.0.0",

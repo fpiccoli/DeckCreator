@@ -347,7 +347,7 @@ module.exports = {
                 <table role="presentation" class="main">
 
                   <!-- START MAIN CONTENT AREA -->
-                  <img src="https://drive.google.com/uc?export=download&id=1pjc2qHyQBfK99m7eM9iwYCVBzqigkegc">
+                  <img src="https://drive.google.com/uc?export=download&id=1pjc2qHyQBfK99m7eM9iwYCVBzqigkegc" alt="">
                   <tr>
                     <td class="wrapper">
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0">

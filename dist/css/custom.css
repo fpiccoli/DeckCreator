@@ -1,3 +1,54 @@
+.Enlarge {
+  position:relative;
+}
+.Enlarge span {
+  position:absolute;
+  left: -9999px;
+  visibility: hidden;
+  opacity: 0;-webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+.Enlarge span img {
+  margin-bottom:5px;
+}
+div.Enlarge:hover{
+  z-index: 999;
+  cursor:pointer;
+}
+div.Enlarge:hover span{
+  visibility: visible;
+  opacity: 1;
+  top: 25%;
+  left: -125px;
+  z-index: 999;
+  width:200%;
+  height:200%;
+  -webkit-box-shadow: 0 0 20px rgba(0,0,0, .75));
+  -moz-box-shadow: 0 0 20px rgba(0,0,0, .75);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius:8px;
+  font-family: 'Droid Sans', sans-serif;
+  font-size:12px;
+  line-height:18px;
+  text-align: center;
+  padding-bottom:20px;
+}
+
+.zoom {
+  transition: transform .2s;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  z-index: 9999999999999;
+  position: relative;
+  transform: scale(1.5); 
+}
+
 .card-img {
   border-radius: 5%;
 }

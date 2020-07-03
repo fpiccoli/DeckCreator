@@ -1,4 +1,4 @@
-const htmlCartas = require('../html/cartas.js');
+const htmlCartas = require('../html/editor-cartas.js');
 const conta = require('../conta.js');
 
 module.exports = {

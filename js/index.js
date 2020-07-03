@@ -1,4 +1,4 @@
-const menu = require('./menubar.js');
+const menu = require('./menu/controller.js');
 const { ipcRenderer }  = require('electron');
 const cookie = require('./cookie-manager.js');
 

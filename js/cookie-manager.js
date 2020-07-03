@@ -42,6 +42,18 @@ module.exports = {
       });
     });
   },
+  public(){
+    return new Promise(resolve => {
+      getCookiePromise().then(retorno => {
+        let public = false;
+        cookies = filtraCookies(retorno, 'public');
+        if(cookies[0]){
+          public = cookies[0].value;
+        }
+        resolve(public);
+      });
+    });
+  },
   cards(){
     return new Promise(resolve => {
       getCookiePromise().then(retorno => {

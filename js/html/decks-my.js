@@ -45,9 +45,6 @@ module.exports = {
     });
 
     return builder.element('div', {class: 'tab-content'}, divs);
-  },
-  loading(){
-    return builder.loading();
   }
 }
 
@@ -59,7 +56,7 @@ function menu(decks, game){
     let herois = [];
     let cartas = [];
 
-    let rowTitle = title(deck.name, deck.user+'-'+dataManager.getNome(deck.name));
+    let rowTitle = title(deck, deck.user+'-'+dataManager.getNome(deck.name));
 
     herois = herois.concat(deck.heroes);
     cartas = herois.concat(deck.cards);
@@ -93,9 +90,9 @@ function menu(decks, game){
     });
 
     let id = deck.user+'-'+dataManager.getNome(deck.name);
-    let botaoAlterarNome = botao('tag', 'info', 'alterar-nome-'+id, 'Alterar Nome');
-    let botaoEditar = botao('edit', 'primary', 'editar-'+id, 'Editar Deck');
-    let botaoExcluir = botao('trash', 'danger', 'excluir-'+id, 'Excluir Deck');
+    let botaoAlterarNome = botao('tag', 'info', 'alterar-nome-'+id, 'Change Name');
+    let botaoEditar = botao('edit', 'primary', 'editar-'+id, 'Edit Deck');
+    let botaoExcluir = botao('trash', 'danger', 'excluir-'+id, 'Remove Deck');
     childBotoes = builder.element('div', {class:'col-xs-3 text-right'}, [botaoAlterarNome, botaoEditar, botaoExcluir, builder.element('div', {id:'input-novo-nome-'+id}, [])]);
 
     let panelBody = builder.element('div', {class: 'panel-body'}, [childDeck, childBotoes]);
@@ -107,8 +104,13 @@ function menu(decks, game){
   return panels;
 }
 
-function title(name, index){
-  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [builder.text(name)]);
+function title(deck, index){
+  let publico = '<i class="fa fa-lock"></i> <small>(Private)</small>';
+  if (deck.public){
+    publico = '<i class="fa fa-globe"></i> <small>('+'Public'+')</small>';
+  }
+
+  let collapse = builder.element('a', {dataToggle:'collapse', dataParent:'#accordion', href:'#deck'+index, ariaExpanded:'false', class:'collapsed'}, [builder.text(deck.name + ' ' + publico)]);
   let title = builder.element('h4', {class: 'panel-title'}, [collapse]);
   return builder.element('div', {class: 'panel-heading'}, [title]);
 }
