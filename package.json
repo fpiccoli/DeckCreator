@@ -32,7 +32,9 @@
     "moment": "^2.24.0",
     "mongoose": "^5.7.10",
     "nodemailer": "^6.4.2",
-    "popper.js": "^1.14.5"
+    "popper.js": "^1.14.5",
+    "restify": "^8.5.1",
+    "restify-clients": "^3.0.0"
   },
   "devDependencies": {
     "electron": "^5.0.5",

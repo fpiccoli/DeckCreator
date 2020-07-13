@@ -2,7 +2,6 @@ const { ipcRenderer }  = require('electron');
 const builder = require('../html/builder.js');
 const htmlMyDecks = require('../html/decks-my.js');
 const htmlPublicDecks = require('../html/decks-public.js');
-const dataDeck = require('../../js/data/deck.js');
 const dataManager = require('../data-manager.js');
 const render = require('./render.js');
 const alert = require('../alert-message.js');
@@ -10,7 +9,8 @@ const file = require('../file-manager.js');
 const deckBuilder = require('../deck-builder.js');
 const regras = require('../html/regras.js');
 const sobre = require('../html/sobre.js');
-const dataVersao = require('../data/version.js');
+const dataDeck = require('../../js/rest/deck.js');
+const dataVersao = require('../../js/rest/version.js');
 
 module.exports = {
   navbar(documento, user){

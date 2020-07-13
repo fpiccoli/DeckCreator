@@ -1,5 +1,5 @@
 const file = require('../file-manager.js');
-const dataUser = require('../data/user.js');
+const dataUser = require('../rest/user.js');
 const alert = require('../alert-message.js');
 
 module.exports = {

@@ -1,9 +1,9 @@
 const { ipcRenderer } = require('electron');
 const html = require('./html/herois.js');
-const dataClasse = require('../js/data/classe.js');
 const dataManager = require('./data-manager.js');
 const monta = require('./monta-heroi.js');
 const cookie = require('./cookie-manager.js');
+const dataClasse = require('../js/rest/classe.js');
 
 let linkFechar = document.querySelector("#link-fechar");
 let recarregar;

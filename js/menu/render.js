@@ -1,5 +1,5 @@
 const { ipcRenderer }  = require('electron');
-const dataDeck = require('../../js/data/deck.js');
+const dataDeck = require('../../js/rest/deck.js');
 const dataManager = require('../data-manager.js');
 const file = require('../file-manager.js');
 const deckBuilder = require('../deck-builder.js');
