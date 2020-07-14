@@ -63,8 +63,6 @@ module.exports = {
     return string.toLowerCase();
   },
   filtraMain(lista, game){
-    console.log(lista); //TODO
-    console.log(game); //TODO
     return lista.filter(function(carta){
       if(game == 'M&D'){
         return (carta.subtype == 'ATK' || carta.subtype == 'TEC' || carta.subtype == 'SKL' || carta.subtype == 'DOM')

@@ -45,7 +45,6 @@ module.exports = {
     let options = [];
     let public = options.push(builder.element('i', { class:'fa fa-globe'}, []));
     let private = options.push(builder.element('i', { class:'fa fa-lock'}, []));
-// <i class="fa fa-globe"></i>
 
     options.push(builder.element('option', { class:'active', value: 'false' }, [builder.text('Private')]));
     options.push(builder.element('option', { class:'active', value: 'true' }, [builder.text('Public')]));
@@ -53,7 +52,7 @@ module.exports = {
     let select = builder.element('select', {class: 'form-control', id: 'select-public'}, options);
     let inputGroup = builder.element('div', {class: 'input-group-btn custom-search-form'}, [select]);
 
-    let retorno = builder.build([builder.element('li', {class: 'sidebar-search'/*, id: 'select-public'*/}, [inputGroup])]);
+    let retorno = builder.build([builder.element('li', {class: 'sidebar-search'}, [inputGroup])]);
 
     return builder.replaceCamelCase(retorno);
   },

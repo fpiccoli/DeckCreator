@@ -116,23 +116,17 @@ function layout(carta, user, listaDeCartas, herois, documento){
 }
 
 async function buscaCartas(classe, user){
-  let main = [];
-  main.push(await dataClasse.getClassCards(classe.main, user.game));
-  let sub = [];
+  let main = await dataClasse.getClassCards(classe.main, user.game);
+  let sub;
   if(classe.sub == '???'){
-    sub.push(await dataClasse.getClassCards(classe.main, user.game));
+    sub = await dataClasse.getClassCards(classe.main, user.game);
   } else{
-    sub.push(await dataClasse.getClassCards(classe.sub, user.game));
+    sub = await dataClasse.getClassCards(classe.sub, user.game);
   }
   let mainCards = [];
   let subCards = [];
 
-
   main.forEach(function (grupo, index, array){
-    console.log('grupo---'); //TODO
-    console.log(grupo); //TODO
-    console.log(array); //TODO
-    console.log('grupo---'); //TODO
     if(grupo.cards){
       let filtrado = dataManager.filtraMain(grupo.cards, user.game);
       filtrado.forEach(function (carta, i, array){
@@ -178,13 +172,6 @@ function addEventSelecionar(number, listaDeCartas){
     ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   });
 }
-// function addEventSelecionar(number, listaDeCartas){
-//   document.querySelector('.selecionar-heroi-'+number).addEventListener('focus' , function(){
-//     if (e.key === 'E') {
-//       console.log('apertado');
-//     }
-//   });
-// }
 
 function addObj(lista, carta){
   lista.push(carta);
