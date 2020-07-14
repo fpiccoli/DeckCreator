@@ -127,7 +127,12 @@ async function buscaCartas(classe, user){
   let mainCards = [];
   let subCards = [];
 
+
   main.forEach(function (grupo, index, array){
+    console.log('grupo---'); //TODO
+    console.log(grupo); //TODO
+    console.log(array); //TODO
+    console.log('grupo---'); //TODO
     if(grupo.cards){
       let filtrado = dataManager.filtraMain(grupo.cards, user.game);
       filtrado.forEach(function (carta, i, array){

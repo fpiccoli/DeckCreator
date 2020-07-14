@@ -4,13 +4,7 @@ const alert = require('../alert-message.js');
 
 module.exports = {
   login(user, pass, documento, ipcRenderer){
-    var userFind = dataUser.find({
-      $and: [
-        {$or: [{user: user.toLowerCase()}, {email: user.toLowerCase()} ]},
-        {password: pass},
-        {active: true}
-      ]
-    });
+    var userFind = dataUser.login(user, pass);
 
     userFind.then((retorno) => {
       if(retorno){
