@@ -16,6 +16,7 @@ module.exports = {
       });
     });
   },
-  getClasseByCard(carta){
-  }
+  //DEPRECATED
+  // getClasseByCard(carta){
+  // }
 }
