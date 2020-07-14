@@ -116,12 +116,13 @@ function layout(carta, user, listaDeCartas, herois, documento){
 }
 
 async function buscaCartas(classe, user){
-  let main = await dataClasse.getClassCards(classe.main, user.game);
+  let main = [];
+  main.push(await dataClasse.getClassCards(classe.main, user.game));
   let sub = [];
   if(classe.sub == '???'){
-    sub = await dataClasse.getClassCards(classe.main, user.game);
+    sub.push(await dataClasse.getClassCards(classe.main, user.game));
   } else{
-    sub = await dataClasse.getClassCards(classe.sub, user.game);
+    sub.push(await dataClasse.getClassCards(classe.sub, user.game));
   }
   let mainCards = [];
   let subCards = [];
