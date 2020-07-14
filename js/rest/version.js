@@ -1,24 +1,11 @@
-const clients = require('restify-clients');
-
-const client = clients.createJsonClient({
-  url: 'http://localhost:3000'
-});
+const http = require('./http.js');
 
 module.exports = {
   listAll(){
     return new Promise(resolve => {
-      getPromise('/version/list').then(retorno => {
-        resolve(retorno);
+      http.get('/version/list').then(retorno => {
+        resolve(retorno.conteudo);
       });
     });
   }
-}
-
-function getPromise(path) {
-  return new Promise(resolve => {
-    client.get(path, function(err, req, res, obj) {
-      if(err) console.log(err);
-      resolve(obj);
-    })
-  });
 }

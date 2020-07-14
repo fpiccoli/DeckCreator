@@ -1,8 +1,4 @@
-const clients = require('restify-clients');
-
-const client = clients.createJsonClient({
-  url: 'http://localhost:3000'
-});
+const http = require('./http.js');
 
 module.exports = {
   find(query){
