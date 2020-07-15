@@ -118,18 +118,23 @@ function save(nome){
     game: user.game
   }
 
-  let validacao = dataDeck.exists(object, user.game);
-  validacao.then((deckJaExiste) => {
-    if(deckJaExiste){
-      if(alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')){
-        if(dataDeck.save(object, user.game)){
-          exportDeck(object, user.game);
+  dataDeck.exists(object, user.game).then((retorno) => {
+    if(retorno){
+      if(retorno.exists && !retorno.error){
+        if(alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')){
+          httpSave(object, user.game)
         }
+      } else if (!retorno.exists && !retorno.error){
+        httpSave(object, user.game)
       }
-    } else{
-      if(dataDeck.save(object, user.game)){
-        exportDeck(object, user.game);
-      }
+    }
+  }).catch(err => console.log(err));
+}
+
+function httpSave(obj, game){
+  dataDeck.save(obj, game).then((retorno) => {
+    if(retorno){
+      exportDeck(obj, game);
     }
   }).catch(err => console.log(err));
 }

@@ -36,9 +36,9 @@ module.exports = {
       alert.message(documento.querySelector("#alert-message"), '<b>Tabletop Simulator</b> cache successfully cleared!', 'success');
     });
     documento.querySelector("#import-decks").addEventListener('click', function () {
-      let decks = dataDeck.find(user.name, user.game);
       file.clearLocalFile(user.game);
-      decks.then((retorno) => {
+      dataDeck.find(user.name, user.game)
+      .then((retorno) => {
         retorno.forEach(function (deck, index, array) {
           let deckRetorno = deckBuilder.build(deck, user.game);
           file.export(deck.name, deckRetorno, user.game);
@@ -56,8 +56,8 @@ module.exports = {
   },
   sidebar(documento, user){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
-      let decks = dataDeck.find(user.name, user.game);
-      decks.then((retorno) => {
+      dataDeck.find(user.name, user.game)
+      .then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {
           deck.cards.forEach(function(card){ delete card._id });
@@ -70,8 +70,8 @@ module.exports = {
       }).catch(err => console.log(err));
     });
     documento.querySelector('#public-decks').addEventListener('click' , function(){
-      let decks = dataDeck.list(user.game);
-      decks.then((retorno) => {
+      dataDeck.list(user.game)
+      .then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {
           deck.cards.forEach(function(card){ delete card._id });
