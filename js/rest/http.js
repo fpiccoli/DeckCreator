@@ -21,6 +21,14 @@ module.exports = {
       })
     });
   },
+  put(path, query) {
+    return new Promise(resolve => {
+      client.put(path, query, function(err, req, res, obj) {
+        if(err) console.log(err);
+        resolve({conteudo: obj, status: res.statusCode});
+      })
+    });
+  },
   valida(game){
     return game == 'M&D' ? 'md' : 'mrbc'
   }

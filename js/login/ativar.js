@@ -1,8 +1,8 @@
 const { ipcRenderer }  = require('electron');
 var moment = require('moment');
 const alert = require('../alert-message.js');
-const dataCode = require('../data/code.js');
-const dataUser = require('../data/user.js');
+const dataCode = require('../rest/code.js');
+const dataUser = require('../rest/user.js');
 
 document.querySelector('#back').addEventListener('click' , function(){
   ipcRenderer.send('redirecionar-pagina','register');
@@ -22,19 +22,19 @@ document.querySelector('#ativar').addEventListener('click' , function(){
     return;
   }
 
-  var codeFind = dataCode.find({email: email, codigo: codigo});
+  findCode({email: email, codigo: codigo});
+});
 
-  codeFind.then((retorno) => {
+function findCode(obj){
+  dataCode.find(obj).then((retorno) => {
     if(retorno){
       let atual = moment();
       let limite = moment(retorno.data).add(15, 'm');
 
       if(atual.isBefore(limite)){
-        if(dataUser.activate(email)){
-          ipcRenderer.send('redirecionar-pagina','login');
-        }
+        activateUser(obj);
       }
-      else{
+      else {
         alert.message(document.querySelector('#alert-message'), 'Expired code!' , 'warning');
       }
 
@@ -42,5 +42,13 @@ document.querySelector('#ativar').addEventListener('click' , function(){
       alert.message(document.querySelector('#alert-message'), 'Invalid code or email!', 'danger');
     }
   }).catch(err => console.log(err));
+}
 
-});
+function activateUser(obj){
+  console.log(obj);
+  dataUser.activate(obj.email).then((retorno) => {
+    if(retorno){
+      ipcRenderer.send('redirecionar-pagina','login');
+    }
+  }).catch(err => console.log(err));
+}
