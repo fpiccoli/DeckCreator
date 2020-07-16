@@ -4,6 +4,7 @@ const { ipcRenderer }  = require('electron');
 const os = require('os');
 let path = os.homedir()+"/.local/share";
 if(os.platform() == 'win32') path = os.homedir()+'/Documents';
+const mergeImages = require('merge-images');
 
 module.exports = {
   saveLogin(nome, json){
@@ -35,7 +36,7 @@ module.exports = {
     }
     return 1;
   },
-  export(nome, json, game){
+  export(nome, json, game, herois){
     let addGame = '';
     if(game == 'MRBC') addGame = 'MRBC';
 
@@ -52,6 +53,7 @@ module.exports = {
     let file = caminho + '/' + nome + '.json';
 
     jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
+      saveImg(caminho, nome, game, herois);
       if (err) console.error(err)
     });
     return 1;
@@ -93,9 +95,12 @@ module.exports = {
     tree += '/Saved Objects';
     tree += '/DeckCreator'+addGame;
 
-    var filePath = path + tree + '/' + name + '.json';
-    if(fs.existsSync(filePath)){
-      fs.unlinkSync(filePath);
+    var filePath = path + tree + '/' + name;
+    if(fs.existsSync(filePath + '.json')){
+      fs.unlinkSync(filePath + '.json');
+    }
+    if(fs.existsSync(filePath + '.png')){
+      fs.unlinkSync(filePath + '.png');
     }
   },
   validaLogin(){
@@ -159,6 +164,41 @@ module.exports = {
       fs.unlinkSync(caminho + '/' + file);
     }
   }
+}
+
+function saveImg(caminho, nome, game, herois){
+  let arquivo = caminho + '/' + nome + '.png';
+  let arrayImg = montaArrayImg(game, herois);
+
+  mergeImages(arrayImg)
+  .then((b64) =>{
+    let base64Data = b64.replace(/^data:image\/\w+;base64,/, "");
+    binaryData = Buffer.from(base64Data, 'base64');
+    fs.writeFile(arquivo, binaryData, function(err) {
+      if (err) throw err;
+    });
+  });
+}
+
+function montaArrayImg(game, images){
+  let stringImg = 'https://drive.google.com/uc?export=download&id=';
+  let bgMRBC = '1DcyZHx91CWfPAme_r1yhphlivyMkPa7l';
+  let bgMD = '1u8jln2C6Johb-RHmBExTo3TXaG4exW1W';
+
+  let array = [
+    { src: stringImg+bgMD, x: 0, y: 0, opacity: 0.1},
+    { src: stringImg+images[0].imgurl, x: 1, y: 120},
+    { src: stringImg+images[1].imgurl, x: 180, y: 120 },
+    { src: stringImg+images[2].imgurl, x: 360, y: 120 }
+  ];
+  if (game == 'MRBC'){
+    array = [{ src: stringImg+bgMRBC, x: 0, y: 0, opacity: 0.1},
+      { src: stringImg+images[0].imgurl, x: 1, y: 190},
+      { src: stringImg+images[1].imgurl, x: 260, y: 190 },
+      { src: stringImg+images[2].imgurl, x: 520, y: 190 }
+    ];
+  }
+  return array;
 }
 
 function validaPath(pastas) {

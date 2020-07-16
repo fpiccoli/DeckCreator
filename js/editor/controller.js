@@ -137,7 +137,8 @@ function save(nome){
 function exportDeck(object, game){
   let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
-  file.export(object.name, deckRetorno, user.game);
+
+  file.export(object.name, deckRetorno, user.game, object.heroes);
   ipcRenderer.send('redirecionar-pagina','index');
 }
 
