@@ -142,8 +142,9 @@ function httpSave(obj, game){
 function exportDeck(object, game){
   let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
-  file.export(object.name, deckRetorno, user.game);
-  ipcRenderer.send('redirecionar-pagina','index');
+
+  file.export(object, deckRetorno, user.game);
+  // ipcRenderer.send('redirecionar-pagina','index');
 }
 
 document.querySelector('.cartas-deck').addEventListener('click', function () {

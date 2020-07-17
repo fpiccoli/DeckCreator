@@ -27,7 +27,10 @@ module.exports = {
       Transform: {
         scaleX: 1.5,
         scaleY: 1.0,
-        scaleZ: 1.5
+        scaleZ: 1.5,
+        rotX: 0,
+        rotY: 180,
+        rotZ: 0
       },
       Nickname: object.name,
       Description: "",
