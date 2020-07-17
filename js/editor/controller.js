@@ -135,6 +135,7 @@ function save(nome){
 }
 
 function exportDeck(object, game){
+  console.log(object)
   let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
 

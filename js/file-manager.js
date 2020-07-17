@@ -167,7 +167,6 @@ module.exports = {
 }
 
 function saveImg(caminho, game, deck){
-  console.log(deck.name)
   let arquivo = caminho + '/' + deck.name + '.png';
   let arrayImg = montaArrayImg(game, deck.heroes);
 
@@ -188,15 +187,15 @@ function montaArrayImg(game, images){
 
   let array = [
     { src: stringImg+bgMD, x: 0, y: 0, opacity: 0.1},
-    { src: stringImg+images[0].imgurl, x: 1, y: 120},
-    { src: stringImg+images[1].imgurl, x: 180, y: 120 },
-    { src: stringImg+images[2].imgurl, x: 360, y: 120 }
+    { src: images[0] ? stringImg+images[0].imgurl : stringImg+bgMD, x: 1, y: 120},
+    { src: images[1] ? stringImg+images[1].imgurl : stringImg+bgMD, x: 180, y: 120 },
+    { src: images[2] ? stringImg+images[2].imgurl : stringImg+bgMD, x: 360, y: 120 }
   ];
   if (game == 'MRBC'){
     array = [{ src: stringImg+bgMRBC, x: 0, y: 0, opacity: 0.1},
-      { src: stringImg+images[0].imgurl, x: 1, y: 190},
-      { src: stringImg+images[1].imgurl, x: 260, y: 190 },
-      { src: stringImg+images[2].imgurl, x: 520, y: 190 }
+      { src: images[0] ? stringImg+images[0].imgurl : stringImg+bgMRBC, x: 1, y: 190},
+      { src: images[1] ? stringImg+images[1].imgurl : stringImg+bgMRBC, x: 260, y: 190 },
+      { src: images[2] ? stringImg+images[2].imgurl : stringImg+bgMRBC, x: 520, y: 190 }
     ];
   }
   return array;
