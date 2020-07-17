@@ -2,6 +2,10 @@ DeckCreator
 
 Releases:
 
+    1.13.3 (17/07/2020)
+      - Correções de bugs:
+          - Correção na imagem de exibição para decks salvos pelo editor.
+
     1.13.2 (16/07/2020)
       - Melhorias visuais:
           - Decks agora são salvos com imagem de exibição para o TTS.

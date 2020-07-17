@@ -36,7 +36,7 @@ module.exports = {
     }
     return 1;
   },
-  export(nome, json, game, herois){
+  export(deck, json, game){
     let addGame = '';
     if(game == 'MRBC') addGame = 'MRBC';
 
@@ -50,10 +50,10 @@ module.exports = {
     tree.push('/DeckCreator'+addGame);
 
     let caminho = validaPath(tree);
-    let file = caminho + '/' + nome + '.json';
+    let file = caminho + '/' + deck.name + '.json';
 
     jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
-      saveImg(caminho, nome, game, herois);
+      saveImg(caminho, game, deck);
       if (err) console.error(err)
     });
     return 1;
@@ -166,9 +166,10 @@ module.exports = {
   }
 }
 
-function saveImg(caminho, nome, game, herois){
-  let arquivo = caminho + '/' + nome + '.png';
-  let arrayImg = montaArrayImg(game, herois);
+function saveImg(caminho, game, deck){
+  console.log(deck.name)
+  let arquivo = caminho + '/' + deck.name + '.png';
+  let arrayImg = montaArrayImg(game, deck.heroes);
 
   mergeImages(arrayImg)
   .then((b64) =>{

@@ -41,7 +41,7 @@ module.exports = {
       decks.then((retorno) => {
         retorno.forEach(function (deck, index, array) {
           let deckRetorno = deckBuilder.build(deck, user.game);
-          file.export(deck.name, deckRetorno, user.game, deck.heroes);
+          file.export(deck, deckRetorno, user.game);
         });
       }).catch(err => console.log(err));
       alert.message(documento.querySelector("#alert-message"), 'Decks successfully synced with <b>Tabletop Simulator</b>!', 'success');
