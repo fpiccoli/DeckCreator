@@ -36,7 +36,7 @@ module.exports = {
       documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
         if(alert.confirmDialog('Remove Deck', 'Sure!', 'Nope', 'Are you sure you want to remove the deck "'+ array[index].name +'"?')){
           if(dataDeck.delete(array[index].name, user.name, user.game)){
-            file.delete(array[index].name, user.game);
+            file.delete(array[index], user.game);
             json = removeObj(json, array[index]);
           }
         }
@@ -98,7 +98,7 @@ function eventUpdateNome(documento, deck, index, json, user){
   let antigo = deck.name;
   if(alert.confirmDialog('Name Change', 'Sure!', 'Nope', 'Do you want to change the name of "'+antigo+'" to "'+novoNome+'"?')){
     if(dataDeck.update(deck, novoNome, antigo, user.game)){
-      file.update(novoNome, antigo, deckBuilder.build(deck, user.game), user.game);
+      file.update(novoNome, antigo, deckBuilder.build(deck, user.game), user.game, deck);
     }
   }
 
