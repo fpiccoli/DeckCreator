@@ -1,6 +1,6 @@
 # deckcreator
 
-[Get DeckCreator](https://www.getdeckcreator.com/).
+Get [DeckCreator](https://www.getdeckcreator.com/).
 
 
 ## What is DeckCreator?
@@ -10,9 +10,9 @@ DeckCreator is an application for Windows/Linux that allows you to create and st
 This tool was made to work with the Monster Rancher Battle Card mod, but the code is there to be adapted for any other mod you want.
 
 
-## Where do I get the DeckCreator application?
+## Where do I get DeckCreator?
 
-Get [DeckCreator](https://www.getdeckcreator.com/).
+Get [DeckCreator](https://www.getdeckcreator.com/#home).
 
 ## Where do I find the Monster Rancher mod for TTS?
 
@@ -27,8 +27,8 @@ Get the [MRBC mod](https://steamcommunity.com/sharedfiles/filedetails/?id=193438
 
 ## How to use?
 
-Check out the tutorial on the website [DeckCreator](https://www.getdeckcreator.com/).
+Check out the tutorial on the website [DeckCreator](https://www.getdeckcreator.com/#timeline).
 
 ## Support us
 
-Donate via [PayPal](https://www.paypal.com/cgi-bin/webscr).
+Donate via [PayPal](https://www.getdeckcreator.com/#donate).
