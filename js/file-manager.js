@@ -5,6 +5,7 @@ const os = require('os');
 let path = os.homedir()+"/.local/share";
 if(os.platform() == 'win32') path = os.homedir()+'/Documents';
 const mergeImages = require('merge-images');
+const fsExtra = require('fs-extra');
 
 module.exports = {
   saveLogin(nome, json){
@@ -48,6 +49,11 @@ module.exports = {
     tree.push('/Saves');
     tree.push('/Saved Objects');
     tree.push('/DeckCreator'+addGame);
+    if(deck.grupo) {
+      tree.push('/'+deck.grupo);
+    } else {
+      tree.push('/Other Decks');
+    }
 
     let caminho = validaPath(tree);
     let file = caminho + '/' + deck.name + '.json';
@@ -58,7 +64,7 @@ module.exports = {
     });
     return 1;
   },
-  update(nome, antigo, json, game){
+  update(nome, antigo, json, game, deck){
     let addGame = '';
     if(game == 'MRBC') addGame = 'MRBC';
 
@@ -73,16 +79,23 @@ module.exports = {
 
     json.Nickname = nome;
     let caminho = validaPath(tree);
-    let newFile = caminho + '/' + nome + '.json';
-    let oldFile = caminho + '/' + antigo + '.json';
-    fs.unlinkSync(oldFile);
+    let newFile = caminho + '/' + deck.grupo + '/' + nome + '.json';
+    let oldFile = caminho + '/' + deck.grupo + '/' + antigo;
+
+    if(fs.existsSync(oldFile + '.json')){
+      fs.unlinkSync(oldFile + '.json');
+    }
+    if(fs.existsSync(oldFile + '.png')){
+      fs.unlinkSync(oldFile + '.png');
+    }
 
     jsonfile.writeFile(newFile, json, {spaces: 2}, function (err) {
+      saveImg(caminho, game, deck);
       if (err) console.error(err)
     });
     return 1;
   },
-  delete(name, game){
+  delete(deck, game){
     let addGame = '';
     if(game == 'MRBC') addGame = 'MRBC';
 
@@ -95,7 +108,7 @@ module.exports = {
     tree += '/Saved Objects';
     tree += '/DeckCreator'+addGame;
 
-    var filePath = path + tree + '/' + name;
+    var filePath = path + tree + '/' + deck.grupo + '/' + deck.name;
     if(fs.existsSync(filePath + '.json')){
       fs.unlinkSync(filePath + '.json');
     }
@@ -155,28 +168,19 @@ module.exports = {
     let caminho = validaPath(tree);
     let files = [];
 
-    fs.readdirSync(caminho).forEach(file => {
-      files.push(file);
-    })
-
-    files.forEach(excluir);
-    function excluir(file, index, array){
-      fs.unlinkSync(caminho + '/' + file);
-    }
+    fsExtra.emptyDirSync(caminho);
   }
 }
 
 function saveImg(caminho, game, deck){
-  console.log(deck.name)
   let arquivo = caminho + '/' + deck.name + '.png';
   let arrayImg = montaArrayImg(game, deck.heroes);
-
   mergeImages(arrayImg)
   .then((b64) =>{
     let base64Data = b64.replace(/^data:image\/\w+;base64,/, "");
     binaryData = Buffer.from(base64Data, 'base64');
     fs.writeFile(arquivo, binaryData, function(err) {
-      if (err) throw err;
+      if (err) console.error(err);
     });
   });
 }
@@ -188,15 +192,15 @@ function montaArrayImg(game, images){
 
   let array = [
     { src: stringImg+bgMD, x: 0, y: 0, opacity: 0.1},
-    { src: stringImg+images[0].imgurl, x: 1, y: 120},
-    { src: stringImg+images[1].imgurl, x: 180, y: 120 },
-    { src: stringImg+images[2].imgurl, x: 360, y: 120 }
+    { src: images[0] ? stringImg+images[0].imgurl : stringImg+bgMD, x: 1, y: 120},
+    { src: images[1] ? stringImg+images[1].imgurl : stringImg+bgMD, x: 180, y: 120 },
+    { src: images[2] ? stringImg+images[2].imgurl : stringImg+bgMD, x: 360, y: 120 }
   ];
   if (game == 'MRBC'){
     array = [{ src: stringImg+bgMRBC, x: 0, y: 0, opacity: 0.1},
-      { src: stringImg+images[0].imgurl, x: 1, y: 190},
-      { src: stringImg+images[1].imgurl, x: 260, y: 190 },
-      { src: stringImg+images[2].imgurl, x: 520, y: 190 }
+      { src: images[0] ? stringImg+images[0].imgurl : stringImg+bgMRBC, x: 1, y: 190},
+      { src: images[1] ? stringImg+images[1].imgurl : stringImg+bgMRBC, x: 260, y: 190 },
+      { src: images[2] ? stringImg+images[2].imgurl : stringImg+bgMRBC, x: 520, y: 190 }
     ];
   }
   return array;

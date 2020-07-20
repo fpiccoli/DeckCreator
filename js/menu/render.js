@@ -38,8 +38,7 @@ module.exports = {
           dataDeck.delete(array[index].name, user.name, user.game)
           .then((retorno) => {
             if(retorno){
-              console.log(retorno);
-              file.delete(array[index].name, user.game);
+              file.delete(array[index], user.game);
               json = removeObj(json, array[index]);
             }
             documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
@@ -104,7 +103,7 @@ function eventUpdateNome(documento, deck, index, json, user){
     dataDeck.update(deck, novoNome, antigo, user.game)
     .then((retorno) => {
       if(retorno){
-        file.update(novoNome, antigo, deckBuilder.build(deck, user.game), user.game);
+        file.update(novoNome, antigo, deckBuilder.build(deck, user.game), user.game, deck);
       }
     }).catch(err => console.log(err));
   }

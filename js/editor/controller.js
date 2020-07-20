@@ -140,11 +140,12 @@ function httpSave(obj, game){
 }
 
 function exportDeck(object, game){
+  console.log(object)
   let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
 
   file.export(object, deckRetorno, user.game);
-  // ipcRenderer.send('redirecionar-pagina','index');
+  ipcRenderer.send('redirecionar-pagina','index');
 }
 
 document.querySelector('.cartas-deck').addEventListener('click', function () {

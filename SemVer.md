@@ -5,7 +5,11 @@ Releases:
     1.14.0 (XX/XX/2020)
       -  Novas Funcionalidades:
           - Utilização de acesso ao banco por serviço REST para melhoria de segurança.
-          
+
+    1.13.4 (20/07/2020)
+      - Melhorias visuais:
+          - Decks agora são agrupados por pastas para serem exibidos organizadamente no TTS.
+
     1.13.3 (17/07/2020)
       - Correções de bugs:
           - Correção na imagem de exibição para decks salvos pelo editor.
