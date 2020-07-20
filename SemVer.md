@@ -4,7 +4,7 @@ Releases:
 
     1.13.4 (20/07/2020)
       - Melhorias visuais:
-          - Decks são agrupados por pastas para serem exibidos organizadamente no TTS.
+          - Decks agora são agrupados por pastas para serem exibidos organizadamente no TTS.
 
     1.13.3 (17/07/2020)
       - Correções de bugs:
