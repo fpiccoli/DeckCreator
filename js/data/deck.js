@@ -14,7 +14,16 @@ module.exports = {
   },
   list(game){
     var deckModel = mongoose.model('Deck'+game);
-    return deckModel.find({'public': true}).lean().then(function(retorno){
+
+    return deckModel.find({'public': true, 'recipe': null}).lean().then(function(retorno){
+      return retorno;
+    },function(error){
+      console.log(error);
+    })
+  },
+  recipe(game){
+    var deckModel = mongoose.model('Deck'+game);
+    return deckModel.find({'recipe': true}).lean().then(function(retorno){
       return retorno;
     },function(error){
       console.log(error);

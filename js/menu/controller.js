@@ -83,6 +83,20 @@ module.exports = {
         render.publicDecks(documento, retorno, user);
       }).catch(err => console.log(err));
     });
+    documento.querySelector('#recipe').addEventListener('click' , function(){
+      let decks = dataDeck.recipe(user.game);
+      decks.then((retorno) => {
+        retorno.sort(dataManager.dynamicSort('name'));
+        retorno.forEach(function (deck, index, array) {
+          deck.cards.forEach(function(card){ delete card._id });
+          deck.heroes.forEach(function(hero){ delete hero._id });
+        });
+        documento.querySelector('#menu-content').innerHTML = builder.loading();
+
+        documento.querySelector('#menu-content').innerHTML = htmlPublicDecks.accordion(retorno, user);
+        render.publicDecks(documento, retorno, user);
+      }).catch(err => console.log(err));
+    });
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
       ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'grupo']);
       ipcRenderer.send('redirecionar-pagina','editor');

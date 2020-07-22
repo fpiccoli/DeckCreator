@@ -172,13 +172,6 @@ function addEventSelecionar(number, listaDeCartas){
     ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   });
 }
-// function addEventSelecionar(number, listaDeCartas){
-//   document.querySelector('.selecionar-heroi-'+number).addEventListener('focus' , function(){
-//     if (e.key === 'E') {
-//       console.log('apertado');
-//     }
-//   });
-// }
 
 function addObj(lista, carta){
   lista.push(carta);

@@ -2,6 +2,10 @@ DeckCreator
 
 Releases:
 
+    1.13.5 (22/07/2020)
+      - Melhorias visuais:
+          - Novo menu Recipes para exibir receitas de decks pronto para serem importados.
+
     1.13.4 (20/07/2020)
       - Melhorias visuais:
           - Decks agora são agrupados por pastas para serem exibidos organizadamente no TTS.
