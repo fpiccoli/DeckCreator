@@ -78,7 +78,7 @@ module.exports = {
           }
           if(dataDeck.save(object, user.game)){
             let deckRetorno = deckBuilder.build(object, user.game);
-            file.export(object.name, deckRetorno, user.game);
+            file.export(object, deckRetorno, user.game);
             alert.message(documento.querySelector("#alert-message"), deck.user + "'s <b>" + deck.name + '</b> successfully imported to your decks!', 'success');
           }
         });
