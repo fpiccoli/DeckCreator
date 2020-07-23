@@ -4,14 +4,14 @@ const http = require('./http.js');
 module.exports = {
   find(user, game){
     return new Promise(resolve => {
-      http.post('/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: false}).then(retorno => {
+      http.post('/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}).then(retorno => {
         resolve(retorno.conteudo);
       });
     });
   },
   exists(deck, game){
     return new Promise(resolve => {
-      http.post('/deck/'+http.valida(game)+'/find', {name: deck.name, user: deck.user, recipe: false}).then(obj => {
+      http.post('/deck/'+http.valida(game)+'/find', {name: deck.name, user: deck.user, recipe: null}).then(obj => {
         let retorno;
         if (obj.status == 500 || obj.status == 400){
           ipcRenderer.send('console-log-main', retorno.conteudo);
@@ -50,7 +50,7 @@ module.exports = {
   },
   delete(nome, user, game){
     return new Promise(resolve => {
-      http.delete('/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: false}).then(retorno => {
+      http.delete('/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: null}).then(retorno => {
         let deletado;
         if (retorno.status == 500 || retorno.status == 400){
           ipcRenderer.send('console-log-main', retorno.conteudo)
