@@ -70,7 +70,21 @@ module.exports = {
       }).catch(err => console.log(err));
     });
     documento.querySelector('#public-decks').addEventListener('click' , function(){
-      dataDeck.list(user.game)
+      dataDeck.public(user.game)
+      .then((retorno) => {
+        retorno.sort(dataManager.dynamicSort('name'));
+        retorno.forEach(function (deck, index, array) {
+          deck.cards.forEach(function(card){ delete card._id });
+          deck.heroes.forEach(function(hero){ delete hero._id });
+        });
+        documento.querySelector('#menu-content').innerHTML = builder.loading();
+
+        documento.querySelector('#menu-content').innerHTML = htmlPublicDecks.accordion(retorno, user);
+        render.publicDecks(documento, retorno, user);
+      }).catch(err => console.log(err));
+    });
+    documento.querySelector('#recipe').addEventListener('click' , function(){
+      dataDeck.recipe(user.game)
       .then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {

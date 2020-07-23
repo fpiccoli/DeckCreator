@@ -34,9 +34,16 @@ module.exports = {
       })
     });
   },
-  list(game){
+  public(game){
     return new Promise(resolve => {
       http.get('/deck/'+http.valida(game)+'/public').then(retorno => {
+        resolve(retorno.conteudo);
+      });
+    });
+  },
+  recipe(game){
+    return new Promise(resolve => {
+      http.get('/deck/'+http.valida(game)+'/recipe').then(retorno => {
         resolve(retorno.conteudo);
       });
     });
