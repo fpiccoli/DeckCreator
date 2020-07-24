@@ -7,3 +7,5 @@
 electron-builder.json
 /config/property.js
 /js/login/property.js
+.nyc_output/
+/coverage/

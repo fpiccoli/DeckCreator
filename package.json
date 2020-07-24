@@ -6,7 +6,9 @@
   "author": "fpiccoli",
   "main": "main.js",
   "scripts": {
-    "test": "jasmine",
+    "clean": "rd /s /q .nyc_output coverage release-builds releases>nul 2>&1|echo.>nul",
+    "rebuild": "rd /s /q node_modules>nul 2>&1|echo.>nul",
+    "test": "nyc --reporter=lcov --reporter=text-summary jasmine",
     "start": "electron .",
     "pack": "electron-builder --dir --config electron-builder.json --linux --windows",
     "dist": "electron-builder --config electron-builder.json --windows",
@@ -42,6 +44,7 @@
     "electron-packager": "^13.0.1",
     "electron-winstaller": "^2.7.0",
     "jasmine": "^3.6.0",
-    "lodash.template": "^4.5.0"
+    "lodash.template": "^4.5.0",
+    "nyc": "^15.1.0"
   }
 }
