@@ -21,6 +21,7 @@ module.exports = {
     addEventSelecionar(3, listaDeCartas);
 
     let grupos = await dataDeck.grupo(user.name, user.game);
+    grupos.sort();
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(grupos);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic();
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);

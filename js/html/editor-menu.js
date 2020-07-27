@@ -47,7 +47,7 @@ module.exports = {
 
     return builder.replaceCamelCase(retorno);
   },
-  updateGrupo(decks, opcaoNova){
+  updateGrupo(grupos, opcaoNova){
     let options = [];
     options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Select a group')]));
     grupos.forEach(function (grupo, index, array) {
