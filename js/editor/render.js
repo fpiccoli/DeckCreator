@@ -20,9 +20,9 @@ module.exports = {
     addEventSelecionar(2, listaDeCartas);
     addEventSelecionar(3, listaDeCartas);
 
-    let decks = await dataDeck.find(user.name, user.game);
-    documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
-    documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic(decks);
+    let grupos = await dataDeck.grupo(user.name, user.game);
+    documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(grupos);
+    documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic();
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
     for(let i in buttons){
@@ -40,7 +40,7 @@ module.exports = {
       });
     }
     documento.querySelector("#add-grupo").addEventListener('click', function(){
-      documento.querySelector('#lista-grupos').innerHTML = htmlMenu.updateGrupo(decks, documento.querySelector("#change-grupo").value);
+      documento.querySelector('#lista-grupos').innerHTML = htmlMenu.updateGrupo(grupos, documento.querySelector("#change-grupo").value);
     });
     documento.querySelector("#update-nome").addEventListener('click', function(){
       let nome = documento.querySelector("#campo-nome").value;

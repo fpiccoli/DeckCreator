@@ -12,6 +12,14 @@ module.exports = {
       console.log(error);
     })
   },
+  grupo(user, game){
+    var deckModel = mongoose.model('Deck'+game);
+    return deckModel.distinct('grupo', {user: user.toLowerCase(), grupo: { $nin : ["", null] }}).lean().then(function(retorno){
+      return retorno;
+    },function(error){
+      console.log(error);
+    })
+  },
   list(game){
     var deckModel = mongoose.model('Deck'+game);
 

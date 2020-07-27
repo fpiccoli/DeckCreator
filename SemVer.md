@@ -2,6 +2,10 @@ DeckCreator
 
 Releases:
 
+    1.13.6 (27/07/2020)
+      - Correções de bugs:
+          - Melhoria de performance na tela Editor ao montar o menu lateral de consulta de cartas.
+
     1.13.5 (22/07/2020)
       - Melhorias visuais:
           - Novo menu Recipes para exibir receitas de decks pronto para serem importados.
