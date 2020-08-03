@@ -1,4 +1,6 @@
 # deckcreator
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator?ref=badge_shield)
+
 
 Get [DeckCreator](https://www.getdeckcreator.com/).
 
@@ -32,3 +34,7 @@ Check out the tutorial on the website [DeckCreator](https://www.getdeckcreator.c
 ## Support us
 
 Donate via [PayPal](https://www.getdeckcreator.com/#donate).
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator?ref=badge_large)

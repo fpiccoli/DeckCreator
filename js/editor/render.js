@@ -20,9 +20,10 @@ module.exports = {
     addEventSelecionar(2, listaDeCartas);
     addEventSelecionar(3, listaDeCartas);
 
-    let decks = await dataDeck.find(user.name, user.game);
-    documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(decks);
-    documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic(decks);
+    let grupos = await dataDeck.grupo(user.name, user.game);
+    grupos.sort();
+    documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(grupos);
+    documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic();
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
     for(let i in buttons){
@@ -40,7 +41,7 @@ module.exports = {
       });
     }
     documento.querySelector("#add-grupo").addEventListener('click', function(){
-      documento.querySelector('#lista-grupos').innerHTML = htmlMenu.updateGrupo(decks, documento.querySelector("#change-grupo").value);
+      documento.querySelector('#lista-grupos').innerHTML = htmlMenu.updateGrupo(grupos, documento.querySelector("#change-grupo").value);
     });
     documento.querySelector("#update-nome").addEventListener('click', function(){
       let nome = documento.querySelector("#campo-nome").value;
@@ -72,14 +73,14 @@ module.exports = {
   special(buttons, user){
     if(!user) return;
     if(user.game == 'M&D'){
-      buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'#B57EDC'})
-      buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'#CC8899'})
-      buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'#c0c0c0'})
+      buttons.push({class:'Spell', main:'Spell', sub:'Spell', icon:'12-7YJWM_Y4fbdMPdZgAbZAuJ0n1vUwZV', bg:'#B19CD9'})
+      buttons.push({class:'Enchantment', main:'Enchantment', sub:'Enchantment', icon:'1-J5PmwMchC8J6sBROmT5-DJVrgYjiohW', bg:'#FF99FF'})
+      buttons.push({class:'Talent', main:'Talent', sub:'Talent', icon:'1WrooGrmv1Uand440zPn9QojbY_SA6WzB', bg:'#C0C0C0'})
     }
     else if(user.game == 'MRBC'){
       buttons.push({class:'Breeder-SPE', main:'Breeder-SPE', sub:'Breeder-SPE', icon:'1PwRtWS3sAKngZNE9njZr_YsHQPaZpBOZ', bg:'#483939'})
       buttons.push({class:'Breeder-ENV', main:'Breeder-ENV', sub:'Breeder-ENV', icon:'1PwRtWS3sAKngZNE9njZr_YsHQPaZpBOZ', bg:'#483939'})
-      buttons.push({class:'Any Monster', main:'Any Monster', sub:'Any Monster', icon:'1cTOPQh_UbGKeWzEkUuCjPjxYSTeqTseJ', bg:'#f7f7f9'})
+      buttons.push({class:'Any Monster', main:'Any Monster', sub:'Any Monster', icon:'1cTOPQh_UbGKeWzEkUuCjPjxYSTeqTseJ', bg:'#F7F7F9'})
     }
   }
 }

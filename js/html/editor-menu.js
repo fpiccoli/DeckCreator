@@ -21,16 +21,7 @@ module.exports = {
 
     return builder.build(json);
   },
-  addGrupo(decks){
-    decks.forEach(function (deck, index, array) {
-      if(!deck.grupo) deck.grupo = 'Other Decks';
-    });
-    let decksGrupo = groupBy(decks, ['grupo']);
-    let grupos = [];
-    Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
-      if(nomeDoGrupo != 'Other Decks') grupos.push(nomeDoGrupo);
-    });
-
+  addGrupo(grupos){
     let options = [];
     options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Select a group')]));
     grupos.forEach(function (grupo, index, array) {
@@ -41,7 +32,7 @@ module.exports = {
 
     return builder.replaceCamelCase(retorno);
   },
-  addPublic(decks){
+  addPublic(){
     let options = [];
     let public = options.push(builder.element('i', { class:'fa fa-globe'}, []));
     let private = options.push(builder.element('i', { class:'fa fa-lock'}, []));
@@ -56,16 +47,7 @@ module.exports = {
 
     return builder.replaceCamelCase(retorno);
   },
-  updateGrupo(decks, opcaoNova){
-    decks.forEach(function (deck, index, array) {
-      if(!deck.grupo) deck.grupo = 'Other Decks';
-    });
-    let decksGrupo = groupBy(decks, ['grupo']);
-    let grupos = [];
-    Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
-      if(nomeDoGrupo != 'Other Decks') grupos.push(nomeDoGrupo);
-    });
-
+  updateGrupo(grupos, opcaoNova){
     let options = [];
     options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Select a group')]));
     grupos.forEach(function (grupo, index, array) {
