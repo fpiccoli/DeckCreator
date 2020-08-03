@@ -90,7 +90,6 @@ describe("subClass() -> conta quantas cartas são usadas pelo SUB e da mesma cla
       let game = "M&D";
       expect(algoritmo.subClass(listaMD, heroi, game)).toEqual(4);
     });
-
     it ("deve contar 0 em uma lista de 16 (M&D)", function(){
       let heroi = {main: "Warrior", sub: "Amazon"};
       let game = "MRBC";
@@ -135,7 +134,6 @@ describe("class() -> conta quantas cartas são de determinada classe ->", functi
       let tipo = "Amazon";
       expect(algoritmo.class(listaMD, tipo)).toEqual(8);
     });
-
     it ("deve contar 0 em uma lista de 16", function(){
       let tipo = "Cleric";
       expect(algoritmo.class(listaMD, tipo)).toEqual(0);
@@ -154,7 +152,6 @@ describe("class() -> conta quantas cartas são de determinada classe ->", functi
       let tipo = "Tiger";
       expect(algoritmo.class(listaMRBC, tipo)).toEqual(4);
     });
-
     it ("deve contar 0 em uma lista de 16", function(){
       let tipo = "Golem";
       expect(algoritmo.class(listaMRBC, tipo)).toEqual(0);
