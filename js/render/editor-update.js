@@ -1,5 +1,5 @@
 const htmlCartas = require('../html/editor-cartas.js');
-const conta = require('../conta.js');
+const conta = require('../manager/conta.js');
 
 module.exports = {
   heroPanels(listaDeCartas, user, herois, documento){

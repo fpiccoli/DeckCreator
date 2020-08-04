@@ -1,9 +1,9 @@
 const { ipcRenderer }  = require('electron');
 const md5 = require('md5');
+const mailer = require('./mailer.js');
+const alert = require('../manager/alert.js');
 const dataUser = require('../rest/user.js');
 const dataCode = require('../rest/code.js');
-const mailer = require('./mailer.js');
-const alert = require('../alert-message.js');
 
 document.querySelector('#back').addEventListener('click' , function(){
   ipcRenderer.send('redirecionar-pagina','login');

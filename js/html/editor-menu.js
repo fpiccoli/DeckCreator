@@ -1,6 +1,6 @@
 const builder = require('./builder.js');
 var groupBy = require('json-groupby');
-const dataManager = require('../data-manager.js');
+const dataManager = require('../manager/array.js');
 
 module.exports = {
   addButtons(buttons){

@@ -1,7 +1,7 @@
 const { ipcRenderer }  = require('electron');
-const alert = require('../alert-message.js');
-const cookie = require('../cookie-manager.js');
-const file = require('../file-manager.js');
+const alert = require('../manager/alert.js');
+const cookie = require('../manager/cookie.js');
+const file = require('../manager/file.js');
 const validar = require('./validar.js');
 
 var package = require('../../package.json');

@@ -1,6 +1,6 @@
-const html = require('./html/efeitos.js');
-const data = require('./data-manager.js');
-const dataEfeito = require('./rest/efeito.js');
+const html = require('../html/efeitos.js');
+const data = require('../manager/array.js');
+const dataEfeito = require('../rest/efeito.js');
 
 let lista = dataEfeito.listAll();
 

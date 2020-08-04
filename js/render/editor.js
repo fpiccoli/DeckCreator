@@ -1,9 +1,9 @@
 const { ipcRenderer }  = require('electron');
 const htmlMenu = require('../html/editor-menu.js');
-const dataManager = require('../data-manager.js');
 const htmlCartas = require('../html/editor-cartas.js');
-const update = require('./update.js');
-const conta = require('../conta.js');
+const dataManager = require('../manager/array.js');
+const conta = require('../manager/conta.js');
+const update = require('./editor-update.js');
 const dataDeck = require('../../js/rest/deck.js');
 const dataClasse = require('../../js/rest/classe.js');
 

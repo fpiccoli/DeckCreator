@@ -1,4 +1,4 @@
-const algoritmo = require('../../js/conta.js');
+const algoritmo = require('../../js/manager/conta.js');
 const CartaBuilder = require('../builder/carta.js');
 const ListaDeCartaBuilder = require('../builder/lista-cartas.js');
 

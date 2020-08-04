@@ -1,13 +1,14 @@
 const { ipcRenderer }  = require('electron');
-const dataManager = require('../data-manager.js');
-const deck = require('../deck-builder.js');
-const file = require('../file-manager.js');
-const cookie = require('../cookie-manager.js');
-const alert = require('../alert-message.js');
-const render = require('./render.js');
-const update = require('./update.js');
-const menu = require('../menu/controller.js');
-const dataDeck = require('../../js/rest/deck.js');
+const dataManager = require('../manager/array.js');
+const deck = require('../manager/deck.js');
+const file = require('../manager/file.js');
+const cookie = require('../manager/cookie.js');
+const alert = require('../manager/alert.js');
+const render = require('../render/editor.js');
+const update = require('../render/editor-update.js');
+const navbar = require('../render/menu-navbar.js');
+const sidebar = require('../render/menu-sidebar.js');
+const dataDeck = require('../rest/deck.js');
 let user;
 
 var package = require('../../package.json');
@@ -21,7 +22,13 @@ let nomeDoTime = 'NewDeck';
 cookie.login().then((retorno) => {
   if(retorno){
     user = retorno;
-    menu.navbar(document, user);
+
+    navbar.updateCheck(document);
+    navbar.logout(document);
+    navbar.clearCache(document);
+    navbar.importDecks(document, user);
+    navbar.effects(document, user);
+
     update.otherPanels(listaDeCartas, user, document);
     renderHerois();
   } else{

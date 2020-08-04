@@ -1,9 +1,9 @@
 const { ipcRenderer }  = require('electron');
+const alert = require('../../manager/alert.js');
+const dataCode = require('../../rest/code.js');
+const dataUser = require('../../rest/user.js');
 var moment = require('moment');
 const md5 = require('md5');
-const alert = require('../../alert-message.js');
-const dataCode = require('../../data/code.js');
-const dataUser = require('../../data/user.js');
 
 document.querySelector('#confirm').addEventListener('click' , function(){
   let email = document.querySelector('#email').value.toLowerCase();

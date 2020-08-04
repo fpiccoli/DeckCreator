@@ -1,11 +1,11 @@
 const { ipcRenderer }  = require('electron');
-const dataDeck = require('../../js/rest/deck.js');
-const dataManager = require('../data-manager.js');
-const file = require('../file-manager.js');
-const deckBuilder = require('../deck-builder.js');
-const alert = require('../alert-message.js');
 const htmlMyDecks = require('../html/decks-my.js');
 const htmlPublicDecks = require('../html/decks-public.js');
+const dataManager = require('../manager/array.js');
+const file = require('../manager/file.js');
+const deckBuilder = require('../manager/deck.js');
+const alert = require('../manager/alert.js');
+const dataDeck = require('../rest/deck.js');
 
 module.exports = {
   myDecks(documento, json, user){

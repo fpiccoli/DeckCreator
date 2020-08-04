@@ -2,59 +2,18 @@ const { ipcRenderer }  = require('electron');
 const builder = require('../html/builder.js');
 const htmlMyDecks = require('../html/decks-my.js');
 const htmlPublicDecks = require('../html/decks-public.js');
-const dataManager = require('../data-manager.js');
-const render = require('./render.js');
-const alert = require('../alert-message.js');
-const file = require('../file-manager.js');
-const deckBuilder = require('../deck-builder.js');
 const regras = require('../html/regras.js');
 const sobre = require('../html/sobre.js');
-const dataDeck = require('../../js/rest/deck.js');
-const dataVersao = require('../../js/rest/version.js');
+const dataManager = require('../manager/array.js');
+const alert = require('../manager/alert.js');
+const file = require('../manager/file.js');
+const deckBuilder = require('../manager/deck.js');
+const render = require('../render/menu.js');
+const dataDeck = require('../rest/deck.js');
+const dataVersao = require('../rest/version.js');
 
 module.exports = {
-  navbar(documento, user){
-    ipcRenderer.send('update-check');
-    ipcRenderer.on('update-ready', (event, downloaded) => {
-      if(downloaded){
-        documento.querySelector('#update-ready').innerHTML = '<a class="dropdown-toggle" title="New Update!" data-toggle="dropdown" href="#"><i class="fa fa-exclamation"></i></a><ul class="dropdown-menu dropdown-user"><li><a id="do-update" href="#">Restart and update</a></li></ul>'
-
-        documento.querySelector("#do-update").addEventListener('click' , function(){
-          ipcRenderer.send('do-update');
-        });
-      }
-    });
-    documento.querySelector("#logout").addEventListener('click', function () {
-      if(alert.confirmDialog('Logout', 'Sure!', 'Nope', 'Are you sure you want to logout?')){
-        file.deleteLogin();
-        ipcRenderer.send('clear-cookies');
-        ipcRenderer.send('redirecionar-pagina', 'login');
-      }
-    });
-    documento.querySelector("#clear-cache").addEventListener('click', function () {
-      file.clearCache();
-      alert.message(documento.querySelector("#alert-message"), '<b>Tabletop Simulator</b> cache successfully cleared!', 'success');
-    });
-    documento.querySelector("#import-decks").addEventListener('click', function () {
-      file.clearLocalFile(user.game);
-      dataDeck.find(user.name, user.game)
-      .then((retorno) => {
-        retorno.forEach(function (deck, index, array) {
-          let deckRetorno = deckBuilder.build(deck, user.game);
-          file.export(deck, deckRetorno, user.game);
-        });
-      }).catch(err => console.log(err));
-      alert.message(documento.querySelector("#alert-message"), 'Decks successfully synced with <b>Tabletop Simulator</b>!', 'success');
-    });
-    if(user.game == 'M&D'){
-      let btnLista = '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list-ul"></i> <i class="fa fa-caret-down"></i></a><ul class="dropdown-menu dropdown-user"><li><a id="lista-efeitos" href="#">Effects List</a></li></ul>';
-      documento.querySelector("#btn-lista-efeitos").innerHTML = btnLista;
-      documento.querySelector("#lista-efeitos").addEventListener('click', function () {
-        ipcRenderer.send('abrir-janela-efeitos');
-      });
-    }
-  },
-  sidebar(documento, user){
+  loadDecks(documento, user){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
       dataDeck.find(user.name, user.game)
       .then((retorno) => {
@@ -69,6 +28,8 @@ module.exports = {
         render.myDecks(documento, retorno, user);
       }).catch(err => console.log(err));
     });
+  },
+  publicDecks(documento, user){
     documento.querySelector('#public-decks').addEventListener('click' , function(){
       dataDeck.public(user.game)
       .then((retorno) => {
@@ -83,6 +44,8 @@ module.exports = {
         render.publicDecks(documento, retorno, user);
       }).catch(err => console.log(err));
     });
+  },
+  recipe(documento, user){
     documento.querySelector('#recipe').addEventListener('click' , function(){
       dataDeck.recipe(user.game)
       .then((retorno) => {
@@ -97,16 +60,24 @@ module.exports = {
         render.publicDecks(documento, retorno, user);
       }).catch(err => console.log(err));
     });
+  },
+  newDeck(documento){
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
       ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'grupo']);
       ipcRenderer.send('redirecionar-pagina','editor');
     });
+  },
+  editorDeck(documento){
     documento.querySelector('#editor-deck').addEventListener('click' , function(){
       ipcRenderer.send('redirecionar-pagina','editor');
     });
+  },
+  regras(documento, user){
     documento.querySelector("#regras-panel").addEventListener('click', function () {
       documento.querySelector('#menu-content').innerHTML = regras.html(user.game);
     });
+  },
+  sobre(documento){
     documento.querySelector("#sobre-semver").addEventListener('click', function () {
       dataVersao.listAll().then((retorno) => {
         documento.querySelector('#menu-content').innerHTML = sobre.html(retorno, dataManager);

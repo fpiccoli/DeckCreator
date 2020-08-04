@@ -1,6 +1,6 @@
 const builder = require('./builder.js');
 const json2html = require('html2json').json2html;
-const dataManager = require('../data-manager.js');
+const dataManager = require('../manager/array.js');
 
 module.exports = {
   efeitos(lista){

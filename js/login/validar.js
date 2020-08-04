@@ -1,6 +1,6 @@
-const file = require('../file-manager.js');
+const alert = require('../manager/alert.js');
+const file = require('../manager/file.js');
 const dataUser = require('../rest/user.js');
-const alert = require('../alert-message.js');
 
 module.exports = {
   login(user, pass, documento, ipcRenderer){

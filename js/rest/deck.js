@@ -41,6 +41,13 @@ module.exports = {
       });
     });
   },
+  grupo(user, game){
+    return new Promise(resolve => {
+      http.post('/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}).then(retorno => {
+        resolve(retorno.conteudo);
+      });
+    });
+  },
   recipe(game){
     return new Promise(resolve => {
       http.get('/deck/'+http.valida(game)+'/recipe').then(retorno => {

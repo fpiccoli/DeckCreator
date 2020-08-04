@@ -1,6 +1,6 @@
 const builder = require('./builder.js');
-const conta = require('../conta.js');
-const dataManager = require('../data-manager.js');
+const conta = require('../manager/conta.js');
+const dataManager = require('../manager/array.js');
 var groupBy = require('json-groupby');
 
 module.exports = {

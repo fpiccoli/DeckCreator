@@ -1,8 +1,8 @@
 const { ipcRenderer }  = require('electron');
-const alert = require('../../alert-message.js');
-const dataUser = require('../../data/user.js');
-const dataCode = require('../../data/code.js');
+const alert = require('../../manager/alert.js');
 const mailer = require('../mailer.js');
+const dataUser = require('../../rest/user.js');
+const dataCode = require('../../rest/code.js');
 
 document.querySelector('#change').addEventListener('click' , function(){
   change();
