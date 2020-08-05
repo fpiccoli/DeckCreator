@@ -9,8 +9,6 @@ module.exports = {
     text.push(h1('Patch Notes'));
     text.push(h2('Releases:'));
 
-    console.log(lista)
-
     lista = dataManager.dateSort(lista, 0);
 
     lista.forEach(function (objeto, index, array){

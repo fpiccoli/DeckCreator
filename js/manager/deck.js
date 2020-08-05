@@ -1,21 +1,21 @@
-module.exports = {
-  build(object, game){
-    let json = {
-      SaveName: '',
-      GameMode: '',
-      Gravity: 0.5,
-      Date: '',
-      Table: '',
-      Sky: '',
-      Note: '',
-      Rules: '',
-      XmlUI: '',
-      LuaScript: '',
-      ObjectStates: objectStates(object, game),
-      LuaScriptState: '',
-    }
-    return json;
+module.exports = { build };
+
+function build(object, game){
+  let json = {
+    SaveName: '',
+    GameMode: '',
+    Gravity: 0.5,
+    Date: '',
+    Table: '',
+    Sky: '',
+    Note: '',
+    Rules: '',
+    XmlUI: '',
+    LuaScript: '',
+    ObjectStates: objectStates(object, game),
+    LuaScriptState: '',
   }
+  return json;
 }
 
 function objectStates(object, game){

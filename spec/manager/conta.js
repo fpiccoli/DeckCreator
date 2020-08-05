@@ -120,7 +120,7 @@ describe("subClass() -> conta quantas cartas são usadas pelo SUB e da mesma cla
 
 });
 
-describe("class() -> conta quantas cartas são de determinada classe ->", function(){
+describe("classe() -> conta quantas cartas são de determinada classe ->", function(){
 
   describe("(M&D) ->", function(){
     beforeEach(function(){
@@ -132,11 +132,11 @@ describe("class() -> conta quantas cartas são de determinada classe ->", functi
 
     it ("deve contar 8 em uma lista de 16", function(){
       let tipo = "Amazon";
-      expect(algoritmo.class(listaMD, tipo)).toEqual(8);
+      expect(algoritmo.classe(listaMD, tipo)).toEqual(8);
     });
     it ("deve contar 0 em uma lista de 16", function(){
       let tipo = "Cleric";
-      expect(algoritmo.class(listaMD, tipo)).toEqual(0);
+      expect(algoritmo.classe(listaMD, tipo)).toEqual(0);
     });
   });
 
@@ -150,11 +150,11 @@ describe("class() -> conta quantas cartas são de determinada classe ->", functi
 
     it ("deve contar 4 em uma lista de 16", function(){
       let tipo = "Tiger";
-      expect(algoritmo.class(listaMRBC, tipo)).toEqual(4);
+      expect(algoritmo.classe(listaMRBC, tipo)).toEqual(4);
     });
     it ("deve contar 0 em uma lista de 16", function(){
       let tipo = "Golem";
-      expect(algoritmo.class(listaMRBC, tipo)).toEqual(0);
+      expect(algoritmo.classe(listaMRBC, tipo)).toEqual(0);
     });
   });
 

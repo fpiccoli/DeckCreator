@@ -27,8 +27,8 @@ module.exports = {
     documento.querySelector('#status-bar').innerHTML = htmlCartas.statusbar(percentual);
 
     if(user.game == 'M&D'){
-      qtdeTalent = conta.class(listaDeCartas, 'Talent', user.game);
-      qtdeSpell = conta.class(listaDeCartas, 'Spell', user.game) + conta.class(listaDeCartas, 'Enchantment', user.game);
+      qtdeTalent = conta.classe(listaDeCartas, 'Talent', user.game);
+      qtdeSpell = conta.classe(listaDeCartas, 'Spell', user.game) + conta.classe(listaDeCartas, 'Enchantment', user.game);
       talentStyle = 'style="color: white;background-color: #c0c0c0;"';
       spellStyle = 'style="color: white;background-color: #B57EDC;"';
       talentIcon = '<img src="https://drive.google.com/uc?export=download&id=1WrooGrmv1Uand440zPn9QojbY_SA6WzB" height="300%" width="300%"/>';
@@ -36,8 +36,8 @@ module.exports = {
       talentText = 'Talent</br>All Classes';
       spellText = 'Spell +</br>Enchantment';
     } else if(user.game == 'MRBC'){
-      qtdeTalent = conta.class(listaDeCartas, 'Any Monster', user.game);
-      qtdeSpell = conta.class(listaDeCartas, 'Breeder', user.game);
+      qtdeTalent = conta.classe(listaDeCartas, 'Any Monster', user.game);
+      qtdeSpell = conta.classe(listaDeCartas, 'Breeder', user.game);
       talentStyle = 'style="color: black;background-color: #f7f7f9;"';
       spellStyle = 'style="color: white;background-color: #483939;"';
       talentIcon = '<img src="https://drive.google.com/uc?export=download&id=1cTOPQh_UbGKeWzEkUuCjPjxYSTeqTseJ" height="300%" width="300%"/>';
