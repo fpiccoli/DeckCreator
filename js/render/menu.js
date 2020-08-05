@@ -1,7 +1,7 @@
 const { ipcRenderer }  = require('electron');
 const htmlMyDecks = require('../html/decks-my.js');
 const htmlPublicDecks = require('../html/decks-public.js');
-const dataManager = require('../manager/array.js');
+const dataManager = require('../manager/string.js');
 const file = require('../manager/file.js');
 const deckBuilder = require('../manager/deck.js');
 const alert = require('../manager/alert.js');

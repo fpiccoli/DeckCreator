@@ -1,12 +1,15 @@
 const builder = require('./builder.js');
+const dataManager = require('../manager/array.js');
 var moment = require('moment');
 
 module.exports = {
-  html(lista, dataManager){
+  html(lista){
     let text = [];
 
     text.push(h1('Patch Notes'));
     text.push(h2('Releases:'));
+
+    console.log(lista)
 
     lista = dataManager.dateSort(lista, 0);
 

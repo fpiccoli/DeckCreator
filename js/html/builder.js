@@ -1,5 +1,5 @@
 const json2html = require('html2json').json2html;
-const dataManager = require('../manager/array.js');
+const dataManager = require('../manager/string.js');
 
 module.exports = {
   element(tag, attr, child) {

@@ -4,7 +4,6 @@ const htmlMyDecks = require('../html/decks-my.js');
 const htmlPublicDecks = require('../html/decks-public.js');
 const regras = require('../html/regras.js');
 const sobre = require('../html/sobre.js');
-const dataManager = require('../manager/array.js');
 const alert = require('../manager/alert.js');
 const file = require('../manager/file.js');
 const deckBuilder = require('../manager/deck.js');
@@ -80,7 +79,7 @@ module.exports = {
   sobre(documento){
     documento.querySelector("#sobre-semver").addEventListener('click', function () {
       dataVersao.listAll().then((retorno) => {
-        documento.querySelector('#menu-content').innerHTML = sobre.html(retorno, dataManager);
+        documento.querySelector('#menu-content').innerHTML = sobre.html(retorno);
       }).catch(err => console.log(err));
     });
   }

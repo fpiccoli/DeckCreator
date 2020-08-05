@@ -1,6 +1,8 @@
 const algoritmo = require('../../js/manager/array.js');
 const ListaDeDeckBuilder = require('../builder/lista-decks.js');
+const ListaDeCartaBuilder = require('../builder/lista-cartas.js');
 const CartaBuilder = require('../builder/carta.js');
+const Moment = require('moment');
 
 let lista = [];
 
@@ -124,34 +126,6 @@ describe("getClasseByName() -> filtra uma lista de decks retornando a classe con
   });
 });
 
-describe("replaceAll() -> substitui todas as iteraçoes de uma string em outra string ->", function(){
-  it ("[1] deve retornar a propria string por nao encontrar nada", function(){
-    let string = `<div dataToggle="colapse"></div>`;
-    let retorno = algoritmo.replaceAll(string, 'DataToggle', 'data-toggle');
-    expect(retorno).toEqual(`<div dataToggle="colapse"></div>`);
-  });
-
-  it ("[2] deve retornar a string alterada", function(){
-    let string = `<div dataToggle="colapse"></div>`;
-    let retorno = algoritmo.replaceAll(string, 'dataToggle', 'data-toggle');
-    expect(retorno).toEqual(`<div data-toggle="colapse"></div>`);
-  });
-});
-
-describe("replaceSpecialChar() -> substitui os caracteres especiais por underline ->", function(){
-  it ("[1] deve retornar a propria string por nao encontrar nada", function(){
-    let string = `NomeDeUmDeck`;
-    let retorno = algoritmo.replaceSpecialChar(string);
-    expect(retorno).toEqual(`NomeDeUmDeck`);
-  });
-
-  it ("[2] deve retornar a string alterada", function(){
-    let string = `Nome de*Um%Deck&Outro$Nome#Maior@Que_Esse`;
-    let retorno = algoritmo.replaceSpecialChar(string);
-    expect(retorno).toEqual(`Nome_de_Um_Deck_Outro_Nome_Maior_Que_Esse`);
-  });
-});
-
 describe("dynamicSort() -> ordena um array de objetos baseado em uma determinada propriedade do objeto ->", function(){
   beforeEach(function(){
     lista = ListaDeDeckBuilder()
@@ -173,5 +147,93 @@ describe("dynamicSort() -> ordena um array de objetos baseado em uma determinada
     expect(retorno[11].name).toEqual('Amazon');
     expect(retorno[6].name).toEqual('Eldritch Knight');
     expect(retorno[0].name).toEqual('Warrior');
+  });
+});
+
+describe("dateSort() -> ordena um array de objetos baseado no campo data ->", function(){
+  beforeEach(function(){
+    lista = [
+      {name: 'Outubro-2020', data: '01/10/2020'},{name: 'Maio-2020', data: '01/05/2020'},
+      {name: 'Janeiro-2021', data: '01/01/2021'},{name: 'Janeiro-2019', data: '01/01/2019'},
+      {name: 'Março-2020', data: '01/03/2020'},{name: 'Agosto-2020', data: '01/08/2020'},
+      {name: 'Fevereiro-2020', data: '01/02/2020'},{name: 'Janeiro-2020', data: '01/01/2020'},
+    ]
+  });
+
+  it ("[1] deve retornar a lista ordenada por data em ordem crescente", function(){
+    let retorno = algoritmo.dateSort(lista, 1);
+    expect(retorno[0].name).toEqual('Janeiro-2019');
+    expect(retorno[3].name).toEqual('Março-2020');
+    expect(retorno[7].name).toEqual('Janeiro-2021');
+  });
+
+  it ("[2] deve retornar a lista ordenada por data em ordem decrescente", function(){
+    let retorno = algoritmo.dateSort(lista, 0);
+    expect(retorno[7].name).toEqual('Janeiro-2019');
+    expect(retorno[4].name).toEqual('Março-2020');
+    expect(retorno[0].name).toEqual('Janeiro-2021');
+  });
+});
+
+describe("filtra um array de cartas baseado no campo subtype ->", function(){
+
+  describe("(M&D) ATK/TEC/SKL/DOM -", function(){
+    beforeEach(function(){
+      lista = ListaDeCartaBuilder()
+      .addItem(2, 'Warrior', 'ATK').addItem(2, 'Warrior', 'TEC').addItem(2, 'Warrior', 'EVD').addItem(2, 'Warrior', 'ATK')
+      .addItem(2, 'Warrior', 'ATK').addItem(1, 'Warrior', 'TEC').addItem(1, 'Warrior', 'SKL').addItem(2, 'Warrior', 'ATK')
+      .addItem(2, 'Warrior', 'GRD').addItem(2, 'Warrior', 'GRD').addItem(2, 'Warrior', 'SKL').addItem(2, 'Warrior', 'EVD')
+      .preenche();
+    });
+
+    it ("[1] filtraMain() deve retornar um array vazio por ter game incorreto", function(){
+      let retorno = algoritmo.filtraMain(lista, 'MRBC');
+      expect(retorno.length).toEqual(0);
+    });
+
+    it ("[2] filtraSub() deve retornar um array vazio por ter game incorreto", function(){
+      let retorno = algoritmo.filtraSub(lista, 'MRBC');
+      expect(retorno.length).toEqual(0);
+    });
+
+    it ("[3] filtraMain() deve retornar 8 em uma lista de 22", function(){
+      let retorno = algoritmo.filtraMain(lista, 'M&D');
+      expect(retorno.length).toEqual(14);
+    });
+
+    it ("[4] filtraSub() -> deve retornar 4 em uma lista de 22", function(){
+      let retorno = algoritmo.filtraSub(lista, 'M&D');
+      expect(retorno.length).toEqual(8);
+    });
+  });
+
+  describe("(MRBC) POW/INT/SPE/ENV ->", function(){
+    beforeEach(function(){
+      lista = ListaDeCartaBuilder()
+      .addItem(2, 'Mocchi', 'POW').addItem(4, 'Mocchi', 'SPE').addItem(2, 'Mocchi', 'BLK').addItem(2, 'Mocchi', 'POW')
+      .addItem(2, 'Mocchi', 'INT').addItem(2, 'Mocchi', 'POW').addItem(2, 'Mocchi', 'DGE').addItem(2, 'Mocchi', 'INT')
+      .addItem(2, 'Mocchi', 'INT').addItem(2, 'Mocchi', 'POW').addItem(2, 'Mocchi', 'SPE').addItem(2, 'Mocchi', 'DGE')
+      .preenche();
+    });
+
+    it ("[1] filtraMain() deve retornar um array vazio por ter game incorreto", function(){
+      let retorno = algoritmo.filtraMain(lista, 'M&D');
+      expect(retorno.length).toEqual(0);
+    });
+
+    it ("[2] filtraSub() deve retornar um array vazio por ter game incorreto", function(){
+      let retorno = algoritmo.filtraSub(lista, 'M&D');
+      expect(retorno.length).toEqual(0);
+    });
+
+    it ("[3] filtraMain() deve retornar 9 em uma lista de 26", function(){
+      let retorno = algoritmo.filtraMain(lista, 'MRBC');
+      expect(retorno.length).toEqual(20);
+    });
+
+    it ("[4] filtraSub() -> deve retornar 3 em uma lista de 26", function(){
+      let retorno = algoritmo.filtraSub(lista, 'MRBC');
+      expect(retorno.length).toEqual(6);
+    });
   });
 });

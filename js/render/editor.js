@@ -1,7 +1,8 @@
 const { ipcRenderer }  = require('electron');
 const htmlMenu = require('../html/editor-menu.js');
 const htmlCartas = require('../html/editor-cartas.js');
-const dataManager = require('../manager/array.js');
+const arrayManager = require('../manager/array.js');
+const stringManager = require('../manager/string.js');
 const conta = require('../manager/conta.js');
 const update = require('./editor-update.js');
 const dataDeck = require('../../js/rest/deck.js');
@@ -27,8 +28,8 @@ module.exports = {
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addButtons(buttons);
 
     for(let i in buttons){
-      documento.querySelector('#cards-'+dataManager.getNome(buttons[i].class)).addEventListener('click', function () {
-        let txt = '#cards-'+dataManager.getNome(buttons[i].class);
+      documento.querySelector('#cards-'+stringManager.getNome(buttons[i].class)).addEventListener('click', function () {
+        let txt = '#cards-'+stringManager.getNome(buttons[i].class);
 
         buscaCartas(buttons[i], user).then((retorno) => {
           documento.querySelector('#skill-cards').innerHTML = htmlCartas.cartas(retorno);
@@ -129,7 +130,7 @@ async function buscaCartas(classe, user){
 
   main.forEach(function (grupo, index, array){
     if(grupo.cards){
-      let filtrado = dataManager.filtraMain(grupo.cards, user.game);
+      let filtrado = arrayManager.filtraMain(grupo.cards, user.game);
       filtrado.forEach(function (carta, i, array){
         carta.deck = {id: grupo.id, face: grupo.face};
       });
@@ -138,7 +139,7 @@ async function buscaCartas(classe, user){
   });
   sub.forEach(function (grupo, index, array){
     if(grupo.cards){
-      let filtrado = dataManager.filtraSub(grupo.cards, user.game);
+      let filtrado = arrayManager.filtraSub(grupo.cards, user.game);
       filtrado.forEach(function (carta, i, array){
         carta.deck = {id: grupo.id, face: grupo.face};
       });
@@ -146,8 +147,8 @@ async function buscaCartas(classe, user){
     }
   });
 
-  mainCards.sort(dataManager.dynamicSort('cardnumber'));
-  subCards.sort(dataManager.dynamicSort('cardnumber'));
+  mainCards.sort(arrayManager.dynamicSort('cardnumber'));
+  subCards.sort(arrayManager.dynamicSort('cardnumber'));
 
   return mainCards.concat(subCards);
 }
@@ -176,7 +177,7 @@ function addEventSelecionar(number, listaDeCartas){
 
 function addObj(lista, carta){
   lista.push(carta);
-  lista.sort(dataManager.dynamicSort('cardnumber'));
+  lista.sort(arrayManager.dynamicSort('cardnumber'));
 }
 
 function removeObj(lista, obj){

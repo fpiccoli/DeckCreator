@@ -29,17 +29,6 @@ module.exports = {
       }
     );
   },
-  replaceAll(str, de, para){
-    var pos = str.indexOf(de);
-    while (pos > -1){
-      str = str.replace(de, para);
-      pos = str.indexOf(de);
-    }
-    return (str);
-  },
-  replaceSpecialChar(str){
-    return str.replace(/[^a-zA-Z0-9]/g,'_');
-  },
   dynamicSort(property) {
     var sortOrder = 1;
     if(property[0] === "-") {
@@ -59,12 +48,6 @@ module.exports = {
       sortedArray  = array.sort((a,b) => new Moment(b.data, 'DD/MM/YYYY') - new Moment(a.data, 'DD/MM/YYYY'))
     }
     return sortedArray;
-  },
-  getNome(string){
-    string = this.replaceAll(string, ' ','-');
-    string = this.replaceAll(string, 'á','a');
-    string = this.replaceSpecialChar(string);
-    return string.toLowerCase();
   },
   filtraMain(lista, game){
     return lista.filter(function(carta){
