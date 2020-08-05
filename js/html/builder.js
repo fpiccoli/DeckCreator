@@ -1,4 +1,5 @@
 const json2html = require('html2json').json2html;
+const dataManager = require('../manager/array.js');
 
 module.exports = {
   element(tag, attr, child) {
@@ -10,22 +11,14 @@ module.exports = {
   build(json){
     return json2html({node: 'root', child: json });
   },
-  replaceAll(str, de, para){
-    var pos = str.indexOf(de);
-    while (pos > -1){
-      str = str.replace(de, para);
-      pos = str.indexOf(de);
-    }
-    return (str);
-  },
   replaceCamelCase(html){
-    html = this.replaceAll(html,"dataToggle", "data-toggle");
-    html = this.replaceAll(html,"dataTarget", "data-target");
-    html = this.replaceAll(html,"dataParent", "data-parent");
-    html = this.replaceAll(html,"ariaExpanded", "aria-expanded");
-    html = this.replaceAll(html,"ariaValuenow", "aria-valuenow");
-    html = this.replaceAll(html,"ariaValuemin", "aria-valuemin");
-    html = this.replaceAll(html,"ariaValuemax", "aria-valuemax");
+    html = dataManager.replaceAll(html,"dataToggle", "data-toggle");
+    html = dataManager.replaceAll(html,"dataTarget", "data-target");
+    html = dataManager.replaceAll(html,"dataParent", "data-parent");
+    html = dataManager.replaceAll(html,"ariaExpanded", "aria-expanded");
+    html = dataManager.replaceAll(html,"ariaValuenow", "aria-valuenow");
+    html = dataManager.replaceAll(html,"ariaValuemin", "aria-valuemin");
+    html = dataManager.replaceAll(html,"ariaValuemax", "aria-valuemax");
     return html;
   },
   loading(){

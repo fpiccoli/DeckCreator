@@ -1,7 +1,8 @@
 {
   "spec_dir": "spec",
   "spec_files": [
-    "manager/conta.js"
+    "manager/conta.js",
+    "manager/array.js"
   ],
   "helpers": [
     "helpers/**/*.js"

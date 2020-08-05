@@ -35,7 +35,10 @@ module.exports = {
       str = str.replace(de, para);
       pos = str.indexOf(de);
     }
-    return (str.replace(/[^a-zA-Z0-9]/g,'_'));
+    return (str);
+  },
+  replaceSpecialChar(str){
+    return str.replace(/[^a-zA-Z0-9]/g,'_');
   },
   dynamicSort(property) {
     var sortOrder = 1;
@@ -60,6 +63,7 @@ module.exports = {
   getNome(string){
     string = this.replaceAll(string, ' ','-');
     string = this.replaceAll(string, 'á','a');
+    string = this.replaceSpecialChar(string);
     return string.toLowerCase();
   },
   filtraMain(lista, game){
