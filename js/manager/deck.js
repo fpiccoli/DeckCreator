@@ -1,5 +1,3 @@
-const { ipcRenderer }  = require('electron');
-
 module.exports = {
   build(object, game){
     let json = {
@@ -13,50 +11,51 @@ module.exports = {
       Rules: '',
       XmlUI: '',
       LuaScript: '',
-      ObjectStates: this.objectStates(object, game),
+      ObjectStates: objectStates(object, game),
       LuaScriptState: '',
     }
     return json;
-  },
-  objectStates(object, game){
-    let content = buildCards(object, game);
-
-    let json = [];
-    json.push({
-      Name: 'Deck',
-      Transform: {
-        scaleX: 1.5,
-        scaleY: 1.0,
-        scaleZ: 1.5,
-        rotX: 0,
-        rotY: 180,
-        rotZ: 0
-      },
-      Nickname: object.name,
-      Description: "",
-      ColorDiffuse: {
-        r: 0.713235259,
-        g: 0.713235259,
-        b: 0.713235259
-      },
-      Locked: false,
-      Grid: true,
-      Snap: true,
-      Autoraise: true,
-      Sticky: true,
-      Tooltip: true,
-      GridProjection: false,
-      Hands: false,
-      SidewaysCard: false,
-      DeckIDs: content.listaDeIds,
-      CustomDeck: content.decks,
-      XmlUI: '',
-      LuaScript: '',
-      LuaScriptState: '',
-      ContainedObjects: content.cards
-    });
-    return json;
   }
+}
+
+function objectStates(object, game){
+  let content = buildCards(object, game);
+
+  let json = [];
+  json.push({
+    Name: 'Deck',
+    Transform: {
+      scaleX: 1.5,
+      scaleY: 1.0,
+      scaleZ: 1.5,
+      rotX: 0,
+      rotY: 180,
+      rotZ: 0
+    },
+    Nickname: object.name,
+    Description: "",
+    ColorDiffuse: {
+      r: 0.713235259,
+      g: 0.713235259,
+      b: 0.713235259
+    },
+    Locked: false,
+    Grid: true,
+    Snap: true,
+    Autoraise: true,
+    Sticky: true,
+    Tooltip: true,
+    GridProjection: false,
+    Hands: false,
+    SidewaysCard: false,
+    DeckIDs: content.listaDeIds,
+    CustomDeck: content.decks,
+    XmlUI: '',
+    LuaScript: '',
+    LuaScriptState: '',
+    ContainedObjects: content.cards
+  });
+  return json;
 }
 
 function buildCards(object, game){

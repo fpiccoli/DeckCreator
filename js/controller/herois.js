@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
-const dataManager = require('../manager/data.js');
+const dataManager = require('../manager/array.js');
 const cookie = require('../manager/cookie.js');
-const render = require('./render.js');
+const render = require('../render/herois.js');
 const dataClasse = require('../rest/classe.js');
 
 let linkFechar = document.querySelector("#link-fechar");

@@ -6,6 +6,7 @@ const regras = require('../html/regras.js');
 const sobre = require('../html/sobre.js');
 const alert = require('../manager/alert.js');
 const file = require('../manager/file.js');
+const dataManager = require('../manager/array.js');
 const deckBuilder = require('../manager/deck.js');
 const render = require('../render/menu.js');
 const dataDeck = require('../rest/deck.js');

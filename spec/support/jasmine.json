@@ -3,7 +3,8 @@
   "spec_files": [
     "manager/conta.js",
     "manager/array.js",
-    "manager/string.js"
+    "manager/string.js",
+    "manager/deck.js"
   ],
   "helpers": [
     "helpers/**/*.js"
