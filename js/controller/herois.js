@@ -1,6 +1,6 @@
 const { ipcRenderer } = require('electron');
 const dataManager = require('../manager/array.js');
-const cookie = require('../manager/cookie.js');
+const cookie = require('../manager/interface/cookie.js');
 const render = require('../render/herois.js');
 const dataClasse = require('../rest/classe.js');
 

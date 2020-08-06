@@ -1,6 +1,6 @@
 const { ipcRenderer }  = require('electron');
 const alert = require('../manager/interface/alert.js');
-const cookie = require('../manager/cookie.js');
+const cookie = require('../manager/interface/cookie.js');
 const file = require('../manager/file.js');
 const validar = require('./validar.js');
 

@@ -1,7 +1,7 @@
 const { ipcRenderer }  = require('electron');
 const navbar = require('../render/menu-navbar.js');
 const sidebar = require('../render/menu-sidebar.js');
-const cookie = require('../manager/cookie.js');
+const cookie = require('../manager/interface/cookie.js');
 
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
