@@ -4,7 +4,7 @@ const htmlPublicDecks = require('../html/decks-public.js');
 const dataManager = require('../manager/string.js');
 const file = require('../manager/file.js');
 const deckBuilder = require('../manager/deck.js');
-const alert = require('../manager/alert.js');
+const alert = require('../manager/interface/alert.js');
 const dataDeck = require('../rest/deck.js');
 
 module.exports = {

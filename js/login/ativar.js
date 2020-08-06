@@ -1,6 +1,6 @@
 const { ipcRenderer }  = require('electron');
 var moment = require('moment');
-const alert = require('../manager/alert.js');
+const alert = require('../manager/interface/alert.js');
 const dataCode = require('../rest/code.js');
 const dataUser = require('../rest/user.js');
 

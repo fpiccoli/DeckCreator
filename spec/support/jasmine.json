@@ -4,7 +4,8 @@
     "manager/conta.js",
     "manager/array.js",
     "manager/string.js",
-    "manager/deck.js"
+    "manager/deck.js",
+    "manager/alert.js"
   ],
   "helpers": [
     "helpers/**/*.js"

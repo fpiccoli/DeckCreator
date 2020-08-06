@@ -1,4 +1,4 @@
-const alert = require('../manager/alert.js');
+const alert = require('../manager/interface/alert.js');
 const file = require('../manager/file.js');
 const dataUser = require('../rest/user.js');
 
