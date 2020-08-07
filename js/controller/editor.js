@@ -1,9 +1,9 @@
 const { ipcRenderer }  = require('electron');
 const dataManager = require('../manager/array.js');
 const deck = require('../manager/deck.js');
-const file = require('../manager/file.js');
 const cookie = require('../manager/interface/cookie.js');
 const alert = require('../manager/interface/alert.js');
+const file = require('../file/interface/deck.js');
 const render = require('../render/editor.js');
 const update = require('../render/editor-update.js');
 const navbar = require('../render/menu-navbar.js');
@@ -151,7 +151,7 @@ function exportDeck(object, game){
   let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
 
-  file.export(object, deckRetorno, user.game);
+  file.saveLocal(object, deckRetorno, user.game);
   ipcRenderer.send('redirecionar-pagina','index');
 }
 

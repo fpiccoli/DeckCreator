@@ -5,7 +5,6 @@ const htmlPublicDecks = require('../html/decks-public.js');
 const regras = require('../html/regras.js');
 const sobre = require('../html/sobre.js');
 const alert = require('../manager/interface/alert.js');
-const file = require('../manager/file.js');
 const dataManager = require('../manager/array.js');
 const deckBuilder = require('../manager/deck.js');
 const render = require('../render/menu.js');

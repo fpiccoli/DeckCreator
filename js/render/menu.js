@@ -2,9 +2,9 @@ const { ipcRenderer }  = require('electron');
 const htmlMyDecks = require('../html/decks-my.js');
 const htmlPublicDecks = require('../html/decks-public.js');
 const dataManager = require('../manager/string.js');
-const file = require('../manager/file.js');
 const deckBuilder = require('../manager/deck.js');
 const alert = require('../manager/interface/alert.js');
+const file = require('../file/interface/deck.js');
 const dataDeck = require('../rest/deck.js');
 
 module.exports = {
@@ -38,7 +38,7 @@ module.exports = {
           dataDeck.delete(array[index].name, user.name, user.game)
           .then((retorno) => {
             if(retorno){
-              file.delete(array[index], user.game);
+              file.removeLocal(array[index], user.game);
               json = removeObj(json, array[index]);
             }
             documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
@@ -81,7 +81,7 @@ module.exports = {
           }
           if(dataDeck.save(object, user.game)){
             let deckRetorno = deckBuilder.build(object, user.game);
-            file.export(object, deckRetorno, user.game);
+            file.saveLocal(object, deckRetorno, user.game);
             alert.message(documento.querySelector("#alert-message"), deck.user + "'s <b>" + deck.name + '</b> successfully imported to your decks!', 'success');
           }
         });
@@ -103,7 +103,7 @@ function eventUpdateNome(documento, deck, index, json, user){
     dataDeck.update(deck, novoNome, antigo, user.game)
     .then((retorno) => {
       if(retorno){
-        file.update(novoNome, antigo, deckBuilder.build(deck, user.game), user.game, deck);
+        file.changeName(novoNome, antigo, deckBuilder.build(deck, user.game), user.game, deck);
       }
     }).catch(err => console.log(err));
   }

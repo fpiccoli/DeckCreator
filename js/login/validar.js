@@ -1,5 +1,5 @@
 const alert = require('../manager/interface/alert.js');
-const file = require('../manager/file.js');
+const file = require('../file/interface/login.js');
 const dataUser = require('../rest/user.js');
 
 module.exports = {
@@ -24,5 +24,5 @@ module.exports = {
 }
 
 function manterUsuario(json){
-  file.saveLogin('dclogin', json);
+  file.save('dclogin', json);
 }
