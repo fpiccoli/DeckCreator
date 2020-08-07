@@ -1,8 +1,8 @@
 module.exports = { save, remove, valida }
 
-function save(nome, json, os, fs, jsonfile, path){ //saveLogin
+function save(json, os, jsonfile, path){ //saveLogin
   let caminho = path.valida(tree(os));
-  let file = caminho + '/' + nome + '.json';
+  let file = caminho + '/dclogin.json';
 
   jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
     if (err) console.error(err)

@@ -6,8 +6,8 @@ const path = require('./path.js');
 
 module.exports = { save, remove, valida }
 
-function save(nome, json){
-  return call.save(nome, json, os, fs, jsonfile, path);
+function save(json){
+  return call.save(json, os, jsonfile, path);
 }
 
 function remove(){

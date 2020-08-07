@@ -24,5 +24,5 @@ module.exports = {
 }
 
 function manterUsuario(json){
-  file.save('dclogin', json);
+  file.save(json);
 }
