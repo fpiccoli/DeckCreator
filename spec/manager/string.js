@@ -1,7 +1,5 @@
 const algoritmo = require('../../js/manager/string.js');
 
-let lista = [];
-
 describe("replaceAll() -> substitui todas as iteraçoes de uma string em outra string ->", function(){
   it ("[1] deve retornar a propria string por nao encontrar nada", function(){
     let string = `<div dataToggle="colapse"></div>`;

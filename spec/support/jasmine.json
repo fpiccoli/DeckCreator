@@ -1,7 +1,8 @@
 {
   "spec_dir": "spec",
   "spec_files": [
-    "manager/conta.js", "manager/array.js", "manager/string.js", "manager/deck.js", "manager/alert.js", "manager/cookie.js"
+    "manager/conta.js", "manager/array.js", "manager/string.js", "manager/deck.js", "manager/alert.js", "manager/cookie.js",
+    "file/path.js"
   ],
   "helpers": [
     "helpers/**/*.js"
