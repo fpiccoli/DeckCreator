@@ -31,7 +31,7 @@ module.exports = {
           retorno = {error: false, exists:false};
         }
         resolve(retorno);
-      })
+      });
     });
   },
   public(game){
@@ -100,7 +100,7 @@ module.exports = {
     });
   },
   save(deck, game){
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       http.put('/deck/'+http.valida(game)+'/save', deck).then(retorno => {
         let criado = false;
         if (retorno.status == 500 || retorno.status == 400){
@@ -119,7 +119,7 @@ module.exports = {
           criado = true;
         }
         resolve(criado);
-      });
+      }).catch(err => { reject(err) });
     });
   }
 }

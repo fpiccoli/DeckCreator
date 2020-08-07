@@ -81,8 +81,11 @@ module.exports = {
           }
           if(dataDeck.save(object, user.game)){
             let deckRetorno = deckBuilder.build(object, user.game);
-            file.saveLocal(object, deckRetorno, user.game);
-            alert.message(documento.querySelector("#alert-message"), deck.user + "'s <b>" + deck.name + '</b> successfully imported to your decks!', 'success');
+
+            file.saveLocal(object, deckRetorno, user.game).then(retorno => {
+              alert.message(documento.querySelector("#alert-message"), deck.user + "'s <b>" + deck.name + '</b> successfully imported to your decks!', 'success');
+            }).catch(err => console.error(err));
+
           }
         });
       }
@@ -103,11 +106,14 @@ function eventUpdateNome(documento, deck, index, json, user){
     dataDeck.update(deck, novoNome, antigo, user.game)
     .then((retorno) => {
       if(retorno){
-        file.changeName(novoNome, antigo, deckBuilder.build(deck, user.game), user.game, deck);
+        let deckBuild = deckBuilder.build(deck, user.game);
+        file.changeName(novoNome, antigo, deckBuild, user.game, deck)
+        .then(retorno => {
+          //Alterou nome com sucesso
+        }).catch(err => {console.error(err); alert.message(document.querySelector('#alert-message'), err, 'danger')});
       }
-    }).catch(err => console.log(err));
+    }).catch(err => console.error(err));
   }
-
   documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
   module.exports.myDecks(documento, json, user);
 }

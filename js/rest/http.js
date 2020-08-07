@@ -14,18 +14,24 @@ module.exports = {
     });
   },
   post(path, query) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       client.post(path, query, function(err, req, res, obj) {
-        if(err) console.log(err);
-        resolve({conteudo: obj, status: res.statusCode});
+        if(err) {
+          reject(err);
+        } else{
+          resolve({conteudo: obj, status: res.statusCode});
+        }
       })
     });
   },
   put(path, query) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       client.put(path, query, function(err, req, res, obj) {
-        if(err) console.log(err);
-        resolve({conteudo: obj, status: res.statusCode});
+        if(err) {
+          reject(err);
+        } else{
+          resolve({conteudo: obj, status: res.statusCode});
+        }
       })
     });
   },

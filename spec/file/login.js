@@ -36,7 +36,7 @@ describe("remove() -> deleta o arquivo json local com as informaçoes de login -
 
       path = jasmine.createSpyObj('path', ['valida']);
 
-      fs = jasmine.createSpyObj('os', ['existsSync', 'unlinkSync']);
+      fs = jasmine.createSpyObj('fs', ['existsSync', 'unlinkSync']);
       fs.existsSync.and.returnValue(true);
     });
 
@@ -57,7 +57,7 @@ describe("remove() -> deleta o arquivo json local com as informaçoes de login -
 
       path = jasmine.createSpyObj('path', ['valida']);
 
-      fs = jasmine.createSpyObj('os', ['existsSync', 'unlinkSync']);
+      fs = jasmine.createSpyObj('fs', ['existsSync', 'unlinkSync']);
       fs.existsSync.and.returnValue(false);
     });
 
@@ -84,7 +84,7 @@ describe("valida() -> verifica se existe arquivo json local com as informaçoes 
       jsonfile = jasmine.createSpyObj('jsonfile', ['readFileSync']);
       jsonfile.readFileSync.and.returnValue({user: 'usuario', password: 'senha'});
 
-      fs = jasmine.createSpyObj('os', ['existsSync']);
+      fs = jasmine.createSpyObj('fs', ['existsSync']);
       fs.existsSync.and.returnValue(true);
     });
 
@@ -107,7 +107,7 @@ describe("valida() -> verifica se existe arquivo json local com as informaçoes 
       path = jasmine.createSpyObj('path', ['valida']);
       jsonfile = jasmine.createSpyObj('jsonfile', ['readFileSync']);
 
-      fs = jasmine.createSpyObj('os', ['existsSync']);
+      fs = jasmine.createSpyObj('fs', ['existsSync']);
       fs.existsSync.and.returnValue(false);
     });
 

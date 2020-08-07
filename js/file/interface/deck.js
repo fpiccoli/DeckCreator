@@ -2,18 +2,18 @@ const fs = require('fs');
 const os = require('os');
 const jsonfile = require('jsonfile');
 const fsExtra = require('fs-extra');
-const mergeImg = require('merge-images');
 const call = require('../deck.js');
 const path = require('./path.js');
+const image = require('./image.js');
 
 module.exports = { saveLocal, changeName, removeLocal, clearLocal }
 
 function saveLocal(deck, json, game){ //exportDeck
-  return call.saveLocal(deck, json, game, mergeImg, os, fs, jsonfile, path);
+  return call.saveLocal(deck, json, game, os, jsonfile, image, path);
 }
 
 function changeName(nome, antigo, json, game, deck){ //updateDeck
-  return call.changeName(nome, antigo, json, game, deck, mergeImg, os, fs, jsonfile, path);
+  return call.changeName(nome, antigo, json, game, deck, os, fs, jsonfile, image, path);
 }
 
 function removeLocal(deck, game){ //deleteDeck
@@ -21,5 +21,5 @@ function removeLocal(deck, game){ //deleteDeck
 }
 
 function clearLocal(game){ //removeLocal
-  return call.clearLocal(game, os, fs, fsExtra, path)
+  return call.clearLocal(game, os, fsExtra, path)
 }

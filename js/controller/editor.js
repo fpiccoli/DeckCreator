@@ -135,7 +135,7 @@ function save(nome){
         httpSave(object, user.game)
       }
     }
-  }).catch(err => console.log(err));
+  }).catch(err =>  alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
 function httpSave(obj, game){
@@ -143,16 +143,16 @@ function httpSave(obj, game){
     if(retorno){
       exportDeck(obj, game);
     }
-  }).catch(err => console.log(err));
+  }).catch(err => alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
 function exportDeck(object, game){
-
   let deckRetorno = deck.build(object, game);
   ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
 
-  file.saveLocal(object, deckRetorno, user.game);
-  ipcRenderer.send('redirecionar-pagina','index');
+  file.saveLocal(object, deckRetorno, user.game).then(retorno => {
+    ipcRenderer.send('redirecionar-pagina','index');
+  }).catch(err => alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
 document.querySelector('.cartas-deck').addEventListener('click', function () {

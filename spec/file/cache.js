@@ -10,7 +10,7 @@ describe("clear() -> limpa os arquivos de cache do TTS ->", function(){
     os = jasmine.createSpyObj('os', ['platform']);
     os.platform.and.returnValue('win32');
 
-    fs = jasmine.createSpyObj('os', ['readdirSync', 'unlinkSync']);
+    fs = jasmine.createSpyObj('fs', ['readdirSync', 'unlinkSync']);
     fs.readdirSync.and.returnValue(['arquivo1.json', 'arquivo2.json', 'arquivo3.json', 'arquivo4.json']);
 
     path = jasmine.createSpyObj('path', ['valida']);

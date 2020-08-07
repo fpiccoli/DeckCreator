@@ -4,8 +4,10 @@ let ipcRenderer;
 let lista;
 
 function mock(){
-  return (event, result) => {
-    result(null, lista);
+  return (param1, param2, param3) => {
+    return new Promise(resolve => {
+      resolve(lista);
+    });
   }
 }
 

@@ -46,7 +46,7 @@ describe("valida() -> verifica a existência de pastas e cria se necessario ->",
       os.homedir.and.returnValue('C:/User/username');
       os.platform.and.returnValue('win32');
 
-      fs = jasmine.createSpyObj('os', ['existsSync', 'mkdirSync']);
+      fs = jasmine.createSpyObj('fs', ['existsSync', 'mkdirSync']);
       fs.existsSync.and.returnValue(true);
 
       pastas = ['/Pasta1', '/Pasta2', '/Pasta3'];
@@ -68,7 +68,7 @@ describe("valida() -> verifica a existência de pastas e cria se necessario ->",
       os.homedir.and.returnValue('C:/User/username');
       os.platform.and.returnValue('win32');
 
-      fs = jasmine.createSpyObj('os', ['existsSync', 'mkdirSync']);
+      fs = jasmine.createSpyObj('fs', ['existsSync', 'mkdirSync']);
       fs.existsSync.and.returnValue(false);
 
       pastas = ['/Pasta1', '/Pasta2', '/Pasta3'];
