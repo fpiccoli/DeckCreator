@@ -1,22 +1,19 @@
-module.exports = { clearCache }
+module.exports = { clear }
 
-function clearCache(os, fs, path){
-
-
-  let caminho = path.valida(tree());
+function clear(os, fs, path){
+  let caminho = path.valida(tree(os));
   let files = [];
 
   fs.readdirSync(caminho).forEach(file => {
     files.push(file);
   })
 
-  files.forEach(excluir);
-  function excluir(file, index, array){
+  files.forEach(function (file, index, array) {
     fs.unlinkSync(caminho + '/' + file);
-  }
+  });
 }
 
-function tree(){
+function tree(os){
   let tree = [];
   if(os.platform() == 'win32'){
     tree.push('/My Games');

@@ -37,7 +37,7 @@ module.exports = {
   },
   clearCache(documento){
     documento.querySelector("#clear-cache").addEventListener('click', function () {
-      fileCache.clearCache();
+      fileCache.clear();
       alert.message(documento.querySelector("#alert-message"), '<b>Tabletop Simulator</b> cache successfully cleared!', 'success');
     });
   },

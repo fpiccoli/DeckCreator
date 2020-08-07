@@ -3,8 +3,8 @@ const os = require('os');
 const call = require('../cache.js');
 const path = require('./path.js');
 
-module.exports = {clearCache }
+module.exports = { clear }
 
-function clearCache(){
-  return call.clearCache(os, fs, path);
+function clear(){
+  return call.clear(os, fs, path);
 }
