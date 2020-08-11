@@ -2,16 +2,16 @@ const builder = require('./builder.js');
 const arrayManager = require('../manager/array.js');
 const stringManager = require('../manager/string.js');
 
-module.exports = {
-  build(type, colunas, puros, lista){
-    let html = builder.build(classe(type, colunas, puros, lista));
-    html = builder.replaceCamelCase(html);
+module.exports = { build }
 
-    if (html == '<div class="row"></div>'){
-      html = botaoRecarregar();
-    }
-    return html;
+function build(type, colunas, puros, lista){
+  let html = builder.build(classe(type, colunas, puros, lista));
+  html = builder.replaceCamelCase(html);
+
+  if (html == '<div class="row"></div>'){
+    html = botaoRecarregar();
   }
+  return html;
 }
 
 function classe(type, colunas, classes, lista){

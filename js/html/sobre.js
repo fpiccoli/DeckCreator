@@ -2,33 +2,33 @@ const builder = require('./builder.js');
 const dataManager = require('../manager/array.js');
 var moment = require('moment');
 
-module.exports = {
-  html(lista){
-    let text = [];
+module.exports = { html }
 
-    text.push(h1('Patch Notes'));
-    text.push(h2('Releases:'));
+function html(lista){
+  let text = [];
 
-    lista = dataManager.dateSort(lista, 0);
+  text.push(h1('Patch Notes'));
+  text.push(h2('Releases:'));
 
-    lista.forEach(function (objeto, index, array){
-      text.push(h3(objeto.versao));
-      text.push(h4(moment(objeto.data, "DD/MM/YYYY").format("LL")));
+  lista = dataManager.dateSort(lista, 0);
 
-      objeto.changes.forEach(function (objeto, index, array){
-        text.push(patch([
-          {
-            titulo: objeto.titulo,
-            itens: objeto.itens
-          }])
-        );
-      });
+  lista.forEach(function (objeto, index, array){
+    text.push(h3(objeto.versao));
+    text.push(h4(moment(objeto.data, "DD/MM/YYYY").format("LL")));
+
+    objeto.changes.forEach(function (objeto, index, array){
+      text.push(patch([
+        {
+          titulo: objeto.titulo,
+          itens: objeto.itens
+        }])
+      );
     });
+  });
 
-    let json = builder.element('div', {class:'col-lg-12'}, text)
+  let json = builder.element('div', {class:'col-lg-12'}, text)
 
-    return builder.build([json]);
-  }
+  return builder.build([json]);
 }
 
 function patch(lista){
