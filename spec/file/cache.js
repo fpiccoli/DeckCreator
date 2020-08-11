@@ -3,7 +3,6 @@ const algoritmo = require('../../js/file/cache.js');
 let path;
 let os;
 let fs;
-let pastas;
 
 describe("clear() -> limpa os arquivos de cache do TTS ->", function(){
   beforeEach(function(){
@@ -15,8 +14,6 @@ describe("clear() -> limpa os arquivos de cache do TTS ->", function(){
 
     path = jasmine.createSpyObj('path', ['valida']);
     path.valida.and.returnValue('C:/User/username/Documents');
-
-    pastas = ['/Pasta1', '/Pasta2', '/Pasta3'];
   });
 
   it ("[1] deve ler a pasta e excluir cada um dos 4 arquivos existentes", function(){

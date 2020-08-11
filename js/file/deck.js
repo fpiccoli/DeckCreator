@@ -12,8 +12,7 @@ function saveLocal(deck, json, game, os, jsonfile, image, path){
 
   return new Promise((resolve, reject) => {
     jsonfile.writeFile(file, json, {spaces: 2}).then(res => {
-      image.save(caminho, game, deck);
-      resolve(true);
+      resolve(image.save(caminho, game, deck));
     }).catch(err => reject(err));
   });
 }

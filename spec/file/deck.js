@@ -24,14 +24,14 @@ describe("saveLocal() -> salva o arquivo json do deck na maquina local ->", func
       jsonfile.writeFile.and.callFake(mock());
 
       image = jasmine.createSpyObj('image', ['save']);
+      image.save.and.returnValue(true);
 
       path = jasmine.createSpyObj('path', ['valida']);
       path.valida.and.returnValue('C:/User/username/Documents');
     });
 
     it ("[1] deve salvar o deck dentro da pasta de seu grupo", function(){
-      let herois = [{imgurl: 'imagem-heroi1'}, {imgurl: 'imagem-heroi2'}, {imgurl: 'imagem-heroi3'}];
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois};
+      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste'};
 
       algoritmo.saveLocal(deck, 'json', 'game', os, jsonfile, image, path)
       .then(function(retorno) {
