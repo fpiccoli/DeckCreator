@@ -35,7 +35,7 @@ module.exports = {
       });
       documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
         if(alert.confirmDialog('Remove Deck', 'Sure!', 'Nope', 'Are you sure you want to remove the deck "'+ array[index].name +'"?')){
-          dataDeck.delete(array[index].name, user.name, user.game)
+          dataDeck.remove(array[index].name, user.name, user.game)
           .then((retorno) => {
             if(retorno){
               file.removeLocal(array[index], user.game);
