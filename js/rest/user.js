@@ -1,8 +1,7 @@
 const { ipcRenderer }  = require('electron');
 const http = require('./http.js');
-const stage = '/beta';
 
-module.exports = { login, active, activate }
+module.exports = { login, active, activate, save }
 
 function login(user, pass){
   return new Promise(resolve => {
@@ -24,7 +23,7 @@ function login(user, pass){
 }
 
 function active(query){
-  return new Promise(resolve => {
+  return new Promise((resolve, reject)  => {
     http.post(http.stage()+'/user/active', query).then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
@@ -38,13 +37,14 @@ function active(query){
         ipcRenderer.send('console-log-main', "Registro permitido")
       }
       resolve(retorno);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function save(obj){
-  return new Promise(resolve => {
-    http.put(http.stage()+'/user/save', obj).then(retorno => {
+  return new Promise((resolve, reject) => {
+    http.put(http.stage()+'/user/save', obj)
+    .then(retorno => {
       let criado = false;
       if (retorno.status == 200){
         console.error('Usuario que nao estava ativo foi alterado');
@@ -56,7 +56,7 @@ function save(obj){
         criado = true;
       }
       resolve(criado);
-    });
+    }).catch(err => reject(err));
   });
 }
 

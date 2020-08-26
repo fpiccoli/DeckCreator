@@ -8,7 +8,7 @@ module.exports = { get, post, put, remove, valida, stage }
 
 function get(path) {
   return new Promise(resolve => {
-    client.get(path, function(err, req, res, obj) {
+    client.get(options(path), function(err, req, res, obj) {
       if(err) console.log(err);
       resolve({conteudo: obj, status: res.statusCode});
     })
@@ -17,7 +17,7 @@ function get(path) {
 
 function post(path, query) {
   return new Promise((resolve, reject) => {
-    client.post(path, query, function(err, req, res, obj) {
+    client.post(options(path), query, function(err, req, res, obj) {
       if(err) {
         reject(err);
       } else{
@@ -29,7 +29,7 @@ function post(path, query) {
 
 function put(path, query) {
   return new Promise((resolve, reject) => {
-    client.put(path, query, function(err, req, res, obj) {
+    client.put(options(path), query, function(err, req, res, obj) {
       if(err) {
         reject(err);
       } else{
@@ -41,11 +41,20 @@ function put(path, query) {
 
 function remove(path, query) {
   return new Promise(resolve => {
-    client.post(path, query, function(err, req, res, obj) {
+    client.post(options(path), query, function(err, req, res, obj) {
       if(err) console.log(err);
       resolve({conteudo: obj, status: res.statusCode});
     })
   });
+}
+
+function options(path){
+  return {
+    path: path,
+    headers: {
+      'x-api-key': 'IsT3Y2Z9pT6FvFCad09sC1JmADw6kTYvSWf9Mnhb'
+    }
+  }
 }
 
 function valida(game){

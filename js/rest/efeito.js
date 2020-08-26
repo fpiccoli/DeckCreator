@@ -1,5 +1,4 @@
 const http = require('./http.js');
-const stage = '/beta';
 
 module.exports = { listAll }
 

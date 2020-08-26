@@ -1,22 +1,17 @@
 const { ipcRenderer }  = require('electron');
 const md5 = require('md5');
-const mailer = require('./mailer.js');
 const alert = require('../manager/interface/alert.js');
 const dataUser = require('../rest/user.js');
-const dataCode = require('../rest/code.js');
+const cognito = require('./cognito.js');
 
 document.querySelector('#back').addEventListener('click' , function(){
   ipcRenderer.send('redirecionar-pagina','login');
 });
 
-document.querySelector('#activate').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','ativar');
-});
-
 document.querySelector('#register').addEventListener('click' , function(){
   let user = document.querySelector('#user').value.toLowerCase();
   let email = document.querySelector('#email').value.toLowerCase();
-  let pass = md5(document.querySelector('#pass').value);
+  let pass = document.querySelector('#pass').value;
 
   if(user.length < 3){
     alert.message(document.querySelector('#alert-message'), 'User must be at least 3 characters!', 'warning');
@@ -33,50 +28,36 @@ document.querySelector('#register').addEventListener('click' , function(){
     return;
   }
 
-  let userFind = dataUser.active({user: user.toLowerCase(), email: email.toLowerCase()});
-  userFind.then((retorno) => {
+  dataUser.active({user: user.toLowerCase(), email: email.toLowerCase()})
+  .then((retorno) => {
     if(retorno){
       alert.message(document.querySelector('#alert-message'), 'User or email already registered!', 'danger');
     } else{
-      sendEmail(user, email, pass);
+      saveCognito(user, email, pass)
     }
   }).catch(err => console.log(err));
 });
 
-function sendEmail(user, email, pass){
+function saveCognito(user, email, pass){
+  cognito.register(user, email, pass)
+  .then((retorno) => {
+    saveUser(user, email, pass);
+  }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
+}
+
+function saveUser(user, email, pass){
   let obj = {
     user: user.toLowerCase(),
     email: email.toLowerCase(),
-    password: pass,
+    password: md5(pass),
     game:'MRBC',
-    codigo: Math.random().toString(36).substring(2, 5).toUpperCase() + Math.random().toString(36).substring(2, 5).toUpperCase(),
-    active: false
+    active: true
   };
 
-  saveUser(obj);
-}
-
-function saveUser(obj){
-  dataUser.save(obj).then((retorno) => {
-    if(retorno){
-      saveCode(obj);
-    }
-  }).catch(err => console.log(err));
-}
-
-function saveCode(obj){
-  dataCode.save({email: obj.email, codigo: obj.codigo, data: new Date()})
+  dataUser.save(obj)
   .then((retorno) => {
-    console.log(retorno);
     if(retorno){
-      mail(obj);
+      ipcRenderer.send('redirecionar-pagina','login');
     }
-  }).catch(err => console.log(err));
-}
-
-function mail(obj){
-  mailer.alert(obj.user, obj.email, obj.codigo);
-  mailer.registration(obj.user, obj.email, obj.codigo).then(() => {
-    ipcRenderer.send('redirecionar-pagina','ativar');
-  }).catch(err => console.log(err));
+  }).catch(err =>  alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
 }

@@ -3,6 +3,7 @@ const md5 = require('md5');
 const alert = require('../manager/interface/alert.js');
 const cookie = require('../manager/interface/cookie.js');
 const validar = require('./validar.js');
+const cognito = require('./cognito.js');
 
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
@@ -39,12 +40,20 @@ document.querySelector('#pass').addEventListener('keypress', function (e) {
 
 function login(){
   let user = document.querySelector('#user').value.toLowerCase();
-  let pass = md5(document.querySelector('#pass').value);
+  let pass = document.querySelector('#pass').value;
 
   if(user.length == 0){
     alert.message(document.querySelector('#alert-message'), 'Enter the user!', 'warning');
     return;
   }
 
-  validar.login(user, pass, document, ipcRenderer);
+  cognito.authenticate(user, pass)
+  .then((retorno) => {
+    let idToken = retorno.idToken;
+    let refreshToken = retorno.refreshToken;
+    console.log(idToken);
+    console.log(refreshToken);
+  }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
+
+  // validar.login(user, pass);
 }
