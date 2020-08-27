@@ -14,7 +14,7 @@ const dataVersao = require('../rest/version.js');
 module.exports = {
   loadDecks(documento, user){
     documento.querySelector('#load-decks').addEventListener('click' , function(){
-      dataDeck.find(user.name, user.game)
+      dataDeck.find(user.name, user.game, user.idToken)
       .then((retorno) => {
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {

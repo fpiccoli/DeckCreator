@@ -4,7 +4,7 @@ module.exports = { listAll }
 
 function listAll(){
   return new Promise(resolve => {
-    http.get(http.stage()+'/effect/list').then(retorno => {
+    http.get(http.stage()+'/effect/list', null).then(retorno => {
       resolve(retorno.conteudo);
     });
   });

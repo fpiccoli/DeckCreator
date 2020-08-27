@@ -21,7 +21,7 @@ module.exports = {
     addEventSelecionar(2, listaDeCartas);
     addEventSelecionar(3, listaDeCartas);
 
-    let grupos = await dataDeck.grupo(user.name, user.game);
+    let grupos = await dataDeck.grupo(user.name, user.game, user.idToken);
     grupos.sort();
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addGrupo(grupos);
     documento.querySelector('#side-menu').innerHTML += htmlMenu.addPublic();
@@ -118,12 +118,12 @@ function layout(carta, user, listaDeCartas, herois, documento){
 }
 
 async function buscaCartas(classe, user){
-  let main = await dataClasse.getClassCards(classe.main, user.game);
+  let main = await dataClasse.getClassCards(classe.main, user.game, user.idToken);
   let sub;
   if(classe.sub == '???'){
-    sub = await dataClasse.getClassCards(classe.main, user.game);
+    sub = await dataClasse.getClassCards(classe.main, user.game, user.idToken);
   } else{
-    sub = await dataClasse.getClassCards(classe.sub, user.game);
+    sub = await dataClasse.getClassCards(classe.sub, user.game, user.idToken);
   }
   let mainCards = [];
   let subCards = [];

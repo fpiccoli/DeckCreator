@@ -7,7 +7,12 @@ function login(ipcRenderer){
       let cookies = filtraCookies(retorno, 'login');
       if(cookies[0]){
         let loginJson = JSON.parse(cookies[0].value);
-        user = {name: loginJson.user, game: loginJson.game};
+        user = {
+          name: loginJson.user,
+          game: loginJson.game,
+          idToken: loginJson.idToken,
+          refreshToken: loginJson.refreshToken
+        }
       }
       resolve(user);
     });

@@ -125,21 +125,21 @@ function save(nome){
     game: user.game
   }
 
-  dataDeck.exists(object, user.game).then((retorno) => {
+  dataDeck.exists(object, user.game, user.idToken).then((retorno) => {
     if(retorno){
       if(retorno.exists && !retorno.error){
         if(alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')){
-          httpSave(object, user.game)
+          httpSave(object, user.game, user.idToken)
         }
       } else if (!retorno.exists && !retorno.error){
-        httpSave(object, user.game)
+        httpSave(object, user.game, user.idToken)
       }
     }
   }).catch(err =>  alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
-function httpSave(obj, game){
-  dataDeck.save(obj, game).then((retorno) => {
+function httpSave(obj, game, token){
+  dataDeck.save(obj, game, token).then((retorno) => {
     if(retorno){
       exportDeck(obj, game);
     }

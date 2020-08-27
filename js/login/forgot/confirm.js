@@ -1,13 +1,38 @@
 const { ipcRenderer }  = require('electron');
 const alert = require('../../manager/interface/alert.js');
-const dataCode = require('../../rest/code.js');
 const dataUser = require('../../rest/user.js');
-var moment = require('moment');
 const md5 = require('md5');
+const cognito = require('../cognito.js');
+
+document.querySelector('#back').addEventListener('click' , function(){
+  ipcRenderer.send('redirecionar-pagina','senha-esqueci');
+});
+
+document.querySelector('#email').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    confirm();
+  }
+});
+
+document.querySelector('#pass').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    confirm();
+  }
+});
+
+document.querySelector('#codigo').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    confirm();
+  }
+});
 
 document.querySelector('#confirm').addEventListener('click' , function(){
+  confirm()
+});
+
+function confirm(){
   let email = document.querySelector('#email').value.toLowerCase();
-  let pass = md5(document.querySelector('#pass').value);
+  let pass = document.querySelector('#pass').value;
   let codigo = document.querySelector('#codigo').value.toUpperCase();
 
   if(!email){
@@ -23,25 +48,23 @@ document.querySelector('#confirm').addEventListener('click' , function(){
     return;
   }
 
-  var codeFind = dataCode.find({email: email, codigo: codigo});
+  cognito.confirmPassword(email, codigo, pass)
+  .then((retorno) => {
+    getUser(email, pass);
+  }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
 
-  codeFind.then((retorno) => {
-    if(retorno){
-      let atual = moment();
-      let limite = moment(retorno.data).add(15, 'm');
+  function getUser(user, newPassword){
+    dataUser.active({ user: user, email: user })
+    .then((retorno) => {
+      retorno.password = md5(newPassword);
+      updateUser(retorno);
+    }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
+  }
 
-      if(atual.isBefore(limite)){
-        if(dataUser.update({email: email, password: pass})){
-          ipcRenderer.send('redirecionar-pagina','login');
-        }
-      }
-      else{
-        alert.message(document.querySelector('#alert-message'), 'Expired code!' , 'warning');
-      }
-
-    } else{
-      alert.message(document.querySelector('#alert-message'), 'Invalid code or email!', 'danger');
-    }
-  }).catch(err => console.log(err));
-
-});
+  function updateUser(obj){
+    dataUser.save(obj)
+    .then((retorno) => {
+      ipcRenderer.send('redirecionar-pagina','login');
+    }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
+  }
+}

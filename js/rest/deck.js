@@ -3,17 +3,17 @@ const http = require('./http.js');
 
 module.exports = { find, exists, public, grupo, recipe, remove, update, save }
 
-function find(user, game){
+function find(user, game, token){
   return new Promise(resolve => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}).then(retorno => {
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}, token).then(retorno => {
       resolve(retorno.conteudo);
     });
   });
 }
 
-function exists(deck, game){
+function exists(deck, game, token){
   return new Promise(resolve => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/find', {name: deck.name, user: deck.user, recipe: null}).then(obj => {
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/find', {name: deck.name, user: deck.user, recipe: null}, token).then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo);
@@ -39,15 +39,7 @@ function exists(deck, game){
 
 function public(game){
   return new Promise(resolve => {
-    http.get(http.stage()+'/deck/'+http.valida(game)+'/public').then(retorno => {
-      resolve(retorno.conteudo);
-    });
-  });
-}
-
-function grupo(user, game){
-  return new Promise(resolve => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}).then(retorno => {
+    http.get(http.stage()+'/deck/'+http.valida(game)+'/public', null).then(retorno => {
       resolve(retorno.conteudo);
     });
   });
@@ -55,15 +47,23 @@ function grupo(user, game){
 
 function recipe(game){
   return new Promise(resolve => {
-    http.get(http.stage()+'/deck/'+http.valida(game)+'/recipe').then(retorno => {
+    http.get(http.stage()+'/deck/'+http.valida(game)+'/recipe', null).then(retorno => {
       resolve(retorno.conteudo);
     });
   });
 }
 
-function remove(nome, user, game){
+function grupo(user, game, token){
   return new Promise(resolve => {
-    http.remove(http.stage()+'/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: null}).then(retorno => {
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}, token).then(retorno => {
+      resolve(retorno.conteudo);
+    });
+  });
+}
+
+function remove(nome, user, game, token){
+  return new Promise(resolve => {
+    http.remove(http.stage()+'/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: null}, token).then(retorno => {
       let deletado;
       if (retorno.status == 500 || retorno.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo)
@@ -81,11 +81,11 @@ function remove(nome, user, game){
   });
 }
 
-function update(deck, novoNome, nomeAntigo, game){
+function update(deck, novoNome, nomeAntigo, game, token){
   deck.name = novoNome;
   deck.nomeAntigo = nomeAntigo;
   return new Promise(resolve => {
-    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck).then(retorno => {
+    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token).then(retorno => {
       let criado = false;
       if (retorno.status == 500 || retorno.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo)
@@ -107,9 +107,9 @@ function update(deck, novoNome, nomeAntigo, game){
   });
 }
 
-function save(deck, game){
+function save(deck, game, token){
   return new Promise((resolve, reject) => {
-    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck).then(retorno => {
+    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token).then(retorno => {
       let criado = false;
       if (retorno.status == 500 || retorno.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo)

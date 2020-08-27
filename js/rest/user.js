@@ -5,7 +5,7 @@ module.exports = { login, active, activate, save }
 
 function login(user, pass){
   return new Promise(resolve => {
-    http.post(http.stage()+'/user/login', {user: user, password: pass}).then(obj => {
+    http.post(http.stage()+'/user/login', {user: user, password: pass}, null).then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
         ipcRenderer.send('console-log-main', obj.conteudo)
@@ -24,7 +24,7 @@ function login(user, pass){
 
 function active(query){
   return new Promise((resolve, reject)  => {
-    http.post(http.stage()+'/user/active', query).then(obj => {
+    http.post(http.stage()+'/user/active', query, null).then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
         ipcRenderer.send('console-log-main', obj.conteudo)
@@ -43,7 +43,7 @@ function active(query){
 
 function save(obj){
   return new Promise((resolve, reject) => {
-    http.put(http.stage()+'/user/save', obj)
+    http.put(http.stage()+'/user/save', obj, null)
     .then(retorno => {
       let criado = false;
       if (retorno.status == 200){
@@ -57,22 +57,5 @@ function save(obj){
       }
       resolve(criado);
     }).catch(err => reject(err));
-  });
-}
-
-function activate(email){
-  return new Promise(resolve => {
-    http.put(http.stage()+'/user/activate', {email: email}).then(obj => {
-      let ativado = false;
-      if (obj.status == 500 || obj.status == 400){
-        ipcRenderer.send('console-log-main', obj.conteudo)
-        console.error(obj.conteudo);
-      } else if (obj.status == 200){
-        console.error('Usuario ativado');
-        ipcRenderer.send('console-log-main', 'Usuario ativado')
-        ativado = true;
-      }
-      resolve(ativado);
-    });
   });
 }

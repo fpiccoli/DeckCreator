@@ -6,18 +6,18 @@ const client = clients.createJsonClient({
 
 module.exports = { get, post, put, remove, valida, stage }
 
-function get(path) {
+function get(path, token) {
   return new Promise(resolve => {
-    client.get(options(path), function(err, req, res, obj) {
+    client.get(options(path, token), function(err, req, res, obj) {
       if(err) console.log(err);
       resolve({conteudo: obj, status: res.statusCode});
     })
   });
 }
 
-function post(path, query) {
+function post(path, query, token) {
   return new Promise((resolve, reject) => {
-    client.post(options(path), query, function(err, req, res, obj) {
+    client.post(options(path, token), query, function(err, req, res, obj) {
       if(err) {
         reject(err);
       } else{
@@ -27,9 +27,9 @@ function post(path, query) {
   });
 }
 
-function put(path, query) {
+function put(path, query, token) {
   return new Promise((resolve, reject) => {
-    client.put(options(path), query, function(err, req, res, obj) {
+    client.put(options(path, token), query, function(err, req, res, obj) {
       if(err) {
         reject(err);
       } else{
@@ -39,22 +39,22 @@ function put(path, query) {
   });
 }
 
-function remove(path, query) {
+function remove(path, query, token) {
   return new Promise(resolve => {
-    client.post(options(path), query, function(err, req, res, obj) {
+    client.post(options(path, token), query, function(err, req, res, obj) {
       if(err) console.log(err);
       resolve({conteudo: obj, status: res.statusCode});
     })
   });
 }
 
-function options(path){
-  return {
+function options(path, token){
+  let retorno = {
     path: path,
-    headers: {
-      'x-api-key': 'IsT3Y2Z9pT6FvFCad09sC1JmADw6kTYvSWf9Mnhb'
-    }
+    headers: { 'x-api-key': 'IsT3Y2Z9pT6FvFCad09sC1JmADw6kTYvSWf9Mnhb' }
   }
+  if (token) retorno.headers.Authorization = 'Bearer ' + token;
+  return retorno;
 }
 
 function valida(game){

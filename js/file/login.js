@@ -2,7 +2,7 @@ module.exports = { save, remove, valida }
 
 function save(json, os, jsonfile, path){ //saveLogin
   let caminho = path.valida(tree(os));
-  let file = caminho + '/dclogin.json';
+  let file = caminho + '/rftkn.json';
 
   jsonfile.writeFile(file, json, {spaces: 2}, function (err) {
     if (err) console.error(err)
@@ -12,7 +12,7 @@ function save(json, os, jsonfile, path){ //saveLogin
 
 function remove(os, fs, path){ //deleteLogin
   let caminho = path.valida(tree(os));
-  var filePath = caminho + '/dclogin.json';
+  var filePath = caminho + '/rftkn.json';
 
   if(fs.existsSync(filePath)){
     fs.unlinkSync(filePath);
@@ -22,7 +22,7 @@ function remove(os, fs, path){ //deleteLogin
 
 function valida(os, fs, jsonfile, path){ //validaLogin
   let caminho = path.valida(tree(os));
-  let file = caminho + '/dclogin.json';
+  let file = caminho + '/rftkn.json';
 
   if(fs.existsSync(file)){
     return jsonfile.readFileSync(file);

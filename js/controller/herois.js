@@ -11,12 +11,12 @@ document.querySelector('#accordion-hybrid-panel').innerHTML = '<button type="but
 
 cookie.login().then((retorno) => {
   if(retorno){
-    getHerois(retorno.game);
+    getHerois(retorno.game, retorno.idToken);
   }
 }).catch(err => console.log(err));
 
-function getHerois(game){
-  let classes = dataClasse.listAll(game);
+function getHerois(game, token){
+  let classes = dataClasse.listAll(game, token);
 
   classes.then((retorno) => {
     let puros = dataManager.listByType('Pure', retorno);
