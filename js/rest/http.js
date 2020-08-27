@@ -1,7 +1,8 @@
 const clients = require('restify-clients');
+const api = require('./property.js');
 
 const client = clients.createJsonClient({
-  url: 'https://7hx09pixtg.execute-api.us-east-1.amazonaws.com'
+  url: api.url();
 });
 
 module.exports = { get, post, put, remove, valida, stage }
@@ -51,7 +52,7 @@ function remove(path, query, token) {
 function options(path, token){
   let retorno = {
     path: path,
-    headers: { 'x-api-key': 'IsT3Y2Z9pT6FvFCad09sC1JmADw6kTYvSWf9Mnhb' }
+    headers: { 'x-api-key': api.key() }
   }
   if (token) retorno.headers.Authorization = 'Bearer ' + token;
   return retorno;

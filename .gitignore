@@ -5,7 +5,6 @@
 /release-builds-mrbc/
 /releases/
 electron-builder.json
-/config/property.js
-/js/login/property.js
+/js/rest/property.js
 .nyc_output/
 /coverage/
