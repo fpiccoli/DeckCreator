@@ -44,14 +44,23 @@ function login(){
   let pass = document.querySelector('#pass').value;
 
   if(user.length == 0){
-    alert.message(document.querySelector('#alert-message'), 'Enter the user!', 'warning');
+    alertMessage('Enter the user!', 'warning');
     return;
   }
+
+  if(pass.length == 0){
+    alertMessage('Enter the password!', 'warning');
+    return;
+  }
+
+  document.querySelector('#login').setAttribute('disabled', 'disabled');
+  document.querySelector('#login').innerHTML = 'Loading';
+  
   dataUser.login(user, md5(pass))
   .then((retorno) => {
     if (retorno) auth(user, pass, retorno.email, retorno.game);
-    else alert.message(document.querySelector('#alert-message'), 'Login incorrect!', 'danger');
-  }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
+    else alertMessage('Login incorrect!', 'danger')
+  }).catch(err => alertMessage(err.message, 'danger'));
 }
 
 function auth(user, pass, email, game){
@@ -62,17 +71,23 @@ function auth(user, pass, email, game){
     if (err.code == 'NotAuthorizedException') cognitoRegister(user, pass, email);
     else if (err.code == 'UserNotConfirmedException') {
       cognito.resendConfirmation(user);
-      alert.message(document.querySelector('#alert-message'), 'Please, check your email <b>('+email+')</b> and validate your account.', 'warning');
+      alertMessage('Please, check your email <b>('+email+')</b> and validate your account.', 'warning');
     }
-    else alert.message(document.querySelector('#alert-message'), err.message, 'danger');
+    else alertMessage(err.message, 'danger');
   });
 }
 
 function cognitoRegister(user, pass, email){
   cognito.register(user, email, pass)
   .then((retorno) => {
-    alert.message(document.querySelector('#alert-message'), 'Please, check your email <b>('+email+')</b> and validate your account.', 'warning');
-  }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
+    alertMessage('Please, check your email <b>('+email+')</b> and validate your account.', 'warning');
+  }).catch(err => alertMessage(err.message, 'danger'));
+}
+
+function alertMessage(message, type){
+  alert.message(document.querySelector('#alert-message'), message, type)
+  document.querySelector('#login').removeAttribute('disabled');
+  document.querySelector('#login').innerHTML = 'Enter';
 }
 
 function logged(user, game, access){

@@ -1,7 +1,7 @@
 const { ipcRenderer }  = require('electron');
 const http = require('./http.js');
 
-module.exports = { login, active, activate, save }
+module.exports = { login, active, save }
 
 function login(user, pass){
   return new Promise((resolve, reject) => {
