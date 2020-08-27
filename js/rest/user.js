@@ -4,8 +4,9 @@ const http = require('./http.js');
 module.exports = { login, active, activate, save }
 
 function login(user, pass){
-  return new Promise(resolve => {
-    http.post(http.stage()+'/user/login', {user: user, password: pass}, null).then(obj => {
+  return new Promise((resolve, reject) => {
+    http.post(http.stage()+'/user/login', {user: user, password: pass}, null)
+    .then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
         ipcRenderer.send('console-log-main', obj.conteudo)
@@ -18,13 +19,14 @@ function login(user, pass){
         ipcRenderer.send('console-log-main', "Login incorreto")
       }
       resolve(retorno);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function active(query){
   return new Promise((resolve, reject)  => {
-    http.post(http.stage()+'/user/active', query, null).then(obj => {
+    http.post(http.stage()+'/user/active', query, null)
+    .then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
         ipcRenderer.send('console-log-main', obj.conteudo)

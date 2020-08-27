@@ -4,16 +4,18 @@ const http = require('./http.js');
 module.exports = { find, exists, public, grupo, recipe, remove, update, save }
 
 function find(user, game, token){
-  return new Promise(resolve => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}, token).then(retorno => {
+  return new Promise((resolve, reject) => {
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}, token)
+    .then(retorno => {
       resolve(retorno.conteudo);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function exists(deck, game, token){
-  return new Promise(resolve => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/find', {name: deck.name, user: deck.user, recipe: null}, token).then(obj => {
+  return new Promise((resolve, reject) => {
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/find', {name: deck.name, user: deck.user, recipe: null}, token)
+    .then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo);
@@ -33,37 +35,41 @@ function exists(deck, game, token){
         retorno = {error: false, exists:false};
       }
       resolve(retorno);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function public(game){
-  return new Promise(resolve => {
-    http.get(http.stage()+'/deck/'+http.valida(game)+'/public', null).then(retorno => {
+  return new Promise((resolve, reject) => {
+    http.get(http.stage()+'/deck/'+http.valida(game)+'/public', null)
+    .then(retorno => {
       resolve(retorno.conteudo);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function recipe(game){
-  return new Promise(resolve => {
-    http.get(http.stage()+'/deck/'+http.valida(game)+'/recipe', null).then(retorno => {
+  return new Promise((resolve, reject) => {
+    http.get(http.stage()+'/deck/'+http.valida(game)+'/recipe', null)
+    .then(retorno => {
       resolve(retorno.conteudo);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function grupo(user, game, token){
-  return new Promise(resolve => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}, token).then(retorno => {
+  return new Promise((resolve, reject) => {
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}, token)
+    .then(retorno => {
       resolve(retorno.conteudo);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function remove(nome, user, game, token){
-  return new Promise(resolve => {
-    http.remove(http.stage()+'/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: null}, token).then(retorno => {
+  return new Promise((resolve, reject) => {
+    http.remove(http.stage()+'/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: null}, token)
+    .then(retorno => {
       let deletado;
       if (retorno.status == 500 || retorno.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo)
@@ -77,7 +83,7 @@ function remove(nome, user, game, token){
         deletado = retorno.conteudo.deleted;
       }
       resolve(deletado);
-    });
+    }).catch(err => reject(err));
   });
 }
 
@@ -85,7 +91,8 @@ function update(deck, novoNome, nomeAntigo, game, token){
   deck.name = novoNome;
   deck.nomeAntigo = nomeAntigo;
   return new Promise(resolve => {
-    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token).then(retorno => {
+    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token)
+    .then(retorno => {
       let criado = false;
       if (retorno.status == 500 || retorno.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo)
@@ -103,13 +110,14 @@ function update(deck, novoNome, nomeAntigo, game, token){
         criado = true;
       }
       resolve(criado);
-    });
+    }).catch(err => reject(err));
   });
 }
 
 function save(deck, game, token){
   return new Promise((resolve, reject) => {
-    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token).then(retorno => {
+    http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token)
+    .then(retorno => {
       let criado = false;
       if (retorno.status == 500 || retorno.status == 400){
         ipcRenderer.send('console-log-main', retorno.conteudo)
@@ -127,6 +135,6 @@ function save(deck, game, token){
         criado = true;
       }
       resolve(criado);
-    }).catch(err => { reject(err) });
+    }).catch(err => reject(err));
   });
 }

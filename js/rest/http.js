@@ -8,9 +8,9 @@ const client = clients.createJsonClient({
 module.exports = { get, post, put, remove, valida, stage }
 
 function get(path, token) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     client.get(options(path, token), function(err, req, res, obj) {
-      if(err) console.log(err);
+      if(err) reject(err);
       resolve({conteudo: obj, status: res.statusCode});
     })
   });
@@ -19,11 +19,8 @@ function get(path, token) {
 function post(path, query, token) {
   return new Promise((resolve, reject) => {
     client.post(options(path, token), query, function(err, req, res, obj) {
-      if(err) {
-        reject(err);
-      } else{
-        resolve({conteudo: obj, status: res.statusCode});
-      }
+      if(err) reject(err);
+      else resolve({conteudo: obj, status: res.statusCode});
     })
   });
 }
@@ -31,20 +28,17 @@ function post(path, query, token) {
 function put(path, query, token) {
   return new Promise((resolve, reject) => {
     client.put(options(path, token), query, function(err, req, res, obj) {
-      if(err) {
-        reject(err);
-      } else{
-        resolve({conteudo: obj, status: res.statusCode});
-      }
+      if(err) reject(err);
+      else resolve({conteudo: obj, status: res.statusCode});
     })
   });
 }
 
 function remove(path, query, token) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     client.post(options(path, token), query, function(err, req, res, obj) {
-      if(err) console.log(err);
-      resolve({conteudo: obj, status: res.statusCode});
+      if(err) reject(err);
+      else resolve({conteudo: obj, status: res.statusCode});
     })
   });
 }
