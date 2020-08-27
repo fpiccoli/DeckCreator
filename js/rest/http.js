@@ -2,7 +2,7 @@ const clients = require('restify-clients');
 const api = require('./property.js');
 
 const client = clients.createJsonClient({
-  url: api.url();
+  url: api.url()
 });
 
 module.exports = { get, post, put, remove, valida, stage }
