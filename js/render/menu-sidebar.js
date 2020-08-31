@@ -16,7 +16,6 @@ module.exports = {
     documento.querySelector('#load-decks').addEventListener('click' , function(){
       dataDeck.find(user.name, user.game, user.idToken)
       .then((retorno) => {
-        console.log(retorno)
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {
           deck.cards.forEach(function(card){ delete card._id });

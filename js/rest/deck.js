@@ -5,7 +5,6 @@ const cognito = require('../login/cognito.js');
 module.exports = { find, exists, public, grupo, recipe, remove, update, save }
 
 function find(user, game, token){
-  console.log(token);
   return new Promise((resolve, reject) => {
     http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}, token)
     .then(retorno => {

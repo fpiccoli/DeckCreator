@@ -101,7 +101,6 @@ function signOut(user){
   getCognitoUser(user).signOut();
 }
 
-
 function getAttribute(cognitoUser, atr){
   return new Promise((resolve, reject) => {
     cognitoUser.getUserAttributes(function(err, attributes) {
@@ -111,7 +110,6 @@ function getAttribute(cognitoUser, atr){
     });
   });
 }
-
 
 function getSessionStorage(){
   var cognitoUser = getCognitoUser();
