@@ -7,12 +7,12 @@ const sobre = require('../html/sobre.js');
 const dataManager = require('../manager/array.js');
 const alert = require('../manager/interface/alert.js');
 const deckBuilder = require('../manager/deck.js');
-const fileLogin = require('../file/interface/login.js');
 const fileCache = require('../file/interface/cache.js');
 const fileDeck = require('../file/interface/deck.js');
 const render = require('../render/menu.js');
 const dataDeck = require('../rest/deck.js');
 const dataVersao = require('../rest/version.js');
+const cognito = require('../login/cognito.js');
 
 module.exports = {
   updateCheck(documento){
@@ -26,10 +26,10 @@ module.exports = {
       }
     });
   },
-  logout(documento){
+  logout(documento, user){
     documento.querySelector("#logout").addEventListener('click', function () {
       if(alert.confirmDialog('Logout', 'Sure!', 'Nope', 'Are you sure you want to logout?')){
-        fileLogin.remove();
+        cognito.signOut(user);
         ipcRenderer.send('clear-cookies');
         ipcRenderer.send('redirecionar-pagina', 'login');
       }

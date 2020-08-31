@@ -16,6 +16,7 @@ module.exports = {
     documento.querySelector('#load-decks').addEventListener('click' , function(){
       dataDeck.find(user.name, user.game, user.idToken)
       .then((retorno) => {
+        console.log(retorno)
         retorno.sort(dataManager.dynamicSort('name'));
         retorno.forEach(function (deck, index, array) {
           deck.cards.forEach(function(card){ delete card._id });
@@ -25,7 +26,7 @@ module.exports = {
 
         documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(retorno, user.game);
         render.myDecks(documento, retorno, user);
-      }).catch(err => console.log(err));
+      }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
     });
   },
   publicDecks(documento, user){

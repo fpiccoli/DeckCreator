@@ -4,7 +4,6 @@ const alert = require('../manager/interface/alert.js');
 const cookie = require('../manager/interface/cookie.js');
 const dataUser = require('../rest/user.js');
 const cognito = require('./cognito.js');
-const file = require('../file/interface/login.js');
 
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
@@ -55,7 +54,7 @@ function login(){
 
   document.querySelector('#login').setAttribute('disabled', 'disabled');
   document.querySelector('#login').innerHTML = 'Loading';
-  
+
   dataUser.login(user, md5(pass))
   .then((retorno) => {
     if (retorno) auth(user, pass, retorno.email, retorno.game);
@@ -85,7 +84,7 @@ function cognitoRegister(user, pass, email){
 }
 
 function alertMessage(message, type){
-  alert.message(document.querySelector('#alert-message'), message, type)
+  alert.message(document.querySelector('#alert-message'), message, type);
   document.querySelector('#login').removeAttribute('disabled');
   document.querySelector('#login').innerHTML = 'Enter';
 }
@@ -93,9 +92,6 @@ function alertMessage(message, type){
 function logged(user, game, access){
   let idToken = access.idToken;
   let refreshToken = access.refreshToken;
-  if(document.querySelector('#lembrar').checked){
-    file.save({user: user, rftkn: refreshToken});
-  }
   ipcRenderer.send('set-cookie', 'login', JSON.stringify({user: user, game: game, idToken: idToken, refreshToken: refreshToken}));
   ipcRenderer.send('redirecionar-pagina','index');
 }

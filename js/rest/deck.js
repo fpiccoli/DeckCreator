@@ -1,14 +1,33 @@
 const { ipcRenderer }  = require('electron');
 const http = require('./http.js');
+const cognito = require('../login/cognito.js');
 
 module.exports = { find, exists, public, grupo, recipe, remove, update, save }
 
 function find(user, game, token){
+  console.log(token);
   return new Promise((resolve, reject) => {
     http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}, token)
     .then(retorno => {
       resolve(retorno.conteudo);
-    }).catch(err => reject(err));
+    }).catch(err => {
+      if (err.body.message == 'The incoming token has expired'){
+        cognito.getSessionStorage().then((obj) => {
+          cognito.refresh(obj.cognitoUser, obj.session).then((retorno) => {
+            ipcRenderer.send('set-cookie', 'login', JSON.stringify(retorno));
+            resolve(find(user, game, retorno.idToken));
+          }).catch(err => console.log(err));
+        }).catch(err => {
+          if (err.code == 'NotAuthorizedException'){
+            ipcRenderer.send('clear-cookies');
+            ipcRenderer.send('redirecionar-pagina','login');
+          }
+          else console.log(err);
+        });
+      } else {
+        reject(err)
+      }
+    });
   });
 }
 

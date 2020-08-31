@@ -1,6 +1,5 @@
 const { ipcRenderer }  = require('electron');
 const alert = require('../../manager/interface/alert.js');
-const mailer = require('../mailer.js');
 const cognito = require('../cognito.js');
 
 document.querySelector('#change').addEventListener('click' , function(){
