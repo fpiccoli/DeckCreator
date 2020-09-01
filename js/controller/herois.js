@@ -32,5 +32,5 @@ function getHerois(game, token){
 }
 
 linkFechar.addEventListener('click', function () {
-  ipcRenderer.send('fechar-janela-herois');
+  ipcRenderer.invoke('fechar-janela-herois');
 });

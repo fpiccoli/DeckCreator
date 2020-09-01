@@ -15,26 +15,27 @@ module.exports = {
 
       let id = deck.user+'-'+dataManager.getNome(deck.name);
       documento.querySelector('#botao-editar-'+id).addEventListener('click' , function(){
-        ipcRenderer.send('set-cookie', 'nome', array[index].name);
+        ipcRenderer.invoke('set-cookie', 'nome', array[index].name);
         if(deck.grupo == 'Sem Grupo'){
-          ipcRenderer.send('delete-cookies', ['grupo']);
+          ipcRenderer.invoke('delete-cookies', ['grupo']);
         } else{
-          ipcRenderer.send('set-cookie', 'grupo', deck.grupo);
+          ipcRenderer.invoke('set-cookie', 'grupo', deck.grupo);
         }
         if(deck.public){
-          ipcRenderer.send('set-cookie', 'public', 'true');
+          ipcRenderer.invoke('set-cookie', 'public', 'true');
         } else{
-          ipcRenderer.send('set-cookie', 'public', 'false');
+          ipcRenderer.invoke('set-cookie', 'public', 'false');
         }
-        ipcRenderer.send('set-cookie', 'cards', JSON.stringify(cartas));
+        ipcRenderer.invoke('set-cookie', 'cards', JSON.stringify(cartas));
         herois.forEach(setCookie);
         function setCookie(heroi, index, array){
-          ipcRenderer.send('set-cookie', 'heroi'+(index+1), JSON.stringify(heroi));
+          ipcRenderer.invoke('set-cookie', 'heroi'+(index+1), JSON.stringify(heroi));
         };
-        ipcRenderer.send('redirecionar-pagina','editor');
+        ipcRenderer.invoke('redirecionar-pagina','editor');
       });
       documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
-        if(alert.confirmDialog('Remove Deck', 'Sure!', 'Nope', 'Are you sure you want to remove the deck "'+ array[index].name +'"?')){
+        alert.confirmDialog('Remove Deck', 'Sure!', 'Nope', 'Are you sure you want to remove the deck "'+ array[index].name +'"?')
+        .then(positiveResponse => {
           dataDeck.remove(array[index].name, user.name, user.game)
           .then((retorno) => {
             if(retorno){
@@ -43,7 +44,7 @@ module.exports = {
             }
             documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
           }).catch(err => console.log(err));
-        }
+        })
         module.exports.myDecks(documento, json, user);
       });
       document.querySelector('#botao-alterar-nome-'+id).addEventListener('click' , function(){
@@ -102,7 +103,9 @@ function eventUpdateNome(documento, deck, index, json, user){
   }
 
   let antigo = deck.name;
-  if(alert.confirmDialog('Name Change', 'Sure!', 'Nope', 'Do you want to change the name of "'+antigo+'" to "'+novoNome+'"?')){
+
+  alert.confirmDialog('Name Change', 'Sure!', 'Nope', 'Do you want to change the name of "'+antigo+'" to "'+novoNome+'"?')
+  .then(positiveResponse => {
     dataDeck.update(deck, novoNome, antigo, user.game)
     .then((retorno) => {
       if(retorno){
@@ -113,9 +116,9 @@ function eventUpdateNome(documento, deck, index, json, user){
         }).catch(err => {console.error(err); alert.message(document.querySelector('#alert-message'), err, 'danger')});
       }
     }).catch(err => console.error(err));
-  }
+  })
   documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
-  module.exports.myDecks(documento, json, user);
+  myDecks(documento, json, user);
 }
 
 function removeObj(lista, obj){

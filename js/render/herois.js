@@ -58,7 +58,9 @@ function montaHeroi(heroi, lista, main, sub){
 function buttonSelecionar(param, heroi, lista){
   myURL = new URL(document.URL);
   document.querySelector('.selecionar-'+param+'-'+stringManager.getNome(heroi.cardnumber)).addEventListener('click', function () {
-    ipcRenderer.send('heroi-selecionado', heroi, myURL.searchParams.get('posicao'));
-    ipcRenderer.send('fechar-janela-herois');
+    ipcRenderer.invoke('heroi-selecionado', heroi, myURL.searchParams.get('posicao')).then(()=>{
+      ipcRenderer.invoke('redirecionar-pagina','editor')
+      ipcRenderer.invoke('fechar-janela-herois');
+    })
   });
 }

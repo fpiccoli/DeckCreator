@@ -7,16 +7,10 @@ function message(campo, message, color){
   }, 10000);
 }
 
-function confirmDialog(title, confirm, cancel, message, remote) {
-  var choice =  remote.dialog.showMessageBox(
-    remote.getCurrentWindow(),
-    {
-      type: 'question',
-      cancelId: 2,
-      buttons: [confirm, cancel],
-      title: title,
-      message: message
-    }
-  );
-  return choice === 0;
+function confirmDialog(title, confirm, cancel, message, ipcRenderer) {
+  return new Promise((resolve, reject) => {
+    ipcRenderer.invoke('dialog', title, confirm, cancel, message)
+    .then(retorno => { resolve(retorno) })
+    .catch(err => reject(err))
+  });
 }

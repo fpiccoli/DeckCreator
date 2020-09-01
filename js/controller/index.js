@@ -22,6 +22,6 @@ cookie.login().then((user) => {
     sidebar.regras(document, user);
     sidebar.sobre(document);
   } else{
-    ipcRenderer.send('redirecionar-pagina','login');
+    ipcRenderer.invoke('redirecionar-pagina','login');
   }
 }).catch(err => console.log(err));

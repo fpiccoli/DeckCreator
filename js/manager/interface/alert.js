@@ -1,4 +1,4 @@
-const { remote } = require('electron');
+const { ipcRenderer }  = require('electron');
 const call = require('../alert.js');
 
 module.exports = { message, confirmDialog }
@@ -8,5 +8,5 @@ function message(campo, message, color){
 }
 
 function confirmDialog(title, confirm, cancel, message) {
-  return call.confirmDialog(title, confirm, cancel, message, remote)
+  return call.confirmDialog(title, confirm, cancel, message, ipcRenderer)
 }

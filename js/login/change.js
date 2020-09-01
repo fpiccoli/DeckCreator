@@ -7,11 +7,11 @@ document.querySelector('#change').addEventListener('click' , function(){
 });
 
 document.querySelector('#back').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','login');
+  ipcRenderer.invoke('redirecionar-pagina','login');
 });
 
 document.querySelector('#trocar').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','senha-trocar');
+  ipcRenderer.invoke('redirecionar-pagina','senha-trocar');
 });
 
 function change(){
@@ -24,6 +24,6 @@ function change(){
 
   cognito.forgotPassword(email)
   .then((retorno) => {
-    ipcRenderer.send('redirecionar-pagina','senha-trocar');
+    ipcRenderer.invoke('redirecionar-pagina','senha-trocar');
   }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
 }

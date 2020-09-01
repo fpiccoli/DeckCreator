@@ -88,8 +88,7 @@ function nome(ipcRenderer){
 
 function getCookiePromise(ipcRenderer) {
   return new Promise(resolve => {
-    ipcRenderer.send('get-cookies');
-    ipcRenderer.on('send-cookies', (event, result) => {
+    ipcRenderer.invoke('get-cookies').then((result) => {
       resolve(result);
     })
   });

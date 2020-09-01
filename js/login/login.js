@@ -10,16 +10,16 @@ document.querySelector('#title').innerHTML = package.productName + ' v' + packag
 
 cookie.login().then((user) => {
   if(user){
-    ipcRenderer.send('redirecionar-pagina','index');
+    ipcRenderer.invoke('redirecionar-pagina','index');
   }
 }).catch(err => console.log(err));
 
 document.querySelector('#register').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','register');
+  ipcRenderer.invoke('redirecionar-pagina','register');
 });
 
 document.querySelector('#forgot').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','senha-esqueci');
+  ipcRenderer.invoke('redirecionar-pagina','senha-esqueci');
 });
 
 document.querySelector('#login').addEventListener('click' , function(){
@@ -92,6 +92,8 @@ function alertMessage(message, type){
 function logged(user, game, access){
   let idToken = access.idToken;
   let refreshToken = access.refreshToken;
-  ipcRenderer.send('set-cookie', 'login', JSON.stringify({user: user, game: game, idToken: idToken, refreshToken: refreshToken}));
-  ipcRenderer.send('redirecionar-pagina','index');
+  let cookie = {user: user, game: game, idToken: idToken, refreshToken: refreshToken};
+  ipcRenderer.invoke('set-cookie', 'login', JSON.stringify(cookie)).then(() => {
+    ipcRenderer.invoke('redirecionar-pagina','login');
+  })
 }

@@ -19,20 +19,20 @@ function exists(deck, game, token){
     .then(obj => {
       let retorno;
       if (obj.status == 500 || obj.status == 400){
-        ipcRenderer.send('console-log-main', retorno.conteudo);
+        ipcRenderer.invoke('console-log-main', retorno.conteudo);
         console.error(retorno.conteudo);
         retorno = {error: true};
       } else if (obj.status == 404){
-        ipcRenderer.send('console-log-main', 'Erro no game');
+        ipcRenderer.invoke('console-log-main', 'Erro no game');
         console.error('Erro no game');
         retorno = {error: true};
       } else if (obj.status == 200){
         console.error('Deck ja cadastrado com este nome');
-        ipcRenderer.send('console-log-main', 'Deck ja cadastrado com este nome');
+        ipcRenderer.invoke('console-log-main', 'Deck ja cadastrado com este nome');
         retorno = {error: false, exists:true};
       } else if (obj.status == 204){
         console.error('Deck pode ser cadastrado com este nome');
-        ipcRenderer.send('console-log-main', 'Deck pode ser cadastrado com este nome');
+        ipcRenderer.invoke('console-log-main', 'Deck pode ser cadastrado com este nome');
         retorno = {error: false, exists:false};
       }
       resolve(retorno);
@@ -73,14 +73,14 @@ function remove(nome, user, game, token){
     .then(retorno => {
       let deletado;
       if (retorno.status == 500 || retorno.status == 400){
-        ipcRenderer.send('console-log-main', retorno.conteudo)
+        ipcRenderer.invoke('console-log-main', retorno.conteudo)
         console.error(retorno.conteudo);
       } else if (retorno.status == 404){
-        ipcRenderer.send('console-log-main', 'Erro no game')
+        ipcRenderer.invoke('console-log-main', 'Erro no game')
         console.error('Erro no game');
       } else if (retorno.status == 200){
         console.error('Deck deletado');
-        ipcRenderer.send('console-log-main', 'Deck deletado')
+        ipcRenderer.invoke('console-log-main', 'Deck deletado')
         deletado = retorno.conteudo.deleted;
       }
       resolve(deletado);
@@ -96,18 +96,18 @@ function update(deck, novoNome, nomeAntigo, game, token){
     .then(retorno => {
       let criado = false;
       if (retorno.status == 500 || retorno.status == 400){
-        ipcRenderer.send('console-log-main', retorno.conteudo)
+        ipcRenderer.invoke('console-log-main', retorno.conteudo)
         console.error(retorno.conteudo);
       } else if (retorno.status == 404){
-        ipcRenderer.send('console-log-main', 'Erro no game')
+        ipcRenderer.invoke('console-log-main', 'Erro no game')
         console.error('Erro no game');
       } else if (retorno.status == 200){
         console.error('Deck ja existente foi alterado');
-        ipcRenderer.send('console-log-main', 'Deck ja existente foi alterado')
+        ipcRenderer.invoke('console-log-main', 'Deck ja existente foi alterado')
         criado = true;
       } else if (retorno.status == 201){
         console.error('Deck novo criado');
-        ipcRenderer.send('console-log-main', 'Deck novo criado')
+        ipcRenderer.invoke('console-log-main', 'Deck novo criado')
         criado = true;
       }
       resolve(criado);
@@ -121,18 +121,18 @@ function save(deck, game, token){
     .then(retorno => {
       let criado = false;
       if (retorno.status == 500 || retorno.status == 400){
-        ipcRenderer.send('console-log-main', retorno.conteudo)
+        ipcRenderer.invoke('console-log-main', retorno.conteudo)
         console.error(retorno.conteudo);
       } else if (retorno.status == 404){
-        ipcRenderer.send('console-log-main', 'Erro no game')
+        ipcRenderer.invoke('console-log-main', 'Erro no game')
         console.error('Erro no game');
       } else if (retorno.status == 200){
         console.error('Deck ja existente foi alterado');
-        ipcRenderer.send('console-log-main', 'Deck ja existente foi alterado')
+        ipcRenderer.invoke('console-log-main', 'Deck ja existente foi alterado')
         criado = true;
       } else if (retorno.status == 201){
         console.error('Deck novo criado');
-        ipcRenderer.send('console-log-main', 'Deck novo criado')
+        ipcRenderer.invoke('console-log-main', 'Deck novo criado')
         criado = true;
       }
       resolve(criado);
@@ -151,8 +151,9 @@ function validaErro(err, callback, args){
       })
       .catch(err => {
         if (err.code == 'NotAuthorizedException'){
-          ipcRenderer.send('clear-cookies');
-          ipcRenderer.send('redirecionar-pagina','login');
+          ipcRenderer.invoke('clear-cookies').then(() => {
+            ipcRenderer.invoke('redirecionar-pagina','login');
+          })
           return;
         }
         else reject(err);
@@ -172,7 +173,7 @@ function sessionStorage(){
 function refreshSession(obj){
   return new Promise((resolve, reject) => {
     cognito.refresh(obj.cognitoUser, obj.session).then(retorno => {
-      ipcRenderer.send('set-cookie', 'login', JSON.stringify(retorno));
+      ipcRenderer.invoke('set-cookie', 'login', JSON.stringify(retorno));
       resolve(retorno.idToken)
     }).catch(err => reject(err));
   });

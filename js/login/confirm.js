@@ -5,7 +5,7 @@ const md5 = require('md5');
 const cognito = require('../cognito/forgot-password.js');
 
 document.querySelector('#back').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','senha-esqueci');
+  ipcRenderer.invoke('redirecionar-pagina','senha-esqueci');
 });
 
 document.querySelector('#email').addEventListener('keypress', function (e) {
@@ -64,7 +64,7 @@ function confirm(){
   function updateUser(obj){
     dataUser.save(obj)
     .then((retorno) => {
-      ipcRenderer.send('redirecionar-pagina','login');
+      ipcRenderer.invoke('redirecionar-pagina','login');
     }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
   }
 }

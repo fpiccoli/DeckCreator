@@ -16,23 +16,27 @@ const cognito = require('../cognito/session.js');
 
 module.exports = {
   updateCheck(documento){
-    ipcRenderer.send('update-check');
-    ipcRenderer.on('update-ready', (event, downloaded) => {
+    ipcRenderer.invoke('update-check').then(downloaded => {
       if(downloaded){
         documento.querySelector('#update-ready').innerHTML = '<a class="dropdown-toggle" title="New Update!" data-toggle="dropdown" href="#"><i class="fa fa-exclamation"></i></a><ul class="dropdown-menu dropdown-user"><li><a id="do-update" href="#">Restart and update</a></li></ul>'
         documento.querySelector("#do-update").addEventListener('click' , function(){
-          ipcRenderer.send('do-update');
+          ipcRenderer.invoke('do-update');
         });
       }
     });
   },
   logout(documento, user){
     documento.querySelector("#logout").addEventListener('click', function () {
-      if(alert.confirmDialog('Logout', 'Sure!', 'Nope', 'Are you sure you want to logout?')){
-        cognito.signOut(user);
-        ipcRenderer.send('clear-cookies');
-        ipcRenderer.send('redirecionar-pagina', 'login');
-      }
+      alert.confirmDialog('Logout', 'Sure!', 'Nope', 'Are you sure you want to logout?')
+      .then(positiveResponse => {
+        if(positiveResponse){
+          cognito.signOut(user);
+          ipcRenderer.invoke('clear-cookies').then(() => {
+            ipcRenderer.invoke('redirecionar-pagina','login');
+          })
+        }
+      })
+      .catch(err => alert.message(documento.querySelector("#alert-message"), err.message, 'danger'));
     });
   },
   clearCache(documento){
@@ -44,7 +48,7 @@ module.exports = {
   importDecks(documento, user){
     documento.querySelector("#import-decks").addEventListener('click', function () {
       fileDeck.clearLocal(user.game);
-      dataDeck.find(user.name, user.game)
+      dataDeck.find(user.name, user.game, user.idToken)
       .then((retorno) => {
         retorno.forEach(function (deck, index, array) {
           let deckRetorno = deckBuilder.build(deck, user.game);
@@ -59,7 +63,7 @@ module.exports = {
       let btnLista = '<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list-ul"></i> <i class="fa fa-caret-down"></i></a><ul class="dropdown-menu dropdown-user"><li><a id="lista-efeitos" href="#">Effects List</a></li></ul>';
       documento.querySelector("#btn-lista-efeitos").innerHTML = btnLista;
       documento.querySelector("#lista-efeitos").addEventListener('click', function () {
-        ipcRenderer.send('abrir-janela-efeitos');
+        ipcRenderer.invoke('abrir-janela-efeitos');
       });
     }
   }

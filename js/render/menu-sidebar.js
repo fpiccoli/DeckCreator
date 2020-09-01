@@ -62,13 +62,13 @@ module.exports = {
   },
   newDeck(documento){
     documento.querySelector('#novo-deck').addEventListener('click' , function(){
-      ipcRenderer.send('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'grupo']);
-      ipcRenderer.send('redirecionar-pagina','editor');
+      ipcRenderer.invoke('delete-cookies', ['heroi1', 'heroi2', 'heroi3', 'cards', 'nome', 'grupo']);
+      ipcRenderer.invoke('redirecionar-pagina','editor');
     });
   },
   editorDeck(documento){
     documento.querySelector('#editor-deck').addEventListener('click' , function(){
-      ipcRenderer.send('redirecionar-pagina','editor');
+      ipcRenderer.invoke('redirecionar-pagina','editor');
     });
   },
   regras(documento, user){

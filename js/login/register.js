@@ -5,7 +5,7 @@ const dataUser = require('../rest/user.js');
 const cognito = require('../cognito/auth.js');
 
 document.querySelector('#back').addEventListener('click' , function(){
-  ipcRenderer.send('redirecionar-pagina','login');
+  ipcRenderer.invoke('redirecionar-pagina','login');
 });
 
 document.querySelector('#register').addEventListener('click' , function(){
@@ -57,7 +57,7 @@ function saveUser(user, email, pass){
   dataUser.save(obj)
   .then((retorno) => {
     if(retorno){
-      ipcRenderer.send('redirecionar-pagina','login');
+      ipcRenderer.invoke('redirecionar-pagina','login');
     }
   }).catch(err =>  alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
 }

@@ -38,7 +38,7 @@ module.exports = {
           });
         }).catch(err => console.log(err));
 
-        ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
+        ipcRenderer.invoke('set-cookie', 'cards', JSON.stringify(listaDeCartas));
       });
     }
     documento.querySelector("#add-grupo").addEventListener('click', function(){
@@ -157,7 +157,7 @@ function eventUpdateNome(nome, documento){
   nomeDoTime = nome;
   nome = '';
   documento.querySelector("#nome-time").textContent = nomeDoTime;
-  ipcRenderer.send('set-cookie', 'nome', nomeDoTime);
+  ipcRenderer.invoke('set-cookie', 'nome', nomeDoTime);
 }
 
 function validaNomeVazio(nome, documento){
@@ -170,8 +170,8 @@ function validaNomeVazio(nome, documento){
 
 function addEventSelecionar(number, listaDeCartas){
   document.querySelector('.selecionar-heroi-'+number).addEventListener('click' , function(){
-    ipcRenderer.send('seleciona-heroi', number);
-    ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
+    ipcRenderer.invoke('seleciona-heroi', number);
+    ipcRenderer.invoke('set-cookie', 'cards', JSON.stringify(listaDeCartas));
   });
 }
 

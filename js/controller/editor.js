@@ -32,7 +32,7 @@ cookie.login().then((retorno) => {
     update.otherPanels(listaDeCartas, user, document);
     renderHerois();
   } else{
-    ipcRenderer.send('redirecionar-pagina','login');
+    ipcRenderer.invoke('redirecionar-pagina','login');
   }
 }).catch(err => console.log(err));
 
@@ -128,9 +128,12 @@ function save(nome){
   dataDeck.exists(object, user.game, user.idToken).then((retorno) => {
     if(retorno){
       if(retorno.exists && !retorno.error){
-        if(alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')){
-          httpSave(object, user.game, user.idToken)
-        }
+        alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')
+        .then(positiveResponse => {
+          if(positiveResponse){
+            httpSave(object, user.game, user.idToken)
+          }
+        })
       } else if (!retorno.exists && !retorno.error){
         httpSave(object, user.game, user.idToken)
       }
@@ -148,10 +151,10 @@ function httpSave(obj, game, token){
 
 function exportDeck(object, game){
   let deckRetorno = deck.build(object, game);
-  ipcRenderer.send('set-cookie', 'cards', JSON.stringify(listaDeCartas));
+  ipcRenderer.invoke('set-cookie', 'cards', JSON.stringify(listaDeCartas));
 
   file.saveLocal(object, deckRetorno, user.game).then(retorno => {
-    ipcRenderer.send('redirecionar-pagina','index');
+    ipcRenderer.invoke('redirecionar-pagina','index');
   }).catch(err => alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
