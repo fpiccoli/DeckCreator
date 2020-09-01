@@ -9,24 +9,7 @@ function find(user, game, token){
     http.post(http.stage()+'/deck/'+http.valida(game)+'/list', {user: user.toLowerCase(), recipe: null}, token)
     .then(retorno => {
       resolve(retorno.conteudo);
-    }).catch(err => {
-      if (err.body.message == 'The incoming token has expired'){
-        cognito.getSessionStorage().then((obj) => {
-          cognito.refresh(obj.cognitoUser, obj.session).then((retorno) => {
-            ipcRenderer.send('set-cookie', 'login', JSON.stringify(retorno));
-            resolve(find(user, game, retorno.idToken));
-          }).catch(err => console.log(err));
-        }).catch(err => {
-          if (err.code == 'NotAuthorizedException'){
-            ipcRenderer.send('clear-cookies');
-            ipcRenderer.send('redirecionar-pagina','login');
-          }
-          else console.log(err);
-        });
-      } else {
-        reject(err)
-      }
-    });
+    }).catch(err => resolve(validaErro(err, find, [user, game])));
   });
 }
 
@@ -53,7 +36,7 @@ function exists(deck, game, token){
         retorno = {error: false, exists:false};
       }
       resolve(retorno);
-    }).catch(err => reject(err));
+    }).catch(err => resolve(validaErro(err, exists, [deck, game])));
   });
 }
 
@@ -80,7 +63,7 @@ function grupo(user, game, token){
     http.post(http.stage()+'/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}, token)
     .then(retorno => {
       resolve(retorno.conteudo);
-    }).catch(err => reject(err));
+    }).catch(err => resolve(validaErro(err, grupo, [user, game])));
   });
 }
 
@@ -101,7 +84,7 @@ function remove(nome, user, game, token){
         deletado = retorno.conteudo.deleted;
       }
       resolve(deletado);
-    }).catch(err => reject(err));
+    }).catch(err => resolve(validaErro(err, remove, [nome, user, game])));
   });
 }
 
@@ -128,7 +111,7 @@ function update(deck, novoNome, nomeAntigo, game, token){
         criado = true;
       }
       resolve(criado);
-    }).catch(err => reject(err));
+    }).catch(err => resolve(validaErro(err, update, [deck, novoNome, nomeAntigo, game])));
   });
 }
 
@@ -153,6 +136,44 @@ function save(deck, game, token){
         criado = true;
       }
       resolve(criado);
+    }).catch(err => resolve(validaErro(err, save, [deck, game])));
+  });
+}
+
+function validaErro(err, callback, args){
+  if (err.body.message == 'The incoming token has expired'){
+    return new Promise((resolve, reject) => {
+      sessionStorage()
+      .then(refreshSession)
+      .then(newToken => {
+        args.push(newToken);
+        resolve(callback.apply(this, args));
+      })
+      .catch(err => {
+        if (err.code == 'NotAuthorizedException'){
+          ipcRenderer.send('clear-cookies');
+          ipcRenderer.send('redirecionar-pagina','login');
+          return;
+        }
+        else reject(err);
+      });
+    });
+  }
+}
+
+function sessionStorage(){
+  return new Promise((resolve, reject) => {
+    cognito.getSessionStorage().then(obj => {
+      resolve(obj);
+    }).catch(err => reject(err));
+  });
+}
+
+function refreshSession(obj){
+  return new Promise((resolve, reject) => {
+    cognito.refresh(obj.cognitoUser, obj.session).then(retorno => {
+      ipcRenderer.send('set-cookie', 'login', JSON.stringify(retorno));
+      resolve(retorno.idToken)
     }).catch(err => reject(err));
   });
 }
