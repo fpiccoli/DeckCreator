@@ -1,8 +1,8 @@
 const { ipcRenderer }  = require('electron');
-const alert = require('../../manager/interface/alert.js');
-const dataUser = require('../../rest/user.js');
+const alert = require('../manager/interface/alert.js');
+const dataUser = require('../rest/user.js');
 const md5 = require('md5');
-const cognito = require('../cognito.js');
+const cognito = require('../cognito/forgot-password.js');
 
 document.querySelector('#back').addEventListener('click' , function(){
   ipcRenderer.send('redirecionar-pagina','senha-esqueci');

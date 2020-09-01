@@ -1,6 +1,6 @@
 const { ipcRenderer }  = require('electron');
 const cookie = require('../manager/interface/cookie.js');
-const cognito = require('./cognito.js');
+const cognito = require('../cognito/session.js');
 
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;

@@ -1,6 +1,6 @@
 const { ipcRenderer }  = require('electron');
 const http = require('./http.js');
-const cognito = require('../login/cognito.js');
+const cognito = require('../cognito/session.js');
 
 module.exports = { find, exists, public, grupo, recipe, remove, update, save }
 

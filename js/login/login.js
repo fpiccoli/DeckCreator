@@ -3,7 +3,7 @@ const md5 = require('md5');
 const alert = require('../manager/interface/alert.js');
 const cookie = require('../manager/interface/cookie.js');
 const dataUser = require('../rest/user.js');
-const cognito = require('./cognito.js');
+const cognito = require('../cognito/auth.js');
 
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;

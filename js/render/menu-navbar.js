@@ -12,7 +12,7 @@ const fileDeck = require('../file/interface/deck.js');
 const render = require('../render/menu.js');
 const dataDeck = require('../rest/deck.js');
 const dataVersao = require('../rest/version.js');
-const cognito = require('../login/cognito.js');
+const cognito = require('../cognito/session.js');
 
 module.exports = {
   updateCheck(documento){

@@ -1,6 +1,6 @@
 const { ipcRenderer }  = require('electron');
-const alert = require('../../manager/interface/alert.js');
-const cognito = require('../cognito.js');
+const alert = require('../manager/interface/alert.js');
+const cognito = require('../cognito/forgot-password.js');
 
 document.querySelector('#change').addEventListener('click' , function(){
   change();
