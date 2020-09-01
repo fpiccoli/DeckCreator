@@ -13,7 +13,7 @@ cookieLogin()
     ipcRenderer.send('clear-cookies');
     ipcRenderer.send('redirecionar-pagina','login');
   }
-  else console.log(err));
+  else console.log(err);
 });
 
 function cookieLogin(){
@@ -35,7 +35,6 @@ function sessionStorage(){
 
 function refreshSession(obj){
   return new Promise((resolve, reject) => {
-    console.log('REFRESH')
     cognito.refresh(obj.cognitoUser, obj.session).then(retorno => {
       ipcRenderer.send('set-cookie', 'login', JSON.stringify(retorno));
       ipcRenderer.send('redirecionar-pagina','index');

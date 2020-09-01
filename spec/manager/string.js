@@ -18,6 +18,6 @@ describe("getNome() -> retorna uma string sem espaços ou acentos ->", function(
   it ("[1] deve retornar a string alterada", function(){
     let string = `a e i o u á é í ó ú ã ê â ô`;
     let retorno = algoritmo.getNome(string);
-    expect(retorno).toEqual(`a-e-i-o-u-a-e-i-o-u-a-e-a-o`);
+    expect(retorno).toEqual(`a_e_i_o_u_a_e_i_o_u_a_e_a_o`);
   });
 });

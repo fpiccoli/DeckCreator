@@ -16,9 +16,8 @@ cookie.login().then((retorno) => {
 }).catch(err => console.log(err));
 
 function getHerois(game, token){
-  let classes = dataClasse.listAll(game, token);
-
-  classes.then((retorno) => {
+  dataClasse.listAll(game, token)
+  .then((retorno) => {
     let puros = dataManager.listByType('Pure', retorno);
     let hibridos = dataManager.listByType('Hybrid', retorno);
 

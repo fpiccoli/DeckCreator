@@ -20,7 +20,6 @@ function getNome(string){
   string = replaceAll(string, 'í','i');
   string = replaceAll(string, 'ú','u');
   string = replaceSpecialChar(string);
-  string = replaceAll(string, '_','-');
   return string.toLowerCase();
 }
 

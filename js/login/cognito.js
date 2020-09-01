@@ -86,7 +86,7 @@ function forgotPassword(user){
 
 function confirmPassword(user, code, newPassword){
   return new Promise((resolve, reject) => {
-    getCognitoUser().confirmPassword(code, newPassword, {
+    newCognitoUser(user).confirmPassword(code, newPassword, {
       onSuccess: function() {
         resolve(true);
       },
