@@ -1,17 +1,41 @@
 const { app, BrowserWindow, ipcMain, session, dialog } = require('electron');
+const { autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
 let mainWindow;
 let mainSession;
 let downloaded = false;
 
-const autoUpdater = require('./main/auto-updater');
 const cookieHandler = require('./main/cookie-handler');
 
-ipcMain.handle("update-check", async (event) => {
-  return await downloaded;
+//handle setupevents as quickly as possible
+const setupEvents = require('./installers/setupEvents');
+if (setupEvents.handleSquirrelEvent()) {
+  // squirrel event handled and app will exit in 1000ms, so don't do anything else
+  return;
+}
+
+// Module to control application life.
+var path = require('path');
+
+autoUpdater.on('update-availabe', () => {
+  console.log('update available');
+});
+autoUpdater.on('checking-for-update', () => {
+  console.log('checking-for-update');
+});
+autoUpdater.on('update-not-available', () => {
+  console.log('update-not-available');
+});
+autoUpdater.on('update-downloaded', (e) => {
+  downloaded = true;
+  console.log(e);
 });
 
-ipcMain.handle("do-update", (event) => {
+ipcMain.on("update-check", (event) => {
+  event.sender.send("update-ready", downloaded);
+});
+
+ipcMain.on("do-update", (event) => {
   autoUpdater.quitAndInstall();
   app.isQuiting = true;
   app.quit();

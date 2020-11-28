@@ -1,7 +1,7 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.15.0-beta",
+  "version": "1.14.0",
   "description": "Criador de decks para Tabletop Simulator",
   "author": "fpiccoli",
   "main": "main.js",
