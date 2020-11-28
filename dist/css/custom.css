@@ -15,7 +15,7 @@
   margin-bottom:5px;
 }
 div.Enlarge:hover{
-  z-index: 999;
+  z-index: 99999;
   cursor:pointer;
 }
 div.Enlarge:hover span{
@@ -23,7 +23,7 @@ div.Enlarge:hover span{
   opacity: 1;
   top: 25%;
   left: -125px;
-  z-index: 999;
+  z-index: 99999;
   width:200%;
   height:200%;
   -webkit-box-shadow: 0 0 20px rgba(0,0,0, .75));
@@ -44,9 +44,9 @@ div.Enlarge:hover span{
 }
 
 .zoom:hover {
-  z-index: 9999999999999;
+  z-index: 99999;
   position: relative;
-  transform: scale(1.5); 
+  transform: scale(1.5);
 }
 
 .card-img {

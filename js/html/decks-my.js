@@ -1,51 +1,53 @@
 const builder = require('./builder.js');
-const conta = require('../conta.js');
-const dataManager = require('../data-manager.js');
+const conta = require('../manager/conta.js');
+const dataManager = require('../manager/string.js');
 var groupBy = require('json-groupby');
 
-module.exports = {
-  accordion(decks, game){
-    decks.forEach(function (deck, index, array) {
-      if(!deck.grupo) deck.grupo = 'Other Decks';
-    });
-    let decksGrupo = groupBy(decks, ['grupo']);
-    let grupos = [];
-    Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
-      if(nomeDoGrupo != 'Other Decks') grupos.push(nomeDoGrupo);
-    });
-    grupos = grupos.sort();
-    grupos.push('Other Decks');
+module.exports = { accordion, accordionHeader, accordionContent }
 
-    let json = [];
-    json.push(builder.element('div', {class: 'col-lg-12'}, [this.accordionHeader(grupos), this.accordionContent(grupos, decksGrupo, game)]));
+function accordion(decks, game){
+  decks.forEach(function (deck, index, array) {
+    if(!deck.grupo) deck.grupo = 'Other Decks';
+  });
+  let decksGrupo = groupBy(decks, ['grupo']);
+  let grupos = [];
+  Object.getOwnPropertyNames(decksGrupo).forEach(function (nomeDoGrupo, index, array) {
+    if(nomeDoGrupo != 'Other Decks') grupos.push(nomeDoGrupo);
+  });
+  grupos = grupos.sort();
+  grupos.push('Other Decks');
 
-    return  builder.replaceCamelCase(builder.build(json));
-  },
-  accordionHeader(grupos){
-    let lis = [];
+  let json = [];
+  json.push(builder.element('div', {class: 'col-lg-12'}, [accordionHeader(grupos), accordionContent(grupos, decksGrupo, game)]));
 
-    grupos.forEach(function (nomeDoGrupo, index, array) {
-      let a = builder.element('a', {href: '#'+dataManager.getNome(nomeDoGrupo), dataToggle:'tab'}, [builder.text(nomeDoGrupo)]);
-      let content = {};
-      if (index == 0) content = {class: 'active'};
-      lis.push(builder.element('li', content, [a]));
-    });
+  return  builder.replaceCamelCase(builder.build(json));
+}
 
-    return builder.element('ul', {class: 'nav nav-tabs'}, lis);
-  },
-  accordionContent(grupos, decksGrupo, game){
-    let divs = [];
+function accordionHeader(grupos){
+  let lis = [];
 
-    grupos.forEach(function (nomeDoGrupo, index, array) {
-      let content = '';
-      if (index == 0) content = ' active in';
+  grupos.forEach(function (nomeDoGrupo, index, array) {
+    let a = builder.element('a', {href: '#'+dataManager.getNome(nomeDoGrupo), dataToggle:'tab'}, [builder.text(nomeDoGrupo)]);
+    let content = {};
+    if (index == 0) content = {class: 'active'};
+    lis.push(builder.element('li', content, [a]));
+  });
 
-      if(decksGrupo[nomeDoGrupo]) divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo], game)));
-      else divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, [builder.element('div', {class: 'brtre'}, [])]));
-    });
+  return builder.element('ul', {class: 'nav nav-tabs'}, lis);
+}
 
-    return builder.element('div', {class: 'tab-content'}, divs);
-  }
+function accordionContent(grupos, decksGrupo, game){
+  let divs = [];
+
+  grupos.forEach(function (nomeDoGrupo, index, array) {
+    let content = '';
+    if (index == 0) content = ' active in';
+
+    if(decksGrupo[nomeDoGrupo]) divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo], game)));
+    else divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, [builder.element('div', {class: 'brtre'}, [])]));
+  });
+
+  return builder.element('div', {class: 'tab-content'}, divs);
 }
 
 function menu(decks, game){

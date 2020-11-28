@@ -1,52 +1,55 @@
 const builder = require('./builder.js');
-const conta = require('../conta.js');
-const dataManager = require('../data-manager.js');
+const conta = require('../manager/conta.js');
+const dataManager = require('../manager/string.js');
 var groupBy = require('json-groupby');
 
-module.exports = {
-  accordion(decks, userObj){
-    let decksUser = groupBy(decks, ['user']);
-    let lista = [];
-    Object.getOwnPropertyNames(decksUser).forEach(function (user, index, array) {
-        if(user != userObj.name) lista.push(user);
-    });
-    lista = lista.sort();
+module.exports = { accordion, accordionHeader, accordionContent, loading }
 
-    let json = [];
+function accordion(decks, userObj){
+  let decksUser = groupBy(decks, ['user']);
+  let lista = [];
+  Object.getOwnPropertyNames(decksUser).forEach(function (user, index, array) {
+    if(user != userObj.name) lista.push(user);
+  });
+  lista = lista.sort();
+
+  let json = [];
 
 
-    json.push(builder.element('div', {class: 'col-lg-12'}, [this.accordionHeader(lista), this.accordionContent(lista, decksUser, userObj.game)]));
+  json.push(builder.element('div', {class: 'col-lg-12'}, [accordionHeader(lista), accordionContent(lista, decksUser, userObj.game)]));
 
-    return  builder.replaceCamelCase(builder.build(json));
-  },
-  accordionHeader(users){
-    let lis = [];
+  return  builder.replaceCamelCase(builder.build(json));
+}
 
-    users.forEach(function (user, index, array) {
-      let a = builder.element('a', {href: '#'+dataManager.getNome(user), dataToggle:'tab'}, [builder.text(user)]);
-      let content = {};
-      if (index == 0) content = {class: 'active'};
-      lis.push(builder.element('li', content, [a]));
-    });
+function accordionHeader(users){
+  let lis = [];
 
-    return builder.element('ul', {class: 'nav nav-tabs'}, lis);
-  },
-  accordionContent(grupos, decksGrupo, game){
-    let divs = [];
+  users.forEach(function (user, index, array) {
+    let a = builder.element('a', {href: '#'+dataManager.getNome(user), dataToggle:'tab'}, [builder.text(user)]);
+    let content = {};
+    if (index == 0) content = {class: 'active'};
+    lis.push(builder.element('li', content, [a]));
+  });
 
-    grupos.forEach(function (nomeDoGrupo, index, array) {
-      let content = '';
-      if (index == 0) content = ' active in';
+  return builder.element('ul', {class: 'nav nav-tabs'}, lis);
+}
 
-      if(decksGrupo[nomeDoGrupo]) divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo], game)));
-      else divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, [builder.element('div', {class: 'brtre'}, [])]));
-    });
+function accordionContent(grupos, decksGrupo, game){
+  let divs = [];
 
-    return builder.element('div', {class: 'tab-content'}, divs);
-  },
-  loading(){
-    return builder.loading();
-  }
+  grupos.forEach(function (nomeDoGrupo, index, array) {
+    let content = '';
+    if (index == 0) content = ' active in';
+
+    if(decksGrupo[nomeDoGrupo]) divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, menu(decksGrupo[nomeDoGrupo], game)));
+    else divs.push(builder.element('div', {class: 'tab-pane fade'+content, id:dataManager.getNome(nomeDoGrupo)}, [builder.element('div', {class: 'brtre'}, [])]));
+  });
+
+  return builder.element('div', {class: 'tab-content'}, divs);
+}
+
+function loading(){
+  return builder.loading();
 }
 
 function menu(decks, game){

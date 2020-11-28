@@ -1,0 +1,13 @@
+{
+  "spec_dir": "spec",
+  "spec_files": [
+    "manager/conta.js", "manager/array.js", "manager/string.js", "manager/deck.js", "manager/alert.js", "manager/cookie.js",
+    "file/path.js", "file/cache.js", "file/login.js", "file/deck.js", "file/image.js",
+    "html/builder.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}

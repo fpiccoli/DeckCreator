@@ -1,12 +1,14 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.13.6",
+  "version": "1.15.0-beta",
   "description": "Criador de decks para Tabletop Simulator",
   "author": "fpiccoli",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rd /s /q .nyc_output coverage release-builds releases>nul 2>&1|echo.>nul",
+    "rebuild": "rd /s /q node_modules>nul 2>&1|echo.>nul",
+    "test": "nyc --reporter=lcov --reporter=text-summary jasmine",
     "start": "electron .",
     "pack": "electron-builder --dir --config electron-builder.json --linux --windows",
     "dist": "electron-builder --config electron-builder.json --windows",
@@ -20,6 +22,8 @@
   },
   "license": "ISC",
   "dependencies": {
+    "amazon-cognito-identity-js": "^4.3.4",
+    "aws-sdk": "^2.740.0",
     "bootstrap": "^4.3.1",
     "electron-is-dev": "^1.1.0",
     "electron-updater": "^4.0.4",
@@ -31,15 +35,18 @@
     "md5": "^2.2.1",
     "merge-images": "^2.0.0",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.10",
     "nodemailer": "^6.4.2",
-    "popper.js": "^1.14.5"
+    "popper.js": "^1.14.5",
+    "restify": "^8.5.1",
+    "restify-clients": "^3.0.0"
   },
   "devDependencies": {
-    "electron": "^5.0.5",
+    "electron": "^7.2.4",
     "electron-builder": "^20.38.0",
     "electron-packager": "^13.0.1",
     "electron-winstaller": "^2.7.0",
-    "lodash.template": "^4.5.0"
+    "jasmine": "^3.6.0",
+    "lodash.template": "^4.5.0",
+    "nyc": "^15.1.0"
   }
 }

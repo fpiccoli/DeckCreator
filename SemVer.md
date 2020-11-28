@@ -1,6 +1,9 @@
 DeckCreator
 
 Releases:
+    1.14.0 (XX/XX/2020)
+      -  Novas Funcionalidades:
+          - Utilização de acesso ao banco por serviço REST para melhoria de segurança.
 
     1.13.6 (27/07/2020)
       - Correções de bugs:

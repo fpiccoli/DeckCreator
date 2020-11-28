@@ -1,35 +1,35 @@
 const builder = require('./builder.js');
 
-module.exports = {
-  html(game){
-    let lista;
-    let content = [];
+module.exports = { html }
 
-    if(game == 'M&D'){
-      lista = ['Regras', 'Turnos', 'Cartas', 'Glossário'];
-      content.push(regras());
-      content.push(turnos());
-      content.push(cartas());
-      content.push(glossario());
-    } else {
-      lista = ['Rules', 'Turns', 'Cards', 'Glossary'];
-      content.push(regrasEN());
-      content.push(turnosEN());
-      content.push(cartasEN());
-      content.push(glossarioEN());
-    }
+function html(game){
+  let lista;
+  let content = [];
 
-    let li = listaNav(lista);
-    let nav =  builder.element('ul', {class:'nav nav-tabs'}, li);
-
-    let tabContent = builder.element('div', {class:'tab-content'}, content);
-
-    let json = builder.element('div', {class:'panel-body'}, [nav, tabContent]);
-
-    let retorno = builder.build([json]);
-
-    return builder.replaceCamelCase(retorno);
+  if(game == 'M&D'){
+    lista = ['Regras', 'Turnos', 'Cartas', 'Glossário'];
+    content.push(regras());
+    content.push(turnos());
+    content.push(cartas());
+    content.push(glossario());
+  } else {
+    lista = ['Rules', 'Turns', 'Cards', 'Glossary'];
+    content.push(regrasEN());
+    content.push(turnosEN());
+    content.push(cartasEN());
+    content.push(glossarioEN());
   }
+
+  let li = listaNav(lista);
+  let nav =  builder.element('ul', {class:'nav nav-tabs'}, li);
+
+  let tabContent = builder.element('div', {class:'tab-content'}, content);
+
+  let json = builder.element('div', {class:'panel-body'}, [nav, tabContent]);
+
+  let retorno = builder.build([json]);
+
+  return builder.replaceCamelCase(retorno);
 }
 
 function listaNav(menus){
@@ -206,52 +206,52 @@ function glossario(){
 function glossarioEN(){
   let head = tr('thead', 'th', [{item:'Item', description:'Description', traducao:'PT-BR'}]);
   let body = tr('tbody', 'td', [
-  {item:'Any Monster', description:'Any Monster', traducao:'Qualquer monstro'},
-  {item:'Breeder', description:'Breeder', traducao:'Criador/Treinador'},
-  {item:'POW', description:'Power', traducao:'Poder'},
-  {item:'INT', description:'Intelligence', traducao:'Inteligência'},
-  {item:'SPE', description:'Special', traducao:'Especial'},
-  {item:'DGE', description:'Dodge', traducao:'Esquiva'},
-  {item:'BLK', description:'Block', traducao:'Bloqueio'},
-  {item:'ENV', description:'Environment', traducao:'Ambiente'},
-  {item:'G', description:'Ground', traducao:'Terreste'},
-  {item:'A', description:'Aerial', traducao:'Aéreo'},
-  {item:'W', description:'Water', traducao:'Aquático'}]);
+    {item:'Any Monster', description:'Any Monster', traducao:'Qualquer monstro'},
+    {item:'Breeder', description:'Breeder', traducao:'Criador/Treinador'},
+    {item:'POW', description:'Power', traducao:'Poder'},
+    {item:'INT', description:'Intelligence', traducao:'Inteligência'},
+    {item:'SPE', description:'Special', traducao:'Especial'},
+    {item:'DGE', description:'Dodge', traducao:'Esquiva'},
+    {item:'BLK', description:'Block', traducao:'Bloqueio'},
+    {item:'ENV', description:'Environment', traducao:'Ambiente'},
+    {item:'G', description:'Ground', traducao:'Terreste'},
+    {item:'A', description:'Aerial', traducao:'Aéreo'},
+    {item:'W', description:'Water', traducao:'Aquático'}]);
 
-  let table = builder.element('table', {class:'table table-hover'}, [head, body]);
-  let div = builder.element('div', {class:'table-responsive'}, [table]);
-  return builder.element('div', {class:'tab-pane fade', id:'nav-glossary'}, [div]);
-}
-
-function p(string){
-  return builder.element('p', null, [builder.text(string)]);
-}
-
-function h3(string){
-  return builder.element('h3', null, [builder.text(string)]);
-}
-
-function h4(string){
-  return builder.element('h4', null, [builder.text(string)]);
-}
-
-function ul(lista){
-  let li = [];
-  lista.forEach(monta);
-  function monta(item, index, array){
-    li.push(builder.element('li', null, [builder.text(item)]));
+    let table = builder.element('table', {class:'table table-hover'}, [head, body]);
+    let div = builder.element('div', {class:'table-responsive'}, [table]);
+    return builder.element('div', {class:'tab-pane fade', id:'nav-glossary'}, [div]);
   }
-  return builder.element('ul', null, li);
-}
 
-function tr(head, element, lista){
-  let tr = [];
-  lista.forEach(function (obj, index, array){
-    let t = [];
-    t.push(builder.element(element, null, [builder.text(obj.item)]));
-    t.push(builder.element(element, null, [builder.text(obj.description)]));
-    t.push(builder.element(element, null, [builder.text(obj.traducao)]));
-    tr.push(builder.element('tr', null, t));
-  });
-  return builder.element(head, null, tr);
-}
+  function p(string){
+    return builder.element('p', null, [builder.text(string)]);
+  }
+
+  function h3(string){
+    return builder.element('h3', null, [builder.text(string)]);
+  }
+
+  function h4(string){
+    return builder.element('h4', null, [builder.text(string)]);
+  }
+
+  function ul(lista){
+    let li = [];
+    lista.forEach(monta);
+    function monta(item, index, array){
+      li.push(builder.element('li', null, [builder.text(item)]));
+    }
+    return builder.element('ul', null, li);
+  }
+
+  function tr(head, element, lista){
+    let tr = [];
+    lista.forEach(function (obj, index, array){
+      let t = [];
+      t.push(builder.element(element, null, [builder.text(obj.item)]));
+      t.push(builder.element(element, null, [builder.text(obj.description)]));
+      t.push(builder.element(element, null, [builder.text(obj.traducao)]));
+      tr.push(builder.element('tr', null, t));
+    });
+    return builder.element(head, null, tr);
+  }
