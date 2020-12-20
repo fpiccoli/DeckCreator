@@ -82,7 +82,7 @@ module.exports = {
             public: false,
             game: user.game
           }
-          if(dataDeck.save(object, user.game)){
+          if(dataDeck.save(object, user.game, user.idToken)){
             let deckRetorno = deckBuilder.build(object, user.game);
 
             file.saveLocal(object, deckRetorno, user.game).then(retorno => {
