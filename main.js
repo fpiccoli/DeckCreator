@@ -31,11 +31,11 @@ autoUpdater.on('update-downloaded', (e) => {
   console.log(e);
 });
 
-ipcMain.on("update-check", (event) => {
-  event.sender.send("update-ready", downloaded);
+ipcMain.handle('update-check', (event, mensagem) => {
+  event.sender.send('update-ready', downloaded);
 });
 
-ipcMain.on("do-update", (event) => {
+ipcMain.on('do-update', (event) => {
   autoUpdater.quitAndInstall();
   app.isQuiting = true;
   app.quit();

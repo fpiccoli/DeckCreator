@@ -69,7 +69,7 @@ function grupo(user, game, token){
 
 function remove(nome, user, game, token){
   return new Promise((resolve, reject) => {
-    http.remove(http.stage()+'/deck/delete/'+http.valida(game), {name: nome, user: user, recipe: null}, token)
+    http.remove(http.stage()+'/deck/'+http.valida(game)+'/delete', {name: nome, user: user, recipe: null}, token)
     .then(retorno => {
       let deletado;
       if (retorno.status == 500 || retorno.status == 400){
@@ -91,7 +91,7 @@ function remove(nome, user, game, token){
 function update(deck, novoNome, nomeAntigo, game, token){
   deck.name = novoNome;
   deck.nomeAntigo = nomeAntigo;
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     http.put(http.stage()+'/deck/'+http.valida(game)+'/save', deck, token)
     .then(retorno => {
       let criado = false;

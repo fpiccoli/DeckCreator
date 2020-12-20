@@ -36,16 +36,18 @@ module.exports = {
       documento.querySelector('#botao-excluir-'+id).addEventListener('click' , function(){
         alert.confirmDialog('Remove Deck', 'Sure!', 'Nope', 'Are you sure you want to remove the deck "'+ array[index].name +'"?')
         .then(positiveResponse => {
-          dataDeck.remove(array[index].name, user.name, user.game)
-          .then((retorno) => {
-            if(retorno){
-              file.removeLocal(array[index], user.game);
-              json = removeObj(json, array[index]);
-            }
-            documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
-          }).catch(err => console.log(err));
+          if(positiveResponse){
+            dataDeck.remove(array[index].name, user.name, user.game, user.idToken)
+            .then((retorno) => {
+              if(retorno){
+                file.removeLocal(array[index], user.game);
+                json = removeObj(json, array[index]);
+              }
+              documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
+              module.exports.myDecks(documento, json, user);
+            }).catch(err => console.log(err));
+          }
         })
-        module.exports.myDecks(documento, json, user);
       });
       document.querySelector('#botao-alterar-nome-'+id).addEventListener('click' , function(){
         document.querySelector('#input-novo-nome-'+id).innerHTML = '<div class="input-group custom-search-form"><input id="campo-nome-'+id+'" type="text" class="form-control" placeholder="New Name"><span class="input-group-btn"><button id="update-nome-'+id+'" class="btn btn-default" type="button"><i class="fa fa-tag"></i></button></span></div>';
@@ -106,19 +108,20 @@ function eventUpdateNome(documento, deck, index, json, user){
 
   alert.confirmDialog('Name Change', 'Sure!', 'Nope', 'Do you want to change the name of "'+antigo+'" to "'+novoNome+'"?')
   .then(positiveResponse => {
-    dataDeck.update(deck, novoNome, antigo, user.game)
-    .then((retorno) => {
-      if(retorno){
-        let deckBuild = deckBuilder.build(deck, user.game);
-        file.changeName(novoNome, antigo, deckBuild, user.game, deck)
-        .then(retorno => {
-          //Alterou nome com sucesso
-        }).catch(err => {console.error(err); alert.message(document.querySelector('#alert-message'), err, 'danger')});
-      }
-    }).catch(err => console.error(err));
+    if(positiveResponse){
+      dataDeck.update(deck, novoNome, antigo, user.game, user.idToken)
+      .then((retorno) => {
+        if(retorno){
+          let deckBuild = deckBuilder.build(deck, user.game);
+          file.changeName(novoNome, antigo, deckBuild, user.game, deck)
+          .then(retorno2 => {
+            documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
+            module.exports.myDecks(documento, json, user);
+          }).catch(err => {console.error(err); alert.message(document.querySelector('#alert-message'), err, 'danger')});
+        }
+      }).catch(err => console.error(err));
+    }
   })
-  documento.querySelector('#menu-content').innerHTML = htmlMyDecks.accordion(json, user.game);
-  myDecks(documento, json, user);
 }
 
 function removeObj(lista, obj){
