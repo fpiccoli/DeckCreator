@@ -18,7 +18,9 @@ function getSessionStorage(){
 function refresh(cognitoUserObj, session){
   return new Promise((resolve, reject) => {
     cognitoUserObj.refreshSession(session.getRefreshToken(), (err, newSession) => {
+
       if (err) reject(err);
+      if (!AWS.config.credentials) reject(err);
 
       let idToken = newSession.getIdToken().getJwtToken();
       let refreshToken = newSession.getRefreshToken().getToken();
@@ -36,6 +38,8 @@ function refresh(cognitoUserObj, session){
           resolve({user: cognitoUserObj.getUsername(), game:game, idToken: idToken, refreshToken: refreshToken});
         });
       });
+
+
     });
   });
 }

@@ -1,6 +1,10 @@
 DeckCreator
 
 Releases:
+    1.14.1-beta (20/12/2020)
+      -  Correções de bugs:
+          - Correção de login com sessão salva que não abre o aplicativo.
+
     1.14.0 (28/11/2020)
       -  Novas Funcionalidades:
           - Utilização de acesso ao banco por serviço REST para melhoria de segurança.
