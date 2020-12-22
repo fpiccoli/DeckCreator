@@ -1,16 +1,10 @@
 DeckCreator
 
 Releases:
-    1.14.3-beta (20/12/2020)
+    1.14.1 (21/12/2020)
       -  Correções de bugs:
-          - Correção dos métodos de importar deck na listagem Public Decks.
-
-    1.14.2-beta (20/12/2020)
-      -  Correções de bugs:
-          - Correção dos métodos de alterar nome e deletar deck na listagem MyDecks.
-
-    1.14.1-beta (20/12/2020)
-      -  Correções de bugs:
+          - Correção do botão alterar nome na listagem MyDecks.
+          - Correção do botão deletar deck na listagem MyDecks.
           - Correção de login com sessão salva que não abre o aplicativo.
 
     1.14.0 (28/11/2020)
