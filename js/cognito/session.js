@@ -20,13 +20,12 @@ function refresh(cognitoUserObj, session){
     cognitoUserObj.refreshSession(session.getRefreshToken(), (err, newSession) => {
 
       if (err) reject(err);
-      if (!AWS.config.credentials) reject(err);
 
       let idToken = newSession.getIdToken().getJwtToken();
       let refreshToken = newSession.getRefreshToken().getToken();
 
       AWS.config.region = cognitoUser.getRegion();
-      AWS.config.credentials.params = new AWS.CognitoIdentityCredentials({
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId: cognitoUser.getIdentityPoolId(),
         Logins: {
           'cognito-idp.us-east-1.amazonaws.com/us-east-1_cIJHtSy5H': idToken,
@@ -38,7 +37,6 @@ function refresh(cognitoUserObj, session){
           resolve({user: cognitoUserObj.getUsername(), game:game, idToken: idToken, refreshToken: refreshToken});
         });
       });
-
 
     });
   });

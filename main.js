@@ -14,40 +14,52 @@ if (setupEvents.handleSquirrelEvent()) {
   return;
 }
 
-// Module to control application life.
-var path = require('path');
 
-autoUpdater.on('update-availabe', () => {
-  console.log('update available');
+autoUpdater.on('update-available', (obj) => {
+  mainWindow.webContents.send('update-available', obj);
+  disponivel = true;
 });
+
+autoUpdater.on('update-downloaded', (obj) => {
+  mainWindow.webContents.send('update-downloaded', obj);
+  baixado = true;
+  baixando = false;
+});
+
 autoUpdater.on('checking-for-update', () => {
-  console.log('checking-for-update');
-});
-autoUpdater.on('update-not-available', () => {
-  console.log('update-not-available');
-});
-autoUpdater.on('update-downloaded', (e) => {
-  downloaded = true;
-  console.log(e);
+  mainWindow.webContents.send('checking-for-update', 'Buscando Update');
 });
 
-ipcMain.handle('update-check', (event, mensagem) => {
-  event.sender.send('update-ready', downloaded);
+autoUpdater.on('update-not-available', (obj) => {
+  mainWindow.webContents.send('update-not-available', obj);
 });
 
-ipcMain.on('do-update', (event) => {
+autoUpdater.on('download-progress', (obj) => {
+  mainWindow.webContents.send('download-progress', obj);
+  baixando = true;
+});
+
+autoUpdater.on('error', (err) => {
+  mainWindow.webContents.send('update-error', err);
+});
+
+ipcMain.handle('update-check', (event) => {
+  if (isDev) return;
+  if (disponivel) return;
+  if (baixando) return;
+  if (baixado) return;
+
+  autoUpdater.checkForUpdates();
+});
+
+ipcMain.handle('do-update', (event) => {
+  if (isDev) return;
   autoUpdater.quitAndInstall();
   app.isQuiting = true;
   app.quit();
 });
 
 app.on('ready', () => {
-  if (!isDev){
-    autoUpdater.checkForUpdatesAndNotify();
-    setInterval(function(){
-      autoUpdater.checkForUpdatesAndNotify();
-    }, 60000);
-  }
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,

@@ -9,16 +9,10 @@ cookieLogin()
 .then(sessionStorage)
 .then(refreshSession)
 .catch(err => {
-  if (!err){
-    ipcRenderer.invoke('clear-cookies').then(() => {
-      ipcRenderer.invoke('redirecionar-pagina','login');
-    })
-  } else if (err.code == 'NotAuthorizedException'){
-    ipcRenderer.invoke('clear-cookies').then(() => {
-      ipcRenderer.invoke('redirecionar-pagina','login');
-    })
-  }
-  else console.log(err);
+  ipcRenderer.invoke('clear-cookies').then(() => {
+    ipcRenderer.invoke('console-log-main', err);
+    ipcRenderer.invoke('redirecionar-pagina','login');
+  })
 });
 
 function cookieLogin(){

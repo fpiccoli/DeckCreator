@@ -23,7 +23,6 @@ cookie.login().then((retorno) => {
   if(retorno){
     user = retorno;
 
-    navbar.updateCheck(document);
     navbar.logout(document);
     navbar.clearCache(document);
     navbar.importDecks(document, user);

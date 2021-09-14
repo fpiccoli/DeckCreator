@@ -1,6 +1,13 @@
 DeckCreator
 
 Releases:
+
+    1.15.0 (14/09/2021)
+      -  Novas Funcionalidades:
+          - Novo menu para baixar as atualizações de sistema.
+      -  Correções de bugs:
+          - Correção de login com sessão armazenada.
+
     1.14.1 (21/12/2020)
       -  Correções de bugs:
           - Correção do botão alterar nome na listagem MyDecks.

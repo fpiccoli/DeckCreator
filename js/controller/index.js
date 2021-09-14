@@ -8,7 +8,6 @@ document.querySelector('#title').innerHTML = package.productName + ' v' + packag
 
 cookie.login().then((user) => {
   if(user){
-    navbar.updateCheck(document);
     navbar.logout(document, user);
     navbar.clearCache(document);
     navbar.importDecks(document, user);

@@ -15,16 +15,6 @@ const dataVersao = require('../rest/version.js');
 const cognito = require('../cognito/session.js');
 
 module.exports = {
-  updateCheck(documento){
-    ipcRenderer.invoke('update-check').then(downloaded => {
-      if(downloaded){
-        documento.querySelector('#update-ready').innerHTML = '<a class="dropdown-toggle" title="New Update!" data-toggle="dropdown" href="#"><i class="fa fa-exclamation"></i></a><ul class="dropdown-menu dropdown-user"><li><a id="do-update" href="#">Restart and update</a></li></ul>'
-        documento.querySelector("#do-update").addEventListener('click' , function(){
-          ipcRenderer.invoke('do-update');
-        });
-      }
-    });
-  },
   logout(documento, user){
     documento.querySelector("#logout").addEventListener('click', function () {
       alert.confirmDialog('Logout', 'Sure!', 'Nope', 'Are you sure you want to logout?')
