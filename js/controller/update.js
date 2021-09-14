@@ -8,6 +8,7 @@ let baixando = false;
 let baixado = false;
 
 ipcRenderer.on('download-progress', (event, obj) => {
+  console.log('PROGRESS');
   let percentual = round(obj.percent, 1);
   updateText.innerHTML = 'Downloading';
   updateText.innerHTML += ' '+percentual+'%';
@@ -17,6 +18,7 @@ ipcRenderer.on('download-progress', (event, obj) => {
 })
 
 ipcRenderer.on('update-downloaded', (event, obj) => {
+  console.log('DOWNLOADED');
   updateIcon.innerHTML = '<span class="glyphicon glyphicon-exclamation-sign"></span>';
   updateText.innerHTML = 'Restart and update'
   baixado = true;
@@ -25,11 +27,13 @@ ipcRenderer.on('update-downloaded', (event, obj) => {
 })
 
 ipcRenderer.on('checking-for-update', (event, obj) => {
+  console.log('CHECKING');
   buscando = setBuscando(true);
   baixando = setBaixando(false);
 })
 
 ipcRenderer.on('update-available', (event, obj) => {
+  console.log('AVAILABLE');
   updateIcon.innerHTML = '<span class="glyphicon glyphicon-cloud"></span>';
   updateText.innerHTML = 'Wait until download starts...';
   buscando = setBuscando(false);
@@ -37,6 +41,7 @@ ipcRenderer.on('update-available', (event, obj) => {
 })
 
 ipcRenderer.on('update-not-available', (event, obj) => {
+  console.log('NOT AVAILABLE');
   updateIcon.innerHTML = '<span class="glyphicon glyphicon-ok"></span>';
   updateText.innerHTML = 'No updates found';
   buscando = setBuscando(false);
@@ -44,6 +49,7 @@ ipcRenderer.on('update-not-available', (event, obj) => {
 })
 
 ipcRenderer.on('update-error', (event, err) => {
+  console.log('ERROR');
   updateIcon.innerHTML = '<span class="glyphicon glyphicon-ban-circle"></span>';
   updateText.innerHTML = 'Update error';
   document.querySelector('#modal-error-message').innerHTML = err;
@@ -55,8 +61,10 @@ document.querySelector('#btn-update').addEventListener('click', function(){
   if(baixando) return;
 
   if(baixado) {
+    console.log('DO UPDATE');
     ipcRenderer.invoke('do-update');
   } else{
+    console.log('BUSCANDO');
     buscando = setBuscando(true);
     ipcRenderer.invoke('update-check');
   }

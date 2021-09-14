@@ -3,7 +3,9 @@ const { autoUpdater } = require('electron-updater');
 const isDev = require('electron-is-dev');
 let mainWindow;
 let mainSession;
-let downloaded = false;
+let baixado = false;
+let disponivel = false;
+let baixando = false;
 
 const cookieHandler = require('./main/cookie-handler');
 
@@ -66,11 +68,11 @@ app.on('ready', () => {
       enableRemoteModule: false
     }
   });
-  if(isDev){
+  // if(isDev){
     mainWindow.toggleDevTools();
-  }else{
-    mainWindow.setMenu(null);
-  }
+  // }else{
+  //   mainWindow.setMenu(null);
+  // }
   mainWindow.loadURL(`file://${__dirname}/pages/prelogin.html`);
     mainWindow.maximize();
     mainSession = mainWindow.webContents.session;
