@@ -4,7 +4,7 @@ Releases:
 
     1.15.1 (22/09/2021)
       -  Correções de bugs:
-          - Corrigidos testes unitários quebrados com a última atualização.
+          - Novo menu que permite baixar as atualizações de sistema manualmente.
 
     1.15.0 (14/09/2021)
       -  Novas Funcionalidades:
