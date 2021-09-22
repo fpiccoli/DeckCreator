@@ -1,7 +1,5 @@
 # deckcreator
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator?ref=badge_shield)
-
-[![Build Status](https://app.travis-ci.com/fpiccoli/DeckCreator.svg?branch=master)](https://app.travis-ci.com/fpiccoli/DeckCreator)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffpiccoli%2FDeckCreator?ref=badge_shield) [![Build Status](https://app.travis-ci.com/fpiccoli/DeckCreator.svg?branch=master)](https://app.travis-ci.com/fpiccoli/DeckCreator)
 
 Get [DeckCreator](https://www.getdeckcreator.com/).
 
