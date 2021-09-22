@@ -21,8 +21,8 @@ describe("login() -> filtra os cookies para trazer aquele que for referente ao l
         {domain: 'deckcreator.com', name: 'heroi3'},
         {domain: 'deckcreator.com', name: 'login', value:`{"user": "teste", "game": "M&D"}`}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar um objeto com name e game", function(){
@@ -30,8 +30,7 @@ describe("login() -> filtra os cookies para trazer aquele que for referente ao l
         expect(retorno).toBeDefined();
         expect(retorno.name).toEqual('teste');
         expect(retorno.game).toEqual('M&D');
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -43,15 +42,14 @@ describe("login() -> filtra os cookies para trazer aquele que for referente ao l
         {domain: 'deckcreator.com', name: 'heroi2'},
         {domain: 'deckcreator.com', name: 'heroi3'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar undefined", function(){
       algoritmo.login(ipcRenderer).then(function(retorno) {
         expect(retorno).not.toBeDefined();
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -68,8 +66,8 @@ describe("herois() -> filtra os cookies para trazer aquele que for referente aos
         {domain: 'deckcreator.com', name: 'heroi3', value:`{"class": "Amazon"}`},
         {domain: 'deckcreator.com', name: 'login'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma lista de herois", function(){
@@ -81,8 +79,7 @@ describe("herois() -> filtra os cookies para trazer aquele que for referente aos
         expect(retorno[1].panel).toEqual('2');
         expect(retorno[2].class).toEqual('Amazon');
         expect(retorno[2].panel).toEqual('3');
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -92,16 +89,15 @@ describe("herois() -> filtra os cookies para trazer aquele que for referente aos
       lista = [
         {domain: 'deckcreator.com', name: 'login'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma lista vazia", function(){
       algoritmo.herois(ipcRenderer).then(function(retorno) {
         expect(retorno).toBeDefined();
         expect(retorno).toEqual([]);
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -118,16 +114,15 @@ describe("grupo() -> filtra os cookies para trazer aquele que for referente ao g
         {domain: 'deckcreator.com', name: 'heroi3'},
         {domain: 'deckcreator.com', name: 'grupo', value:`DecksGrupo`}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma string de grupo", function(){
       algoritmo.grupo(ipcRenderer).then(function(retorno) {
         expect(retorno).toBeDefined();
         expect(retorno).toEqual('DecksGrupo');
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -139,16 +134,15 @@ describe("grupo() -> filtra os cookies para trazer aquele que for referente ao g
         {domain: 'deckcreator.com', name: 'heroi2'},
         {domain: 'deckcreator.com', name: 'heroi3'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma string de grupo", function(){
       algoritmo.grupo(ipcRenderer).then(function(retorno) {
         expect(retorno).toBeDefined();
         expect(retorno).toEqual('');
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -165,15 +159,14 @@ describe("public() -> filtra os cookies para trazer aquele que for referente ao 
         {domain: 'deckcreator.com', name: 'heroi3'},
         {domain: 'deckcreator.com', name: 'public', value:`true`}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma boolean true", function(){
       algoritmo.public(ipcRenderer).then(function(retorno) {
         expect(retorno).toBeTruthy();
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -185,15 +178,14 @@ describe("public() -> filtra os cookies para trazer aquele que for referente ao 
         {domain: 'deckcreator.com', name: 'heroi2'},
         {domain: 'deckcreator.com', name: 'heroi3'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma boolean false", function(){
       algoritmo.public(ipcRenderer).then(function(retorno) {
         expect(retorno).not.toBeTruthy();
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -210,8 +202,8 @@ describe("cards() -> filtra os cookies para trazer aquele que for referente aos 
         {domain: 'deckcreator.com', name: 'heroi3'},
         {domain: 'deckcreator.com', name: 'cards', value:`[{"name": "Card1", "class": "Amazon"},{"name": "Card2", "class": "Barbarian"}]`}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma lista de cartas", function(){
@@ -221,8 +213,7 @@ describe("cards() -> filtra os cookies para trazer aquele que for referente aos 
         expect(retorno[0].class).toEqual('Amazon');
         expect(retorno[1].name).toEqual('Card2');
         expect(retorno[1].class).toEqual('Barbarian');
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -234,15 +225,14 @@ describe("cards() -> filtra os cookies para trazer aquele que for referente aos 
         {domain: 'deckcreator.com', name: 'heroi2'},
         {domain: 'deckcreator.com', name: 'heroi3'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar undefined", function(){
       algoritmo.cards(ipcRenderer).then(function(retorno) {
         expect(retorno).not.toBeDefined();
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -259,16 +249,15 @@ describe("nome() -> filtra os cookies para trazer aquele que for referente ao no
         {domain: 'deckcreator.com', name: 'heroi3'},
         {domain: 'deckcreator.com', name: 'nome', value:`NomeDoDeck`}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar uma lista de cartas", function(){
       algoritmo.nome(ipcRenderer).then(function(retorno) {
         expect(retorno).toBeDefined();
         expect(retorno).toEqual('NomeDoDeck');
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });
@@ -280,15 +269,14 @@ describe("nome() -> filtra os cookies para trazer aquele que for referente ao no
         {domain: 'deckcreator.com', name: 'heroi2'},
         {domain: 'deckcreator.com', name: 'heroi3'}
       ];
-      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['send', 'on']);
-      ipcRenderer.on.and.callFake(mock());
+      ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+      ipcRenderer.invoke.and.callFake(mock());
     });
 
     it ("[1] deve retornar undefined", function(){
       algoritmo.nome(ipcRenderer).then(function(retorno) {
         expect(retorno).not.toBeDefined();
-        expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-        expect(ipcRenderer.on).toHaveBeenCalledTimes(1);
+        expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
       });
     });
   });

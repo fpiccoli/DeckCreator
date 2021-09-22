@@ -1,7 +1,15 @@
 const algoritmo = require('../../js/manager/alert.js');
 
-let remote;
-let dialog;
+let ipcRenderer;
+let retorno;
+
+function mock(){
+  return (param1, param2, param3, param4, param5) => {
+    return new Promise(resolve => {
+      resolve(retorno);
+    });
+  }
+}
 
 describe("message() -> altera a mensagem de alerta do sistema ->", function(){
   beforeEach(function(){
@@ -21,24 +29,32 @@ describe("message() -> altera a mensagem de alerta do sistema ->", function(){
 
 describe("confirmDialog() -> retorna um boolean se a resposta do dialog for positiva ->", function(){
   beforeEach(function(){
-    function mock(){
-      return function(param1, param2) {
-        return 0;
-      }
-    }
-
-    dialog = jasmine.createSpyObj('dialog', ['showMessageBox']);
-    dialog.showMessageBox.and.callFake(mock());
-
-    remote = jasmine.createSpyObj('remote', ['getCurrentWindow']);
-    remote.getCurrentWindow.and.returnValue(1);
-    remote.dialog = dialog;
+    retorno = true;
+    ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+    ipcRenderer.invoke.and.callFake(mock(retorno));
   });
 
   it ("[1] deve retornar verdadeiro", function(){
-    let retorno = algoritmo.confirmDialog('Unit Test', 'OK', 'Não', 'Deseja realizar este mock?', remote);
-    expect(retorno).toBeTruthy();
-    expect(remote.getCurrentWindow).toHaveBeenCalledTimes(1);
-    expect(remote.dialog.showMessageBox).toHaveBeenCalledTimes(1);
+    algoritmo.confirmDialog('Unit Test', 'OK', 'Não', 'Deseja realizar este mock?', ipcRenderer)
+    .then(function(retorno) {
+      expect(retorno).toBeTruthy();
+      expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
+    });
+  });
+});
+
+describe("confirmDialog() -> retorna um boolean se a resposta do dialog for negativa ->", function(){
+  beforeEach(function(){
+    retorno = false;
+    ipcRenderer = jasmine.createSpyObj('ipcRenderer', ['invoke']);
+    ipcRenderer.invoke.and.callFake(mock(retorno));
+  });
+
+  it ("[1] deve retornar falso", function(){
+    algoritmo.confirmDialog('Unit Test', 'OK', 'Não', 'Deseja realizar este mock?', ipcRenderer)
+    .then(function(retorno) {
+      expect(retorno).toBeFalsy();
+      expect(ipcRenderer.invoke).toHaveBeenCalledTimes(1);
+    });
   });
 });
