@@ -34,7 +34,7 @@
     "jsonfile": "^5.0.0",
     "md5": "^2.2.1",
     "merge-images": "^2.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nodemailer": "^6.4.2",
     "popper.js": "^1.14.5",
     "restify": "^8.5.1",
