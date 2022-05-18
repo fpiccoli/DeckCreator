@@ -17,7 +17,7 @@ function panel(heroi, documento, game) {
   documento.querySelector('#txt-heroi-' + heroi.panel).textContent = 'Change';
 
   imgPath = '../img/' + game + '/icons';
-  imgName = heroi.main.toLowerCase();
+  imgName = heroi.main.toLowerCase().replace(' ','');
   game === 'MRBC' ? imgName = imgName + '.png' : imgName = imgName + '.svg';
 
   documento.querySelector('#img-heroi-' + heroi.panel).innerHTML = '<img src="' + imgPath + '/' + imgName + '" height="300%" width="300%"/>';

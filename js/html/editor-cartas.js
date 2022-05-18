@@ -31,7 +31,6 @@ function cartas(lista, game){
 }
 
 function lista(lista, game){
-  let colunas = 5;
   let cards = [];
 
   lista.forEach(addCard);
@@ -39,7 +38,9 @@ function lista(lista, game){
   function addCard(card, index, array){
     let childs = [];
 
-    childs.push(builder.element('img', {src:'../img/'+game+'/cards/'+card.class.toLowerCase()+'/'+card.id+'.png', draggable:"false", height: '100%', width: '100%', class:'card-img'}, []));
+    let imgName = card.class.toLowerCase().replace(' ','')+'/'+card.id+'.png';
+
+    childs.push(builder.element('img', {src:'../img/'+game+'/cards/'+imgName, draggable:"false", height: '100%', width: '100%', class:'card-img'}, []));
 
     if(card.stamp){
       childs.push(builder.element('img', {class:'selo-novidade', src:'../img/stamp-'+card.stamp+'.png', draggable:"false", height: '20%', width: '25%'}, []));

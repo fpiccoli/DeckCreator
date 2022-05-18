@@ -29,6 +29,7 @@ function otherPanels(listaDeCartas, user, documento) {
   if (user.game === 'MRBC') maxCards = 50;
 
   let percentual = listaDeCartas.length * 100 / maxCards;
+  percentual = round(percentual, 1);
   documento.querySelector('#all-cards').textContent = listaDeCartas.length;
   documento.querySelector('#status-value').textContent = percentual + '%';
   documento.querySelector('#status-bar').innerHTML = htmlCartas.statusbar(percentual);
@@ -58,4 +59,9 @@ function otherPanels(listaDeCartas, user, documento) {
 
   documento.querySelector('#talent-panel').innerHTML = talentHtml;
   documento.querySelector('#spell-panel').innerHTML = spellHtml;
+}
+
+function round(value, precision) {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
 }
