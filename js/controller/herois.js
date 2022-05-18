@@ -10,25 +10,25 @@ document.querySelector('#accordion-pure-panel').innerHTML = '<button type="butto
 document.querySelector('#accordion-hybrid-panel').innerHTML = '<button type="button" class="btn btn-outline btn-primary btn-lg btn-block">LOADING...</button>';
 
 cookie.login().then((retorno) => {
-  if(retorno){
+  if (retorno) {
     getHerois(retorno.game, retorno.idToken);
   }
 }).catch(err => console.log(err));
 
-function getHerois(game, token){
+function getHerois(game, token) {
   dataClasse.listAll(game, token)
-  .then((retorno) => {
-    let puros = dataManager.listByType('Pure', retorno);
-    let hibridos = dataManager.listByType('Hybrid', retorno);
+    .then((retorno) => {
+      let puros = dataManager.listByType('Pure', retorno);
+      let hibridos = dataManager.listByType('Hybrid', retorno);
 
-    puros.sort(dataManager.dynamicSort('name'));
-    hibridos.sort(dataManager.dynamicSort('name'));
+      puros.sort(dataManager.dynamicSort('name'));
+      hibridos.sort(dataManager.dynamicSort('name'));
 
-    render.accordion('pure', 2, puros, retorno);
-    render.accordion('hybrid', 2, puros, retorno);
-    render.button(retorno, puros, hibridos);
+      render.accordion('pure', 2, puros, retorno, game);
+      render.accordion('hybrid', 2, puros, retorno, game);
+      render.button(retorno, puros, hibridos);
 
-  }).catch(err => console.log(err));
+    }).catch(err => console.log(err));
 }
 
 linkFechar.addEventListener('click', function () {

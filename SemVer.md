@@ -2,6 +2,11 @@ DeckCreator
 
 Releases:
 
+    1.15.2 (18/05/2022)
+      -  Correção de bugs:
+          - Correção das imagens que eram mostradas como não existentes.
+          - Correção na exibição do percentual em Deck Status no editor.
+
     1.15.1 (22/09/2021)
       -  Correções de bugs:
           - Novo menu que permite baixar as atualizações de sistema manualmente.

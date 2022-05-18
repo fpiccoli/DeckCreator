@@ -4,18 +4,22 @@ const dataManager = require('../manager/string.js');
 
 module.exports = { addButtons, addGrupo, addPublic, updateGrupo }
 
-function addButtons(buttons){
+function addButtons(buttons, game) {
   let json = [];
 
   buttons.forEach(montaJson);
-  function montaJson(button, index, array){
+  function montaJson(button, index, array) {
     let childs = [];
     let elements = [];
 
-    childs.push(builder.element('img', {src:'https://drive.google.com/uc?export=download&id='+button.icon, draggable:"false", height:'50%', width:'25%', style:'background-color:'+button.bg+'; border-radius:5px; padding:5px;'}, []));
+    let imgName = button.main.toLowerCase().replace(' ', '');
 
-    childs.push(builder.element('div', {class: 'text-center'}, [builder.text(button.class)]));
-    elements.push(builder.element('a', {href:'#', class: 'text-center', id:'cards-'+dataManager.getNome(button.class)}, childs));
+    game === 'MRBC' ? imgName = imgName + '.png' : imgName = imgName + '.svg';
+
+    childs.push(builder.element('img', { src: '../img/' + game + '/icons/' + imgName, draggable: "false", height: '50%', width: '25%', style: 'background-color:' + button.bg + '; border-radius:5px; padding:5px;' }, []));
+
+    childs.push(builder.element('div', { class: 'text-center' }, [builder.text(button.class)]));
+    elements.push(builder.element('a', { href: '#', class: 'text-center', id: 'cards-' + dataManager.getNome(button.class) }, childs));
 
     json.push(builder.element('li', null, elements));
   }
@@ -23,37 +27,37 @@ function addButtons(buttons){
   return builder.build(json);
 }
 
-function addGrupo(grupos){
+function addGrupo(grupos) {
   let options = [];
-  options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Select a group')]));
+  options.push(builder.element('option', { class: 'active', value: '' }, [builder.text('Select a group')]));
   grupos.forEach(function (grupo, index, array) {
     options.push(addOption(grupo));
   });
 
-  let retorno = builder.build([builder.element('li', {class: 'sidebar-search', id: 'lista-grupos'}, [grupo(options)])]);
+  let retorno = builder.build([builder.element('li', { class: 'sidebar-search', id: 'lista-grupos' }, [grupo(options)])]);
 
   return builder.replaceCamelCase(retorno);
 }
 
-function addPublic(){
+function addPublic() {
   let options = [];
-  let public = options.push(builder.element('i', { class:'fa fa-globe'}, []));
-  let private = options.push(builder.element('i', { class:'fa fa-lock'}, []));
+  let public = options.push(builder.element('i', { class: 'fa fa-globe' }, []));
+  let private = options.push(builder.element('i', { class: 'fa fa-lock' }, []));
 
-  options.push(builder.element('option', { class:'active', value: 'false' }, [builder.text('Private')]));
-  options.push(builder.element('option', { class:'active', value: 'true' }, [builder.text('Public')]));
+  options.push(builder.element('option', { class: 'active', value: 'false' }, [builder.text('Private')]));
+  options.push(builder.element('option', { class: 'active', value: 'true' }, [builder.text('Public')]));
 
-  let select = builder.element('select', {class: 'form-control', id: 'select-public'}, options);
-  let inputGroup = builder.element('div', {class: 'input-group-btn custom-search-form'}, [select]);
+  let select = builder.element('select', { class: 'form-control', id: 'select-public' }, options);
+  let inputGroup = builder.element('div', { class: 'input-group-btn custom-search-form' }, [select]);
 
-  let retorno = builder.build([builder.element('li', {class: 'sidebar-search'}, [inputGroup])]);
+  let retorno = builder.build([builder.element('li', { class: 'sidebar-search' }, [inputGroup])]);
 
   return builder.replaceCamelCase(retorno);
 }
 
-function updateGrupo(grupos, opcaoNova){
+function updateGrupo(grupos, opcaoNova) {
   let options = [];
-  options.push(builder.element('option', { class:'active', value: '' }, [builder.text('Select a group')]));
+  options.push(builder.element('option', { class: 'active', value: '' }, [builder.text('Select a group')]));
   grupos.forEach(function (grupo, index, array) {
     options.push(addOption(grupo));
   });
@@ -64,17 +68,17 @@ function updateGrupo(grupos, opcaoNova){
   return builder.replaceCamelCase(retorno);
 }
 
-function grupo(options){
+function grupo(options) {
   let iconAdd = builder.element('i', { class: 'fa fa-plus' }, []);
-  let btnAdd = builder.element('button', { class:'btn btn-default', dataToggle:'modal', dataTarget:'#myModal', type:'button' }, [iconAdd]);
+  let btnAdd = builder.element('button', { class: 'btn btn-default', dataToggle: 'modal', dataTarget: '#myModal', type: 'button' }, [iconAdd]);
 
-  let spanAdd = builder.element('span', { class:'input-group-btn' }, [btnAdd]);
+  let spanAdd = builder.element('span', { class: 'input-group-btn' }, [btnAdd]);
 
-  let select = builder.element('select', {class: 'form-control', id: 'grupo'}, options);
+  let select = builder.element('select', { class: 'form-control', id: 'grupo' }, options);
 
-  return inputGroup = builder.element('div', {class: 'input-group custom-search-form'}, [select, spanAdd]);
+  return inputGroup = builder.element('div', { class: 'input-group custom-search-form' }, [select, spanAdd]);
 }
 
-function addOption(texto){
+function addOption(texto) {
   return builder.element('option', { value: texto }, [builder.text(texto)]);;
 }

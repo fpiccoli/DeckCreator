@@ -1,4 +1,4 @@
-const { ipcRenderer }  = require('electron');
+const { ipcRenderer } = require('electron');
 const dataManager = require('../manager/array.js');
 const deck = require('../manager/deck.js');
 const cookie = require('../manager/interface/cookie.js');
@@ -20,7 +20,7 @@ let buttons = [];
 let nomeDoTime = 'NewDeck';
 
 cookie.login().then((retorno) => {
-  if(retorno){
+  if (retorno) {
     user = retorno;
 
     navbar.logout(document);
@@ -30,16 +30,16 @@ cookie.login().then((retorno) => {
 
     update.otherPanels(listaDeCartas, user, document);
     renderHerois();
-  } else{
-    ipcRenderer.invoke('redirecionar-pagina','login');
+  } else {
+    ipcRenderer.invoke('redirecionar-pagina', 'login');
   }
 }).catch(err => console.log(err));
 
-function renderHerois(){
+function renderHerois() {
   cookie.herois().then((retorno) => {
     herois = retorno;
-    for(let i in herois){
-      render.panel(herois[i], document);
+    for (let i in herois) {
+      render.panel(herois[i], document, user.game);
       buttons.push(herois[i]);
     }
     renderSidebar(user);
@@ -49,65 +49,65 @@ function renderHerois(){
   }).catch(err => console.log(err));
 }
 
-function renderSidebar(usuario){
+function renderSidebar(usuario) {
   render.sidebar(buttons, usuario, listaDeCartas, herois, document).then(() => {
     renderGrupo();
     renderPublic();
   }).catch(err => console.log(err));
 }
 
-function renderGrupo(){
+function renderGrupo() {
   cookie.grupo().then((retorno) => {
-    if(retorno != 'Other Decks'){
+    if (retorno != 'Other Decks') {
       document.querySelector("#grupo").value = retorno;
-    } else{
+    } else {
       document.querySelector("#grupo").value = '';
     }
   }).catch(err => console.log(err));
 }
 
-function renderPublic(){
+function renderPublic() {
   cookie.public().then((retorno) => {
-    if(retorno){
+    if (retorno) {
       document.querySelector("#select-public").value = retorno;
-    } else{
+    } else {
       document.querySelector("#grupo").value = '';
     }
   }).catch(err => console.log(err));
 }
 
 cookie.cards().then((retorno) => {
-  if (retorno){
+  if (retorno) {
     listaDeCartas = retorno;
   }
 }).catch(err => console.log(err));
 
 cookie.nome().then((retorno) => {
-  if (retorno){
+  if (retorno) {
     document.querySelector("#nome-time").textContent = retorno;
   }
 }).catch(err => console.log(err));
 
-document.querySelector("#salvar-deck").addEventListener('click' , function(){
-  if(herois.length == 0){
+document.querySelector("#salvar-deck").addEventListener('click', function () {
+  if (herois.length == 0) {
     alert.message(document.querySelector('#alert-message'), 'You need to add a card to the deck!', 'warning');
     return;
   }
   saveDeck();
 });
 
-function saveDeck(){
+function saveDeck() {
   cookie.nome().then((retorno) => {
-    if(retorno){
+    if (retorno) {
       nomeDoTime = retorno
     }
     save(nomeDoTime);
   }).catch(err => console.log(err));
 }
 
-function save(nome){
-  if(!user) return;
-  if(!document.querySelector("#grupo")){
+function save(nome) {
+  if (!user) return;
+  if (!document.querySelector("#grupo")) {
     alert.message(document.querySelector('#alert-message'), 'Try again later!', 'warning');
     return;
   }
@@ -125,35 +125,35 @@ function save(nome){
   }
 
   dataDeck.exists(object, user.game, user.idToken).then((retorno) => {
-    if(retorno){
-      if(retorno.exists && !retorno.error){
+    if (retorno) {
+      if (retorno.exists && !retorno.error) {
         alert.confirmDialog('Caution', 'Overwrite it', 'Change the name', 'Deck name already exists, what do you want to do?')
-        .then(positiveResponse => {
-          if(positiveResponse){
-            httpSave(object, user.game, user.idToken)
-          }
-        })
-      } else if (!retorno.exists && !retorno.error){
+          .then(positiveResponse => {
+            if (positiveResponse) {
+              httpSave(object, user.game, user.idToken)
+            }
+          })
+      } else if (!retorno.exists && !retorno.error) {
         httpSave(object, user.game, user.idToken)
       }
     }
-  }).catch(err =>  alert.message(document.querySelector('#alert-message'), err, 'danger'));
+  }).catch(err => alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
-function httpSave(obj, game, token){
+function httpSave(obj, game, token) {
   dataDeck.save(obj, game, token).then((retorno) => {
-    if(retorno){
+    if (retorno) {
       exportDeck(obj, game);
     }
   }).catch(err => alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
-function exportDeck(object, game){
+function exportDeck(object, game) {
   let deckRetorno = deck.build(object, game);
   ipcRenderer.invoke('set-cookie', 'cards', JSON.stringify(listaDeCartas));
 
   file.saveLocal(object, deckRetorno, user.game).then(retorno => {
-    ipcRenderer.invoke('redirecionar-pagina','index');
+    ipcRenderer.invoke('redirecionar-pagina', 'index');
   }).catch(err => alert.message(document.querySelector('#alert-message'), err, 'danger'));
 }
 
