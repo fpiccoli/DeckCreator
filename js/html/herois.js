@@ -86,11 +86,7 @@ function content(classe, selecionarHeroi, type, game) {
 
     imgPath = '../img/' + game + '/cards/' + type;
 
-    if (game === 'MRBC') {
-      imgName = classe.heroes[i].cardnumber + '-min.png';
-    } else {
-      imgName = classe.heroes[i].class.toLowerCase().replace(' ', '-') + '-' + classe.heroes[i].name.toLowerCase() + '-min.png';
-    }
+    imgName = classe.heroes[i].cardnumber + '.png';
 
     let img = builder.element('img', { src: imgPath + '/' + imgName, draggable: "false", height: '100%', width: '100%', class: 'card-img' }, []);
     let col = builder.element('div', { class: 'col-lg-12' }, [img]);

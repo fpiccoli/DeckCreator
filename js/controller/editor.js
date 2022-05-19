@@ -7,7 +7,6 @@ const file = require('../file/interface/deck.js');
 const render = require('../render/editor.js');
 const update = require('../render/editor-update.js');
 const navbar = require('../render/menu-navbar.js');
-const sidebar = require('../render/menu-sidebar.js');
 const dataDeck = require('../rest/deck.js');
 let user;
 
