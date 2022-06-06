@@ -5,6 +5,7 @@ Releases:
     1.15.6 (06/06/2022)
       -  Correção de bugs:
           - Correção das imagens que estavam sendo mostradas erradas.
+          - Correção na internacionalização do Patch Notes.
       - Balanceamento de cartas:
           - Exorcism (Cleric): Custo reduzido e adicionado efeito de Alvo.
           - Lullaby Sonata (Bard): Custo aumentado.

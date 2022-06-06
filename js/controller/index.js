@@ -19,7 +19,7 @@ cookie.login().then((user) => {
     sidebar.newDeck(document);
     sidebar.editorDeck(document);
     sidebar.regras(document, user);
-    sidebar.sobre(document);
+    sidebar.sobre(document, user);
   } else{
     ipcRenderer.invoke('redirecionar-pagina','login');
   }

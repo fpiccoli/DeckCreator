@@ -4,7 +4,10 @@ var moment = require('moment');
 
 module.exports = { html }
 
-function html(lista){
+function html(lista, game){
+  let property = 'changes';
+  if(game === "M&D") property = 'funcionalidades';
+
   let text = [];
 
   text.push(h1('Patch Notes'));
@@ -16,7 +19,7 @@ function html(lista){
     text.push(h3(objeto.versao));
     text.push(h4(moment(objeto.data, "DD/MM/YYYY").format("LL")));
 
-    objeto.changes.forEach(function (objeto, index, array){
+    objeto[property].forEach(function (objeto, index, array){
       text.push(patch([
         {
           titulo: objeto.titulo,
