@@ -8,3 +8,4 @@ electron-builder.json
 /js/rest/property.js
 .nyc_output/
 /coverage/
+package-lock.json
