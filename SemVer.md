@@ -2,6 +2,18 @@ DeckCreator
 
 Releases:
 
+    1.15.6 (06/06/2022)
+      -  Correção de bugs:
+          - Correção das imagens que estavam sendo mostradas erradas.
+      - Balanceamento de cartas:
+          - Exorcism (Cleric): Custo reduzido e adicionado efeito de Alvo.
+          - Lullaby Sonata (Bard): Custo aumentado.
+          - Healing Elixir (Alchemist): Efeito reduzido e removido efeito de Alvo.
+          - Reallocate (Spell): Descrição do efeito alterado para incluir o efeito Assaltar.
+          - Pupil (Talent): Aumentado o custo e adicionada nova restrição de uso.
+          - Guardian: Aumentado o máximo de PV da classe.
+
+
     1.15.5 (20/05/2022)
       -  Correção de bugs:
           - Atualização de segurança.
