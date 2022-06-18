@@ -1,28 +1,29 @@
-const { ipcRenderer }  = require('electron');
+const { ipcRenderer } = require('electron');
 const md5 = require('md5');
 const alert = require('../manager/interface/alert.js');
 const cookie = require('../manager/interface/cookie.js');
 const dataUser = require('../rest/user.js');
 const cognito = require('../cognito/auth.js');
+const img = require('./images.js');
 
 var package = require('../../package.json');
 document.querySelector('#title').innerHTML = package.productName + ' v' + package.version;
 
 cookie.login().then((user) => {
-  if(user){
-    ipcRenderer.invoke('redirecionar-pagina','index');
+  if (user) {
+    ipcRenderer.invoke('redirecionar-pagina', 'index');
   }
 }).catch(err => console.log(err));
 
-document.querySelector('#register').addEventListener('click' , function(){
-  ipcRenderer.invoke('redirecionar-pagina','register');
+document.querySelector('#register').addEventListener('click', function () {
+  ipcRenderer.invoke('redirecionar-pagina', 'register');
 });
 
-document.querySelector('#forgot').addEventListener('click' , function(){
-  ipcRenderer.invoke('redirecionar-pagina','senha-esqueci');
+document.querySelector('#forgot').addEventListener('click', function () {
+  ipcRenderer.invoke('redirecionar-pagina', 'senha-esqueci');
 });
 
-document.querySelector('#login').addEventListener('click' , function(){
+document.querySelector('#login').addEventListener('click', function () {
   login();
 });
 
@@ -38,16 +39,16 @@ document.querySelector('#pass').addEventListener('keypress', function (e) {
   }
 });
 
-function login(){
+function login() {
   let user = document.querySelector('#user').value.toLowerCase();
   let pass = document.querySelector('#pass').value;
 
-  if(user.length == 0){
+  if (user.length == 0) {
     alertMessage('Enter the user!', 'warning');
     return;
   }
 
-  if(pass.length == 0){
+  if (pass.length == 0) {
     alertMessage('Enter the password!', 'warning');
     return;
   }
@@ -56,44 +57,46 @@ function login(){
   document.querySelector('#login').innerHTML = 'Loading';
 
   dataUser.login(user, md5(pass))
-  .then((retorno) => {
-    if (retorno) auth(user, pass, retorno.email, retorno.game);
-    else alertMessage('Login incorrect!', 'danger')
-  }).catch(err => alertMessage(err.message, 'danger'));
+    .then((retorno) => {
+      if (retorno) auth(user, pass, retorno.email, retorno.game);
+      else alertMessage('Login incorrect!', 'danger')
+    }).catch(err => alertMessage(err.message, 'danger'));
 }
 
-function auth(user, pass, email, game){
+function auth(user, pass, email, game) {
   cognito.authenticate(user, pass)
-  .then((retorno) => {
-    logged(user, game, retorno);
-  }).catch(err => {
-    if (err.code == 'NotAuthorizedException') cognitoRegister(user, pass, email);
-    else if (err.code == 'UserNotConfirmedException') {
-      cognito.resendConfirmation(user);
-      alertMessage('Please, check your email <b>('+email+')</b> and validate your account.', 'warning');
-    }
-    else alertMessage(err.message, 'danger');
-  });
+    .then((retorno) => {
+      logged(user, game, retorno);
+    }).catch(err => {
+      if (err.code == 'NotAuthorizedException') cognitoRegister(user, pass, email);
+      else if (err.code == 'UserNotConfirmedException') {
+        cognito.resendConfirmation(user);
+        alertMessage('Please, check your email <b>(' + email + ')</b> and validate your account.', 'warning');
+      }
+      else alertMessage(err.message, 'danger');
+    });
 }
 
-function cognitoRegister(user, pass, email){
+function cognitoRegister(user, pass, email) {
   cognito.register(user, email, pass)
-  .then((retorno) => {
-    alertMessage('Please, check your email <b>('+email+')</b> and validate your account.', 'warning');
-  }).catch(err => alertMessage(err.message, 'danger'));
+    .then((retorno) => {
+      alertMessage('Please, check your email <b>(' + email + ')</b> and validate your account.', 'warning');
+    }).catch(err => alertMessage(err.message, 'danger'));
 }
 
-function alertMessage(message, type){
+function alertMessage(message, type) {
   alert.message(document.querySelector('#alert-message'), message, type);
   document.querySelector('#login').removeAttribute('disabled');
   document.querySelector('#login').innerHTML = 'Enter';
 }
 
-function logged(user, game, access){
+function logged(user, game, access) {
   let idToken = access.idToken;
   let refreshToken = access.refreshToken;
-  let cookie = {user: user, game: game, idToken: idToken, refreshToken: refreshToken};
+  let cookie = { user: user, game: game, idToken: idToken, refreshToken: refreshToken };
   ipcRenderer.invoke('set-cookie', 'login', JSON.stringify(cookie)).then(() => {
-    ipcRenderer.invoke('redirecionar-pagina','login');
+    img.validate().then(() => {
+      ipcRenderer.invoke('redirecionar-pagina', 'index');
+    })
   })
 }

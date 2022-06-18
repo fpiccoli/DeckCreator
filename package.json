@@ -1,12 +1,12 @@
 {
   "name": "deckcreator",
   "productName": "DeckCreator",
-  "version": "1.15.6",
+  "version": "1.16.0",
   "description": "Criador de decks para Tabletop Simulator",
   "author": "fpiccoli",
   "main": "main.js",
   "scripts": {
-    "clean": "rd /s /q .nyc_output coverage release-builds releases>nul 2>&1|echo.>nul",
+    "clean": "rd /s /q .nyc_output coverage release-builds img releases>nul 2>&1|echo.>nul",
     "rebuild": "rd /s /q node_modules>nul 2>&1|echo.>nul",
     "test": "nyc --reporter=lcov --reporter=text-summary jasmine",
     "start": "electron .",
@@ -27,6 +27,7 @@
     "bootstrap": "^4.3.1",
     "electron-is-dev": "^1.1.0",
     "electron-updater": "^4.0.4",
+    "extract-zip": "^2.0.1",
     "html2json": "^1.0.2",
     "jquery": "^3.5.1",
     "json-beautify": "^1.0.1",
@@ -37,6 +38,7 @@
     "moment": "^2.24.0",
     "nodemailer": "^6.4.2",
     "popper.js": "^1.14.5",
+    "receive-file": "^2.0.1",
     "restify": "^8.5.1",
     "restify-clients": "^3.0.0"
   },

@@ -137,16 +137,21 @@ function cardJSON(card){
 }
 
 function deckJSON(deck, game){
-  let back = 'https://drive.google.com/uc?export=download&id=';
+  let face = 'https://tabletop-simulator-mods.s3.amazonaws.com/';
+  let back = 'https://tabletop-simulator-mods.s3.amazonaws.com/';
 
   if(game == 'M&D'){
-    back += '15d1rszwKVEFO9sALb2Mu00iXCD3ojxus'
+    face += 'md/cards/'
+    back += 'md/back.jpg';
   }
   else if(game == 'MRBC'){
-    back += '1UKrGHayxga-bEIvMHSEDG4HRJJe6rL2c'
+    face += 'mrbc/cards/'
+    back += 'mrbc/back.jpg';
   }
 
-  return '"' + deck.id + '":{"FaceURL": "https://drive.google.com/uc?export=download&id=' + deck.face + '","BackURL": "' + back + '","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
+  console.log(deck);
+
+  return '"' + deck.id + '":{"FaceURL": "' + face + deck.aws + '","BackURL": "' + back + '","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 
 function verificaSeExiste(decks, id){

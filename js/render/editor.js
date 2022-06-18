@@ -136,20 +136,20 @@ async function buscaCartas(classe, user) {
   let mainCards = [];
   let subCards = [];
 
-  main.forEach(function (grupo, index, array) {
-    if (grupo.cards) {
-      let filtrado = arrayManager.filtraMain(grupo.cards, user.game);
+  main.forEach(function (deck, index, array) {
+    if (deck.cards) {
+      let filtrado = arrayManager.filtraMain(deck.cards, user.game);
       filtrado.forEach(function (carta, i, array) {
-        carta.deck = { id: grupo.id, face: grupo.face };
+        carta.deck = { id: deck.id, face: deck.face, aws: deck.aws };
       });
       mainCards = mainCards.concat(filtrado);
     }
   });
-  sub.forEach(function (grupo, index, array) {
-    if (grupo.cards) {
-      let filtrado = arrayManager.filtraSub(grupo.cards, user.game);
+  sub.forEach(function (deck, index, array) {
+    if (deck.cards) {
+      let filtrado = arrayManager.filtraSub(deck.cards, user.game);
       filtrado.forEach(function (carta, i, array) {
-        carta.deck = { id: grupo.id, face: grupo.face };
+        carta.deck = { id: deck.id, face: deck.face, aws: deck.aws };
       });
       subCards = subCards.concat(filtrado);
     }
