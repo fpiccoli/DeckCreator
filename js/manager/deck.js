@@ -149,8 +149,6 @@ function deckJSON(deck, game){
     back += 'mrbc/back.jpg';
   }
 
-  console.log(deck);
-
   return '"' + deck.id + '":{"FaceURL": "' + face + deck.aws + '","BackURL": "' + back + '","NumWidth": 5,"NumHeight": 4,"BackIsHidden": false,"UniqueBack": false}';
 }
 
