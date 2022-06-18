@@ -2,6 +2,13 @@ DeckCreator
 
 Releases:
 
+    1.16.0 (20/06/2022)
+      -  Correção de bugs:
+          - Host das imagens foi migrado do GDrive para Amazon AWS.
+      -  Novas Funcionalidades:
+          - Todas as imagens das cartas serão atualizadas no momento do login.
+          - Botão SyncDecks atualizará as imagens de todos os decks já cadastrados para o novo host.
+
     1.15.6 (06/06/2022)
       -  Correção de bugs:
           - Correção das imagens que estavam sendo mostradas erradas.
@@ -13,7 +20,6 @@ Releases:
           - Reallocate (Spell): Descrição do efeito alterado para incluir o efeito Assaltar.
           - Pupil (Talent): Aumentado o custo e adicionada nova restrição de uso.
           - Guardian: Aumentado o máximo de PV da classe.
-
 
     1.15.5 (20/05/2022)
       -  Correção de bugs:
