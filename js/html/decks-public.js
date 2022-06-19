@@ -2,6 +2,7 @@ const builder = require('./builder.js');
 const conta = require('../manager/conta.js');
 const dataManager = require('../manager/string.js');
 var groupBy = require('json-groupby');
+const path = require('../manager/path.js').getPath();
 
 module.exports = { accordion, accordionHeader, accordionContent, loading }
 
@@ -87,7 +88,7 @@ function menu(decks, game){
       imgName = heroi.main.toLowerCase().replace(' ','');
       game === 'MRBC' ? imgName = imgName + '.png' : imgName = imgName + '.svg';
 
-      subElements.push(builder.element('img', {src:'../img/'+game+'/icons/'+imgName, draggable:"false", height:'55%', width:'55%', style:'background-color:'+heroi.bg+'; border-radius:5px; padding:5px;'}, []));
+      subElements.push(builder.element('img', {src: path+game+'/icons/'+imgName, draggable:"false", height:'55%', width:'55%', style:'background-color:'+heroi.bg+'; border-radius:5px; padding:5px;'}, []));
 
       subElements.push(builder.element('div', null, [builder.text(heroi.class)]));
       subElements.push(builder.element('div', null, [builder.text(atk+'/'+def+' ('+(atk+def)+')')]));

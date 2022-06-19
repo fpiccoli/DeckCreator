@@ -68,15 +68,15 @@ app.on('ready', () => {
       enableRemoteModule: false
     }
   });
-  if(isDev){
-    mainWindow.toggleDevTools();
-  } else{
-    mainWindow.setMenu(null);
-  }
+  // if(isDev){
+  mainWindow.toggleDevTools();
+  // } else{
+  //   mainWindow.setMenu(null);
+  // }
   mainWindow.loadURL(`file://${__dirname}/pages/prelogin.html`);
-    mainWindow.maximize();
-    mainSession = mainWindow.webContents.session;
-  }
+  mainWindow.maximize();
+  mainSession = mainWindow.webContents.session;
+}
 );
 
 app.on('window-all-closed', () => {
@@ -85,14 +85,14 @@ app.on('window-all-closed', () => {
 
 let heroisWindow = null;
 ipcMain.handle('seleciona-heroi', (event, param) => {
-  if(heroisWindow == null){
+  if (heroisWindow == null) {
     let pos = mainWindow.getPosition();
     let size = mainWindow.getSize();
     heroisWindow = new BrowserWindow({
       alwaysOnTop: true,
       frame: false,
-      x: pos[0]+10,
-      y: pos[1]+10,
+      x: pos[0] + 10,
+      y: pos[1] + 10,
       width: size[0],
       height: size[1],
       webPreferences: {
@@ -100,29 +100,29 @@ ipcMain.handle('seleciona-heroi', (event, param) => {
         enableRemoteModule: false
       }
     });
-    if(isDev){
-      heroisWindow.toggleDevTools();
-    }else{
-      heroisWindow.setMenu(null);
-    }
+    // if(isDev){
+    heroisWindow.toggleDevTools();
+    // }else{
+    //   heroisWindow.setMenu(null);
+    // }
     heroisWindow.on('closed', () => {
       heroisWindow = null;
     });
   }
   heroisWindow.loadURL(`file://${__dirname}/pages/herois.html?posicao=${param}`);
-  }
+}
 );
 
 let efeitosWindow = null;
 ipcMain.handle('abrir-janela-efeitos', (event) => {
-  if(efeitosWindow == null){
+  if (efeitosWindow == null) {
     let pos = mainWindow.getPosition();
     let size = mainWindow.getSize();
     efeitosWindow = new BrowserWindow({
       alwaysOnTop: true,
-      x: pos[0]+10,
-      y: pos[1]+10,
-      width: size[0]/4,
+      x: pos[0] + 10,
+      y: pos[1] + 10,
+      width: size[0] / 4,
       height: size[1],
       webPreferences: {
         nodeIntegration: true,
@@ -133,13 +133,13 @@ ipcMain.handle('abrir-janela-efeitos', (event) => {
       efeitosWindow = null;
     })
   }
-  if(isDev){
+  if (isDev) {
     efeitosWindow.toggleDevTools();
-  }else{
+  } else {
     efeitosWindow.setMenu(null);
   }
   efeitosWindow.loadURL(`file://${__dirname}/pages/efeitos.html`);
-  }
+}
 );
 
 ipcMain.handle('dialog', async (event, title, confirm, cancel, message) => {
@@ -169,7 +169,7 @@ ipcMain.handle('fechar-janela-efeitos', () => {
 });
 
 ipcMain.handle('heroi-selecionado', (event, heroi, posicao) => {
-  return cookieHandler.setCookie('heroi'+posicao, JSON.stringify(heroi), mainSession);
+  return cookieHandler.setCookie('heroi' + posicao, JSON.stringify(heroi), mainSession);
 });
 
 ipcMain.handle('get-cookies', (event) => {
@@ -189,10 +189,15 @@ ipcMain.handle('delete-cookies', (event, lista) => {
 });
 
 ipcMain.handle('redirecionar-pagina', (event, pagina) => {
-  mainWindow.loadURL(`file://${__dirname}/pages/`+pagina+`.html`);
-  }
+  mainWindow.loadURL(`file://${__dirname}/pages/` + pagina + `.html`);
+}
 );
 
 ipcMain.handle('console-log-main', (event, mensagem) => {
   console.log(mensagem);
 });
+
+ipcMain.on('is-dev', (event) => {
+  event.returnValue = isDev;
+});
+

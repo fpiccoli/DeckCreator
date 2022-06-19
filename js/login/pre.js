@@ -20,7 +20,7 @@ function cookieLogin() {
   return new Promise((resolve, reject) => {
     cookie.login().then((user) => {
       if (user) {
-        img.validate().then(() => {
+        img.validate(user.game).then(() => {
           ipcRenderer.invoke('redirecionar-pagina', 'index');
         })
         return;
@@ -42,7 +42,7 @@ function refreshSession(obj) {
   return new Promise((resolve, reject) => {
     cognito.refresh(obj.cognitoUser, obj.session).then(retorno => {
       ipcRenderer.invoke('set-cookie', 'login', JSON.stringify(retorno)).then((isSet) => {
-        img.validate().then(() => {
+        img.validate(retorno.game).then(() => {
           ipcRenderer.invoke('redirecionar-pagina', 'index');
         })
       })

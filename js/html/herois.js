@@ -1,6 +1,7 @@
 const builder = require('./builder.js');
 const arrayManager = require('../manager/array.js');
 const stringManager = require('../manager/string.js');
+const path = require('../manager/path.js').getPath();
 
 module.exports = { build }
 
@@ -84,7 +85,7 @@ function content(classe, selecionarHeroi, type, game) {
 
   for (let i in classe.heroes) {
 
-    imgPath = '../img/' + game + '/cards/' + type;
+    imgPath = path + game + '/cards/' + type;
 
     imgName = classe.heroes[i].cardnumber + '.png';
 

@@ -1,6 +1,6 @@
 const builder = require('./builder.js');
-var groupBy = require('json-groupby');
 const dataManager = require('../manager/string.js');
+const path = require('../manager/path.js').getPath();
 
 module.exports = { addButtons, addGrupo, addPublic, updateGrupo }
 
@@ -16,7 +16,7 @@ function addButtons(buttons, game) {
 
     game === 'MRBC' ? imgName = imgName + '.png' : imgName = imgName + '.svg';
 
-    childs.push(builder.element('img', { src: '../img/' + game + '/icons/' + imgName, draggable: "false", height: '50%', width: '25%', style: 'background-color:' + button.bg + '; border-radius:5px; padding:5px;' }, []));
+    childs.push(builder.element('img', { src: path + game + '/icons/' + imgName, draggable: "false", height: '50%', width: '25%', style: 'background-color:' + button.bg + '; border-radius:5px; padding:5px;' }, []));
 
     childs.push(builder.element('div', { class: 'text-center' }, [builder.text(button.class)]));
     elements.push(builder.element('a', { href: '#', class: 'text-center', id: 'cards-' + dataManager.getNome(button.class) }, childs));

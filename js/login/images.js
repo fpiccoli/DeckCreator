@@ -5,17 +5,21 @@ const jsonfile = require('jsonfile');
 const fsExtra = require('fs-extra');
 const fs = require('fs');
 const alert = require('../manager/interface/alert.js');
+const path = require('../manager/path.js').getPathLogin();
+const pathZip = require('../manager/path.js').getPathZip();
 
 module.exports = { validate }
 
-function validate() {
+function validate(game) {
     return new Promise((resolve, reject) => {
         dataVersion.listImg().then((retorno) => {
             let ultimaVersao = Math.max(...retorno.map(o => o.versao));
-            if (fs.existsSync('./img/version.json')) {
-                jsonfile.readFile('./img/version.json').then(local => {
+            if (fs.existsSync(path + game + '-version.json')) {
+                console.log("IF 1");
+                jsonfile.readFile(path + game + '-version.json').then(local => {
                     if (ultimaVersao > local.versao) {
-                        atualizaImagens(ultimaVersao).then(() => {
+                        console.log("IF 2");
+                        atualizaImagens(game, ultimaVersao).then(() => {
                             resolve();
                         })
                     } else {
@@ -23,7 +27,8 @@ function validate() {
                     }
                 })
             } else {
-                atualizaImagens(ultimaVersao).then(() => {
+                console.log("ELSE");
+                atualizaImagens(game, ultimaVersao).then(() => {
                     resolve();
                 })
             }
@@ -31,29 +36,32 @@ function validate() {
     });
 }
 
-function atualizaImagens(ultimaVersao) {
+function atualizaImagens(game, ultimaVersao) {
     return new Promise((resolve, reject) => {
-        fsExtra.emptyDir('./img/').then(() => {
-            download().then(() => {
-                jsonfile.writeFile('./img/version.json', { versao: ultimaVersao }, { spaces: 2 }).then(() => {
-                    fsExtra.removeSync('./img/img.zip');
-                    resolve();
-                })
+        // fsExtra.emptyDir(path).then(() => {
+        download(game).then(() => {
+            jsonfile.writeFile(path + game + '-version.json', { versao: ultimaVersao }, { spaces: 2 }).then(() => {
+                fsExtra.removeSync(path + 'img.zip');
+                resolve();
             })
         }).catch((err) => { reject(err); });
+        // })
     })
 }
 
-function download() {
+function download(game) {
     alert.message(document.querySelector('#alert-message'), 'Updating card images, please wait a few seconds...', 'warning');
     const options = {
-        directory: "./img/",
+        directory: path,
         filename: "img.zip",
         timeout: 100000
     }
     return new Promise((resolve, reject) => {
-        Download('https://tabletop-simulator-mods.s3.amazonaws.com/img.zip', options).then(() => {
-            extractZip('./img/img.zip', __dirname + '../../../img/').then(() => {
+        let gamePath = 'mrbc';
+        if (game === 'M&D') gamePath = 'md';
+
+        Download('https://tabletop-simulator-mods.s3.amazonaws.com/' + gamePath + '/img.zip', options).then(() => {
+            extractZip(path + '/img.zip', __dirname + pathZip).then(() => {
                 resolve();
             })
         }).catch((err) => { reject(err); });

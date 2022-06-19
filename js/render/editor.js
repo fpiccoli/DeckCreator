@@ -7,6 +7,7 @@ const conta = require('../manager/conta.js');
 const update = require('./editor-update.js');
 const dataDeck = require('../../js/rest/deck.js');
 const dataClasse = require('../../js/rest/classe.js');
+const path = require('../manager/path.js').getPath();
 
 module.exports = { panel, sidebar, lista, special }
 
@@ -16,7 +17,7 @@ function panel(heroi, documento, game) {
   documento.querySelector('#classe-heroi-' + heroi.panel).textContent = heroi.class + ' (' + heroi.alligment + ')';
   documento.querySelector('#txt-heroi-' + heroi.panel).textContent = 'Change';
 
-  imgPath = '../img/' + game + '/icons';
+  imgPath = path + game + '/icons';
   imgName = heroi.main.toLowerCase().replace(' ','');
   game === 'MRBC' ? imgName = imgName + '.png' : imgName = imgName + '.svg';
 

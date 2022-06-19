@@ -1,6 +1,7 @@
 const { max } = require('moment');
 const htmlCartas = require('../html/editor-cartas.js');
 const conta = require('../manager/conta.js');
+const path = require('../manager/path.js').getPath();
 
 module.exports = { heroPanels, cardPanels, otherPanels }
 
@@ -39,8 +40,8 @@ function otherPanels(listaDeCartas, user, documento) {
     qtdeSpell = conta.classe(listaDeCartas, 'Spell', user.game) + conta.classe(listaDeCartas, 'Enchantment', user.game);
     talentStyle = 'style="color: white;background-color: #c0c0c0;"';
     spellStyle = 'style="color: white;background-color: #B57EDC;"';
-    talentIcon = '<img src="../img/M&D/icons/talent.svg" height="300%" width="300%"/>';
-    spellIcon = '<img src="../img/M&D/icons/spell.svg" height="150%" width="150%"/><img src="../img/M&D/icons/enchantment.svg" height="150%" width="150%"/>';
+    talentIcon = '<img src="' + path + 'M&D/icons/talent.svg" height="300%" width="300%"/>';
+    spellIcon = '<img src="' + path + 'M&D/icons/spell.svg" height="150%" width="150%"/><img src="' + path + 'M&D/icons/enchantment.svg" height="150%" width="150%"/>';
     talentText = 'Talent</br>All Classes';
     spellText = 'Spell +</br>Enchantment';
   } else if (user.game == 'MRBC') {
@@ -48,8 +49,8 @@ function otherPanels(listaDeCartas, user, documento) {
     qtdeSpell = conta.classe(listaDeCartas, 'Breeder', user.game);
     talentStyle = 'style="color: black;background-color: #f7f7f9;"';
     spellStyle = 'style="color: white;background-color: #483939;"';
-    talentIcon = '<img src="../img/MRBC/icons/anymonster.png" height="300%" width="300%"/>';
-    spellIcon = '<img src="../img/MRBC/icons/breeder.png" height="300%" width="300%"/>';
+    talentIcon = '<img src="' + path + 'MRBC/icons/anymonster.png" height="300%" width="300%"/>';
+    spellIcon = '<img src="' + path + 'MRBC/icons/breeder.png" height="300%" width="300%"/>';
     talentText = 'Any Monster';
     spellText = 'Breeder';
   }
