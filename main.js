@@ -68,11 +68,11 @@ app.on('ready', () => {
       enableRemoteModule: false
     }
   });
-  // if(isDev){
-  mainWindow.toggleDevTools();
-  // } else{
-  //   mainWindow.setMenu(null);
-  // }
+  if (isDev) {
+    mainWindow.toggleDevTools();
+  } else {
+    mainWindow.setMenu(null);
+  }
   mainWindow.loadURL(`file://${__dirname}/pages/prelogin.html`);
   mainWindow.maximize();
   mainSession = mainWindow.webContents.session;
@@ -100,11 +100,11 @@ ipcMain.handle('seleciona-heroi', (event, param) => {
         enableRemoteModule: false
       }
     });
-    // if(isDev){
-    heroisWindow.toggleDevTools();
-    // }else{
-    //   heroisWindow.setMenu(null);
-    // }
+    if (isDev) {
+      heroisWindow.toggleDevTools();
+    } else {
+      heroisWindow.setMenu(null);
+    }
     heroisWindow.on('closed', () => {
       heroisWindow = null;
     });

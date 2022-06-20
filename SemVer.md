@@ -5,9 +5,11 @@ Releases:
     1.16.0 (20/06/2022)
       -  Correção de bugs:
           - Host das imagens foi migrado do GDrive para Amazon AWS.
+          - Corrigido imagem de exibição do deck errada ao salvar deck.
       -  Novas Funcionalidades:
           - Todas as imagens das cartas serão atualizadas no momento do login.
           - Botão SyncDecks atualizará as imagens de todos os decks já cadastrados para o novo host.
+          - Agora aparece uma tela informando 'Loggin In' enquanto o sistema verifica as credenciais de usuário.
 
     1.15.6 (06/06/2022)
       -  Correção de bugs:

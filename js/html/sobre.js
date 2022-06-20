@@ -20,11 +20,11 @@ function html(lista, game) {
 
   lista = dataManager.dateSort(lista, 0);
 
-  lista.forEach(function (objeto, index, array) {
+  lista.forEach(function (objeto) {
     text.push(h3(objeto.versao));
     text.push(h4(moment(objeto.data, "DD/MM/YYYY").format("LL")));
 
-    objeto[property].forEach(function (objeto, index, array) {
+    objeto[property].forEach(function (objeto) {
       text.push(patch([
         {
           titulo: objeto.titulo,
@@ -41,7 +41,7 @@ function html(lista, game) {
 
 function patch(lista) {
   let retorno = []
-  lista.forEach(function (objeto, index, array) {
+  lista.forEach(function (objeto) {
     retorno.push({ texto: builder.text(objeto.titulo), items: ul(objeto.itens) });
   });
   return ul2(retorno);
@@ -67,10 +67,10 @@ function h4(string) {
   return builder.element('h4', null, [builder.text(string)]);
 }
 
-function ul(lista, tipo) {
+function ul(lista) {
   let li = [];
   lista.forEach(monta);
-  function monta(item, index, array) {
+  function monta(item) {
     li.push(builder.element('li', null, [builder.text(item)]));
   }
   return builder.element('ul', null, li);
@@ -79,7 +79,7 @@ function ul(lista, tipo) {
 function ul2(lista) {
   let li = [];
   lista.forEach(monta);
-  function monta(item, index, array) {
+  function monta(item) {
     li.push(builder.element('li', null, [item.texto, item.items]));
   }
   return builder.element('ul', null, li);

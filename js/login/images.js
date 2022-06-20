@@ -10,15 +10,16 @@ const pathZip = require('../manager/path.js').getPathZip();
 
 module.exports = { validate }
 
-function validate(game) {
+function validate(user) {
     return new Promise((resolve, reject) => {
-        dataVersion.listImg().then((retorno) => {
+        let game = 'mrbc';
+        if (user.game === 'M&D') game = 'md';
+
+        dataVersion.list(game).then((retorno) => {
             let ultimaVersao = Math.max(...retorno.map(o => o.versao));
             if (fs.existsSync(path + game + '-version.json')) {
-                console.log("IF 1");
                 jsonfile.readFile(path + game + '-version.json').then(local => {
                     if (ultimaVersao > local.versao) {
-                        console.log("IF 2");
                         atualizaImagens(game, ultimaVersao).then(() => {
                             resolve();
                         })
@@ -27,7 +28,6 @@ function validate(game) {
                     }
                 })
             } else {
-                console.log("ELSE");
                 atualizaImagens(game, ultimaVersao).then(() => {
                     resolve();
                 })
@@ -38,14 +38,12 @@ function validate(game) {
 
 function atualizaImagens(game, ultimaVersao) {
     return new Promise((resolve, reject) => {
-        // fsExtra.emptyDir(path).then(() => {
         download(game).then(() => {
             jsonfile.writeFile(path + game + '-version.json', { versao: ultimaVersao }, { spaces: 2 }).then(() => {
                 fsExtra.removeSync(path + 'img.zip');
                 resolve();
             })
         }).catch((err) => { reject(err); });
-        // })
     })
 }
 
@@ -57,10 +55,8 @@ function download(game) {
         timeout: 100000
     }
     return new Promise((resolve, reject) => {
-        let gamePath = 'mrbc';
-        if (game === 'M&D') gamePath = 'md';
 
-        Download('https://tabletop-simulator-mods.s3.amazonaws.com/' + gamePath + '/img.zip', options).then(() => {
+        Download('https://tabletop-simulator-mods.s3.amazonaws.com/' + game + '/img.zip', options).then(() => {
             extractZip(path + '/img.zip', __dirname + pathZip).then(() => {
                 resolve();
             })

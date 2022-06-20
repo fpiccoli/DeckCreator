@@ -1,19 +1,19 @@
 const http = require('./http.js');
 
-module.exports = { listAll, listImg }
+module.exports = { list, listAll }
 
-function listAll(){
+function list(game){
   return new Promise((resolve, reject) => {
-    http.get(http.stage()+'/version/list', null)
+    http.get(http.stage()+'/version/list/'+game, null)
     .then(retorno => {
       resolve(retorno.conteudo);
     }).catch(err => reject(err));
   });
 }
 
-function listImg(){
+function listAll(){
   return new Promise((resolve, reject) => {
-    http.get(http.stage()+'/version/img', null)
+    http.get(http.stage()+'/version/list', null)
     .then(retorno => {
       resolve(retorno.conteudo);
     }).catch(err => reject(err));
