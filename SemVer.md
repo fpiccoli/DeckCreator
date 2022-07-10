@@ -2,6 +2,10 @@ DeckCreator
 
 Releases:
 
+    1.16.1 (08/07/2022)
+      -  Correção de bugs:
+          - Correção no login de usuário.
+
     1.16.0 (20/06/2022)
       -  Correção de bugs:
           - Host das imagens foi migrado do GDrive para Amazon AWS.

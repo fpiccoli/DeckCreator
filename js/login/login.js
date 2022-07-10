@@ -93,9 +93,9 @@ function alertMessage(message, type) {
 function logged(user, game, access) {
   let idToken = access.idToken;
   let refreshToken = access.refreshToken;
-  let cookie = { user: user, game: game, idToken: idToken, refreshToken: refreshToken };
+  let cookie = { user, game, idToken, refreshToken };
   ipcRenderer.invoke('set-cookie', 'login', JSON.stringify(cookie)).then(() => {
-    img.validate(game).then(() => {
+    img.validate(cookie).then(() => {
       ipcRenderer.invoke('redirecionar-pagina', 'index');
     })
   })
