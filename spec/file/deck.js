@@ -5,7 +5,7 @@ let os;
 let jsonfile;
 let image;
 
-function mock(){
+function mock() {
   return (param1, param2, param3) => {
     return new Promise(resolve => {
       resolve(true);
@@ -13,10 +13,10 @@ function mock(){
   }
 }
 
-describe("saveLocal() -> salva o arquivo json do deck na maquina local ->", function(){
+describe("saveLocal() -> salva o arquivo json do deck na maquina local ->", function () {
 
-  describe("sem erros ->", function(){
-    beforeEach(function(){
+  describe("sem erros ->", function () {
+    beforeEach(function () {
       os = jasmine.createSpyObj('os', ['platform']);
       os.platform.and.returnValue('win32');
 
@@ -30,36 +30,36 @@ describe("saveLocal() -> salva o arquivo json do deck na maquina local ->", func
       path.valida.and.returnValue('C:/User/username/Documents');
     });
 
-    it ("[1] deve salvar o deck dentro da pasta de seu grupo", function(){
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste'};
+    it("[1] deve salvar o deck dentro da pasta de seu grupo", function () {
+      let deck = { name: 'NomeDoDeck', grupo: 'GrupoTeste' };
 
       algoritmo.saveLocal(deck, 'json', 'game', os, jsonfile, image, path)
-      .then(function(retorno) {
-        expect(retorno).toBeTruthy();
-        expect(os.platform).toHaveBeenCalledTimes(1);
-        expect(jsonfile.writeFile).toHaveBeenCalledTimes(1);
-        expect(image.save).toHaveBeenCalledTimes(1);
-        expect(path.valida).toHaveBeenCalledTimes(1);
-      });
+        .then(function (retorno) {
+          expect(retorno).toBeTruthy();
+          expect(os.platform).toHaveBeenCalledTimes(1);
+          expect(jsonfile.writeFile).toHaveBeenCalledTimes(1);
+          expect(image.save).toHaveBeenCalledTimes(1);
+          expect(path.valida).toHaveBeenCalledTimes(1);
+        });
     });
 
-    it ("[2] deve salvar o deck dentro da pasta default sem grupo (Other Decks)", function(){
-      let herois = [{imgurl: 'imagem-heroi1'}, {imgurl: 'imagem-heroi2'}, {imgurl: 'imagem-heroi3'}];
-      let deck = {name: 'NomeDoDeck', heroes: herois};
+    it("[2] deve salvar o deck dentro da pasta default sem grupo (Other Decks)", function () {
+      let herois = [{ imgurl: 'imagem-heroi1' }, { imgurl: 'imagem-heroi2' }, { imgurl: 'imagem-heroi3' }];
+      let deck = { name: 'NomeDoDeck', heroes: herois };
 
       algoritmo.saveLocal(deck, 'json', 'game', os, jsonfile, image, path)
-      .then(function(retorno) {
-        expect(retorno).toBeTruthy();
-        expect(os.platform).toHaveBeenCalledTimes(1);
-        expect(jsonfile.writeFile).toHaveBeenCalledTimes(1);
-        expect(image.save).toHaveBeenCalledTimes(1);
-        expect(path.valida).toHaveBeenCalledTimes(1);
-      });
+        .then(function (retorno) {
+          expect(retorno).toBeTruthy();
+          expect(os.platform).toHaveBeenCalledTimes(1);
+          expect(jsonfile.writeFile).toHaveBeenCalledTimes(1);
+          expect(image.save).toHaveBeenCalledTimes(1);
+          expect(path.valida).toHaveBeenCalledTimes(1);
+        });
     });
   });
 
-  describe("lança um erro ->", function(){
-    beforeEach(function(){
+  describe("lança um erro ->", function () {
+    beforeEach(function () {
       os = jasmine.createSpyObj('os', ['platform']);
       os.platform.and.returnValue('win32');
 
@@ -74,10 +74,10 @@ describe("saveLocal() -> salva o arquivo json do deck na maquina local ->", func
       spyOn(console, 'error');
     });
 
-    it ("[1] deve lançar um erro ao retornar a Promise", async function(){
-      let herois = [{imgurl: 'imagem-heroi1'}, {imgurl: 'imagem-heroi2'}, {imgurl: 'imagem-heroi3'}];
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois};
-      let json = {name: 'QualquerCoisa'};
+    it("[1] deve lançar um erro ao retornar a Promise", async function () {
+      let herois = [{ imgurl: 'imagem-heroi1' }, { imgurl: 'imagem-heroi2' }, { imgurl: 'imagem-heroi3' }];
+      let deck = { name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois };
+      let json = { name: 'QualquerCoisa' };
       let game = 'M&D';
 
       let retorno = algoritmo.saveLocal(deck, json, game, os, jsonfile, image, path);
@@ -92,10 +92,10 @@ describe("saveLocal() -> salva o arquivo json do deck na maquina local ->", func
 
 });
 
-describe("changeName() -> salva o arquivo json do deck na maquina local ->", function(){
+describe("changeName() -> salva o arquivo json do deck na maquina local ->", function () {
 
-  describe("sem erros ->", function(){
-    beforeEach(function(){
+  describe("sem erros ->", function () {
+    beforeEach(function () {
       os = jasmine.createSpyObj('os', ['platform']);
       os.platform.and.returnValue('win32');
 
@@ -111,24 +111,24 @@ describe("changeName() -> salva o arquivo json do deck na maquina local ->", fun
       path.valida.and.returnValue('C:/User/username/Documents');
     });
 
-    it ("[1] deve salvar o deck dentro da pasta de seu grupo", function(){
-      let herois = [{imgurl: 'imagem-heroi1'}, {imgurl: 'imagem-heroi2'}, {imgurl: 'imagem-heroi3'}];
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois};
-      let json = {Nickname: 'JsonNickname'}
+    it("[1] deve salvar o deck dentro da pasta de seu grupo", function () {
+      let herois = [{ imgurl: 'imagem-heroi1' }, { imgurl: 'imagem-heroi2' }, { imgurl: 'imagem-heroi3' }];
+      let deck = { name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois };
+      let json = { Nickname: 'JsonNickname' }
 
       algoritmo.changeName('NovoNome', 'NomeAntigo', json, 'M&D', deck, os, fs, jsonfile, image, path)
-      .then(function(retorno) {
-        expect(retorno).toBeTruthy();
-        expect(os.platform).toHaveBeenCalledTimes(1);
-        expect(jsonfile.writeFile).toHaveBeenCalledTimes(1);
-        expect(image.save).toHaveBeenCalledTimes(1);
-        expect(path.valida).toHaveBeenCalledTimes(1);
-      });
+        .then(function (retorno) {
+          expect(retorno).toBeTruthy();
+          expect(os.platform).toHaveBeenCalledTimes(1);
+          expect(jsonfile.writeFile).toHaveBeenCalledTimes(1);
+          expect(image.save).toHaveBeenCalledTimes(1);
+          expect(path.valida).toHaveBeenCalledTimes(1);
+        });
     });
   });
 
-  describe("lança um erro ->", function(){
-    beforeEach(function(){
+  describe("lança um erro ->", function () {
+    beforeEach(function () {
       os = jasmine.createSpyObj('os', ['platform']);
       os.platform.and.returnValue('win32');
 
@@ -144,10 +144,10 @@ describe("changeName() -> salva o arquivo json do deck na maquina local ->", fun
       path.valida.and.returnValue('C:/User/username/Documents');
     });
 
-    it ("[1] deve salvar o deck dentro da pasta de seu grupo", async function(){
-      let herois = [{imgurl: 'imagem-heroi1'}, {imgurl: 'imagem-heroi2'}, {imgurl: 'imagem-heroi3'}];
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois};
-      let json = {Nickname: 'JsonNickname'}
+    it("[1] deve salvar o deck dentro da pasta de seu grupo", async function () {
+      let herois = [{ imgurl: 'imagem-heroi1' }, { imgurl: 'imagem-heroi2' }, { imgurl: 'imagem-heroi3' }];
+      let deck = { name: 'NomeDoDeck', grupo: 'GrupoTeste', heroes: herois };
+      let json = { Nickname: 'JsonNickname' }
 
       let retorno = algoritmo.changeName('NovoNome', 'NomeAntigo', json, 'M&D', deck, os, fs, jsonfile, image, path)
       await expectAsync(retorno).toBeRejected();
@@ -161,10 +161,10 @@ describe("changeName() -> salva o arquivo json do deck na maquina local ->", fun
 
 });
 
-describe("removeLocal() -> deleta o arquivo json do deck na maquina local ->", function(){
+describe("removeLocal() -> deleta o arquivo json do deck na maquina local ->", function () {
 
-  describe("encontra o arquivo ->", function(){
-    beforeEach(function(){
+  describe("encontra o arquivo ->", function () {
+    beforeEach(function () {
       os = jasmine.createSpyObj('os', ['platform']);
       os.platform.and.returnValue('win32');
 
@@ -175,8 +175,8 @@ describe("removeLocal() -> deleta o arquivo json do deck na maquina local ->", f
       path.valida.and.returnValue('C:/User/username/Documents');
     });
 
-    it ("[1] deve salvar o deck dentro da pasta de seu grupo", function(){
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste'};
+    it("[1] deve salvar o deck dentro da pasta de seu grupo", function () {
+      let deck = { name: 'NomeDoDeck', grupo: 'GrupoTeste' };
 
       algoritmo.removeLocal(deck, 'game', os, fs, path)
       expect(os.platform).toHaveBeenCalledTimes(1);
@@ -186,8 +186,8 @@ describe("removeLocal() -> deleta o arquivo json do deck na maquina local ->", f
     });
   });
 
-  describe("nao encontra o arquivo ->", function(){
-    beforeEach(function(){
+  describe("nao encontra o arquivo ->", function () {
+    beforeEach(function () {
       os = jasmine.createSpyObj('os', ['platform']);
       os.platform.and.returnValue('win32');
 
@@ -198,8 +198,8 @@ describe("removeLocal() -> deleta o arquivo json do deck na maquina local ->", f
       path.valida.and.returnValue('C:/User/username/Documents');
     });
 
-    it ("[1] deve salvar o deck dentro da pasta de seu grupo", function(){
-      let deck = {name: 'NomeDoDeck', grupo: 'GrupoTeste'};
+    it("[1] deve salvar o deck dentro da pasta de seu grupo", function () {
+      let deck = { name: 'NomeDoDeck', grupo: 'GrupoTeste' };
 
       algoritmo.removeLocal(deck, 'game', os, fs, path)
       expect(os.platform).toHaveBeenCalledTimes(1);
@@ -211,21 +211,25 @@ describe("removeLocal() -> deleta o arquivo json do deck na maquina local ->", f
 
 });
 
-describe("clearLocal() -> deleta todos os arquivos json de deck da maquina local ->", function(){
-  beforeEach(function(){
-    os = jasmine.createSpyObj('os', ['platform']);
-    os.platform.and.returnValue('win32');
+describe("clearLocal() -> deleta todos os arquivos json de deck da maquina local ->", function () {
 
-    fsExtra = jasmine.createSpyObj('fsExtra', ['emptyDirSync']);
+  describe("remove os arquivos ->", function () {
+    beforeEach(function () {
+      os = jasmine.createSpyObj('os', ['platform']);
+      os.platform.and.returnValue('win32');
 
-    path = jasmine.createSpyObj('path', ['valida']);
-    path.valida.and.returnValue('C:/User/username/Documents');
+      fsExtra = jasmine.createSpyObj('fsExtra', ['emptyDirSync']);
+
+      path = jasmine.createSpyObj('path', ['valida']);
+      path.valida.and.returnValue('C:/User/username/Documents');
+    });
+
+    it("[1] deve excluir todos os arquivos json e png da pasta", function () {
+      algoritmo.clearLocal('game', os, fsExtra, path)
+      expect(os.platform).toHaveBeenCalledTimes(1);
+      expect(fsExtra.emptyDirSync).toHaveBeenCalledTimes(1);
+      expect(path.valida).toHaveBeenCalledTimes(1);
+    });
   });
 
-  it ("[1] deve excluir todos os arquivos json e png da pasta", function(){
-    algoritmo.clearLocal('game', os, fsExtra, path)
-    expect(os.platform).toHaveBeenCalledTimes(1);
-    expect(fsExtra.emptyDirSync).toHaveBeenCalledTimes(1);
-    expect(path.valida).toHaveBeenCalledTimes(1);
-  });
 });

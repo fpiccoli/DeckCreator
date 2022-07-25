@@ -1,12 +1,10 @@
-const path = require('../manager/path.js').getPath();
-
 module.exports = { save }
 
-function save(caminho, game, deck, mergeImg, fs) {
+function save(caminho, game, deck, mergeImg, fs, path) {
   let arquivo = caminho + '/' + deck.name + '.png';
 
-  let arrayImg = montaArray(game, deck.heroes);
-
+  let arrayImg = montaArray(game, deck.heroes, path);
+  
   return mergeImg(arrayImg)
     .then((b64) => {
       let base64Data = b64.replace(/^data:image\/\w+;base64,/, "");
@@ -22,7 +20,7 @@ function save(caminho, game, deck, mergeImg, fs) {
     });
 }
 
-function montaArray(game, images) {
+function montaArray(game, images, path) {
   let array = [];
 
   let posY = 120;
@@ -40,12 +38,12 @@ function montaArray(game, images) {
 
   array = [
     { src: bg, x: 0, y: 0, opacity: 0.1 },
-    montaObj(game, images[0], posX1, posY, bg), montaObj(game, images[1], posX2, posY, bg), montaObj(game, images[2], posX3, posY, bg)
+    montaObj(game, images[0], posX1, posY, bg, path), montaObj(game, images[1], posX2, posY, bg, path), montaObj(game, images[2], posX3, posY, bg, path)
   ];
   return array;
 }
 
-function montaObj(game, obj, posX, posY, bg) {
+function montaObj(game, obj, posX, posY, bg, path) {
   let subtype = 'pure';
   if (obj) {
     if (obj.main !== obj.sub) {
@@ -55,5 +53,5 @@ function montaObj(game, obj, posX, posY, bg) {
 
   let retorno = { src: obj ? path + game + '/cards/' + subtype + '/' + obj.cardnumber + '.png' : bg, x: posX, y: posY };
 
-  return retorno
+  return retorno;
 }
