@@ -3,7 +3,6 @@ const md5 = require('md5');
 const alert = require('../manager/interface/alert.js');
 const dataUser = require('../rest/user.js');
 const cognito = require('../cognito/auth.js');
-const mailer = require('./mailer.js');
 
 document.querySelector('#back').addEventListener('click', function () {
   ipcRenderer.invoke('redirecionar-pagina', 'login');
@@ -45,9 +44,7 @@ document.querySelector('#register').addEventListener('click', function () {
 function saveCognito(user, email, pass) {
   cognito.register(user, email, pass)
     .then((retorno) => {
-      sendEmail(user, email).then((retorno) => {
         saveUser(user, email, pass);
-      }).catch((err) => { console.log(err) });
     }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
 }
 
@@ -66,14 +63,4 @@ function saveUser(user, email, pass) {
         ipcRenderer.invoke('redirecionar-pagina', 'login');
       }
     }).catch(err => alert.message(document.querySelector('#alert-message'), err.message, 'danger'));
-}
-
-function sendEmail(user, email) {
-  return new Promise((resolve, reject) => {
-    mailer.alert(user, email).then((retorno) => {
-      ipcRenderer.invoke('console-log-main', 'Message sent:' + retorno.messageId);
-      resolve();
-    }).catch((err) => { reject(err); });
-  });
-
 }
