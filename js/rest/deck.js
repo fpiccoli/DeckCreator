@@ -60,7 +60,7 @@ function recipe(game){
 
 function grupo(user, game, token){
   return new Promise((resolve, reject) => {
-    http.post(http.stage()+'/deck/'+http.valida(game)+'/group', {user: user.toLowerCase()}, token)
+    http.post(http.stage()+'/deck/'+http.valida(game)+'/tag', {user: user.toLowerCase()}, token)
     .then(retorno => {
       resolve(retorno.conteudo);
     }).catch(err => resolve(validaErro(err, grupo, [user, game])));

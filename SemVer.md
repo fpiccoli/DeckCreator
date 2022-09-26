@@ -2,6 +2,10 @@ DeckCreator
 
 Releases:
 
+    1.16.4 (25/09/2022)
+      -  Correção de bugs:
+          - Correção na listagem de grupos do editor.
+
     1.16.3 (15/08/2022)
       -  Correção de bugs:
           - Alteração no envio de email de registro.

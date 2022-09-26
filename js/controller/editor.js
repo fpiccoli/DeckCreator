@@ -118,7 +118,7 @@ function save(nome) {
     heroes: herois,
     extra: [],
     user: user.name,
-    grupo: document.querySelector("#grupo").value,
+    tag: document.querySelector("#grupo").value,
     public: document.querySelector("#select-public").value == 'true',
     game: user.game
   }
